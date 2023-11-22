@@ -1,0 +1,12 @@
+@import 'base';
+@import 'abstract/variables';
+@import 'abstract/mixins', 'abstract/typography';
+
+@import 'component/components';
+
+#root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -1,0 +1,50 @@
+.input-field {
+    position: relative;
+    user-select: none;
+    font-family: $font-family-1;
+
+    & input {
+        padding: $padding-components;
+        border: $component-border;
+        border-radius: $border-radius-medium;
+        z-index: 2;
+
+        background-color: $color-white;
+
+        &:focus-visible {
+            outline: $component-focus-border;
+        }
+
+        &:not(:placeholder-shown) ~ label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        &::-webkit-input-placeholder {
+            
+        }
+    }
+
+
+
+    & label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        font-size: 1.3rem;
+        font-weight: bold;
+        transform: translateY(150%);
+
+        transition: transform $animation-fast ease-in-out;
+    }
+
+    & p.message {
+        min-height: 1.6rem;
+        
+        text-align: right;
+        font-size: 1.2rem;
+        color: red;
+        padding-bottom: .5rem;
+    }
+}

@@ -1,0 +1,53 @@
+option-selector {
+    font-size: 1.6rem;
+    position: relative;
+    cursor: pointer;
+
+    .selector-value {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
+        user-select: none;
+
+        padding: .8rem 2rem;
+        border: $component-border;
+        border-radius: $border-radius-medium;
+        width: 100%;
+
+        & svg {
+            display: block;
+            transition: transform $animation-fast;
+        }
+
+        &.open ~ .options-list {
+            display: block;
+        }
+
+        &.open svg {
+            transform: rotate(180deg);
+        }
+    }
+
+    .options-list {
+        display: none;
+        
+        position: absolute;
+        list-style: none;
+        width: 100%;
+        border: $component-border;
+        border-top: 1px solid transparent;
+        border-radius: $border-radius-medium;
+
+        .option {
+            padding: .8rem 2rem;
+            text-align: center;
+
+            &:hover {
+                border: $component-border;
+            }
+        }
+    }
+
+   
+}

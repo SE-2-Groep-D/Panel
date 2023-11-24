@@ -6,11 +6,10 @@
 
 html {
     font-size: 62.5%; // this makes it so 1rem = 10px
+    font-family: $font-family-1;
 }
 
-body, html {
-    overflow-x: hidden;
-}
+
 
 select,input,button,label {
     outline: none;

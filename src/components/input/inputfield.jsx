@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function InputField({children, type, name, message, required}) {
+export default function InputField({children, type, name, message, required, disabled}) {
     name = (name == undefined || name == null) ? "input-field" : name;
 
     const inputField = (required)? 
@@ -9,11 +9,11 @@ export default function InputField({children, type, name, message, required}) {
 
     if(required) message = 'required*';
   return (
-    <div className='input-field'>
+    <input-field className='input-field'>
         <p className='message'>{message}</p>
         {inputField}
         <label htmlFor={name}>{children}</label>
-    </div>
+    </input-field>
   )
 }
 

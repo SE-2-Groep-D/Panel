@@ -1,7 +1,11 @@
 .btn {
-    padding: $padding-components;
+    padding: 1rem 2rem;
     border-radius: $border-radius-medium;
+
+    font-size: 1.6rem;
     font-weight: bold;
+
+
     background-color: $color-primary;
     color: $color-white;
     cursor: pointer;

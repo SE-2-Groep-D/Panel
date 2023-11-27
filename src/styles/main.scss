@@ -1,6 +1,7 @@
-@import 'base';
 @import 'abstract/variables';
 @import 'abstract/mixins', 'abstract/typography';
+
+@import 'base';
 
 @import 'component/components';
 
@@ -9,4 +10,6 @@
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+    height: 100%;
 }

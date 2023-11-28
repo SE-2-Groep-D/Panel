@@ -11,11 +11,10 @@ import ProgressBar from '@components/progress-bar.jsx';
 import Form from './form.jsx';
 import Button from '@components/button/button.jsx';
 
-
-
 function SetupAccount() {
     const [stage, setStage] = useState(0);
     const [moveOut, setMove] = useState(false);
+
 
     function nextStep() {
         setMove(true);

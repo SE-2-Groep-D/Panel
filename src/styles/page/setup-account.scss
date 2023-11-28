@@ -2,14 +2,19 @@
 
 #account-form {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+
     gap: 1.5rem;
     transform: translate(0);
 
     animation: moveIn $animation-slow forwards;
+
+    h1 {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 .move {

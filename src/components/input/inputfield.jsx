@@ -1,9 +1,10 @@
-export default function InputField({children, type, name, message, required, disabled, visible}) {
+// eslint-disable-next-line react/prop-types
+export default function InputField({children, type, name, message, required, disabled, visible, onChange}) {
     name = (name == undefined || name == null) ? "field" : name;
 
     const inputField = (required)? 
-        <input name={name} type={getInputType(type)} placeholder={children} required></input> :
-        <input name={name} type={getInputType(type)} placeholder={children}></input>
+        <input id={name} type={getInputType(type)} placeholder={children} onChange={onChange} required></input> :
+        <input id={name} type={getInputType(type)} placeholder={children} onChange={onChange}></input>
 
     if(required) message = 'required*';
   return (

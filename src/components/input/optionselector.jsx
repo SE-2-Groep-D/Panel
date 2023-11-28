@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 
-export default function OptionsSelector({children, options, name, message, required, disabled}) {
+export default function OptionsSelector({children, options, name, message, required, disabled, onChange}) {
     const [value, setValue] = useState(options[0]);
     const [open, setOpen] = useState(false);
 
@@ -19,6 +19,11 @@ export default function OptionsSelector({children, options, name, message, requi
     });
 
 
+    function handleSelect(target, newValue) {
+        setOpen(false);
+        onChange(value, newValue);
+        setValue(newValue)
+    }
     
     
     function handleEnterClick(event) {
@@ -26,7 +31,7 @@ export default function OptionsSelector({children, options, name, message, requi
         const target = event.target;
         const activeElement = document.activeElement;
         const classList = activeElement.classList;
-    
+
        
      // Check if the component is focused
         if (classList.contains('selector-value')) {
@@ -35,8 +40,7 @@ export default function OptionsSelector({children, options, name, message, requi
         } 
     
         if(classList.contains('option')) {
-            setValue(target.innerText);
-            setOpen(false);
+            handleSelect(target, target.innerText)
             return;
         }
     }
@@ -56,11 +60,12 @@ export default function OptionsSelector({children, options, name, message, requi
 
             </div>
             <ul className='options-list'>
+                {/* eslint-disable-next-line react/prop-types */}
                 {options.map((option, key) => {
                     return <li 
                                 className='option' 
                                 key={key} 
-                                onClick={() => {setValue(option); setOpen(false)}}
+                                onClick={(e) => {handleSelect(e.target, option);}}
                                 tabIndex={0}
                             >{option}</li>
                 })}

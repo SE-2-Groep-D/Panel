@@ -1,6 +1,6 @@
 
 
-export default function Checkbox({children, name}) {
+export default function Checkbox({children, name, onChange}) {
       const text = (children) ?  
       <span className="checkbox-text">{children}</span>
       : null;
@@ -10,7 +10,7 @@ export default function Checkbox({children, name}) {
   return (<div className="checkbox">
              {text}
             <label className="checkbox-label">
-              <input type="checkbox" className='checkbox-cb'/>
+              <input onChange={onChange} type="checkbox" className='checkbox-cb'/>
               <span className="checkbox-mark"></span>
             </label>
         </div>

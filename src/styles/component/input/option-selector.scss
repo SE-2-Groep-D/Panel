@@ -47,6 +47,7 @@ option-selector {
         display: none;
 
         background-color: $color-white;
+        z-index: 1;
         
         position: absolute;
         left: 50%;

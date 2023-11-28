@@ -1,0 +1,84 @@
+@import '../main.scss';
+
+#account-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+    transform: translate(0);
+
+    animation: moveIn $animation-slow forwards;
+}
+
+.move {
+    animation: moveOut $animation-slow forwards !important;
+}
+
+#setup-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4rem;
+
+    @include respond(mobile) {
+        justify-content: start;
+        padding-top: 5rem;
+    }
+
+    @include respond(tablet) {
+        justify-content: center;
+    }
+  
+    width: 100vw;
+    height: 100vh;
+
+    button {
+        width: 22.5rem;
+        height: 5rem;
+    }
+      
+    .form-title {
+        font-weight: bold;
+        font-size: 4rem;
+    }
+}
+
+
+@keyframes moveIn {
+    0% {
+        transform: translateX(40rem);
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveOut {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-40rem);
+        opacity: 0;
+    }
+}
+
+
+
+
+
+.logo {
+    width: 45rem;
+
+    @include respond(mobile) {
+        width: 35rem;
+    }
+}

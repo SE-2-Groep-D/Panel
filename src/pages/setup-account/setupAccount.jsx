@@ -3,20 +3,31 @@ import '@pagestyles/setup-account.scss';
 
 
 // functions
-import { useState } from 'react';
+import {createContext, useState} from 'react';
 
 // components
 import Logo from '@components/logo/logo.jsx';
 import ProgressBar from '@components/progress-bar.jsx';
 import Form from './form.jsx';
-import Button from '@components/button/button.jsx';
+
+const AccountContext = createContext();
 
 function SetupAccount() {
     const [stage, setStage] = useState(0);
     const [moveOut, setMove] = useState(false);
+    const [formData, setFormData] = useState({
+        name: null,
+        telefoonNummer: null,
+        gebruikersType: null,
+    });
 
 
-    function nextStep() {
+    function handleInputChange(event) {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+    }
+
+    function nextStage() {
         setMove(true);
         setTimeout(() => {
             setStage(stage + 1);
@@ -27,12 +38,16 @@ function SetupAccount() {
 
 
     return (
-        <section id="setup-account">
+        <AccountContext.Provider id="setup-account" value={{
+            handleInputChange,
+            nextStage,
+            stage,
+            formData,
+        }}>
                 <Logo id="logo"></Logo>
                 <ProgressBar stage={stage} maxStage={3}/>
                 <Form moveOut={(moveOut) ? 'move' : ''} id='form' stage={stage}/>
-                <Button onClick={nextStep}>Volgende</Button>
-        </section>
+        </AccountContext.Provider>
     );
 }
 

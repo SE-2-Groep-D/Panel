@@ -10,6 +10,7 @@ import Checkbox from "@components/input/checkbox.jsx";
 import DefaultForm from "@pages/setup-account/default-form.jsx";
 import InputField from "@components/input/inputfield.jsx";
 import OptionsSelector from "@components/input/optionselector.jsx";
+import Button from "@components/button/button.jsx";
 
 
 export default function Form({moveOut, stage}) {
@@ -35,6 +36,7 @@ export default function Form({moveOut, stage}) {
             <InputField visible>Telefoonnummer</InputField>
             <OptionsSelector onChange={(o,n) => setType(n)} options={['Ervaringsdeskundige', 'Bedrijf']}>Ik ben een</OptionsSelector>
             {cb}
+            <Button onClick={nextStage}>Volgende</Button>
         </DefaultForm>
     );
 

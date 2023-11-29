@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 
-export default function OptionsSelector({children, options, name, message, required, disabled}) {
+export default function OptionSelector({children, options, name, message, required, disabled}) {
     const [value, setValue] = useState(options[0]);
     const [open, setOpen] = useState(false);
 

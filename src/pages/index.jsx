@@ -1,0 +1,1 @@
+export {default as SetupAccount} from './setup-account/setupAccount.jsx'

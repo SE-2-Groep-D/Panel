@@ -11,6 +11,7 @@ option-selector {
     label {
         font-weight: bold;
         margin-bottom: .5rem;
+        display: block;
     }
 
     .selector-value {
@@ -22,7 +23,7 @@ option-selector {
         gap: 10px;
         user-select: none;
 
-        padding: .8rem 2rem;
+        padding: 1rem 2rem;
         border: $component-border;
         border-radius: $border-radius-medium;
         width: 100%;
@@ -42,6 +43,7 @@ option-selector {
             transform: rotate(180deg);
         }
     }
+
 
     .options-list {
         display: none;

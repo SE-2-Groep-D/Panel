@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react';
 
 
-export default function OptionsSelector({children, options, name, message, required, disabled, onChange}) {
-    const [value, setValue] = useState(options[0]);
+export default function OptionsSelector({
+                                            children, options,
+
+                                            name,
+                                            id,
+
+                                            message, required,
+                                            disabled, onChange
+}) {
+
+    options = (options === null || options === undefined)? [] : options;
+    const [value, setValue] = useState((options[0] === null || options[0] === undefined) ? '' : options[0]);
     const [open, setOpen] = useState(false);
 
 
@@ -21,7 +31,11 @@ export default function OptionsSelector({children, options, name, message, requi
 
     function handleSelect(target, newValue) {
         setOpen(false);
-        onChange(value, newValue);
+        if(onChange !== null && onChange !== undefined) onChange({
+            element: target,
+            oldValue: value,
+            value: newValue,
+        });
         setValue(newValue)
     }
     
@@ -49,7 +63,7 @@ export default function OptionsSelector({children, options, name, message, requi
 
 
     return(
-        <option-selector className='option-selector' value={value} disabled={disabled}>
+        <option-selector className='option-selector' value={value} disabled={disabled} id={id}>
             <label htmlFor={name}>{children}</label>
 
             <div name={name} className={(open) ? 'selector-value open' : 'selector-value'} tabIndex={0}  onClick={() => {setOpen(!open)}}>

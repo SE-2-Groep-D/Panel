@@ -1,19 +1,30 @@
+import {useState} from "react";
+
+export default function Checkbox({children, id, onChange}) {
+    const [value, setValue] = useState(false);
 
 
-export default function Checkbox({children, name, onChange}) {
       const text = (children) ?  
       <span className="checkbox-text">{children}</span>
       : null;
 
+      function handleChange(e) {
+          setValue(e.target.checked);
+          if(onChange !== undefined && onChange !== null) onChange({
+              element: e.target.parentNode.parentNode,
+              oldValue: value,
+              value: e.target.checked,
+          });
+      }
       
 
-  return (<div className="checkbox">
+  return (<check-box className="checkbox" value={value} id={id}>
              {text}
             <label className="checkbox-label">
-              <input onChange={onChange} type="checkbox" className='checkbox-cb'/>
+              <input onChange={handleChange} type="checkbox" className='checkbox-cb'/>
               <span className="checkbox-mark"></span>
             </label>
-        </div>
+        </check-box>
   )
 }
 

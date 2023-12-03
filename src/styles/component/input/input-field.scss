@@ -1,4 +1,4 @@
-.input-field {
+.inputField {
     position: relative;
     font-size: 1.6rem;
 
@@ -23,9 +23,9 @@
         }
 
         &::-webkit-input-placeholder {
-            
+
         }
-        
+
         &:not(:placeholder-shown) ~ label {
             transform: translateY(0);
             opacity: 1;
@@ -37,16 +37,16 @@
         opacity: 1;
     }
 
-
     & label {
         position: absolute;
+
         top: 0;
         left: 0;
 
         font-size: 1.6rem;
         font-weight: bold;
 
-        opacity: 0;        
+        opacity: 0;
         transform: translateY(150%);
         transition: all $animation-fast;
     }

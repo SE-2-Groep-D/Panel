@@ -1,44 +1,49 @@
 import {default as useFormData } from './hooks/useFormData.jsx'
 
-import {Button, Logo, ProgressBar, InputField, OptionSelector} from "@components";
-import DefaultForm from './components/default-form.jsx';
+import {Form, Button, Logo, ProgressBar, InputField, OptionSelector} from "@components";
 import {useState} from "react";
 
-function Form() {
+function SetupForm() {
   const {formData, dispatch} = useFormData();
   const {currentStage, maxStage} = formData;
 
-  const {callBack, form} = getNextForm(currentStage);
+  const {onComplete, form} = getNextForm(currentStage);
 
   return (
       <>
         <Logo id="logo"></Logo>
         <ProgressBar stage={currentStage} maxStage={maxStage}/>
-          {form}
-        <Button onClick={callBack}>Volgende</Button>
+          <Form title="Test" buttonText='volgende' message='' onSubmit={(data) => {
+              console.log(data);
+          }}>
+              {form}
+          </Form>
       </>
   );
 }
 
-export default Form;
+export default SetupForm;
 
 function getNextForm(stage) {
     const [data, setFormData] = useState({});
 
     return {
-        callBack: () => {
+        onComplete: () => {
             console.log(data);
         },
         form:
-            <DefaultForm
-                title='Account'
-            >
-                <InputField visible onChange={(e) => data.username = e.target.value}>Naam</InputField>
-                <InputField visible onChange={(e) => data.phonenumber = e.target.value}>Telefoonnummer</InputField>
+            <>
+                <InputField id='name' visible onChange={(data) => data.username = data.value}>Naam</InputField>
+                <InputField visible onChange={(data) => data.phonenumber = data.value}>Telefoonnummer</InputField>
                 <OptionSelector onChange={(o,n) => data.type = n} options={['Ervaringsdeskundige', 'Bedrijf']}>Ik ben een</OptionSelector>
-            </DefaultForm>
+            </>
+
     };
 }
+
+// function createNewForm(form, onComplete) {
+//     return {onComplete: onComplete, form: form};
+// }
 
 // export default function Form({moveOut, stage}) {
 //     const [type, setType] = useState(null);

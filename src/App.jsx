@@ -1,10 +1,17 @@
 import '@pagestyles/App.scss';
 
-import {SetupAccount} from "@pages";
+
+import {Icon} from '@components';
+
+import { useState } from 'react';
 
 function App() {
+  const [open, setOpen] = useState(false);
+
   return (
-      <SetupAccount/>
+      <>
+       <Icon type='add' color='blue' size='50'/>
+      </>
   )
 }
 

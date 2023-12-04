@@ -1,0 +1,80 @@
+option-selector {
+    font-size: 1.6rem;
+    position: relative;
+    cursor: pointer;
+    max-width: 30rem;
+    background-color: $color-white;
+
+    width: 24rem;
+    min-height: 4rem;
+
+    label {
+        font-weight: bold;
+        margin-bottom: .5rem;
+        display: block;
+    }
+
+    .selector-value {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        
+        gap: 10px;
+        user-select: none;
+
+        padding: 1rem 2rem;
+        border: $component-border;
+        border-radius: $border-radius-medium;
+        width: 100%;
+
+        background-color: $color-white;
+
+        & svg {
+            display: block;
+            transition: transform $animation-fast;
+        }
+
+        &.open ~ .options-list {
+            display: block;
+        }
+
+        &.open svg {
+            transform: rotate(180deg);
+        }
+    }
+
+
+    .options-list {
+        display: none;
+
+        background-color: $color-white;
+        z-index: 1;
+        
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        list-style: none;
+        width: 100%;
+        max-height: 20rem;
+        overflow-y: auto;
+
+
+        border: $component-border;
+        border-radius: $border-radius-medium;
+
+
+        .option {
+            padding: .8rem 2rem;
+            text-align: center;
+
+            &:hover {
+                border: $component-border;
+            }
+        }
+    }
+
+
+   
+}

@@ -1,10 +1,10 @@
-// padding
-$padding-components: 1rem 2rem;
+
 
 
 // border
 $component-border: 1px solid black;
 $component-focus-border: 2px solid black;
+$container-border: 3px solid #EBECF0;
 
 $border-radius-small: 3px;
 $border-radius-medium: 5px;
@@ -14,3 +14,4 @@ $border-radius-big: 8px;
 $animation-fast: .3s;
 $animation-medium: .5s;
 $animation-slow: .7s;
+$animation-slowest: 1s;

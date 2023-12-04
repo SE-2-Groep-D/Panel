@@ -1,0 +1,123 @@
+@import '../main.scss';
+
+
+#setup-account {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    padding-top: 20rem;
+    gap: 4rem;
+}
+
+form {
+
+}
+
+.moveIn {
+    animation: moveIn $animation-slow forwards !important;
+}
+
+.moveOut {
+    animation: moveOut $animation-slow forwards !important;
+}
+
+//
+//.form {
+//    display: flex;
+//    align-items: center;
+//    flex-direction: column;
+//    gap: 1.5rem;
+//
+//    &-title {
+//
+//    }
+//}
+
+//#account-form {
+//    display: flex;
+//    align-items: start;
+//    justify-content: center;
+//    flex-direction: column;
+//
+//    gap: 1.5rem;
+//    transform: translate(0);
+//
+//    animation: moveIn $animation-slow forwards;
+//
+//    h1 {
+//        width: 100%;
+//        text-align: center;
+//    }
+//}
+//
+//.move {
+//    animation: moveOut $animation-slow forwards !important;
+//}
+//
+//#setup-account {
+//    display: flex;
+//    align-items: center;
+//    justify-content: center;
+//    flex-direction: column;
+//    gap: 4rem;
+//
+//    @include respond(mobile) {
+//        justify-content: start;
+//        padding-top: 5rem;
+//    }
+//
+//    @include respond(tablet) {
+//        justify-content: center;
+//    }
+//
+//    width: 100vw;
+//    height: 100vh;
+//
+//    button {
+//        width: 22.5rem;
+//        height: 5rem;
+//    }
+//
+//    .form-title {
+//        font-weight: bold;
+//        font-size: 4rem;
+//    }
+//}
+//
+//
+@keyframes moveIn {
+    0% {
+        transform: translateX(40rem);
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveOut {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-40rem);
+        opacity: 0;
+    }
+}
+
+
+
+
+
+.logo {
+    width: 45rem;
+
+    @include respond(mobile) {
+        width: 35rem;
+    }
+}

@@ -1,0 +1,114 @@
+dialog.modal  {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    
+    padding: 4rem;
+    border-radius: $border-radius-big;
+    border: $container-border;
+
+    flex-direction: column;
+    gap: 10px;
+
+    &.top {
+        animation: moveFromTop $animation-slowest ease-in-out forwards;
+    }
+
+    &.right {
+        animation: moveFromRight $animation-slow ease-in-out forwards;
+    }
+
+    &.bottom {
+        animation: moveFromBottom $animation-slowest ease-in-out forwards;
+    }
+
+    &.left {
+        animation: moveFromLeft $animation-slow ease-in-out forwards;
+    }
+
+   
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    & .modal-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    & .close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+
+        height: 3rem;
+        width: 3rem;
+
+        border-radius: 50%;
+        background-color: $color-white-3;
+
+        &:hover {
+            background-color: $color-white-2;
+            cursor: pointer;
+        }
+
+        & svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+@keyframes moveFromTop {
+    0% {
+        opacity: 0;
+        top: 0%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@keyframes moveFromRight {
+    0% {
+        opacity: 0;
+        left: 100%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@keyframes moveFromBottom {
+    0% {
+        opacity: 0;
+        top: 100%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@keyframes moveFromLeft {
+    0% {
+        opacity: 0;
+        left: 0%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

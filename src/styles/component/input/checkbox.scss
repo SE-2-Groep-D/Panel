@@ -1,3 +1,10 @@
+check-box {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 1rem;
+}
+
 .checkbox {
     position: relative;
     display: flex;

@@ -1,9 +1,11 @@
 import React from 'react' 
 
-export default function Button({children, onClick, color, varient}) {
+export default function Button({className, children, onClick, color, varient, type}) {
+  const finalClassName = (className === null || className === undefined) ? getButtonClasses(color, varient) : getButtonClasses(color, varient) + ' ' + className;
+
   return (
-    <button 
-    className={getButtonClasses(color, varient)}
+    <button type={type}
+    className={finalClassName}
     onClick={onClick}
       >{children}</button>
   )
@@ -20,14 +22,14 @@ const varients = {
 }
 
 function getButtonClasses(color, varient) {
-  var className = "btn ";
+  var className = "btn";
 
   switch(varient) {
     case varients.OUTLINED:
-        className += varients.OUTLINED + " ";
+        className += " " + varients.OUTLINED;
       break;
     case varients.TEXT:
-        className += varients.TEXT + " ";
+        className +=  " " + varients.TEXT;
       break;
   }
 

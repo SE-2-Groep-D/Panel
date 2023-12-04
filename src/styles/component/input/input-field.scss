@@ -1,50 +1,61 @@
-.input-field {
+.inputField {
     position: relative;
-    user-select: none;
-    font-family: $font-family-1;
+    font-size: 1.6rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 5px;
+
+    width: 24rem;
+    min-height: 4rem;
 
     & input {
-        padding: $padding-components;
+        padding: 1rem 2rem;
         border: $component-border;
         border-radius: $border-radius-medium;
-        z-index: 2;
+        font-size: inherit;
 
-        background-color: $color-white;
+        width: 100%;
 
         &:focus-visible {
-            outline: $component-focus-border;
-        }
-
-        &:not(:placeholder-shown) ~ label {
-            opacity: 1;
-            transform: translateY(0);
+            outline: $component-focus-border !important;
         }
 
         &::-webkit-input-placeholder {
-            
+
+        }
+
+        &:not(:placeholder-shown) ~ label {
+            transform: translateY(0);
+            opacity: 1;
         }
     }
 
-
+    &.visible label {
+        transform: translateY(0);
+        opacity: 1;
+    }
 
     & label {
         position: absolute;
+
         top: 0;
         left: 0;
-        z-index: -1;
-        font-size: 1.3rem;
-        font-weight: bold;
-        transform: translateY(150%);
 
-        transition: transform $animation-fast ease-in-out;
+        font-size: 1.6rem;
+        font-weight: bold;
+
+        opacity: 0;
+        transform: translateY(150%);
+        transition: all $animation-fast;
     }
 
-    & p.message {
-        min-height: 1.6rem;
-        
-        text-align: right;
+    .message {
+        min-height: 1.8rem;
         font-size: 1.2rem;
-        color: red;
-        padding-bottom: .5rem;
+        font-weight: bold;
     }
 }
+
+

@@ -1,11 +1,11 @@
 import React from 'react' 
 
 export default function Button({className, children, onClick, color, varient, type}) {
-  className = (className === null || className === undefined) ? getButtonClasses(color, varient) : + getButtonClasses(color, varient) + ' ' + className
+  const finalClassName = (className === null || className === undefined) ? getButtonClasses(color, varient) : getButtonClasses(color, varient) + ' ' + className;
 
   return (
     <button type={type}
-    className={className}
+    className={finalClassName}
     onClick={onClick}
       >{children}</button>
   )

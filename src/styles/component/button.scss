@@ -5,14 +5,11 @@
     font-size: 2rem;
     font-weight: bold;
 
-    
-
-
     background-color: $color-primary;
     color: $color-white;
     cursor: pointer;
     user-select: none;
-    transition: 
+    transition:
         color $animation-fast,
         background-color $animation-fast,
         border-color $animation-fast;
@@ -23,7 +20,7 @@
     }
 
     &:focus-visible {
-        outline: 3px solid $color-black !important;   
+        outline: 3px solid $color-black !important;
     }
 
     &.secondary {
@@ -51,21 +48,21 @@
             border-color: $color-primary-2;
             color: $color-primary-2;
         }
-    
+
         &.secondary {
             border-color: $color-secondary;
             color: $color-secondary;
-    
+
             &:hover {
                 border-color: $color-secondary-2;
                 color: $color-secondary-2;
             }
         }
-    
+
         &.tertiary {
             border-color: $color-tertiary;
             color: $color-tertiary;
-    
+
             &:hover {
                 border-color: $color-tertiary-2;
                 color: $color-tertiary-2;

@@ -36,7 +36,6 @@ export default function Form({moveOut, stage}) {
             <InputField visible>Telefoonnummer</InputField>
             <OptionsSelector onChange={(o,n) => setType(n)} options={['Ervaringsdeskundige', 'Bedrijf']}>Ik ben een</OptionsSelector>
             {cb}
-            <Button onClick={nextStage}>Volgende</Button>
         </DefaultForm>
     );
 

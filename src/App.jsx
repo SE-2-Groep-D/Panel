@@ -1,6 +1,6 @@
 import '@pagestyles/App.scss';
 
-import SetupAccount from "@pages/setup-account/setupAccount.jsx";
+import SetupAccount from "@pages/login/loginAccount.jsx";
 
 function App() {
   return (

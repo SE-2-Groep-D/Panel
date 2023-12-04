@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react';
 
 
-export default function OptionsSelector({children, options, name, message, required, disabled}) {
-    const [value, setValue] = useState(options[0]);
+export default function OptionsSelector({
+                                            children, options,
+
+                                            name,
+                                            id,
+
+                                            message, required,
+                                            disabled, onChange
+}) {
+
+    options = (options === null || options === undefined)? [] : options;
+    const [value, setValue] = useState((options[0] === null || options[0] === undefined) ? '' : options[0]);
     const [open, setOpen] = useState(false);
 
 
@@ -19,6 +29,15 @@ export default function OptionsSelector({children, options, name, message, requi
     });
 
 
+    function handleSelect(target, newValue) {
+        setOpen(false);
+        if(onChange !== null && onChange !== undefined) onChange({
+            element: target,
+            oldValue: value,
+            value: newValue,
+        });
+        setValue(newValue)
+    }
     
     
     function handleEnterClick(event) {
@@ -26,7 +45,7 @@ export default function OptionsSelector({children, options, name, message, requi
         const target = event.target;
         const activeElement = document.activeElement;
         const classList = activeElement.classList;
-    
+
        
      // Check if the component is focused
         if (classList.contains('selector-value')) {
@@ -35,8 +54,7 @@ export default function OptionsSelector({children, options, name, message, requi
         } 
     
         if(classList.contains('option')) {
-            setValue(target.innerText);
-            setOpen(false);
+            handleSelect(target, target.innerText)
             return;
         }
     }
@@ -45,8 +63,10 @@ export default function OptionsSelector({children, options, name, message, requi
 
 
     return(
-        <option-selector className='option-selector' value={value} disabled={disabled}>
-            <div className={(open) ? 'selector-value open' : 'selector-value'} tabIndex={0}  onClick={() => {setOpen(!open)}}>
+        <option-selector className='option-selector' value={value} disabled={disabled} id={id}>
+            <label htmlFor={name}>{children}</label>
+
+            <div name={name} className={(open) ? 'selector-value open' : 'selector-value'} tabIndex={0}  onClick={() => {setOpen(!open)}}>
                 <span>{value}</span>
                 <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.8275 0.6725L0.5 2L8 9.5L15.5 2L14.1725 0.672499L8 6.845L1.8275 0.6725Z" fill="#111329"/>
@@ -54,11 +74,12 @@ export default function OptionsSelector({children, options, name, message, requi
 
             </div>
             <ul className='options-list'>
+                {/* eslint-disable-next-line react/prop-types */}
                 {options.map((option, key) => {
                     return <li 
                                 className='option' 
                                 key={key} 
-                                onClick={() => {setValue(option); setOpen(false)}}
+                                onClick={(e) => {handleSelect(e.target, option);}}
                                 tabIndex={0}
                             >{option}</li>
                 })}

@@ -1,23 +1,29 @@
-input-field {
+.inputField {
     position: relative;
+    font-size: 1.6rem;
 
     display: flex;
     flex-direction: column;
     align-items: end;
     gap: 5px;
 
+    width: 24rem;
+    min-height: 4rem;
 
     & input {
         padding: 1rem 2rem;
         border: $component-border;
         border-radius: $border-radius-medium;
+        font-size: inherit;
+
+        width: 100%;
 
         &:focus-visible {
             outline: $component-focus-border !important;
         }
 
         &::-webkit-input-placeholder {
-            
+
         }
 
         &:not(:placeholder-shown) ~ label {
@@ -26,21 +32,30 @@ input-field {
         }
     }
 
+    &.visible label {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
     & label {
         position: absolute;
+
         top: 0;
         left: 0;
 
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         font-weight: bold;
 
-        opacity: 0;        
+        opacity: 0;
         transform: translateY(150%);
         transition: all $animation-fast;
     }
 
     .message {
+        min-height: 1.8rem;
         font-size: 1.2rem;
         font-weight: bold;
     }
 }
+
+

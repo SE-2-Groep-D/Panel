@@ -1,33 +1,57 @@
+import {lazy, Suspense} from 'react';
+import {Logo, ProgressBar, LoadingDiv} from "@components";
 import {default as useFormData } from './hooks/useFormData.jsx'
 
-import {Form, Button, Logo, ProgressBar, InputField, OptionSelector} from "@components";
-
-import StartForm from "@pages/setup-account/components/start-form.jsx";
-import {useState} from "react";
 
 function SetupForm() {
-  const {formData, dispatch} = useFormData();
+  const {formData} = useFormData();
   const {currentStage, maxStage} = formData;
 
-  const StageForm = getNextForm(currentStage);
+  console.log(currentStage)
 
   return (
       <>
-          <Logo id="logo"> </Logo>
+          <Logo id="logo" />
           <ProgressBar stage={currentStage} maxStage={maxStage}/>
-          {StageForm}
+          <LazyForm data={formData}/>
       </>
   );
 }
 
 export default SetupForm;
 
-function getNextForm(stage) {
-    switch (stage) {
-        case 0:
-            return <StartForm/>
-    }
+function LazyForm({data}) {
+    const {currentStage} = data;
+    const StageForm = getNextForm(currentStage, data);
+
+
+    return (
+        <Suspense fallback={<LoadingDiv loading/>}>
+            {(StageForm)? <StageForm /> : <LoadingDiv loading/>}
+          </Suspense>
+    );
 }
+
+
+
+const PossibleForms = {
+    startForm: lazy(() => import('./form/start-form.jsx')),
+    researchForm: lazy(() => import('./form/research.jsx')),
+    companyForm: lazy(() => import('./form/company.jsx')),
+}
+
+function getNextForm(stage, formData) {
+    const user = (formData.user === null || formData.user === undefined) ? undefined : formData.user;
+    const accountType = (user === undefined) ? undefined : user.accountType;
+
+
+    if(stage === 1 && accountType === 'Bedrijf') return PossibleForms.companyForm;
+    if(stage === 1 && accountType === 'Ervaringsdeskundige') return PossibleForms.researchForm;
+
+    return PossibleForms.startForm;
+}
+
+
 
 // function createNewForm(form, onComplete) {
 //     return {onComplete: onComplete, form: form};

@@ -1,17 +1,21 @@
 @import '../main.scss';
 
-
 #setup-account {
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
 
-    padding-top: 20rem;
+   
     gap: 4rem;
+
+    width: 100vw;
+    height: 100vh;
 }
 
-form {
-
+.loading-div {
+    width: 10rem;
+    height: 20rem;
 }
 
 .moveIn {

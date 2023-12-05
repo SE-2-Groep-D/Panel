@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react'
 
 
@@ -8,12 +9,15 @@ import Button from "@components/button/button.jsx";
 
 export default function Form({moveOut, stage}) {
     const [type, setType] = useState(null);
+    const navigate = useNavigate();
+
 
     console.log(stage);
 
     function test(){
 
         console.log("test123")
+        navigate('/setupAccount'); // replace with your desired path
 
     }
 

@@ -5,14 +5,13 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: 3000,
     proxy: {
       '/api': {
-        target: 'https://localhost:5000', // Your ASP.NET API server address
+        target: 'https://localhost:5000',
         changeOrigin: true,
-        secure: false, // Set to true if your ASP.NET server uses HTTPS with a self-signed certificate
+        secure: false, // set to true if you have a self signed certificate
         rewrite: (path) => path.replace(/^\/api/, ''),
-      }
+      },
     },
   },
   plugins: [react()],

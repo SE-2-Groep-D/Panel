@@ -5,25 +5,21 @@ import {Button} from '@components';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+import {fetchData} from '@services/api';
+
 function App() {
   const [data, setData] = useState(null);
 
-  function fetchData() {
-    fetch('/api/WeatherForecast')
-    .then(res => res.json())
-    .then(data => {
-      setData(data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+  async function updateData() {
+    var returnedData = await fetchData('/WeatherForecast');
+    setData(returnedData);
   }
   
 
   return (
     <> 
       <p> {(data) ? data[0].date : 'no-date'} </p>
-      <Button onClick={fetchData}>Update date</Button>
+      <Button onClick={updateData}>Update date</Button>
     </>
   )
 }

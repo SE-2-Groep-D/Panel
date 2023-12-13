@@ -1,0 +1,53 @@
+
+.container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content:space-around;
+    height: 100%;
+    width: 100%;
+  }
+  .content-left{
+    display: flex;
+    flex-direction:column;
+    width: 45%;
+    height: auto;
+  }
+  .information-text{
+    font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+  
+  .content-right{
+    display: flex;
+    flex-direction:column;
+    width: 45%;
+    height: 40rem;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .section {
+    background-color: white;
+    padding-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .information{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    width: 100%;
+  }
+  .card{
+    margin-top:2rem;
+    height: 100%;
+  }
+
+  .btn{
+    margin-top: 1rem;
+    padding: 0.2rem 1rem;
+    font-size:0.8rem !important;
+
+  }

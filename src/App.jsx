@@ -1,7 +1,7 @@
 import '@pagestyles/App.scss';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginAccount from './pages/login/loginAccount';
+import LoginAccount from './components/chat/chat.jsx';
 import SetupAccount from "@pages/setup-account/setupAccount.jsx";
 
 function App() {

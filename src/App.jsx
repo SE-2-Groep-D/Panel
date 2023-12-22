@@ -13,7 +13,7 @@ function App() {
 
   return (
     <> 
-      <MultiInputSelector animation={false}>Test</MultiInputSelector>
+      <MultiInputSelector animation={false}>Hulpmiddelen</MultiInputSelector>
     </>
   )
 }

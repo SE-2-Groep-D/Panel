@@ -36,7 +36,7 @@ export default function MultiInputSelector({children, animation, options, id}) {
       <InputField animation={animation} value={value} onChange={updateValue}>{children}</InputField>
       <ul>
         {selectedOptions.map((option, index) => {
-          return <li key={index} tabIndex={0} onClick={removeOption} onKeyDown={removeOption}>
+          return <li className='tag' key={index} tabIndex={0} onClick={removeOption} onKeyDown={removeOption}>
           {option}
             <Icon onClick={removeOption} type="close" size="16" color={"#4464EE"}/>
           </li>

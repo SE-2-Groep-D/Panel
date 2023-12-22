@@ -9,21 +9,8 @@
     }
 
     li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: .5rem;
-        
-      
-
-        color: $color-primary;
-        background-color: $color-primary-85;
-        
-        font-size: 1.3rem;
-        border-radius: $border-radius-small;
-        font-weight: bold;
-        padding: .5rem;
-        padding-left: 1rem;
+        padding: .5rem !important;
+        padding-left: 1rem !important;
       
 
         &:hover path {

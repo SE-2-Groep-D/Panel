@@ -3,14 +3,9 @@ export default function Close({fill, size}) {
 
   return (
     <svg width={size} height={size} viewBox={"0 0 24 24"} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_298_219)">
-          <path d="M18.3086 19.3574L12.7011 14.2696L7.61939 19.8839L5.75021 18.1879L10.8319 12.5736L5.22438 7.48576L6.91829 5.61432L12.5258 10.7022L17.6075 5.08786L19.4767 6.78382L14.395 12.3981L20.0025 17.486L18.3086 19.3574Z" fill={fill}/>
-        </g>
-        <defs>
-          <clipPath id="clip0_298_219">
-          <rect width="24" height="24" fill="white"/>
-          </clipPath>
-          </defs>
-    </svg>
+      <path d="M17.4274 18.7219L11.7143 13.5383L6.5369 19.2583L4.63252 17.5304L9.80992 11.8104L4.0968 6.62672L5.8226 4.72004L11.5357 9.90371L16.7131 4.18367L18.6175 5.91156L13.4401 11.6316L19.1532 16.8153L17.4274 18.7219Z" fill={fill}/>
+</svg>
+
   )
 }
+

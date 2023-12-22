@@ -17,7 +17,7 @@
 
 
     &:hover {
-        background-color: $color-primary-2;
+        background-color: $color-primary-60;
     }
 
     &:focus-visible {
@@ -46,8 +46,8 @@
         border: 3px solid $color-primary;
 
         &:hover {
-            border-color: $color-primary-2;
-            color: $color-primary-2;
+            border-color: $color-primary-60;
+            color: $color-primary-60;
         }
     
         &.secondary {
@@ -73,10 +73,10 @@
 
     &.text {
         background-color: transparent;
-        color: $color-primary-2;
+        color: $color-primary-60;
 
         &:hover {
-            background-color: rgba($color-primary-2, .1);
+            background-color: rgba($color-primary-60, .1);
         }
 
         &.secondary {

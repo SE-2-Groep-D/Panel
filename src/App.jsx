@@ -6,20 +6,14 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 import {fetchData} from '@services/api';
+import { MultiInputSelector } from './components/input';
 
 function App() {
   const [data, setData] = useState(null);
 
-  async function updateData() {
-    var returnedData = await fetchData('/WeatherForecast');
-    setData(returnedData);
-  }
-  
-
   return (
     <> 
-      <p> {(data) ? data[0].date : 'no-date'} </p>
-      <Button onClick={updateData}>Update date</Button>
+      <MultiInputSelector animation={false}>Test</MultiInputSelector>
     </>
   )
 }

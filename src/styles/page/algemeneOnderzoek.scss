@@ -1,0 +1,75 @@
+.research-list {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .filters {
+    // Voeg hier je filter stijlen toe
+  }
+
+  .research-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .research-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border: 1px solid #eee;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .research-item-content {
+      flex-grow: 1;
+
+      .research-title {
+        font-size: 1.5em;
+        color: #0077cc;
+        margin: 0 0 10px 0;
+      }
+
+      .research-description {
+        font-size: 1em;
+        color: #666;
+        line-height: 1.6;
+      }
+    }
+
+    .research-item-actions {
+      display: flex;
+      gap: 10px;
+
+      .btn-info {
+        padding: 8px 15px;
+        background-color: #0077cc;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #005fa3;
+        }
+      }
+
+      // Voeg hier eventuele andere actieknop stijlen toe
+    }
+  }
+}

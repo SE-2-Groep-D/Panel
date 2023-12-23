@@ -1,12 +1,12 @@
 
-function Information() {
+function Information({locatie,vergoeding,datum}) {
     
 
     return (
         <div className='information'>
-            <div> Vragenlijst:</div> 
-            <div>€40</div>
-            <div>19-12-2023</div>
+            <div> {locatie}:</div>
+            <div>€{vergoeding}</div>
+            <div>{datum}</div>
       </div>
     );
     }

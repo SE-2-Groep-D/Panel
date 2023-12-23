@@ -23,7 +23,6 @@ function StartForm() {
             <Form title="Account" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
                 <InputField id='firstName' visible required >Voornaam</InputField>
                 <InputField id='lastName' visible required >Achternaam</InputField>
-                <InputField id='email' type='email' visible required >Email</InputField>
                 <InputField id='phonenumber'  type='tel' visible required>Telefoonnummer</InputField>
                 <OptionSelector id='account-type' options={['Ervaringsdeskundige', 'Bedrijf']} required>Ik ben een</OptionSelector>
             </Form>

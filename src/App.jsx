@@ -7,13 +7,15 @@ import { useEffect } from 'react';
 
 import {fetchData} from '@services/api';
 import { MultiInputSelector } from './components/input';
+import SetupAccount from './pages/setup-account/setupAccount';
 
 function App() {
   const [data, setData] = useState(null);
 
   return (
     <> 
-      <MultiInputSelector animation={false}>Hulpmiddelen</MultiInputSelector>
+      {/* <MultiInputSelector animation={false}>Hulpmiddelen</MultiInputSelector> */}
+      <SetupAccount/>
     </>
   )
 }

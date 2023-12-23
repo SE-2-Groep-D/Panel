@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
-import {Form, Button, Logo, ProgressBar, InputField, OptionSelector} from "@components";
+import {Form, Button, Logo, ProgressBar, InputField, OptionSelector, Checkbox} from "@components";
 import {default as useFormData } from '../hooks/useFormData.jsx'
 
-function StartForm() {
+function ErvaringsdeskundigeForm() {
     const {formData, dispatch} = useFormData();
     const [message, setMessage] = useState(null);
     const [move, setMove] = useState('moveIn');
@@ -21,14 +21,12 @@ function StartForm() {
     return (
         <div>
             <Form title="Account" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
-                <InputField id='firstName' visible required >Voornaam</InputField>
-                <InputField id='lastName' visible required >Achternaam</InputField>
-                <InputField id='email' type='email' visible required >Email</InputField>
-                <InputField id='phonenumber' type='tel' visible required>Telefoonnummer</InputField>
-                <OptionSelector id='account-type' options={['Ervaringsdeskundige', 'Bedrijf']} required>Ik ben een</OptionSelector>
+                <InputField id='postcode' visible required >Postcode</InputField>
+                <OptionSelector id='leeftijd' options={['jonger dan 18', '18 t/m 30', '31 t/m 40', '41 t/m 50', '51 t/m 60', '61 t/m 70', '71 t/m 80', '81 t/m 90', '91 t/m 100', 'boven de 100']} visible required >Leeftijd</OptionSelector>
+                <Checkbox id='toestemmingBenadering' visible required >Toestemming Benadering</Checkbox>
             </Form>
         </div>
     );
 }
 
-export default StartForm;
+export default ErvaringsdeskundigeForm;

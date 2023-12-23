@@ -17,7 +17,7 @@ export default function InputField({children, type, name, id, message, required,
         })
     }
 
-    if(required && message === null || message === undefined) message = 'required*';
+    if(required && message === null || message === undefined) message = 'verplicht*';
   return (
     <div className={(animation !== true) ? 'inputField visible' : 'inputField'} id={id}>
         <p className='message'>{message}</p>

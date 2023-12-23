@@ -3,8 +3,9 @@ import {default as useFormData } from './hooks/useFormData.jsx'
 import {Form, Button, Logo, ProgressBar, InputField, OptionSelector} from "@components";
 
 import StartForm from "@pages/setup-account/components/start-form.jsx";
+import ErvaringsdeskundigeForm from "@pages/setup-account/components/ervarignsdeskundige-form.jsx";
 import {useState} from "react";
-
+//src\pages\setup-account\components\ervarignsdeskundige-form.jsx
 function SetupForm() {
   const {formData, dispatch} = useFormData();
   const {currentStage, maxStage} = formData;
@@ -24,8 +25,10 @@ export default SetupForm;
 
 function getNextForm(stage) {
     switch (stage) {
-        case 0:
+        case 1:
             return <StartForm/>
+        case 0:
+            return <ErvaringsdeskundigeForm/>
     }
 }
 

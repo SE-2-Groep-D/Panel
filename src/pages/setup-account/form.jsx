@@ -3,7 +3,8 @@ import {default as useFormData } from './hooks/useFormData.jsx'
 import {Form, Button, Logo, ProgressBar, InputField, OptionSelector} from "@components";
 
 import StartForm from "@pages/setup-account/components/start-form.jsx";
-import ErvaringsdeskundigeForm from "@pages/setup-account/components/ervarignsdeskundige-form.jsx";
+import OnderzoekForm from "@pages/setup-account/components/onderzoek-form.jsx";
+import VoogdForm from "@pages/setup-account/components/voogd-form.jsx";
 import {useState} from "react";
 //src\pages\setup-account\components\ervarignsdeskundige-form.jsx
 function SetupForm() {
@@ -25,10 +26,12 @@ export default SetupForm;
 
 function getNextForm(stage) {
     switch (stage) {
-        case 1:
-            return <StartForm/>
         case 0:
-            return <ErvaringsdeskundigeForm/>
+            return <StartForm/>
+        case 1:
+            return <OnderzoekForm/>
+        case 2:
+            return <VoogdForm/>
     }
 }
 

@@ -3,11 +3,10 @@ import {useState} from "react";
 
 export default function InputField({children, type, name, id, message, required, disabled, animation, onChange, value}) {
     name = (name === undefined || name === null) ? "field" : name;
-   
 
     const inputField = (required)? 
-        <input id={name} type={getInputType(type)} placeholder={children} onChange={handleChange} required value={value}></input> :
-        <input id={name} type={getInputType(type)} placeholder={children} onChange={handleChange} value={value}></input>
+        <input id={id} type={getInputType(type)} placeholder={children} onChange={handleChange} required value={value}></input> :
+        <input id={id} type={getInputType(type)} placeholder={children} onChange={handleChange} value={value}></input>
 
     function handleChange(e) {
         if(onChange !== undefined && onChange !== null) onChange({

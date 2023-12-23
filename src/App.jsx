@@ -11,6 +11,7 @@ import { useState } from 'react';
 import {fetchData} from '@services/api';
 import { MultiInputSelector } from './components/input';
 import AlgemeneOnderzoek from "@pages/research/AlgemeneOnderzoek.jsx";
+import Routing from "./Routing.jsx";
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <>
-        <AlgemeneOnderzoek/>
+        <Routing />
     </>
 
   )

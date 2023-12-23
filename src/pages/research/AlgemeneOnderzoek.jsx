@@ -3,11 +3,16 @@ import { useEffect, useState } from "react";
 import { fetchAllOnderzoeken } from './context/OnderzoekContext';
 import {Button} from "@components";
 import Onderzoek from "@pages/research/Onderzoek.jsx";
-
+import { useNavigate } from 'react-router-dom';
 function AlgemeneOnderzoek() {
     const [onderzoeken, setOnderzoeken] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
+    const goToOnderzoek = (id) => {
+        navigate(`/onderzoek/${id}`);
+    };
 
     useEffect(() => {
         fetchAllOnderzoeken()
@@ -40,7 +45,7 @@ function AlgemeneOnderzoek() {
                             {/* Voeg hier andere details toe indien nodig */}
                         </div>
                         <div className="research-item-actions">
-                            <Button children="Onderzoek Info" onClick={Onderzoek}/>
+                            <Button children="Onderzoek Info" onClick={() => goToOnderzoek(onderzoek.id)}/>
                         </div>
                     </div>
                 ))}

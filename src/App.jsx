@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import {fetchData} from '@services/api';
 import { MultiInputSelector } from './components/input';
 import SetupAccount from './pages/setup-account/setupAccount';
+import { Register } from './pages';
 
 function App() {
   const [data, setData] = useState(null);
@@ -15,7 +16,7 @@ function App() {
   return (
     <> 
       {/* <MultiInputSelector animation={false}>Hulpmiddelen</MultiInputSelector> */}
-      <SetupAccount/>
+      <Register/>
     </>
   )
 }

@@ -2,6 +2,7 @@ import {lazy, Suspense} from 'react';
 
 const Icons = {
     add: lazy(() => import('@icons/add.jsx')),
+    delete: lazy(() => import('@icons/delete.jsx')),
     back: lazy(() => import('@icons/back.jsx')),
     calender: lazy(() => import('@icons/calender.jsx')),
     chat: lazy(() => import('@icons/chat.jsx')),

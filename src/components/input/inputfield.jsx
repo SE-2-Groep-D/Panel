@@ -3,9 +3,8 @@ import {useState} from "react";
 
 export default function InputField({children, type, name, id, message, required, disabled, animation, onChange, value}) {
     name = (name === undefined || name === null) ? "field" : name;
-   
 
-    const inputField = (required)? 
+    const inputField = (required == true)? 
         <input id={name} type={getInputType(type)} placeholder={children} onChange={handleChange} required value={value}></input> :
         <input id={name} type={getInputType(type)} placeholder={children} onChange={handleChange} value={value}></input>
 
@@ -17,7 +16,7 @@ export default function InputField({children, type, name, id, message, required,
         })
     }
 
-    if(required && message === null || message === undefined) message = 'required*';
+    if(required) message = 'vereist*';
   return (
     <div className={(animation !== true) ? 'inputField visible' : 'inputField'} id={id}>
         <p className='message'>{message}</p>

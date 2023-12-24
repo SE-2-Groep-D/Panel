@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-import {InputField, Icon} from '@components';
+import {InputField, ToolTip, Icon} from '@components';
 
 export default function MultiInputSelector({children, animation, options, id}) {
   const [possibleOptions, setOptions] = useState((options === undefined || options === null) ? [] : options);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [value, setValue] = useState('');
+  const [error, setError] = useState(null);
 
   function handleEnterClick(e) {
     if(e.key !== 'Enter') return;
@@ -15,10 +16,16 @@ export default function MultiInputSelector({children, animation, options, id}) {
 
   function updateValue(e) {
     setValue(e.value);
+    setError(null);
   }
 
   function addOption() {
-    if(value === '' || value === ' ' || selectedOptions.includes(value)) return;
+    if(value === '' || value === ' ') return;
+    if(selectedOptions.includes(value)) {
+      setError('Deze optie is al toegevoegd.');
+      return;
+    }
+
     selectedOptions.push(value);
     setValue('');
   }
@@ -33,15 +40,20 @@ export default function MultiInputSelector({children, animation, options, id}) {
 
   return (
     <div className='multi-input-selector' id={id} onKeyDown={handleEnterClick} value={value}>
-      <InputField animation={animation} value={value} onChange={updateValue}>{children}</InputField>
-      <ul>
-        {selectedOptions.map((option, index) => {
-          return <li className='tag' key={index} tabIndex={0} onClick={removeOption} onKeyDown={removeOption}>
-          {option}
-            <Icon onClick={removeOption} type="close" size="16" color={"#4464EE"}/>
-          </li>
-        })}
-      </ul>
+      
+      <ToolTip message='Druk op de enter toets om de optie toe te voegen.' position="top" error={error}> 
+          <InputField animation={animation} value={value} onChange={updateValue}>{children}</InputField>
+      </ToolTip>
+      <ToolTip message='Klik op het kruisje om dit item te verwijderen.' position="bottom"> 
+        <ul>
+          {selectedOptions.map((option, index) => {
+            return <li className='tag' key={index} tabIndex={0} onClick={removeOption} onKeyDown={removeOption}>
+             <label htmlFor={index}>{option}</label>
+             <button id={index} onClick={removeOption}> <Icon type="delete" size="13" color={"#4464EE"}/> </button>
+            </li>
+          })}
+        </ul>
+      </ToolTip>
     </div>
 
   )

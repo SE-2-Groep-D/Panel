@@ -1,28 +1,10 @@
 import {lazy, Suspense} from 'react';
-import {Logo, ProgressBar, LoadingDiv} from "@components";
-import {default as useFormData } from './hooks/useFormData.jsx'
+import {LoadingDiv} from '@components';
 
 
-function SetupForm() {
-  const {formData} = useFormData();
-  const {currentStage, maxStage} = formData;
-
-  console.log(currentStage)
-
-  return (
-      <>
-          <Logo id="logo" />
-          <ProgressBar stage={currentStage} maxStage={maxStage}/>
-          <LazyForm data={formData}/>
-      </>
-  );
-}
-
-export default SetupForm;
-
-function LazyForm({data}) {
-    const {currentStage} = data;
-    const StageForm = getNextForm(currentStage, data);
+function SetupForm({data}) {
+    const {currentStep} = data;
+    const StageForm = getNextForm(currentStep);
 
 
     return (
@@ -32,6 +14,9 @@ function LazyForm({data}) {
     );
 }
 
+export default SetupForm;
+
+
 
 
 const PossibleForms = {
@@ -40,13 +25,13 @@ const PossibleForms = {
     companyForm: lazy(() => import('./form/company.jsx')),
 }
 
-function getNextForm(stage, formData) {
-    const user = (formData.user === null || formData.user === undefined) ? undefined : formData.user;
-    const accountType = (user === undefined) ? undefined : user.accountType;
+function getNextForm(step, formData) {
+    // const user = (formData.user === null || formData.user === undefined) ? undefined : formData.user;
+    // const accountType = (user === undefined) ? undefined : user.accountType;
 
 
-    if(stage === 1 && accountType === 'Bedrijf') return PossibleForms.companyForm;
-    if(stage === 1 && accountType === 'Ervaringsdeskundige') return PossibleForms.researchForm;
+    // if(stage === 1 && accountType === 'Bedrijf') return PossibleForms.companyForm;
+    // if(stage === 1 && accountType === 'Ervaringsdeskundige') return PossibleForms.researchForm;
 
     return PossibleForms.startForm;
 }

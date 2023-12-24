@@ -2,13 +2,16 @@
 
 
 // border
-$component-border: 1px solid black;
-$component-focus-border: 2px solid black;
-$container-border: 3px solid #EBECF0;
+$border-component: 1px solid black;
+$border-component-focus: 2px solid black;
+$border-container: 3px solid #EBECF0;
+
 
 $border-radius-small: 3px;
 $border-radius-medium: 5px;
 $border-radius-big: 8px;
+
+
 
 // animation speeds
 $animation-fast: .3s;

@@ -12,14 +12,14 @@
 
     & input, textarea {
         padding: 1rem 2rem;
-        border: $component-border;
+        border: $border-component;
         border-radius: $border-radius-medium;
         font-size: inherit;
 
         width: 100%;
 
         &:focus-visible {
-            outline: $component-focus-border !important;
+            outline: $border-component-focus !important;
         }
 
         &::-webkit-input-placeholder {

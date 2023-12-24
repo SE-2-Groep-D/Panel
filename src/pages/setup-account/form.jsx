@@ -7,8 +7,6 @@ function SetupForm() {
   const {formData} = useFormData();
   const {currentStage, maxStage} = formData;
 
-  console.log(currentStage)
-
   return (
       <>
           <Logo id="logo" />

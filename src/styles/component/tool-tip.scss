@@ -28,7 +28,7 @@
         }
     
         @media (prefers-reduced-motion: no-preference) {
-            animation: moveIn $animation-fast forwards;
+            animation: moveMessage $animation-fast forwards;
         }
     }
 
@@ -58,7 +58,7 @@
    
 }
 
-@keyframes moveIn {
+@keyframes moveMessage {
     from {
         opacity: 0;
         transform: translate(-50%, -100%);

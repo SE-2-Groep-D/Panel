@@ -29,17 +29,17 @@ function getButtonClasses(color, varient) {
         className += " " + varients.OUTLINED;
       break;
     case varients.TEXT:
-        className +=  " " + varients.TEXT;
+        className += " " + varients.TEXT;
       break;
   }
 
   switch(color) {
     case colors.SECONDARY: 
-      className += colors.SECONDARY;
+      className += " " + colors.SECONDARY;
     break;
 
     case colors.TERTIARY:
-      className += colors.TERTIARY;
+      className += " " + colors.TERTIARY;
     break;
   }
 

@@ -5,24 +5,48 @@ $breakpoints: (
   desktop: 1200px
 );
 
-@mixin respond($breakpoint) {
+@mixin respond($breakpoint, $type: max) {
   @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
-      @content;
+    $value: map-get($breakpoints, $breakpoint);
+    @if $type == min {
+      @media (min-width: #{$value}) {
+        @content;
+      }
+    } @else if $type == max {
+      @media (max-width: #{$value}) {
+        @content;
+      }
+    } @else {
+      @error "Invalid type: #{$type}. Please use 'min' or 'max'.";
     }
   } @else {
-    @error "Invalid breakpoint: #{$breakpoint}. Please use one of: #{map-keys($breakpoints)}";
+    @if $type == min {
+      @media (min-width: #{$breakpoint}) {
+        @content;
+      }
+    } @else if $type == max {
+      @media (max-width: #{$breakpoint}) {
+        @content;
+      }
+    } @else {
+      @error "Invalid type: #{$type}. Please use 'min' or 'max'.";
+    }
   }
 }
 
-// @mixin respond($breakpoint) {
+
+
+
+
+// @mixin respond($breakpoint, $type : max) {
 //   @if map-has-key($breakpoints, $breakpoint) {
-//     @if $breakpoint == desktop {
-//       @media (max-width: map-get($breakpoints, $breakpoint)) {
+//     $value: map-get($breakpoints, $breakpoint);
+//     @if $type == min {
+//       @media (min-width: $breakpoint) {
 //         @content;
 //       }
-//     } @else {
-//       @media (max-width: map-get($breakpoints, $breakpoint)) {
+//     } @else  {
+//       @media (max-width: $breakpoint) {
 //         @content;
 //       }
 //     }
@@ -30,3 +54,15 @@ $breakpoints: (
 //     @error "Invalid breakpoint: #{$breakpoint}. Please use one of: #{map-keys($breakpoints)}";
 //   }
 // }
+
+// @mixin respond($breakpoint) {
+//   @if map-has-key($breakpoints, $breakpoint) {
+//     @media (min-width: map-get($breakpoints, $breakpoint)) {
+//       @content;
+//     }
+//   } @else {
+//     @error "Invalid breakpoint: #{$breakpoint}. Please use one of: #{map-keys($breakpoints)}";
+//   }
+// }
+
+

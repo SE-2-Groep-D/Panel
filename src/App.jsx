@@ -1,22 +1,27 @@
 import '@pagestyles/App.scss';
 
-// import {SetupAccount} from "@pages";
-import {Button} from '@components';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
-import {fetchData} from '@services/api';
-import { MultiInputSelector } from './components/input';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {lazy, Suspense, useState} from 'react';
+import {LoadingDiv} from '@components';
+
+
+// import pages
+const ResearchResults = lazy(() => import('@pages/research').then(module => ({ default: module.Results })));
 
 
 function App() {
-  const [data, setData] = useState(null);
 
-  return (
-    <> 
-      <MultiInputSelector animation={false}>Hulpmiddelen</MultiInputSelector>
-    </>
-  )
+
+    return (
+      <Router>
+        <Suspense fallback={<LoadingDiv/>}>
+          <Routes>
+            <Route path="/" element={<ResearchResults/>}/>
+          </Routes>
+        </Suspense>
+      </Router>
+    );
 }
 
 export default App

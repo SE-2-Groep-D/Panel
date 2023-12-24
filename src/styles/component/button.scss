@@ -1,13 +1,19 @@
+button {
+    outline: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .btn {
-    padding: 1.2rem 2.5rem;
+    padding: .8rem 2rem;
     border-radius: $border-radius-medium;
 
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-weight: bold;
 
     
-
-
     background-color: $color-primary;
     color: $color-white;
     cursor: pointer;
@@ -19,7 +25,7 @@
 
 
     &:hover {
-        background-color: $color-primary-2;
+        background-color: $color-primary-60;
     }
 
     &:focus-visible {
@@ -48,8 +54,8 @@
         border: 3px solid $color-primary;
 
         &:hover {
-            border-color: $color-primary-2;
-            color: $color-primary-2;
+            border-color: $color-primary-60;
+            color: $color-primary-60;
         }
     
         &.secondary {
@@ -75,10 +81,10 @@
 
     &.text {
         background-color: transparent;
-        color: $color-primary-2;
+        color: $color-primary-60;
 
         &:hover {
-            background-color: rgba($color-primary-2, .1);
+            background-color: rgba($color-primary-60, .1);
         }
 
         &.secondary {

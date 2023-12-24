@@ -12,16 +12,17 @@ check-box {
     flex-direction: row-reverse;
     gap: 1rem;
 
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-family: $font-family-1;
 
     &-text {
         display: block;
+        font-size: 1.3rem;
+        max-width: 20rem;
     }
     
 
     &-label {
-
         &:focus .checkbox-mark, &:focus-visible .checkbox-mark, &:focus-within .checkbox-mark  {
             outline: $component-focus-border;
         }

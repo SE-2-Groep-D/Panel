@@ -20,10 +20,30 @@
 
 .moveIn {
     animation: moveIn $animation-slow forwards !important;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        opacity: 1;
+        transform: translate(0,0); 
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        animation: moveIn $animation-fast forwards;
+    }
+
 }
 
 .moveOut {
     animation: moveOut $animation-slow forwards !important;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        animation: moveOut $animation-fast forwards;
+    }
 }
 
 //

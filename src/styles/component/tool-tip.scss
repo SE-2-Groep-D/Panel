@@ -1,0 +1,73 @@
+.tool-tip {
+    position: relative;
+
+    &.error &__message {
+        background-color: $color-tertiary;
+    }
+
+    &__message {
+        position: absolute;
+        background-color: $color-blue-black;
+        color: white;
+
+        font-size: 1.2rem;
+        padding: .5rem 1rem;
+        border-radius: $border-radius-small;
+       
+        opacity: 0;
+        width: max-content;
+        max-width: 100%;
+        z-index: -10;
+    }
+
+    & > *:hover ~ .tool-tip__message, &:focus-within &__message {
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+            opacity: 1;
+            z-index: 10;
+        }
+    
+        @media (prefers-reduced-motion: no-preference) {
+            animation: moveIn $animation-fast forwards;
+        }
+    }
+
+    
+   &.top &__message {
+    top: -2rem;
+    left: 50%;
+   }
+
+   &.right &__message {
+    left: 50%;
+    transform: translate(-50%, -50%);
+   }
+
+   &.bottom &__message {
+    left: 50%;
+    bottom: -6.5rem;
+   }
+
+   &.left &__message {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+   }
+
+  
+   
+}
+
+@keyframes moveIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -100%);
+        z-index: -10;
+    }
+
+    to {
+        opacity: 1;
+        z-index: 10;
+        transform: translate(-50%, -50%);
+    }
+}

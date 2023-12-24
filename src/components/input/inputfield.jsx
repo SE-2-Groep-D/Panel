@@ -1,13 +1,12 @@
 // eslint-disable-next-line react/prop-types
 import {useState} from "react";
 
-export default function InputField({children, type, name, id, message, required, disabled, visible, onChange}) {
+export default function InputField({children, type, name, id, message, required, disabled, animation, onChange, value}) {
     name = (name === undefined || name === null) ? "field" : name;
-    const [value, setValue] = useState('');
 
-    const inputField = (required)? 
-        <input id={name} type={getInputType(type)} placeholder={children} onChange={handleChange} required></input> :
-        <input id={name} type={getInputType(type)} placeholder={children} onChange={handleChange}></input>
+    const inputField = (required == true)? 
+        <input id={name} type={getInputType(type)} placeholder={children} onChange={handleChange} required value={value}></input> :
+        <input id={name} type={getInputType(type)} placeholder={children} onChange={handleChange} value={value}></input>
 
     function handleChange(e) {
         if(onChange !== undefined && onChange !== null) onChange({
@@ -15,12 +14,11 @@ export default function InputField({children, type, name, id, message, required,
             oldValue: value,
             value: e.target.value,
         })
-        setValue(e.target.value);
     }
 
-    if(required && message === null || message === undefined) message = 'required*';
+    if(required) message = 'vereist*';
   return (
-    <div className={(visible) ? 'inputField visible' : 'inputField'} value={value} id={id}>
+    <div className={(animation !== true) ? 'inputField visible' : 'inputField'} id={id}>
         <p className='message'>{message}</p>
         {inputField}
         <label htmlFor={name}>{children}</label>

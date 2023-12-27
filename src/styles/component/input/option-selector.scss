@@ -1,4 +1,4 @@
-option-selector {
+.option-selector {
     font-size: 1.6rem;
     position: relative;
     cursor: pointer;
@@ -19,6 +19,8 @@ option-selector {
         align-items: center;
         justify-content: space-between;
         flex-direction: row;
+
+        font-weight: bold;
         
         gap: 10px;
         user-select: none;

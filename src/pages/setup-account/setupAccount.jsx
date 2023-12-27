@@ -2,20 +2,25 @@ import '@pagestyles/setup-account.scss';
 
 import {Logo, ProgressBar, LoadingDiv} from "@components";
 import Form from './form.jsx';
+import { FormProvider } from './data/formContext.jsx';
+import { useForm } from './data/useForm.jsx';
 
-import useMultiStepForm from './hooks/useMultiStepForm.jsx';
 
 function SetupAccount() {
-  const {data, nextStep, prevStep} = useMultiStepForm();
-  const {currentStage, maxStage} = data;
-
-  console.log(data);
-
   return <main id='setup-account'>
-          <Logo id="logo" />
-          <ProgressBar stage={currentStage} maxStage={maxStage}/>
-          <Form data={data}/>
+        <Logo id="logo" />
+         <FormProvider>
+           <SetupAccountForm/>
+         </FormProvider>
   </main>
+}
+
+function SetupAccountForm() {
+  const {state} = useForm();
+  return <>
+            <ProgressBar step={state.currentStep} maxStep={state.maxStep}/>
+            <Form />
+  </>
 }
 
 

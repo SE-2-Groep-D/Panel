@@ -14,6 +14,7 @@ const Form = ({title, message, children, buttonText, onSubmit, move}) => {
         }
 
         content.childNodes.forEach((item, index) => {
+    
             const id = (item.getAttribute('id') === null || item.getAttribute('id') === undefined) ? index : item.getAttribute('id');
             data.values = {...data.values, [id] : item.getAttribute('value')}
         })

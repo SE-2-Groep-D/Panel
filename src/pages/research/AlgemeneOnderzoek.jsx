@@ -35,6 +35,19 @@ function AlgemeneOnderzoek() {
                 setIsLoading(false);
             });
     }, []);
+    useEffect(() => {
+        fetchAllOnderzoeken()
+            .then(data => {
+                console.log(data)
+                setOnderzoeken(data);
+                setIsLoading(false);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setError(error.toString());
+                setIsLoading(false);
+            });
+    }, []);
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;

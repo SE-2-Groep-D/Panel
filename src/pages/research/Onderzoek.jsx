@@ -26,6 +26,8 @@ function Onderzoek() {
         }
     }, [onderzoekId]);
 
+
+
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -36,12 +38,13 @@ function Onderzoek() {
 
     return (
         <div className="container">
-            <div className="content-left">
+            <div className="content-left-container">
                 <OnderzoekInformatie titel={onderzoek.titel}
                                      omschrijving={onderzoek.omschrijving}
                                      bedrijfid={onderzoek.bedrijfId} />
             </div>
-            <div className="content-right">
+            <div className="content-right-container">
+
                 <Information locatie={onderzoek.locatie}
                              vergoeding={onderzoek.vergoeding}
                              datum={onderzoek.startDatum} />

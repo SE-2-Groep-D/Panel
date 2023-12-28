@@ -2,7 +2,7 @@ import '@pagestyles/algemeneOnderzoek.scss';
 import { useEffect, useState } from "react";
 import { fetchAllOnderzoeken } from './context/OnderzoekContext';
 import {Button} from "@components";
-import Onderzoek from "@pages/research/Onderzoek.jsx";
+
 import { useNavigate } from 'react-router-dom';
 function AlgemeneOnderzoek() {
     const [onderzoeken, setOnderzoeken] = useState([]);
@@ -14,10 +14,19 @@ function AlgemeneOnderzoek() {
         navigate(`/onderzoek/${id}`);
     };
 
+    function formatDate(dateString) {
+        return new Date(dateString).toLocaleDateString('nl-NL', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    }
+
     useEffect(() => {
         fetchAllOnderzoeken()
             .then(data => {
-                setOnderzoeken(data); // Zorg ervoor dat dit de juiste data structuur bevat
+                console.log(data)
+                setOnderzoeken(data);
                 setIsLoading(false);
             })
             .catch(error => {
@@ -31,26 +40,43 @@ function AlgemeneOnderzoek() {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div className="research-list">
-            <h1>Onderzoeken</h1>
-            <div className="filters">
-                {/* Filters kunnen hier geplaatst worden indien nodig */}
-            </div>
-            <div className="research-items">
-                {onderzoeken.map(onderzoek => (
-                    <div className="research-item" key={onderzoek.id}>
-                        <div className="research-item-content">
-                            <h2 className="research-title">{onderzoek.titel}</h2>
-                            <p className="research-description">{onderzoek.omschrijving}</p>
-                            {/* Voeg hier andere details toe indien nodig */}
+
+
+            <div className="onderzoeken-page">
+                <div className="onderzoek-tabel">
+                    <div className="onderzoek-info">
+                        <div className="titel">
+                            <h1>Onderzoeken</h1>
                         </div>
-                        <div className="research-item-actions">
-                            <Button children="Onderzoek Info" onClick={() => goToOnderzoek(onderzoek.id)}/>
+                        <div className="filters">
+                            hier komt filters
                         </div>
                     </div>
-                ))}
+                    <div className="onderzoek-items">
+                        {onderzoeken.map(onderzoek => (
+                            <div className="onderzoek-item" key={onderzoek.id}>
+                                <div className="content-left">
+                                    <h2>{onderzoek.titel}</h2>
+                                    <p >{onderzoek.omschrijving}</p>
+                                </div>
+                                <div className="content-right">
+                                    <p className="">{onderzoek.status}</p>
+                                    <p className="">€{onderzoek.vergoeding}</p>
+                                    <p className="">{onderzoek.aantalParticipanten}</p>
+                                    <p className="">{onderzoek.locatie}</p>
+                                    <div>{formatDate(onderzoek.startDatum)}</div>
+                                    <Button children="Onderzoek Info" onClick={() => goToOnderzoek(onderzoek.id)}/>
+                                </div>
+
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+
             </div>
-        </div>
+
+
     );
 }
 

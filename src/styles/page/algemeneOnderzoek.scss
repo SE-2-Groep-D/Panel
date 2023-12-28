@@ -1,75 +1,68 @@
-.research-list {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+.onderzoeken-page {
+  width: 80%; /* Stel de breedte in op 80% van de #root */
+  margin: 0 auto; /* Centreer het op de pagina */
+  padding: 20px 0; /* Voeg padding toe aan de boven- en onderkant */
 
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-
-  .filters {
-    // Voeg hier je filter stijlen toe
-  }
-
-  .research-items {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .research-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    border: 1px solid #eee;
-    transition: box-shadow 0.3s ease;
-
-    &:hover {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .research-item-content {
-      flex-grow: 1;
-
-      .research-title {
-        font-size: 1.5em;
-        color: #0077cc;
-        margin: 0 0 10px 0;
-      }
-
-      .research-description {
-        font-size: 1em;
-        color: #666;
-        line-height: 1.6;
-      }
-    }
-
-    .research-item-actions {
-      display: flex;
-      gap: 10px;
-
-      .btn-info {
-        padding: 8px 15px;
-        background-color: #0077cc;
-        border: none;
-        border-radius: 4px;
-        color: white;
-        text-transform: uppercase;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: #005fa3;
-        }
-      }
-
-      // Voeg hier eventuele andere actieknop stijlen toe
-    }
-  }
 }
+.onderzoek-info {
+  display: flex;
+  align-items: center; /* Dit zal de items verticaal centreren */
+  justify-content: space-between; /* Dit zorgt ervoor dat de titel en filters verdeeld zijn over de beschikbare ruimte */
+   /* Voeg wat padding toe rond de gehele .onderzoek-info container */
+  padding-bottom:3rem ;
+  padding-top:3rem ;
+
+}
+
+.titel {
+  flex-grow: 1; /* Dit zorgt ervoor dat de titel div kan groeien om extra ruimte in te nemen */
+}
+
+.filters {
+  flex-grow: 0; /* Dit zorgt er ook voor dat de filters div kan groeien om extra ruimte in te nemen */
+}
+
+.onderzoek-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.onderzoek-item {
+  display: flex;
+  min-height: 20rem; /* Minimale hoogte */
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  height: 20rem;
+  border-radius: 8px;
+  border: 3px solid var(--border-2, #EBECF0);
+  background: var(--White, #FFF);
+}
+
+.content-right {
+  display: flex;
+  align-items: flex-end; /* Lijnt items uit aan de rechterkant */
+  justify-content: flex-start; /* Items worden naar de bovenkant van de container gepositioneerd */
+
+}
+
+
+.content-left {
+  flex: 0 0 70%; /* Neemt 70% van de breedte van het onderzoeksitem */
+  padding-right: 20px; /* Voegt ruimte toe tussen de kolommen */
+  height: 100%;
+}
+
+.content-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 100%;
+}
+

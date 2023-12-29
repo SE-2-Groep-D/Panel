@@ -1,11 +1,11 @@
-import '@pagestyles/research.scss';
+import { useEffect, useState } from "react";
 import OnderzoekInformatie from "@pages/research/components/OnderzoekInformatie.jsx";
 import Map from "@pages/research/components/map";
 import Information from './components/information';
-import {fetchOnderzoekById} from './context/OnderzoekContext';
+import {fetchOnderzoekById} from './context/onderzoekservice.js';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from "react";
-
+import {LoadingDiv} from "@components";
+import '@pagestyles/onderzoek.scss';
 function Onderzoek() {
     const { onderzoekId } = useParams();
     const [onderzoek, setOnderzoek] = useState(null);
@@ -15,7 +15,6 @@ function Onderzoek() {
         if (onderzoekId) {
             fetchOnderzoekById(onderzoekId)
                 .then(data => {
-                    console.log(data);
                     setOnderzoek(data);
                     setLoading(false);
                 })
@@ -26,31 +25,30 @@ function Onderzoek() {
         }
     }, [onderzoekId]);
 
-
-
-    if (loading) {
-        return <p>Loading...</p>;
-    }
-
-    if (!onderzoek) {
+    if (!onderzoek && !loading) {
         return <p>Onderzoek niet gevonden.</p>;
     }
 
     return (
-        <div className="container">
-            <div className="content-left-container">
-                <OnderzoekInformatie titel={onderzoek.titel}
-                                     omschrijving={onderzoek.omschrijving}
-                                     bedrijfid={onderzoek.bedrijfId} />
+        <LoadingDiv loading={loading}>
+            <div className="container">
+                {onderzoek && (
+                    <>
+                        <div className="content-left-container">
+                            <OnderzoekInformatie titel={onderzoek.titel}
+                                                 omschrijving={onderzoek.omschrijving}
+                                                 bedrijfid={onderzoek.bedrijfId} />
+                        </div>
+                        <div className="content-right-container">
+                            <Information locatie={onderzoek.locatie}
+                                         vergoeding={onderzoek.vergoeding}
+                                         datum={onderzoek.startDatum} />
+                            <Map />
+                        </div>
+                    </>
+                )}
             </div>
-            <div className="content-right-container">
-
-                <Information locatie={onderzoek.locatie}
-                             vergoeding={onderzoek.vergoeding}
-                             datum={onderzoek.startDatum} />
-                <Map />
-            </div>
-        </div>
+        </LoadingDiv>
     );
 }
 

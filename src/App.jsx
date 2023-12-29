@@ -1,28 +1,24 @@
+import React, { useState, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import '@pagestyles/App.scss';
 
-import {SetupAccount} from "@pages";
-import {Research} from "@pages";
-
-// import {SetupAccount} from "@pages";
-import {Button} from '@components';
-import { useState } from 'react';
-
-
-import {fetchData} from '@services/api';
-import { MultiInputSelector } from './components/input';
-import AlgemeneOnderzoek from "@pages/research/AlgemeneOnderzoek.jsx";
-import Routing from "./Routing.jsx";
-
+// Lazy loading van pagina componenten
+const AlgemeneOnderzoek = React.lazy(() => import('@pages/research/AlgemeneOnderzoek.jsx'));
+const Onderzoek = React.lazy(() => import('@pages/research/Onderzoek.jsx'));
 
 function App() {
-  const [data, setData] = useState(null);
+    const [data, setData] = useState(null);
 
-  return (
-    <>
-        <Routing />
-    </>
-
-  )
+    return (
+        <BrowserRouter>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                    <Route path="/onderzoek" element={<AlgemeneOnderzoek />} />
+                    <Route path="/onderzoek/:onderzoekId" element={<Onderzoek />} />
+                </Routes>
+            </Suspense>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;

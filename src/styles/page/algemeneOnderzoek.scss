@@ -1,25 +1,24 @@
 .onderzoeken-page {
-  width: 80%; /* Stel de breedte in op 80% van de #root */
-  margin: 0 auto; /* Centreer het op de pagina */
-  padding: 20px 0; /* Voeg padding toe aan de boven- en onderkant */
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem 0;
 
 }
 .onderzoek-info {
   display: flex;
-  align-items: center; /* Dit zal de items verticaal centreren */
-  justify-content: space-between; /* Dit zorgt ervoor dat de titel en filters verdeeld zijn over de beschikbare ruimte */
-   /* Voeg wat padding toe rond de gehele .onderzoek-info container */
+  align-items: center;
+  justify-content: space-between;
   padding-bottom:3rem ;
   padding-top:3rem ;
 
 }
 
 .titel {
-  flex-grow: 1; /* Dit zorgt ervoor dat de titel div kan groeien om extra ruimte in te nemen */
+  flex-grow: 1;
 }
 
 .filters {
-  flex-grow: 0; /* Dit zorgt er ook voor dat de filters div kan groeien om extra ruimte in te nemen */
+  flex-grow: 0;
 }
 
 .onderzoek-items {
@@ -31,7 +30,7 @@
 
 .onderzoek-item {
   display: flex;
-  min-height: 20rem; /* Minimale hoogte */
+  min-height: 20rem;
   width: 100%;
   height: 100%;
   padding: 20px;
@@ -45,15 +44,15 @@
 
 .content-right {
   display: flex;
-  align-items: flex-end; /* Lijnt items uit aan de rechterkant */
-  justify-content: flex-start; /* Items worden naar de bovenkant van de container gepositioneerd */
+  align-items: flex-end;
+  justify-content: flex-start;
 
 }
 
 
 .content-left {
-  flex: 0 0 70%; /* Neemt 70% van de breedte van het onderzoeksitem */
-  padding-right: 20px; /* Voegt ruimte toe tussen de kolommen */
+  flex: 0 0 70%;
+  padding-right: 20px;
   height: 100%;
 }
 

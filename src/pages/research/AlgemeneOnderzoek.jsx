@@ -1,7 +1,7 @@
 import '@pagestyles/algemeneOnderzoek.scss';
 import { useEffect, useState } from "react";
-import { fetchAllOnderzoeken } from './context/OnderzoekContext';
-import {Button} from "@components";
+import { fetchAllOnderzoeken } from './context/onderzoekservice.js';
+import {Button, LoadingDiv} from "@components";
 
 import { useNavigate } from 'react-router-dom';
 function AlgemeneOnderzoek() {
@@ -49,12 +49,12 @@ function AlgemeneOnderzoek() {
             });
     }, []);
 
-    if (isLoading) return <div>Loading...</div>;
+
     if (error) return <div>Error: {error}</div>;
 
     return (
 
-
+        <LoadingDiv loading={isLoading}>
             <div className="onderzoeken-page">
                 <div className="onderzoek-tabel">
                     <div className="onderzoek-info">
@@ -88,7 +88,7 @@ function AlgemeneOnderzoek() {
                 </div>
 
             </div>
-
+        </LoadingDiv>
 
     );
 }

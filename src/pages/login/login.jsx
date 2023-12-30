@@ -1,18 +1,19 @@
 import "@pagestyles/register.scss";
 import { Logo } from "@components";
-import RegisterForm from "./components/form";
+import LoginForm from "./components/form";
 import GoogleButton from "./components/GoogleButton";
 
-function Register() {
+function Login() {
   return (
     <section id="register">
       <Logo id="logo"></Logo>
-      <RegisterForm />
+      <LoginForm />
       <hr />
+      <a href="">Wachtwoord vergeten?</a>
       <GoogleButton />
-      <a href="./login">Toch inloggen?</a>
+      <a href="./register">Nog geen account?</a>
     </section>
   );
 }
 
-export default Register;
+export default Login;

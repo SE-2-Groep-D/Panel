@@ -1,24 +1,31 @@
-import '@pagestyles/App.scss';
+import "@pagestyles/App.scss";
 
 // import {SetupAccount} from "@pages";
-import {Button} from '@components';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import {fetchData} from '@services/api';
-import { MultiInputSelector } from './components/input';
-import SetupAccount from './pages/setup-account/setupAccount';
-import { Register } from './pages';
+import { Button } from "@components";
+import { useState } from "react";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { fetchData } from "@services/api";
+import { MultiInputSelector } from "./components/input";
+import SetupAccount from "./pages/setup-account/setupAccount";
+import { Register, Login } from "./pages";
 
 function App() {
   const [data, setData] = useState(null);
 
   return (
-    <> 
+    <>
       {/* <MultiInputSelector animation={false}>Hulpmiddelen</MultiInputSelector> */}
-      <Register/>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="" element={<Register />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

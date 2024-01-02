@@ -1,54 +1,88 @@
 import {lazy, Suspense} from 'react';
-import {Logo, ProgressBar, LoadingDiv} from "@components";
-import {default as useFormData } from './hooks/useFormData.jsx'
+import {LoadingDiv, Form} from '@components';
 
+import {useForm} from './data/useForm.jsx';
 
 function SetupForm() {
-  const {formData} = useFormData();
-  const {currentStage, maxStage} = formData;
-
-  console.log(currentStage)
-
-  return (
-      <>
-          <Logo id="logo" />
-          <ProgressBar stage={currentStage} maxStage={maxStage}/>
-          <LazyForm data={formData}/>
-      </>
-  );
-}
-
-export default SetupForm;
-
-function LazyForm({data}) {
-    const {currentStage} = data;
-    const StageForm = getNextForm(currentStage, data);
-
+    const StageForm = GetNextForm();
 
     return (
         <Suspense fallback={<LoadingDiv loading/>}>
             {(StageForm)? <StageForm /> : <LoadingDiv loading/>}
           </Suspense>
+
     );
 }
+
+export default SetupForm;
+
 
 
 
 const PossibleForms = {
-    startForm: lazy(() => import('./form/start-form.jsx')),
-    researchForm: lazy(() => import('./form/research.jsx')),
-    companyForm: lazy(() => import('./form/company.jsx')),
+    accountInfo: lazy(() => import('./form/account-info.jsx')),
+    personalInfo: lazy(() => import('./form/personal-info.jsx')),
+    parentInfo: lazy(() => import('./form/parent-info.jsx')),
+    researchInfo: lazy(() => import('./form/research-info.jsx')),
+    companyForm: lazy(() => import('./form/company-info.jsx')),
+    companyLocationForm: lazy(() => import('./form/company-location.jsx')),
+    
 }
 
-function getNextForm(stage, formData) {
-    const user = (formData.user === null || formData.user === undefined) ? undefined : formData.user;
-    const accountType = (user === undefined) ? undefined : user.accountType;
+function GetNextForm() {
+   const {state, nextStep, prevStep} = useForm();
+   const validUser = validateUser(state.user);
+   const userType = (validUser) ? state.user.userType : null;
 
 
-    if(stage === 1 && accountType === 'Bedrijf') return PossibleForms.companyForm;
-    if(stage === 1 && accountType === 'Ervaringsdeskundige') return PossibleForms.researchForm;
+   switch (state.currentStep) {
+    case 0:
+        return PossibleForms.accountInfo;
 
-    return PossibleForms.startForm;
+    case 1:
+        if(userType === 'Ervaringsdeskundige' && validUser) return PossibleForms.personalInfo;
+        if(userType === 'Bedrijf' && validUser) return PossibleForms.companyForm;
+        break;
+
+    case 2:
+        if(userType === 'Ervaringsdeskundige' && validUser) {
+            const ageGroup = getUserAgeGroup(state.user);
+            
+            if(ageGroup === '0 tot 10' || ageGroup === '10 tot 18') {
+                return PossibleForms.parentInfo;
+            }
+
+            if(ageGroup !== null) {
+                return PossibleForms.researchInfo;
+            }
+        }
+
+        if(userType === 'Bedrijf' && validUser) 
+            return PossibleForms.companyLocationForm;
+        break;
+
+    case 3:
+        if(userType === 'Ervaringsdeskundige' && validUser) {
+            const ageGroup = getUserAgeGroup(state.user);
+            
+            if(ageGroup === '0 tot 10' || ageGroup === '10 tot 18') {
+                return PossibleForms.researchInfo;
+            }
+        }
+        break;
+   }
+
+   console.log(state)
+    return null;
+}
+
+function validateUser(user) {
+    return user !== null && user !== undefined && user.userType !== null && user.userType !== undefined;
+}
+
+function getUserAgeGroup(user) {
+    if(user.userType !== 'Ervaringsdeskundige') return null;
+    return user.ageGroup;
 }
 
 

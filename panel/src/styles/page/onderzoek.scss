@@ -1,56 +1,97 @@
-
 .container {
-    margin-top: 2rem;
-    display: flex;
-    justify-content:space-around;
-    height: 60rem;
-    width: 180rem;
-  }
-  .content-left-container{
-    display: flex;
-    flex-direction:column;
-    width: 60rem;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+  height: 60rem;
+  width: 180rem;
+
+  // Media query voor kleine schermen
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width:auto;
     height: auto;
+    padding: 0 2rem;
   }
-  .information-text{
-    font-size: 1.4rem;
-    margin-top: 1rem;
+}
+
+.content-left-container {
+  display: flex;
+  flex-direction: column;
+  width: 60rem;
+  height: auto;
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
-  
-  .content-right-container{
-    display: flex;
-    flex-direction:column;
-    width: 40rem;
-    height: 60rem;
-  }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .section {
-    background-color: white;
-    padding-top: 2rem;
-    margin-bottom: 2rem;
-  }
-  .information{
-    display: flex;
-    justify-content: flex-end;
-    align-items: end;
-    width: 40rem;
-  }
-  .information-loction,.information-vergoeding,.information-datum{
-    margin-left: 1rem;
-  }
-  .card{
-    margin-top:2rem;
-    height: 100%;
+}
+
+.information-text {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+}
+
+.content-right-container {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+  height: 60rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    // optioneel: aanpassen van de hoogte indien nodig
   }
 
-  .btn{
-    margin-top: 1rem;
-    padding: 0.2rem 1rem;
-    font-size:0.8rem !important;
+}
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section {
+  background-color: white;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.information {
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  width: 40rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
   }
+}
+
+.information-location, .information-vergoeding, .information-datum {
+  margin-left: 1rem;
+}
+
+.card {
+  margin-top: 2rem;
+  height: 100%;
+}
+
+.btn {
+  margin-top: 1rem;
+  padding: 0.2rem 1rem;
+  font-size: 0.8rem !important;
+}
+
+// Media query voor kleine schermen (mobiele telefoons)
+@media (max-width: 480px) {
+  .information-text {
+    font-size: 1.2rem; // Maak de tekst iets kleiner voor mobiele telefoons
+  }
+
+  .btn {
+    padding: 0.2rem 0.8rem;
+    font-size: 0.7rem !important;
+  }
+}

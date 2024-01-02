@@ -7,56 +7,54 @@ function RegisterForm() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch("/api/Auth/Register", {
-        method: "POST",
-        body: JSON.stringify({
-          voornaam: "string",
-          achternaam: "string",
-          googleAccount: false,
-          email: newUser.email,
-          password: newUser.password,
-          roles: ["Beheerder"],
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
+  function handleChange({ element, value, id }) {
+    setNewUser({ ...newUser, [id ? id : element.id]: value });
+  }
 
-      if (response.ok) {
-        const data = await response.text();
-        if (data) {
-          console.log(data);
-        } else {
-          console.log("Message missing in the response.");
-        }
-      } else {
-        console.log("Register failed.");
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  // const handleSubmit = async () => {
+  //   try {
+  //     const response = await fetch("/api/Auth/Register", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         voornaam: "string",
+  //         achternaam: "string",
+  //         googleAccount: false,
+  //         email: newUser.email,
+  //         password: newUser.password,
+  //         roles: ["Beheerder"],
+  //       }),
+  //       headers: {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       },
+  //     });
 
-  const handleVoorbeeld = () => {
-    navigate("/voorbeeld", { state: { ...newUser } });
+  //     if (response.ok) {
+  //       const data = await response.text();
+  //       if (data) {
+  //         console.log(data);
+  //       } else {
+  //         console.log("Message missing in the response.");
+  //       }
+  //     } else {
+  //       console.log("Register failed.");
+  //     }
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
+
+  const handleSubmit = () => {
+    navigate("/setupAccount", { state: { ...newUser } });
   };
 
   return (
-    <Form
-      title="Registreren"
-      buttonText="Registreren"
-      onSubmit={handleVoorbeeld}
-    >
+    <Form title="Registreren" buttonText="Registreren" onSubmit={handleSubmit}>
       <InputField
         id="email"
         visible
         required
         value={newUser.email}
-        onChange={(e) =>
-          setNewUser({ email: e.target.value, password: newUser.password })
-        }
+        onChange={handleChange}
       >
         Email
       </InputField>
@@ -66,9 +64,7 @@ function RegisterForm() {
         visible
         required
         value={newUser.password}
-        onChange={(e) =>
-          setNewUser({ email: newUser.email, password: e.target.value })
-        }
+        onChange={handleChange}
       >
         Wachtwoord
       </InputField>

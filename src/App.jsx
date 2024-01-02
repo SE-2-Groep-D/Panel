@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { fetchData } from "@services/api";
 import { MultiInputSelector } from "./components/input";
 import SetupAccount from "./pages/setup-account/setupAccount";
-import { Register, Login } from "./pages";
+import { Register, Login, Voorbeeld } from "@pages";
 
 function App() {
   const [data, setData] = useState(null);
@@ -22,6 +22,7 @@ function App() {
           <Route path="" element={<Register />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/voorbeeld" Component={Voorbeeld} />
         </Routes>
       </BrowserRouter>
     </>

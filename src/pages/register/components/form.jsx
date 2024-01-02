@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Form, InputField, Checkbox } from "@components";
+import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
@@ -36,8 +39,16 @@ function RegisterForm() {
     }
   };
 
+  const handleVoorbeeld = () => {
+    navigate("/voorbeeld", { state: { ...newUser } });
+  };
+
   return (
-    <Form title="Registreren" buttonText="Registreren" onSubmit={handleSubmit}>
+    <Form
+      title="Registreren"
+      buttonText="Registreren"
+      onSubmit={handleVoorbeeld}
+    >
       <InputField
         id="email"
         visible

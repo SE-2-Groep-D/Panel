@@ -1,17 +1,24 @@
 .container {
   margin-top: 2rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
   display: flex;
   justify-content: space-around;
   height: 60rem;
   width: 100%;
 
   // Media query voor kleine schermen
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     flex-direction: column;
     width:auto;
     height: auto;
     padding: 0 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
+}
+.onderzoek-omschrijving{
+  font-size: 2rem;
 }
 
 
@@ -22,7 +29,7 @@
   height: auto;
   padding-top: 5rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     padding-top: 0rem;
     width: 100%;
   }
@@ -39,7 +46,7 @@
   width: 40rem;
   height: 60rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     width: 100%;
     // optioneel: aanpassen van de hoogte indien nodig
   }
@@ -56,6 +63,7 @@
   background-color: white;
   padding-top: 2rem;
   margin-bottom: 2rem;
+
 }
 
 .information {
@@ -64,7 +72,7 @@
   align-items: end;
   width: 40rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -87,14 +95,3 @@
   font-size: 0.8rem !important;
 }
 
-// Media query voor kleine schermen (mobiele telefoons)
-@media (max-width: 480px) {
-  .information-text {
-    font-size: 1.2rem; // Maak de tekst iets kleiner voor mobiele telefoons
-  }
-
-  .btn {
-    padding: 0.2rem 0.8rem;
-    font-size: 0.7rem !important;
-  }
-}

@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 
-const Map = ({ coordinates }) => {
+const Map = ({ coordinates,bedrijf }) => {
   const position = coordinates || [51.505, -0.09];
 
   return (
@@ -13,9 +13,18 @@ const Map = ({ coordinates }) => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           <Marker position={position}>
-            <Popup>
-              Hier is het bedrijf. <br /> Dit is een aangepaste popup.
-            </Popup>
+              <Popup>
+                  {bedrijf.bedrijfsnaam}
+                  <br/> {bedrijf.straat} {bedrijf.nummer}
+                  <br/> {bedrijf.plaats} {bedrijf.postcode}
+                  <br/> <a
+                  href={bedrijf.websiteUrl.startsWith('http') ? bedrijf.websiteUrl : `http://${bedrijf.websiteUrl}`}
+                  target="_blank" rel="noopener noreferrer">
+                  Bezoek  website van het bedrijf
+              </a>
+
+
+              </Popup>
           </Marker>
         </MapContainer>
       </div>

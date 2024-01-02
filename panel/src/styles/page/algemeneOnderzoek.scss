@@ -40,11 +40,18 @@
   border-radius: 8px;
   border: 3px solid var(--border-2, #EBECF0);
   background: var(--White, #FFF);
+  // Media query voor kleine schermen
+  @media (max-width: 900px) {
+    flex-direction: column;
+    width:auto;
+    height: auto;
+    padding: 0 2rem;
+  }
+}
+.onderzoek-omschrijving{
+  font-size: 1.5rem;
 }
 
-.onderzoek-omschrijving{
-  font-size: 2rem;
-}
 
 
 .content-right {
@@ -59,6 +66,11 @@
   flex: 0 0 70%;
   padding-right: 20px;
   height: 100%;
+
+  @media (max-width: 768px) {
+    padding-top: 0rem;
+    width: 100%;
+  }
 }
 
 .content-right {
@@ -68,5 +80,11 @@
   align-items: flex-end;
   justify-content: space-around;
   height: 100%;
+  @media (max-width: 900px) {
+    align-items: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+  }
 }
 

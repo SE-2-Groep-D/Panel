@@ -15,8 +15,6 @@ function AlgemeneOnderzoek() {
     const goToOnderzoek = (id) => {
         navigate(`/onderzoek/${id}`);
     };
-
-
     useEffect(() => {
         fetchAllOnderzoeken()
             .then(data => {
@@ -71,7 +69,8 @@ function AlgemeneOnderzoek() {
                                     <p className="">{onderzoek.aantalParticipanten}</p>
                                     <p className="">{onderzoek.locatie}</p>
                                     <div>{FormatDate(onderzoek.startDatum)}</div>
-                                    <Button children="Onderzoek Info" onClick={() => goToOnderzoek(onderzoek.id)}/>
+                                    <div className="button-div"> <Button children="Onderzoek Info" onClick={() => goToOnderzoek(onderzoek.id)}/></div>
+
                                 </div>
 
                             </div>
@@ -83,5 +82,4 @@ function AlgemeneOnderzoek() {
 
     );
 }
-
 export default AlgemeneOnderzoek;

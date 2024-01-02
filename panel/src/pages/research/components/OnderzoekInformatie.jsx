@@ -9,7 +9,7 @@ function OnderzoekInformatie({titel, omschrijving, bedrijf}) {
             </header>
             <section className="section">
                 <h2 className="heading-3">Over onderzoek</h2>
-                <p>{omschrijving}</p>
+                <div className="onderzoek-omschrijving">{omschrijving}</div>
             </section>
             <section className="section">
                 <h2 className="heading-3">Over bedrijf</h2>

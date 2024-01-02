@@ -90,7 +90,7 @@ function Onderzoek() {
                             <Information locatie={onderzoek.locatie}
                                          vergoeding={onderzoek.vergoeding}
                                          datum={onderzoek.startDatum}/>
-                            {bedrijfsCoordinaten && <Map coordinates={bedrijfsCoordinaten}/>}
+                            {bedrijfsCoordinaten && <Map coordinates={bedrijfsCoordinaten} bedrijf={bedrijf}/>}
                         </div>
                     </>
                 )}

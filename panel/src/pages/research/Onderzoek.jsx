@@ -15,7 +15,7 @@ function Onderzoek() {
     const [bedrijf, setBedrijf] = useState(null);
     const [bedrijfsCoordinaten, setBedrijfsCoordinaten] = useState(null);
 
-    // Functie om adres om te zetten naar coördinaten
+
     const getCoordinatesForAddress = (address) => {
         const url = new URL('https://nominatim.openstreetmap.org/search');
         const params = {
@@ -44,18 +44,19 @@ function Onderzoek() {
                     if (data.bedrijfId) {
                         return fetchBedrijfById(data.bedrijfId);
                     }
-                    return null; // Zorg dat je altijd iets returnt om de chain voort te zetten
+                    return null;
                 })
                 .then(bedrijfData => {
                     if (bedrijfData) {
                         setBedrijf(bedrijfData);
                         if (bedrijfData.postcode && bedrijfData.plaats) {
-                            // Maak het adres aan de hand van de opgehaalde bedrijfsdata
-                            const fullAddress = `${bedrijfData.postcode}, ${bedrijfData.plaats}`;
-                            return getCoordinatesForAddress(fullAddress); // Return de Promise van de geocoding call
+                            console.log(bedrijfData)
+
+                            const fullAddress = `${bedrijfData.straat} ${bedrijfData.nummer}, ${bedrijfData.postcode}, ${bedrijfData.plaats}`;
+                            return getCoordinatesForAddress(fullAddress);
                         }
                     }
-                    return null; // Ook hier iets returnen
+                    return null;
                 })
                 .then(coordinates => {
                     if (coordinates) {

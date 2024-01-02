@@ -63,7 +63,7 @@ function AlgemeneOnderzoek() {
                             <div className="onderzoek-item" key={onderzoek.id}>
                                 <div className="content-left">
                                     <h2>{onderzoek.titel}</h2>
-                                    <p>{onderzoek.omschrijving}</p>
+                                    <div className="onderzoek-omschrijving">{onderzoek.omschrijving}</div>
                                 </div>
                                 <div className="content-right">
                                     <p className="">{onderzoek.status}</p>
@@ -77,9 +77,7 @@ function AlgemeneOnderzoek() {
                             </div>
                         ))}
                     </div>
-
                 </div>
-
             </main>
         </LoadingDiv>
 

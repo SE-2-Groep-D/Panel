@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-around;
   height: 60rem;
-  width: 180rem;
+  width: 100%;
 
   // Media query voor kleine schermen
   @media (max-width: 768px) {
@@ -14,19 +14,22 @@
   }
 }
 
+
 .content-left-container {
   display: flex;
   flex-direction: column;
   width: 60rem;
   height: auto;
+  padding-top: 5rem;
 
   @media (max-width: 768px) {
+    padding-top: 0rem;
     width: 100%;
   }
 }
 
 .information-text {
-  font-size: 1.4rem;
+  font-size: 2rem;
   margin-top: 1rem;
 }
 

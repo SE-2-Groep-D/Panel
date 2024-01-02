@@ -1,9 +1,11 @@
 import '@pagestyles/algemeneOnderzoek.scss';
-import { useEffect, useState } from "react";
-import { fetchAllOnderzoeken } from './context/onderzoekservice.js';
+import {useEffect, useState} from "react";
+import {fetchAllOnderzoeken} from './context/onderzoekservice.js';
 import {Button, LoadingDiv} from "@components";
 
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import FormatDate from "@pages/research/components/formDate.jsx";
+
 function AlgemeneOnderzoek() {
     const [onderzoeken, setOnderzoeken] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -14,13 +16,6 @@ function AlgemeneOnderzoek() {
         navigate(`/onderzoek/${id}`);
     };
 
-    function formatDate(dateString) {
-        return new Date(dateString).toLocaleDateString('nl-NL', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-        });
-    }
 
     useEffect(() => {
         fetchAllOnderzoeken()
@@ -49,13 +44,11 @@ function AlgemeneOnderzoek() {
             });
     }, []);
 
-
-    if (error) return <div>Error: {error}</div>;
 
     return (
 
         <LoadingDiv loading={isLoading}>
-            <div className="onderzoeken-page">
+            <main className="onderzoeken-page">
                 <div className="onderzoek-tabel">
                     <div className="onderzoek-info">
                         <div className="titel">
@@ -70,14 +63,14 @@ function AlgemeneOnderzoek() {
                             <div className="onderzoek-item" key={onderzoek.id}>
                                 <div className="content-left">
                                     <h2>{onderzoek.titel}</h2>
-                                    <p >{onderzoek.omschrijving}</p>
+                                    <p>{onderzoek.omschrijving}</p>
                                 </div>
                                 <div className="content-right">
                                     <p className="">{onderzoek.status}</p>
                                     <p className="">€{onderzoek.vergoeding}</p>
                                     <p className="">{onderzoek.aantalParticipanten}</p>
                                     <p className="">{onderzoek.locatie}</p>
-                                    <div>{formatDate(onderzoek.startDatum)}</div>
+                                    <div>{FormatDate(onderzoek.startDatum)}</div>
                                     <Button children="Onderzoek Info" onClick={() => goToOnderzoek(onderzoek.id)}/>
                                 </div>
 
@@ -87,7 +80,7 @@ function AlgemeneOnderzoek() {
 
                 </div>
 
-            </div>
+            </main>
         </LoadingDiv>
 
     );

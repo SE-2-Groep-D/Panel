@@ -1,84 +1,78 @@
 // eslint-disable-next-line react/prop-types
-import { useState } from "react";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
 
 export default function InputField({
   children,
   type,
-  name,
   id,
-  message,
-  required,
-  disabled,
-  animation,
-  onChange,
   value,
+  onChange,
+  placeholder,
+  message,
+  size,
+  required,
 }) {
-  name = name === undefined || name === null ? "field" : name;
+  const isTextArea =
+    size !== undefined && size !== null && size.toLowerCase() === "big";
 
-  const inputField = required ? (
-    <input
-      id={id}
-      type={getInputType(type)}
-      placeholder={children}
-      onChange={onChange}
-      required
+  const finalPlaceHolder =
+    placeholder === undefined || placeholder === null ? children : placeholder;
+
+  const Field = isTextArea ? (
+    <textarea
+      id={"input_" + id}
+      type={type || "text"}
       value={value}
-    ></input>
+      onChange={handleChange}
+      placeholder={finalPlaceHolder}
+      required={required}
+      rows={5}
+    />
   ) : (
     <input
-      id={id}
-      type={getInputType(type)}
-      placeholder={children}
-      onChange={onChange}
+      type={type || "text"}
+      id={"input_" + id}
       value={value}
-    ></input>
+      onChange={handleChange}
+      placeholder={finalPlaceHolder}
+      required={required}
+    />
   );
 
   function handleChange(e) {
+    const newValue = e.target.value;
+
     if (onChange !== undefined && onChange !== null)
       onChange({
         element: e.target.parentNode,
         oldValue: value,
-        value: e.target.value,
+        value: newValue,
       });
   }
 
-  if ((required && message === null) || message === undefined)
-    message = "verplicht*";
   return (
-    <div
-      className={animation !== true ? "inputField visible" : "inputField"}
-      id={id}
-    >
+    <div className="inputField" id={id} value={value}>
+      <label htmlFor={"input_" + id}>{children}</label>
       <p className="message">{message}</p>
-      {inputField}
-      <label htmlFor={name}>{children}</label>
+      {Field}
     </div>
   );
 }
 
-function getInputType(type) {
-  switch (type) {
-    case types.EMAIL:
-      return types.EMAIL;
-    case types.PASSWORD:
-      return types.PASSWORD;
-    case types.PHONENUMBER:
-      return types.PHONENUMBER;
-    case types.SEARCH:
-      return types.SEARCH;
-    case types.URL:
-      return types.URL;
-    default:
-      return types.TEXT;
-  }
-}
-
-const types = {
-  URL: "url",
-  PASSWORD: "password",
-  EMAIL: "email",
-  TEXT: "text",
-  SEARCH: "search",
-  PHONENUMBER: "tel",
+InputField.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.object,
+  ]),
+  label: PropTypes.string,
+  type: PropTypes.string,
+  id: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  message: PropTypes.string,
+  size: PropTypes.oneOf(["big", "small"]),
+  required: PropTypes.bool,
 };

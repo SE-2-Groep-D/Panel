@@ -11,3 +11,5 @@ export {default as Icon} from './icon/icon.jsx';
 
 export {default as Form} from './form/form.jsx';
 
+export {default as ToolTip} from './tooltip.jsx';
+

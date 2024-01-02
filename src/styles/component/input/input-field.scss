@@ -10,6 +10,11 @@
     width: 24rem;
     min-height: 4rem;
 
+    & textarea {
+        max-width: 100%;
+        min-width: 100%;
+    }
+
     & input, textarea {
         padding: 1rem 2rem;
         border: $component-border;
@@ -32,10 +37,10 @@
         }
     }
 
-    &.visible label {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    // &.visible label {
+    //     transform: translateY(0);
+    //     opacity: 1;
+    // }
 
     & label {
         position: absolute;
@@ -46,9 +51,9 @@
         font-size: 1.6rem;
         font-weight: bold;
 
-        opacity: 0;
-        transform: translateY(150%);
-        transition: all $animation-fast;
+        // opacity: 1;
+        // transform: translateY(rem);
+        // transition: all $animation-fast;
     }
 
     .message {

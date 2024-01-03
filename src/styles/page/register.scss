@@ -4,13 +4,8 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-bottom: 500rem;
     padding-top: 5rem;
     gap: 4rem;
-}
-
-heading-1 {
-    padding-bottom: 500rem;
 }
 
 #googleSingInButton {
@@ -19,12 +14,12 @@ heading-1 {
     padding: .8rem 2rem;
     cursor: pointer;
     width: 22.5rem;
-    min-height: 40px;
+    min-height: 4rem;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 8%;
+    margin-bottom: clamp(1rem, 8%, 5rem);
 }
 
 #googleSingInButton img,
@@ -35,7 +30,6 @@ heading-1 {
 hr {
     border: none;
     border-top: 3px solid #e3e8fc;
-    color: #333;
     overflow: visible;
     text-align: center;
     height: 3px;

@@ -21,23 +21,12 @@ function LoginForm() {
         },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data) {
-          console.log(data);
-        } else {
-          console.log("No data");
-        }
-      } else if (response.status === 400) {
-        const data = await response.text();
-        if (data) {
-          console.log(data);
-        } else {
-          console.log("No data");
-        }
-      } else {
-        console.log("Login failed.");
-      }
+      let data = response.ok
+        ? await response.json()
+        : response.status === 400
+        ? await response.text()
+        : console.log("Login failed.");
+      console.log(data || "No data");
     } catch (error) {
       console.error(error.message);
     }

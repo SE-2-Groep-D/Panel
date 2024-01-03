@@ -13,8 +13,6 @@ function App() {
 
   return (
     <>
-      {/* <MultiInputSelector animation={false}>Hulpmiddelen</MultiInputSelector> */}
-
       <BrowserRouter>
         <Routes>
           <Route path="" element={<Register />} />

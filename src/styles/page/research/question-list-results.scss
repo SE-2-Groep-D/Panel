@@ -49,6 +49,12 @@
     border-radius: $border-radius-big;
   }
 
+  .awnser-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .awnsers {
     display: flex;
     flex-direction: column;

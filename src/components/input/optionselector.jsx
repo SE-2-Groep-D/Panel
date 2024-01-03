@@ -58,7 +58,7 @@ export default function OptionsSelector({
     }
 
     return(
-        <option-selector className='option-selector' value={value} id={id}>
+        <div className='option-selector' value={value} id={id}>
             <label htmlFor={id}>{children}</label>
 
             <div id={id} className={(open) ? 'selector-value open' : 'selector-value'} tabIndex={0}  onKeyDown={handleKeyPress} onClick={() => {setOpen(!open)}}>
@@ -80,7 +80,7 @@ export default function OptionsSelector({
                             >{option}</option>
                 })}
             </ul>
-        </option-selector>
+        </div>
     );
 }
 

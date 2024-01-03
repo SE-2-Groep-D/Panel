@@ -146,9 +146,13 @@ function QuestionData({data, id, setQuestion}) {
   return <section className='question-info'>
       <h2 className='heading-2'>Vraag {questionNumber + 1}</h2>
       <h3 className='question heading-3'>{question.onderwerp}</h3>
-      <ul className='awnsers'>
-       {antwoorden}
-      </ul>
+      
+      <div className='awnser-box'>
+        <h3 className='heading-3'>Antwoorden</h3>
+        <ul className='awnsers'>
+        {antwoorden}
+        </ul>
+      </div>
       
       <div className='button-box'>
         {questionNumber !== 0 && prevButton}

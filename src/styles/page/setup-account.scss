@@ -1,14 +1,11 @@
-@import '../abstract/variables.scss'
+@import '../main.scss';
 
 #setup-account {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-
-   
     gap: 4rem;
-
     width: 100vw;
     height: 100vh;
 }
@@ -18,99 +15,31 @@
     height: 20rem;
 }
 
-// .moveIn {
-//     animation: moveIn $animation-slow forwards !important;
+.moveIn {
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        opacity: 1;
+        transform: translate(0,0); 
+    }
 
-//     @media (prefers-reduced-motion: reduce) {
-//         animation: none;
-//         opacity: 1;
-//         transform: translate(0,0); 
-//     }
+    @media (prefers-reduced-motion: no-preference) {
+        animation: moveInForm $animation-fast forwards;
+    }
 
-//     @media (prefers-reduced-motion: no-preference) {
-//         animation: moveIn $animation-fast forwards;
-//     }
+}
 
-// }
+.moveOut {
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        opacity: 0;
+    }
 
-// .moveOut {
-//     animation: moveOut $animation-slow forwards !important;
+    @media (prefers-reduced-motion: no-preference) {
+        animation: moveOutForm $animation-fast forwards;
+    }
+}
 
-//     @media (prefers-reduced-motion: reduce) {
-//         animation: none;
-//         opacity: 0;
-//     }
-
-//     @media (prefers-reduced-motion: no-preference) {
-//         animation: moveOut $animation-fast forwards;
-//     }
-// }
-
-//
-//.form {
-//    display: flex;
-//    align-items: center;
-//    flex-direction: column;
-//    gap: 1.5rem;
-//
-//    &-title {
-//
-//    }
-//}
-
-//#account-form {
-//    display: flex;
-//    align-items: start;
-//    justify-content: center;
-//    flex-direction: column;
-//
-//    gap: 1.5rem;
-//    transform: translate(0);
-//
-//    animation: moveIn $animation-slow forwards;
-//
-//    h1 {
-//        width: 100%;
-//        text-align: center;
-//    }
-//}
-//
-//.move {
-//    animation: moveOut $animation-slow forwards !important;
-//}
-//
-//#setup-account {
-//    display: flex;
-//    align-items: center;
-//    justify-content: center;
-//    flex-direction: column;
-//    gap: 4rem;
-//
-//    @include respond(mobile) {
-//        justify-content: start;
-//        padding-top: 5rem;
-//    }
-//
-//    @include respond(tablet) {
-//        justify-content: center;
-//    }
-//
-//    width: 100vw;
-//    height: 100vh;
-//
-//    button {
-//        width: 22.5rem;
-//        height: 5rem;
-//    }
-//
-//    .form-title {
-//        font-weight: bold;
-//        font-size: 4rem;
-//    }
-//}
-//
-//
-@keyframes moveIn {
+@keyframes moveInForm {
     0% {
         transform: translateX(40rem);
         opacity: 0;
@@ -122,7 +51,7 @@
     }
 }
 
-@keyframes moveOut {
+@keyframes moveOutForm {
     0% {
         transform: translateX(0);
         opacity: 1;
@@ -133,8 +62,6 @@
         opacity: 0;
     }
 }
-
-
 
 
 

@@ -1,11 +1,9 @@
-import React from 'react'
-
-export default function ProgressBar({onClick, stage, maxStage}) {
+export default function ProgressBar({onClick, step, maxStep}) {
     const steps = [];
 
-        for(let i = 0; i < maxStage; i++) {
+        for(let i = 0; i < maxStep; i++) {
             steps.push(
-                <span key={i} className={(stage > i) ? 'stage active' : 'stage'}></span>
+                <span key={i} className={(step > i) ? 'stage active' : 'stage'}></span>
             );
         }
 

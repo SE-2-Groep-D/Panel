@@ -1,15 +1,8 @@
-check-box {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 1rem;
-}
-
 .checkbox {
     position: relative;
     display: flex;
-    align-items: center;
     flex-direction: row-reverse;
+    align-items: center;
     gap: 1rem;
 
     font-size: 1.6rem;

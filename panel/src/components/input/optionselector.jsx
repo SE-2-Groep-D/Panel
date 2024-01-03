@@ -1,6 +1,6 @@
 // eslint-disable-next-line react/prop-types
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 export default function OptionSelector({
   children,

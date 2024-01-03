@@ -1,26 +1,24 @@
 import '@pagestyles/research/research-results.scss';
 
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import {lazy, Suspense} from 'react';
 import {fetchData} from '@services';
 
 
 import {Icon, OptionSelector, LoadingDiv} from '@components';
-import { dom } from '@fortawesome/fontawesome-svg-core';
 
 const TrackingResults = lazy(() => import('./tracking/TrackingResults.jsx'));
 const QuestionListResults = lazy(() => import('./vragenlijst/QuestionListResults.jsx')); 
 
-const userId = '08dc09ee-a444-4aee-8b6f-6d769fedd493'
-const researchId = '08dc09ef-8561-4440-876d-d14443718cb5'
-
 export default function Results() {
     const [options, setOptions] = useState(undefined);
     const [selectedOption, setSelectedOption] = useState();
+    const { id } = useParams();
 
     useEffect(() => {
-        fetchOptions(setOptions);
-    }, []);
+        fetchOptions(id, setOptions);
+    }, [id]);
 
 
     const ResultsComponent = renderedResults(options, selectedOption);
@@ -29,7 +27,7 @@ export default function Results() {
   return (
     <main className='results'>
             <div className='navigation'>
-                <a href='/' className='back'>
+                <a href={`/onderzoek/` + id} className='back'>
                     <Icon type="back" size="17"/>
                     Terug
                 </a>
@@ -43,7 +41,7 @@ export default function Results() {
         </main>
     );
 }
-async function fetchOptions(setOptions) {
+async function fetchOptions(researchId, setOptions) {
     try {
         const data = await fetchData(`/resultaten/${researchId}`);
         const {trackingOnderzoeken, vragenlijsten} = data;

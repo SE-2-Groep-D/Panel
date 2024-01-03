@@ -1,20 +1,19 @@
-import React, { useState, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import '@pagestyles/App.scss';
-
 import {SetupAccount} from "@pages";
-import OnderzoekForm from "@pages/research/onderzoekForm/onderzoekForm.jsx";
-// Lazy loading van pagina componenten
-const AlgemeneOnderzoek = React.lazy(() => import('@pages/research/AlgemeneOnderzoek.jsx'));
-const Onderzoek = React.lazy(() => import('@pages/research/Onderzoek.jsx'));
+import {LoadingDiv} from "@components";
+const OnderzoekForm = React.lazy(() => import("@pages/research/onderzoekForm/onderzoekForm.jsx"));
+const Onderzoeken = React.lazy(() => import('@pages/research/Onderzoeken.jsx'));
+const OnderzoekInfo = React.lazy(() => import('@pages/research/OnderzoekInfo.jsx'));
 
 function App() {
     return (
         <BrowserRouter>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<LoadingDiv loading={true} />}>
                 <Routes>
-                    <Route path="/onderzoek" element={<AlgemeneOnderzoek />} />
-                    <Route path="/onderzoek/:onderzoekId" element={<Onderzoek />} />
+                    <Route path="/onderzoek" element={<Onderzoeken />} />
+                    <Route path="/onderzoek/:onderzoekId" element={<OnderzoekInfo />} />
                     <Route path="/setup" element={<SetupAccount />} />
                     <Route path="/onderzoek/aanmaken" element={<OnderzoekForm />} />
                 </Routes>

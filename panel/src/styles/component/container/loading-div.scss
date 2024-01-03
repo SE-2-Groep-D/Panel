@@ -51,7 +51,7 @@
 }
 
 .loading-div {
-    width: 100%;
+    width: clamp(50rem, 100%, 150rem);
     height: 100%;
     margin: 0 auto;
     padding: 20px 0;

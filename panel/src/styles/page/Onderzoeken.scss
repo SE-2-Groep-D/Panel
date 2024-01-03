@@ -1,15 +1,18 @@
+@import '../main.scss';
+
 .onderzoeken-page {
-  width: 80%;
+  width: clamp(25rem, 90%, 120rem);
   margin: 0 auto;
   padding: 1rem 0;
 
 }
+
 .onderzoek-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom:3rem ;
-  padding-top:3rem ;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
 
 }
 
@@ -21,44 +24,28 @@
   flex-grow: 0;
 }
 
-.onderzoek-items {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-}
-
 .onderzoek-item {
   display: flex;
   min-height: 20rem;
-  width: 100%;
-  height: 100%;
+  width: clamp(40rem, 100%, 120rem);
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;
-  height: 20rem;
+  height: 22rem;
   border-radius: 8px;
   border: 3px solid var(--border-2, #EBECF0);
   background: var(--White, #FFF);
-  // Media query voor kleine schermen
-  @media (max-width: 900px) {
+
+  @include respond(laptop, max) {
     flex-direction: column;
-    width:auto;
+    width: auto;
     height: auto;
     padding: 0 2rem;
   }
 }
-.onderzoek-omschrijving{
+
+.onderzoek-omschrijving {
   font-size: 1.5rem;
-}
-
-
-
-.content-right {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-
 }
 
 
@@ -67,7 +54,7 @@
   padding-right: 20px;
   height: 100%;
 
-  @media (max-width: 768px) {
+  @include respond(tablet, max) {
     padding-top: 0rem;
     width: 100%;
   }
@@ -80,7 +67,7 @@
   align-items: flex-end;
   justify-content: space-around;
   height: 100%;
-  @media (max-width: 900px) {
+  @include respond(tablet, max) {
     align-items: flex-start;
     padding-top: 1rem;
     padding-bottom: 1rem;

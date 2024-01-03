@@ -3,16 +3,12 @@ import {fetchData} from "@services/api.js";
 
 ; // Pas dit pad aan naar waar je api.js bestand zich bevindt
 
-export const fetchAllOnderzoeken = () => {
-    return fetchData('/Onderzoek/list');
-};
 
-export const fetchOnderzoekById = (id) => {
-    return fetchData(`/Onderzoek/${id}`);
-};
+
+
 /*
 export const createOnderzoek = (onderzoekData) => {
-    return fetchData('/Onderzoek/create', {
+    return fetchData('/OnderzoekInfo/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(onderzoekData)
@@ -20,7 +16,7 @@ export const createOnderzoek = (onderzoekData) => {
 };
 
 export const updateOnderzoek = (id, onderzoekData) => {
-    return fetchData(`/Onderzoek/update/${id}`, {
+    return fetchData(`/OnderzoekInfo/update/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(onderzoekData)
@@ -28,7 +24,7 @@ export const updateOnderzoek = (id, onderzoekData) => {
 };
 
 export const deleteOnderzoek = (id) => {
-    return fetchData(`/Onderzoek/delete/${id}`, {
+    return fetchData(`/OnderzoekInfo/delete/${id}`, {
         method: 'DELETE'
     });
 };

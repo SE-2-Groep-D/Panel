@@ -1,7 +1,5 @@
 
 function OnderzoekInformatie({titel, omschrijving, bedrijf}) {
-    console.log(bedrijf); // Dit zal 'null' loggen totdat het is ingesteld
-
     return (
         <div className="research-information">
             <header className="header">

@@ -32,7 +32,7 @@ function OnderzoekStapTwee() {
 
     return (
         <div>
-            <Form title="Onderzoek aanmaken" buttonText='volgende'  onSubmit={handleSubmit} move={move}>
+            <Form title="OnderzoekInfo aanmaken" buttonText='volgende'  onSubmit={handleSubmit} move={move}>
                 <InputField id='aantalParticipanten' value={values.aantalParticipanten} onChange={handleChange} required>Aantal Participanten</InputField>
                 <InputField id='vergoeding' value={values.vergoeding} onChange={handleChange} required>Vergoeding</InputField>
                 <InputField id='datum' value={values.datum} onChange={handleChange} required>Datum</InputField>

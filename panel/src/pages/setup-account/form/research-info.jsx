@@ -36,7 +36,7 @@ function StartForm() {
 
     return (
         <div>
-            <Form title="OnderzoekInfo Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
+            <Form title="Onderzoek Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
                 <InputField id='postcode' value={values.postcode} onChange={handleChange} required>Postcode</InputField>
                 <MultiInputSelector id='disabillityTypes' value={values.disabillityTypes} onChange={handleChange}>Type beperkingen</MultiInputSelector>
                 <OptionSelector id='preferredApproach' value={values.preferredApproach} onChange={handleChange} options={['Email', 'Telefoon']} required>Benader mij via</OptionSelector>

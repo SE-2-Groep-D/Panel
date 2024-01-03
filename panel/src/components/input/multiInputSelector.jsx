@@ -1,6 +1,6 @@
 // eslint-disable-next-line react/prop-types
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import {ToolTip, Icon, InputField} from '@components';
 
 export default function MultiInputSelector({
@@ -15,10 +15,10 @@ export default function MultiInputSelector({
   const [currentValue, setValue] = useState('');
   const [error, setError] = useState(null);
 
-  function handleChange({value}) {
+  /*function handleChange({value}) {
      setValue(value);
   }
-
+*/
     function handleEnterClick(e) {
       if(e.key !== 'Enter') return;
       e.preventDefault();

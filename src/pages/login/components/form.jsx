@@ -4,6 +4,10 @@ import { Form, InputField } from "@components";
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
 
+  function handleChange({ element, value, id }) {
+    setNewUser({ ...newUser, [id ? id : element.id]: value });
+  }
+
   const handleSubmit = async () => {
     try {
       const response = await fetch("/api/Auth/Login", {
@@ -46,9 +50,7 @@ function LoginForm() {
         visible
         required
         value={newUser.email}
-        onChange={(e) =>
-          setNewUser({ email: e.target.value, password: newUser.password })
-        }
+        onChange={handleChange}
       >
         Email
       </InputField>
@@ -58,9 +60,7 @@ function LoginForm() {
         visible
         required
         value={newUser.password}
-        onChange={(e) =>
-          setNewUser({ email: newUser.email, password: e.target.value })
-        }
+        onChange={handleChange}
       >
         Wachtwoord
       </InputField>

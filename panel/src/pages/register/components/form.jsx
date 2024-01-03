@@ -12,7 +12,7 @@ function RegisterForm() {
   }
 
   const handleSubmit = () => {
-    navigate("/setupAccount", { state: { ...newUser } });
+    navigate("/setup", { state: { ...newUser } });
   };
 
   return (

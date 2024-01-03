@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useLocation } from "react-router-dom";
 import { Form, InputField, OptionSelector, Checkbox } from "@components";
 import { useForm } from "../data/useForm.jsx";
 
@@ -7,9 +7,10 @@ function StartForm() {
   const { state, nextStep, prevStep } = useForm();
   const [message, setMessage] = useState(null);
   const [move, setMove] = useState("moveIn");
+  const location = useLocation();
 
   const [values, setValues] = useState({
-    email: "",
+    email: location.state.email,
     phoneNumber: "+31",
     userType: "Ervaringsdeskundige",
     acceptTerms: false,
@@ -27,7 +28,8 @@ function StartForm() {
       setMessage(message);
       return;
     }
-    state.user = values;
+    const password = location.state.password;
+    state.user = { ...values, password };
 
     nextStep();
   }

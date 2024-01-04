@@ -15,6 +15,7 @@ function StartForm() {
     });
 
     function handleChange({element, value, id}) {
+        console.log(value, id)
         setValues({...values, [(id) ? id : element.id] : value});
     }
     
@@ -34,7 +35,7 @@ function StartForm() {
 
     return (
         <div>
-            <Form title="Persoonlijke Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
+            <Form title="Persoonlijke Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} className={move}>
                 <InputField id='firstName' value={values.firstName} onChange={handleChange} required>Voornaam</InputField>
                 <InputField id='lastName' value={values.lastName} onChange={handleChange} required>Achternaam</InputField>
                 <OptionSelector id='ageGroup'  

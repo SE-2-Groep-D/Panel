@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Form, InputField, OptionSelector, Checkbox } from "@components";
 import { useForm } from "../data/useForm.jsx";
@@ -10,10 +10,18 @@ function StartForm() {
   const location = useLocation();
 
   const [values, setValues] = useState({
-    email: location.state.email,
+    email: "",
     phoneNumber: "+31",
     userType: "Ervaringsdeskundige",
     acceptTerms: false,
+    password: "",
+  });
+
+  useEffect(() => {
+    if(!location || !location.state) return;
+    const {email, password} = location.state;
+    if(email) values.email = location.state.email;
+    if(password) values.password = location.state.password;
   });
 
   function handleChange({ element, value, id }) {
@@ -28,9 +36,8 @@ function StartForm() {
       setMessage(message);
       return;
     }
-    const password = location.state.password;
-    state.user = { ...values, password };
 
+    state.user = { ...values };
     nextStep();
   }
 
@@ -41,7 +48,7 @@ function StartForm() {
         buttonText="volgende"
         message={message}
         onSubmit={handleSubmit}
-        move={move}
+        className={move}
       >
         <InputField
           id="email"

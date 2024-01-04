@@ -60,11 +60,7 @@ export default function InputField({
 }
 
 InputField.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.object,
-  ]),
+  children: PropTypes.any,
   label: PropTypes.string,
   type: PropTypes.string,
   id: PropTypes.string,

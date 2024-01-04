@@ -181,9 +181,14 @@ Questions.propTypes = {
   setQuestion: PropTypes.func.isRequired
 };
 
+QuestionListResults.protoTypes = {
+  researhId: PropTypes.string.isRequired
+}
+
 QuestionData.propTypes = {
   data: PropTypes.array.isRequired,
-  id: PropTypes.string
+  id: PropTypes.string,
+  setQuestion: PropTypes.func
 };
 
 Statistics.propTypes = {

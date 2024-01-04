@@ -1,6 +1,7 @@
 import {Button} from "@components";
+import PropTypes from 'prop-types';
 
-const Form = ({title, message, children, buttonText, onSubmit, move}) => {
+const Form = ({title, message, children, buttonText, onSubmit, className}) => {
 
     function submitForm(event) {
         event.preventDefault();
@@ -21,10 +22,10 @@ const Form = ({title, message, children, buttonText, onSubmit, move}) => {
         onSubmit(data);
     }
 
-    const className = (move) ? 'form ' + move : 'form';
+    const finalClassName = (className) ? 'form ' + className : 'form';
 
     return (
-        <form id={title + "-form"} className={className} onSubmit={submitForm}>
+        <form id={title + "-form"} className={finalClassName} onSubmit={submitForm}>
             <div className='form-header'>
                 <h1 className='form-title heading-1'>{title}</h1>
                 <p className='form-message'>{message}</p>
@@ -41,3 +42,13 @@ const Form = ({title, message, children, buttonText, onSubmit, move}) => {
 }
 
 export default Form;
+
+Form.propTypes = {
+    title: PropTypes.string.isRequired,
+    message: PropTypes.string,
+    children: PropTypes.any,
+    buttonText: PropTypes.string,
+    onSubmit: PropTypes.func,
+    className: PropTypes.string,
+  };
+  

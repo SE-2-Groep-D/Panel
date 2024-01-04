@@ -27,11 +27,7 @@ export default function Checkbox({children, id, value, onChange, required}) {
 }
 
 Checkbox.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.object,
-  ]),
+  children: PropTypes.any,
   id: PropTypes.string,
   value: PropTypes.bool,
   onChange: PropTypes.func,

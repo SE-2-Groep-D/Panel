@@ -11,9 +11,17 @@ export default function ProgressBar({onClick, step, maxStep}) {
 
 
   return (
-    <progress-bar onClick={onClick}> {steps.map((item, key) => {
+    <progress-bar onClick={onClick}> {steps.map((item) => {
         return item;
     })} </progress-bar>
   );
 }
+
+import PropTypes from 'prop-types';
+
+ProgressBar.propTypes = {
+  onClick: PropTypes.func,
+  step: PropTypes.number.isRequired,
+  maxStep: PropTypes.number
+};
 

@@ -44,15 +44,19 @@
         position: relative;
 
         transition: all $animation-fast;
+        
+        &:hover {
+            cursor: pointer;
+        }
 
         &::before, &::after {
             position: absolute;
             display: block;
             content: "";
             height: .3rem;
-            background-color: $color-white;
-
+            background-color: white;
         }
+
         &::before {
             width: .8rem;
             top: 1rem;

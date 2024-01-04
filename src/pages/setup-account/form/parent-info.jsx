@@ -34,7 +34,7 @@ function StartForm() {
 
     return (
         <div>
-            <Form title="Voogd Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
+            <Form title="Voogd Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit}  className={move}>
                 <InputField id='name' value={values.name} onChange={handleChange} required>Uw volledige naam</InputField>
                 <InputField id='email' value={values.email} onChange={handleChange} required>email</InputField>
                 <InputField id='phoneNumber' value={values.phoneNumber} onChange={handleChange} required>Telefoonnummer</InputField>

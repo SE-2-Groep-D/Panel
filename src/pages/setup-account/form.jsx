@@ -1,26 +1,20 @@
 import { lazy, Suspense } from "react";
-import { LoadingDiv, Form } from "@components";
+import { LoadingDiv, Logo, ProgressBar} from "@components";
 
 import { useForm } from "./data/useForm.jsx";
 
 function SetupForm() {
-  const {formData} = useFormData();
-  const {currentStage, maxStage} = formData;
-
+  const formData = useForm();
   return (
       <>
-          <Logo id="logo" />
-          <ProgressBar stage={currentStage} maxStage={maxStage}/>
           <LazyForm data={formData}/>
       </>
   );
 }
 
 
-function LazyForm({data}) {
-    const {currentStage} = data;
+function LazyForm() {
     const StageForm = GetNextForm();
-
 
   return (
     <Suspense fallback={<LoadingDiv loading />}>
@@ -41,7 +35,7 @@ const PossibleForms = {
 };
 
 function GetNextForm() {
-  const { state, nextStep, prevStep } = useForm();
+  const { state } = useForm();
   const validUser = validateUser(state.user);
   const userType = validUser ? state.user.userType : null;
 
@@ -83,7 +77,6 @@ function GetNextForm() {
       break;
   }
 
-  console.log(state);
   return null;
 }
 
@@ -100,3 +93,4 @@ function getUserAgeGroup(user) {
   if (user.userType !== "Ervaringsdeskundige") return null;
   return user.ageGroup;
 }
+

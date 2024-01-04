@@ -38,7 +38,7 @@ function StartForm() {
 
     return (
         <div>
-            <Form title="Bedrijf Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
+            <Form title="Bedrijf Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} className={move}>
                 <InputField id='place' value={values.place} onChange={handleChange} required>Plaats</InputField>
                 <InputField id='postcode' value={values.postcode} onChange={handleChange} required>Postcode</InputField>
                 <InputField id='street' value={values.street} onChange={handleChange} required>Straat</InputField>

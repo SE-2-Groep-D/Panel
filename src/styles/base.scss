@@ -1,0 +1,29 @@
+*, *::before, *::after {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%; // this makes it so 1rem = 10px
+    font-family: $font-family-1;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+
+
+select,input,button,label {
+    outline: none;
+    border: none;
+}
+
+#root {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+

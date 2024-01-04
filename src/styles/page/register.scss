@@ -1,0 +1,41 @@
+@import '../main.scss';
+
+#register {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 5rem;
+    gap: 4rem;
+}
+
+#googleSingInButton {
+    background-color: white;
+    border: 1px solid black;  
+    padding: .8rem 2rem;
+    cursor: pointer;
+    width: 22.5rem;
+    min-height: 4rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: clamp(1rem, 8%, 5rem);
+}
+
+#googleSingInButton img,
+#googleSingInButton span {
+    margin-right: 18px;
+}
+
+hr {
+    border: none;
+    border-top: 3px solid #e3e8fc;
+    overflow: visible;
+    text-align: center;
+    height: 3px;
+    width: 22.5rem;
+  }
+
+  a {
+    color: blue;
+  }

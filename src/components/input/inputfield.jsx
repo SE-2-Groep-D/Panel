@@ -1,6 +1,5 @@
 // eslint-disable-next-line react/prop-types
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
 
 export default function InputField({
   children,
@@ -14,7 +13,7 @@ export default function InputField({
   required,
 }) {
   const isTextArea =
-    size !== undefined && size !== null && size.toLowerCase() === 'big';
+    size !== undefined && size !== null && size.toLowerCase() === "big";
 
   const finalPlaceHolder =
     placeholder === undefined || placeholder === null ? children : placeholder;
@@ -22,7 +21,7 @@ export default function InputField({
   const Field = isTextArea ? (
     <textarea
       id={"input_" + id}
-      type={type || 'text'}
+      type={type || "text"}
       value={value}
       onChange={handleChange}
       placeholder={finalPlaceHolder}
@@ -31,7 +30,7 @@ export default function InputField({
     />
   ) : (
     <input
-      type={type || 'text'}
+      type={type || "text"}
       id={"input_" + id}
       value={value}
       onChange={handleChange}
@@ -42,7 +41,7 @@ export default function InputField({
 
   function handleChange(e) {
     const newValue = e.target.value;
-    
+
     if (onChange !== undefined && onChange !== null)
       onChange({
         element: e.target.parentNode,
@@ -73,6 +72,6 @@ InputField.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   message: PropTypes.string,
-  size: PropTypes.oneOf(['big', 'small']),
+  size: PropTypes.oneOf(["big", "small"]),
   required: PropTypes.bool,
 };

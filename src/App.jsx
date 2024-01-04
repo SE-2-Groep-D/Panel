@@ -6,9 +6,12 @@ import { Suspense } from "react";
 
 // Import components
 import { LoadingDiv } from "@components";
+import {} from "@pages";
 
 // Import Pages
-import { 
+import {
+  Navigation,
+
   Register, 
   Login, 
   Voorbeeld,
@@ -28,6 +31,8 @@ import {
 function App() {
   return (
     <BrowserRouter>
+
+        <Navigation/>
       <Suspense fallback={<LoadingDiv loading={true} />}>
         <Routes>
           <Route path="/" element={<Home/>} />

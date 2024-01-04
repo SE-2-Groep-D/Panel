@@ -15,6 +15,7 @@ const Icons = {
     settings: lazy(() => import('@icons/settings.jsx')),
     home: lazy(() => import('@icons/home.jsx')),
     logout: lazy(() => import('@icons/logout.jsx')),
+    research: lazy(() => import('@icons/research.jsx')),
   };
 
 export default function Icon({color, type, size, onClick}) {

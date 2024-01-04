@@ -4,7 +4,23 @@ import { LoadingDiv, Form } from "@components";
 import { useForm } from "./data/useForm.jsx";
 
 function SetupForm() {
-  const StageForm = GetNextForm();
+  const {formData} = useFormData();
+  const {currentStage, maxStage} = formData;
+
+  return (
+      <>
+          <Logo id="logo" />
+          <ProgressBar stage={currentStage} maxStage={maxStage}/>
+          <LazyForm data={formData}/>
+      </>
+  );
+}
+
+
+function LazyForm({data}) {
+    const {currentStage} = data;
+    const StageForm = GetNextForm();
+
 
   return (
     <Suspense fallback={<LoadingDiv loading />}>
@@ -84,54 +100,3 @@ function getUserAgeGroup(user) {
   if (user.userType !== "Ervaringsdeskundige") return null;
   return user.ageGroup;
 }
-
-// function createNewForm(form, onComplete) {
-//     return {onComplete: onComplete, form: form};
-// }
-
-// export default function Form({moveOut, stage}) {
-//     const [type, setType] = useState(null);
-//     const cb = (type === 'Ervaringsdeskundige') ? <Checkbox>Ik ben ouder dan 18 jaar.</Checkbox> : <> </>;
-
-//     console.log(stage);
-
-//     if(type !== undefined && type !== null && stage > 0) {
-//         switch (type) {
-//             case 'Bedrijf':
-//                 return <BedrijfsForm stage={stage}/>
-//             default:
-//                 return <ErvaringsdeskundigeForm stage={stage}/>
-//         }
-//     }
-//     return (
-//         <DefaultForm
-//             moveOut={moveOut}
-//             title='Account'
-//         >
-//             <InputField visible>Naam</InputField>
-//             <InputField visible>Telefoonnummer</InputField>
-//             <OptionsSelector onChange={(o,n) => setType(n)} options={['Ervaringsdeskundige', 'Bedrijf']}>Ik ben een</OptionsSelector>
-//             {cb}
-//             <Button onClick={nextStage}>Volgende</Button>
-//         </DefaultForm>
-//     );
-
-// }
-
-// const ErvaringsdeskundigeForm = ({stage}) => {
-//     switch (stage) {
-//         case 2:
-//             return <EStage2 stage={stage}/>
-//         case 1:
-//             return <EStage1 stage={stage}/>
-//     }
-// }
-
-// const BedrijfsForm = ({stage}) => {
-//     switch (stage) {
-//         case 2:
-//             return <BStage2 stage={stage}/>
-//         case 1:
-//             return <BStage1 stage={stage}/>
-//     }
-// }

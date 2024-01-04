@@ -1,7 +1,7 @@
 .switch {
 
     &:focus-visible .switch-button, &:focus-within .switch-button {
-        outline: $component-focus-border !important;
+        outline: $border-component-focus !important;
     }
 
     &-button {
@@ -10,7 +10,7 @@
         align-items: center;
         padding: 0 3px;
     
-        border: $component-border;
+        border: $border-component;
         border-radius: 1rem;
         user-select: none;
         cursor: pointer;

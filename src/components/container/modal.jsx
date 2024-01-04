@@ -18,13 +18,27 @@ export default function Modal({ open, onClose, children, animation}) {
     if(onClose !== undefined && onClose !== null) onClose(e);
   }
 
+  function addClickEvent(dialog) {
+    dialog.addEventListener("click", e => {
+      if(e.target !== dialog) return; 
+
+      const dialogDimensions = dialog.getBoundingClientRect()
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+
+        handleClose(e);
+      }
+    })
+  }
+
   return (
     <dialog className='modal' ref={dialogRef}>
-      <button className='close' onClick={handleClose}>
-
-      <Icon type='close' size='24'/>
-
-
+      <button className='close' onClick={handleClose} aria-label='Klik of druk op enter om de popup te sluiten.'>
+        <Icon type='close' size='20'/>
       </button>
       <section className='modal-content'>
           {children}
@@ -33,19 +47,7 @@ export default function Modal({ open, onClose, children, animation}) {
   );
 }
 
-function addClickEvent(dialog) {
-  dialog.addEventListener("click", e => {
-    const dialogDimensions = dialog.getBoundingClientRect()
-    if (
-      e.clientX < dialogDimensions.left ||
-      e.clientX > dialogDimensions.right ||
-      e.clientY < dialogDimensions.top ||
-      e.clientY > dialogDimensions.bottom
-    ) {
-      dialog.close()
-    }
-  })
-}
+
 
 function addAnimation(animation, dialog) {
   if(animation === undefined || animation === null) return;

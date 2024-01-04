@@ -7,10 +7,14 @@ dialog.modal  {
     
     padding: 4rem;
     border-radius: $border-radius-big;
-    border: $container-border;
+    border: $border-container;
 
     flex-direction: column;
     gap: 10px;
+
+    button:focus-visible {
+        outline: 3px solid $color-black !important;   
+    }
 
     &.top {
         animation: moveFromTop $animation-slowest ease-in-out forwards;

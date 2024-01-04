@@ -3,7 +3,6 @@
     position: relative;
     cursor: pointer;
     max-width: 30rem;
-    background-color: $color-white;
 
     width: 24rem;
     min-height: 4rem;
@@ -26,11 +25,11 @@
         user-select: none;
 
         padding: 1rem 2rem;
-        border: $component-border;
+        border: $border-component;
         border-radius: $border-radius-medium;
         width: 100%;
 
-        background-color: $color-white;
+        background-color: transparent;
 
         & svg {
             display: block;
@@ -63,7 +62,7 @@
         overflow-y: auto;
 
 
-        border: $component-border;
+        border: $border-component;
         border-radius: $border-radius-medium;
 
 
@@ -72,7 +71,7 @@
             text-align: center;
 
             &:hover {
-                border: $component-border;
+                border: $border-component;
             }
         }
     }

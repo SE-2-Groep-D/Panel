@@ -1,17 +1,26 @@
-// eslint-disable-next-line react/prop-types
+import { useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import  { useState } from 'react';
 
-export default function OptionSelector({
-  children,
-  id,
-  value,
-  onChange,
-  options,
+
+export default function OptionsSelector({
+                                        children, 
+                                        options,
+                                        id,
+                                        message,
+                                        value, 
+                                        onChange,
 }) {
     const [open, setOpen] = useState(false);
 
-      const handleKeyPress = (e) => {
+
+    useEffect(() => {
+        if(value !== undefined) return;
+            handleSelect(null, options[0]);
+    })
+
+   
+
+    const handleKeyPress = (e) => {
         switch(e.key) {
             case 'Enter':
                 handleEnterClick(e);
@@ -20,11 +29,10 @@ export default function OptionSelector({
       };
   
 
-    function handleChange(target, newValue) {
+    function handleSelect(target, newValue) {
         setOpen(false);
         if(onChange !== null && onChange !== undefined) onChange({
             element: target,
-            id: id,
             oldValue: value,
             value: newValue,
         });
@@ -44,51 +52,45 @@ export default function OptionSelector({
         } 
     
         if(classList.contains('option')) {
-            handleChange(target, target.innerText)
+            handleSelect(target, target.innerText)
             return;
         }
     }
 
-  return(
-    <div className='option-selector' value={value} id={id}>
-        <label htmlFor={id}>{children}</label>
+    return(
+        <div className='option-selector' value={value} id={id}>
+            <label htmlFor={id}>{children}</label>
 
-        <div className={(open) ? 'selector-value open' : 'selector-value'} tabIndex={0}  onKeyDown={handleKeyPress} onClick={() => {setOpen(!open)}}>
-            <span>{value}</span>
-            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.8275 0.6725L0.5 2L8 9.5L15.5 2L14.1725 0.672499L8 6.845L1.8275 0.6725Z" fill="#111329"/>
-            </svg>
+            <div id={id} className={(open) ? 'selector-value open' : 'selector-value'} tabIndex={0}  onKeyDown={handleKeyPress} onClick={() => {setOpen(!open)}}>
+                <span>{value}</span>
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.8275 0.6725L0.5 2L8 9.5L15.5 2L14.1725 0.672499L8 6.845L1.8275 0.6725Z" fill="#111329"/>
+                </svg>
 
+            </div>
+            <ul className='options-list'>
+                {/* eslint-disable-next-line react/prop-types */}
+                {options.map((option, key) => {
+                    return <option 
+                                className='option' 
+                                key={key} 
+                                onClick={(e) => {handleSelect(e.target, option);}}
+                                onKeyDown={handleKeyPress}
+                                tabIndex={0}
+                            >{option}</option>
+                })}
+            </ul>
         </div>
-        <ul className='options-list'>
-            {/* eslint-disable-next-line react/prop-types */}
-            {options.map((option, key) => {
-                return <li
-                            className='option' 
-                            key={key} 
-                            onClick={(e) => handleChange(e.target, option)}
-                            tabIndex={0}
-                        >{option}</li>
-            })}
-        </ul>
-    </div>);
+    );
 }
 
-OptionSelector.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.object,
-  ]),
-  label: PropTypes.string,
-  type: PropTypes.string,
-  id: PropTypes.string,
-  options: PropTypes.array,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string,
-  message: PropTypes.string,
-  required: PropTypes.bool,
-};
 
-
+OptionsSelector.propTypes = {
+    children: PropTypes.any,
+    options: PropTypes.array,
+    id: PropTypes.string,
+    message: PropTypes.string,
+    required: PropTypes.bool,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+  };

@@ -31,3 +31,10 @@ function App() {
 }
 
 export default App;
+
+function Home() {
+
+    return <section>
+        <a href='/setup'>click me</a>
+    </section>
+}

@@ -12,6 +12,7 @@ function App() {
         <BrowserRouter>
             <Suspense fallback={<LoadingDiv loading={true} />}>
                 <Routes>
+                    <Route path='/' element={<Home/>} />
                     <Route path="/onderzoek" element={<Onderzoeken />} />
                     <Route path="/onderzoek/:onderzoekId" element={<OnderzoekInfo />} />
                     <Route path="/setup" element={<SetupAccount />} />
@@ -23,3 +24,10 @@ function App() {
 }
 
 export default App;
+
+function Home() {
+
+    return <section>
+        <a href='/setup'>click me</a>
+    </section>
+}

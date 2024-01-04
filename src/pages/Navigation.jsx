@@ -1,5 +1,8 @@
 import {Link, useLocation} from "react-router-dom";
-import {Icon, Logo, Button} from "@components";
+import {Logo, Button} from "@components";
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHome, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
 
 const hideNavigationRoutes  = [
     '/setup',
@@ -22,20 +25,20 @@ function Navigation() {
         <ul className="navigation-items">
             <li className="navigation-item">
                 <Link to='/'>
-                    <Icon type='home' color='black' size={20}/>
+                    <FontAwesomeIcon icon={faHome} />
                     Home
                 </Link>
             </li>
             <li className="navigation-item active">
                 <Link to='/onderzoek'>
-                    <Icon type='research' color='black' size={20}/>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
                     Onderzoeken
                 </Link>
             </li>
         </ul>
 
         <Button aria-label={'profile'} className='profile-button'>
-            <Icon type='profile' color='black' size={20}/>
+            <FontAwesomeIcon icon={faUser} />
             Profile
         </Button>
     </nav>

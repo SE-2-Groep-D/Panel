@@ -7,10 +7,14 @@ dialog.modal  {
     
     padding: 4rem;
     border-radius: $border-radius-big;
-    border: $container-border;
+    border: $border-container;
 
     flex-direction: column;
     gap: 10px;
+
+    button:focus-visible {
+        outline: 3px solid $color-black !important;   
+    }
 
     &.top {
         animation: moveFromTop $animation-slowest ease-in-out forwards;
@@ -51,6 +55,10 @@ dialog.modal  {
         height: 3rem;
         width: 3rem;
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         border-radius: 50%;
         background-color: $color-white-3;
 
@@ -59,10 +67,7 @@ dialog.modal  {
             cursor: pointer;
         }
 
-        & svg {
-            width: 100%;
-            height: 100%;
-        }
+      
     }
 }
 

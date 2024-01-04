@@ -7,11 +7,14 @@
   position: relative;
 
   &-title {
-
+    margin-bottom: 2rem;
   }
 
   &-message {
     position: relative;
+    color: $color-tertiary;
+    font-weight: bold;
+    font-size: 1.4rem;
   }
 
   &-header {
@@ -34,6 +37,8 @@
 
   &-button {
       width: 22.5rem;
+      height: 4rem;
+      font-size: 1.6rem;
   }
 
 

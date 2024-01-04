@@ -6,8 +6,13 @@ import path from 'path';
 export default defineConfig({
   server: {
     proxy: {
-      '/api': 'https://localhost:3500',
-    }
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false, // set to true if you have a self signed certificate
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
   plugins: [react()],
   resolve: {

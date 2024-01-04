@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {Form, Button, Logo, ProgressBar, InputField, OptionSelector} from "@components";
 import {default as useFormData } from '../hooks/useFormData.jsx'
 
-function StartForm() {
+function VoogdForm() {
     const {formData, dispatch} = useFormData();
     const [message, setMessage] = useState(null);
     const [move, setMove] = useState('moveIn');
@@ -20,13 +20,13 @@ function StartForm() {
 
     return (
         <div>
-            <Form title="Account" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
-                <InputField id='name' visible required>Naam</InputField>
-                <InputField id='phonenumber' type='tel' visible required message='verplicht'>Telefoonnummer</InputField>
-                <OptionSelector id='account-type' options={['Ervaringsdeskundige', 'Bedrijf']} required>Ik ben een</OptionSelector>
+            <Form title="Voogd Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} move={move}>
+                <InputField id='nameVoogd' visible required >Naam</InputField>
+                <InputField id='emailVoogd' type='email' visible required >Email</InputField>
+                <InputField id='phonenumberVoogd' type='tel' visible required>Telefoonnummer</InputField>
             </Form>
         </div>
     );
 }
 
-export default StartForm;
+export default VoogdForm;

@@ -1,0 +1,77 @@
+@import '../main.scss';
+
+.onderzoeken-page {
+  width: clamp(25rem, 90%, 120rem);
+  margin: 0 auto;
+  padding: 1rem 0;
+
+}
+
+.onderzoek-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+
+}
+
+.titel {
+  flex-grow: 1;
+}
+
+.filters {
+  flex-grow: 0;
+}
+
+.onderzoek-item {
+  display: flex;
+  min-height: 20rem;
+  width: clamp(40rem, 100%, 120rem);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  height: 22rem;
+  border-radius: 8px;
+  border: 3px solid var(--border-2, #EBECF0);
+  background: var(--White, #FFF);
+
+  @include respond(laptop, max) {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    padding: 0 2rem;
+  }
+}
+
+.onderzoek-omschrijving {
+  font-size: 1.5rem;
+}
+
+
+.content-left {
+  flex: 0 0 70%;
+  padding-right: 20px;
+  height: 100%;
+
+  @include respond(tablet, max) {
+    padding-top: 0rem;
+    width: 100%;
+  }
+}
+
+.content-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 100%;
+  @include respond(tablet, max) {
+    align-items: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+  }
+}
+

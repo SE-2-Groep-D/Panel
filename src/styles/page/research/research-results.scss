@@ -1,0 +1,220 @@
+@import '../../main.scss';
+
+#root {
+    background-color: $color-gray;
+    overflow-x: hidden;
+}
+
+.heading-2 {
+    margin-bottom: 1rem;
+}
+
+.results {
+    width: 100%;
+    max-width: min(140rem, 100% - 2rem);
+  
+    @include respond(mobile, min) {
+        padding: 5rem 1rem;
+        
+    }
+
+    @include respond(tablet, min) {
+        padding: 5rem 6rem;
+    }
+
+    @include respond(laptop, min) {
+        padding: 5rem 12rem;
+    }
+
+    .not-found {
+        margin-top: 10rem;
+        text-align: center;
+    }
+
+    .navigation {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 6rem;
+
+        @include respond(355px) {
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .back {
+            display: flex;
+            align-items: center;
+            font-size: 1.7rem;
+            font-weight: bold;
+            font-family: $font-family-1;
+            text-decoration: none;
+            color: $color-black;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .statistics {        
+        &__items {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+            background-color: $color-white;;
+            
+            border-radius: $border-radius-big;
+            border: $border-container;
+            padding: 5rem;
+
+            @include respond(laptop) {
+                padding: 3rem;
+            }
+           
+            @include respond(600px) {
+                grid-template-columns: none;
+                grid-template-rows: 1fr 1fr 1fr;
+                gap: 3rem;
+            }
+
+        
+
+        
+        }
+        
+        &__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 3rem;
+
+            @include respond(laptop) {
+                gap: 1rem;
+            }
+
+            &-title {
+                @include respond(tablet) {
+                    font-size: 1.8rem;
+                }
+            }
+
+            &-value {
+                font-size: 9rem;
+                font-weight: bold;
+                color: $color-primary;
+
+
+                @include respond(tablet) {
+                    font-size: 5rem;
+                }
+
+                @include respond(laptop) {
+                    font-size: 7rem;
+                }
+            }
+        }
+    }
+
+    table {
+        text-align: left;
+        width: 100%;
+        border-spacing: 1rem 2rem;
+        border-collapse: collapse;
+       
+
+        @include respond(tablet) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+       
+        td {
+            margin-right: 1rem;
+            padding: 1rem 0rem;
+
+            span {
+                font-weight: bold;
+                margin-right: .5rem;
+            }
+        }
+
+        td, th {
+            &:last-child {
+                text-align: right;
+            }
+        }
+
+        th {
+            padding-bottom: 1rem !important;
+        }
+
+        tbody {
+            width: 100%;
+
+            tr{
+                border-top: 1px solid $color-gray;
+            }
+
+           
+        }
+
+    
+
+       
+
+        @include respond(tablet) {
+            th {
+                display: none;
+            }
+
+            tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            tr {
+                flex-direction: column;
+            }
+
+            tr button {
+                width: 100%;
+            }
+
+            tr:not(:first-child) {
+                padding-top: 2rem;
+            }
+
+            td, td:last-child {
+                display: flex;
+                text-align: left;
+                grid-template-columns: 1fr 1fr;
+                justify-content: space-between;
+
+                &::before {
+                    content: attr(data-label);
+                    font-weight: bold;
+                }
+
+                & span.number {
+                    display: none;
+                }
+            }
+        }
+
+        span.bold {
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+    }
+}
+
+
+
+    
+

@@ -1,9 +1,8 @@
-option-selector {
+.option-selector {
     font-size: 1.6rem;
     position: relative;
     cursor: pointer;
     max-width: 30rem;
-    background-color: $color-white;
 
     width: 24rem;
     min-height: 4rem;
@@ -19,16 +18,18 @@ option-selector {
         align-items: center;
         justify-content: space-between;
         flex-direction: row;
+
+        font-weight: bold;
         
         gap: 10px;
         user-select: none;
 
         padding: 1rem 2rem;
-        border: $component-border;
+        border: $border-component;
         border-radius: $border-radius-medium;
         width: 100%;
 
-        background-color: $color-white;
+        background-color: transparent;
 
         & svg {
             display: block;
@@ -61,7 +62,7 @@ option-selector {
         overflow-y: auto;
 
 
-        border: $component-border;
+        border: $border-component;
         border-radius: $border-radius-medium;
 
 
@@ -70,7 +71,7 @@ option-selector {
             text-align: center;
 
             &:hover {
-                border: $component-border;
+                border: $border-component;
             }
         }
     }

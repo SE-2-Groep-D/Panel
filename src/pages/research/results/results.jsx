@@ -1,11 +1,14 @@
 import '@pagestyles/research/research-results.scss';
 
+
+
+// Import libraries
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import {lazy, Suspense} from 'react';
 import {fetchData} from '@services';
 
-
+// Import Components
 import {Icon, OptionSelector, LoadingDiv} from '@components';
 
 const TrackingResults = lazy(() => import('./tracking/TrackingResults.jsx'));

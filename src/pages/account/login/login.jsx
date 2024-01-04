@@ -1,4 +1,5 @@
 import "@pagestyles/register.scss";
+
 import { Logo } from "@components";
 import LoginForm from "./components/form";
 import GoogleButton from "./components/GoogleButton";

@@ -1,9 +1,13 @@
 import '@pagestyles/Onderzoeken.scss';
-import {useEffect, useState} from "react";
-import {Button, LoadingDiv} from "@components";
+
+// Import from libraries
+import {fetchData, formatDate} from "@services";
 import {useNavigate} from 'react-router-dom';
-import FormatDate from "@pages/research/components/formDate.jsx";
-import {fetchData} from "@services/api.js";
+import {useEffect, useState} from "react";
+
+// import components
+import {Button, LoadingDiv} from "@components";
+
 
 function Onderzoeken() {
     const [onderzoeken, setOnderzoeken] = useState([]);
@@ -58,9 +62,9 @@ function Onderzoeken() {
                                     <p className="">€{onderzoek.vergoeding}</p>
                                     <p className="">{onderzoek.aantalParticipanten}</p>
                                     <p className="">{onderzoek.locatie}</p>
-                                    <div>{FormatDate(onderzoek.startDatum)}</div>
-                                    <div className="button-div"><Button children="OnderzoekInfo Info"
-                                                                        onClick={() => goToOnderzoek(onderzoek.id)}/>
+                                    <div>{formatDate(onderzoek.startDatum)}</div>
+                                    <div className="button-div">
+                                        <Button onClick={() => goToOnderzoek(onderzoek.id)}> OnderzoekInfo Info </Button>
                                     </div>
 
                                 </div>

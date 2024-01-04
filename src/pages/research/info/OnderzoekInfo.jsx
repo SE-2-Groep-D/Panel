@@ -1,11 +1,15 @@
-import {useEffect, useState} from "react";
-import OnderzoekInformatie from "@pages/research/components/OnderzoekInformatie.jsx";
-import Map from "@pages/research/components/map";
-import Information from './components/information';
-import {useParams} from 'react-router-dom';
-import {LoadingDiv} from "@components";
 import '@pagestyles/OnderzoekInfo.scss';
-import {fetchData} from "@services/api.js";
+
+import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
+import { fetchData } from "@services/api.js";
+
+// import components
+import OnderzoekInformatie from "./components/OnderzoekInformatie";
+import Information from './components/information';
+import Map from "./components/map";
+import {LoadingDiv} from "@components";
+
 
 function OnderzoekInfo() {
     const {onderzoekId} = useParams();

@@ -8,9 +8,11 @@ function Register() {
     <section id="register">
       <Logo id="logo"></Logo>
       <RegisterForm />
-      <hr />
-      <GoogleButton />
-      <a href="./login">Toch inloggen?</a>
+      <div className='other'>
+          <hr />
+          <GoogleButton />
+          <a href="./login">Toch inloggen?</a>
+      </div>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import "@pagestyles/register.scss";
+
 import { Logo } from "@components";
 import LoginForm from "./components/form";
 import GoogleButton from "./components/GoogleButton";
@@ -8,10 +9,12 @@ function Login() {
     <section id="register">
       <Logo id="logo"></Logo>
       <LoginForm />
-      <hr />
-      <a href="">Wachtwoord vergeten?</a>
-      <GoogleButton />
-      <a href="./register">Nog geen account?</a>
+      <div className='other'>
+        <hr />
+        <a href="">Wachtwoord vergeten?</a>
+        <GoogleButton />
+        <a href="./register">Nog geen account?</a>
+      </div>
     </section>
   );
 }

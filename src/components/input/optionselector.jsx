@@ -35,6 +35,7 @@ export default function OptionsSelector({
             element: target,
             oldValue: value,
             value: newValue,
+            id: id
         });
     }
     

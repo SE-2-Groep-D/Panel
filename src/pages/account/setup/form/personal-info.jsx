@@ -15,7 +15,7 @@ function StartForm() {
     });
 
     function handleChange({element, value, id}) {
-        console.log(value, id)
+
         setValues({...values, [(id) ? id : element.id] : value});
     }
     

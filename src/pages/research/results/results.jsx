@@ -1,15 +1,21 @@
 import '@pagestyles/research/research-results.scss';
 
+
+
+// Import libraries
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import {lazy, Suspense} from 'react';
 import {fetchData} from '@services';
 
-
-import {Icon, OptionSelector, LoadingDiv} from '@components';
+// Import Components
+import {OptionSelector, LoadingDiv} from '@components';
 
 const TrackingResults = lazy(() => import('./tracking/TrackingResults.jsx'));
-const QuestionListResults = lazy(() => import('./vragenlijst/QuestionListResults.jsx')); 
+const QuestionListResults = lazy(() => import('./vragenlijst/QuestionListResults.jsx'));
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 
 export default function Results() {
     const [options, setOptions] = useState(undefined);
@@ -28,7 +34,7 @@ export default function Results() {
     <main className='results'>
             <div className='navigation'>
                 <a href={`/onderzoek/` + id} className='back'>
-                    <Icon type="back" size="17"/>
+                    <FontAwesomeIcon icon={faChevronLeft}/>
                     Terug
                 </a>
 

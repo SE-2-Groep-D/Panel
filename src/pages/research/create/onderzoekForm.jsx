@@ -1,9 +1,13 @@
 import '@pagestyles/setup-account.scss';
 
-import {Logo, ProgressBar, LoadingDiv} from "@components";
-import Form from './form.jsx';
+// Import libraries
 import { FormProvider } from './data/formContext.jsx';
 import { useForm } from './data/useForm.jsx';
+
+// Import components
+import {Logo, ProgressBar, LoadingDiv} from "@components";
+import Form from './form.jsx';
+
 
 
 function Onderzoek() {

@@ -21,7 +21,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-
+    width: 100%;
   }
 
   &-content {
@@ -32,11 +32,15 @@
   }
 
   &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding-top: 2rem;
+    width: 100%;
   }
 
   &-button {
-      width: 22.5rem;
+      width: clamp(22.5rem, 100%, 25rem);
       height: 4rem;
       font-size: 1.6rem;
   }

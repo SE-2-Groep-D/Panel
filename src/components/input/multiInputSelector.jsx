@@ -1,7 +1,8 @@
 // eslint-disable-next-line react/prop-types
 import PropTypes from 'prop-types';
 import  { useState } from 'react';
-import {ToolTip, Icon, InputField} from '@components';
+import {ToolTip, InputField} from '@components';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function MultiInputSelector({
   children,
@@ -15,10 +16,6 @@ export default function MultiInputSelector({
   const [currentValue, setValue] = useState('');
   const [error, setError] = useState(null);
 
-  /*function handleChange({value}) {
-     setValue(value);
-  }
-*/
     function handleEnterClick(e) {
       if(e.key !== 'Enter') return;
       e.preventDefault();
@@ -72,7 +69,9 @@ export default function MultiInputSelector({
           {value && value.map((option, index) => {
               return <li className='tag' key={index} tabIndex={0} onClick={removeOption} onKeyDown={removeOption}>
                         <label htmlFor={index}>{option}</label>
-                        <button id={index} onClick={removeOption}> <Icon type="delete" size="13" color={"#4464EE"}/> </button>
+                        <button id={index} onClick={removeOption}>
+                          <FontAwesomeIcon icon="fa-solid fa-trash" />
+                        </button>
                       </li>
           })}
         </ul>

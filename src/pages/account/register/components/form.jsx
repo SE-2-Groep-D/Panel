@@ -19,6 +19,7 @@ function RegisterForm() {
     <Form title="Registreren" buttonText="Registreren" onSubmit={handleSubmit}>
       <InputField
         id="email"
+        type="email"
         visible
         required
         value={newUser.email}
@@ -33,6 +34,7 @@ function RegisterForm() {
         required
         value={newUser.password}
         onChange={handleChange}
+        pattern={"^(?=.*\\d)(?=.*[A-Z]).{5,}$"}
       >
         Wachtwoord
       </InputField>

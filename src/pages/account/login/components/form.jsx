@@ -36,6 +36,7 @@ function LoginForm() {
     <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit}>
       <InputField
         id="email"
+        type="email"
         visible
         required
         value={newUser.email}

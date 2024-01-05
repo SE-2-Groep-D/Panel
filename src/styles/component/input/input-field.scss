@@ -29,17 +29,18 @@
 
         &:focus-visible {
             outline: $border-component-focus;
-        }
 
-        &:user-invalid {
-            outline-color: $color-tertiary !important;
-            border-color: $color-tertiary !important;
-        }
+            &:user-invalid {
+                outline-color: $color-tertiary !important;
+                border-color: $color-tertiary !important;
+            }
 
-        &:valid {
-            outline-color: $color-secondary !important;
-            border-color: $color-secondary !important;
+            &:valid {
+                outline-color: $color-secondary !important;
+                border-color: $color-secondary !important;
+            }
         }
+        
 
 
         &:not(:placeholder-shown) ~ label {

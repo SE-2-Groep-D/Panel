@@ -11,6 +11,7 @@ export default function InputField({
   message,
   size,
   required,
+  pattern
 }) {
   const isTextArea =
     size !== undefined && size !== null && size.toLowerCase() === "big";
@@ -36,6 +37,7 @@ export default function InputField({
       onChange={handleChange}
       placeholder={finalPlaceHolder}
       required={required}
+      pattern={pattern}
     />
   );
 
@@ -70,4 +72,5 @@ InputField.propTypes = {
   message: PropTypes.string,
   size: PropTypes.oneOf(["big", "small"]),
   required: PropTypes.bool,
+  pattern: PropTypes.string
 };

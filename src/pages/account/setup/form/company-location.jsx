@@ -29,9 +29,12 @@ function StartForm() {
             setMessage(message);
             return;
         }
-        
-        state.company = {...state.company, place, postcode, street, number}
-        nextStep();
+
+        setMove('moveOut')
+        setTimeout(() => {
+            state.company = {...state.company, place, postcode, street, number}
+            nextStep();
+        }, 500)
     }
 
     return (

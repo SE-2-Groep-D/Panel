@@ -4,7 +4,7 @@ import {Form, InputField, OptionSelector, MultiInputSelector, Checkbox} from "@c
 import {useForm} from '../data/useForm.jsx';
 
 function StartForm() {
-    const {state, nextStep, prevStep } = useForm();
+    const {state, nextStep } = useForm();
     const [message, setMessage] = useState(null);
     const [move, setMove] = useState('moveIn');
     
@@ -30,8 +30,12 @@ function StartForm() {
             return;
         }
 
-        state.user = {...state.user, postcode, disabillityTypes, preferredApproach, canBeApproached};
-        nextStep();
+        setMove('moveOut')
+        setTimeout(() => {
+            state.user = {...state.user, postcode, disabillityTypes, preferredApproach, canBeApproached};
+            nextStep();
+        }, 500)
+
     }
 
     return (

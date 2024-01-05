@@ -28,8 +28,12 @@ function StartForm() {
             setMessage(message);
             return;
         }
-        state.user.parent = {...state.user.parent, name, email, phoneNumber}
-        nextStep();
+
+        setMove('moveOut')
+        setTimeout(() => {
+            state.user.parent = {...state.user.parent, name, email, phoneNumber}
+            nextStep();
+        }, 500)
     }
 
     return (

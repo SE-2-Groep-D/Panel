@@ -37,8 +37,12 @@ function StartForm() {
       return;
     }
 
-    state.user = { ...values };
-    nextStep();
+    setMove('moveOut')
+
+    setTimeout(() => {
+      state.user = { ...values };
+      nextStep();
+    }, 500)
   }
 
   return (

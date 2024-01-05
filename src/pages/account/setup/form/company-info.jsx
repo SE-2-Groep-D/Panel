@@ -4,7 +4,7 @@ import {Form, InputField} from "@components";
 import {useForm} from '../data/useForm.jsx';
 
 function StartForm() {
-    const {state, nextStep, prevStep } = useForm();
+    const {state, nextStep } = useForm();
     const [message, setMessage] = useState(null);
     const [move, setMove] = useState('moveIn');
     
@@ -31,8 +31,11 @@ function StartForm() {
             return;
         }
 
-        state.company = {name, description, websiteUrl}
-        nextStep();
+        setMove('moveOut')
+        setTimeout(() => {
+            state.company = {name, description, websiteUrl}
+            nextStep();
+        }, 500)
     }
 
     return (

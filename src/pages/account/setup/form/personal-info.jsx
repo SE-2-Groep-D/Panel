@@ -28,9 +28,13 @@ function StartForm() {
             return;
         }
 
-        state.user = {...state.user, firstName, lastName, ageGroup};
-        if(ageGroup === '0 tot 10' || ageGroup === '10 tot 18') state.maxStep++;
-        nextStep();
+        setMove('moveOut')
+        setTimeout(() => {
+            state.user = {...state.user, firstName, lastName, ageGroup};
+            if(ageGroup === '0 tot 10' || ageGroup === '10 tot 18') state.maxStep++;
+            nextStep();
+            nextStep();
+        }, 500)
     }
 
     return (

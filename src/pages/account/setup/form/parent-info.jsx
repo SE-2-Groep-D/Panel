@@ -37,7 +37,7 @@ function StartForm() {
             <Form title="Voogd Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit}  className={move}>
                 <InputField id='name' value={values.name} onChange={handleChange} required>Uw volledige naam</InputField>
                 <InputField id='email' value={values.email} onChange={handleChange} required>email</InputField>
-                <InputField id='phoneNumber' value={values.phoneNumber} onChange={handleChange} required>Telefoonnummer</InputField>
+                <InputField id='phoneNumber' value={values.phoneNumber} onChange={handleChange} pattern={"^(?:\\+31|0)(?:[1-9][0-9]?|6[1-6]|7[0-9]|8[1-5]|9[0-9])\\d{6,7}$"} required>Telefoonnummer</InputField>
             </Form>
         </div>
     );

@@ -66,6 +66,7 @@ function StartForm() {
           value={values.phoneNumber}
           onChange={handleChange}
           required
+          pattern={"^(?:\\+31|0)(?:[1-9][0-9]?|6[1-6]|7[0-9]|8[1-5]|9[0-9])\\d{6,7}$"}
         >
           Telefoonnummer
         </InputField>

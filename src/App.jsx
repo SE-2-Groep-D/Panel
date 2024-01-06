@@ -10,8 +10,8 @@ import {} from "@pages";
 
 // Import Pages
 import {
+  Home,
   Navigation,
-
   Register, 
   Login, 
   Voorbeeld,
@@ -31,7 +31,6 @@ import {
 function App() {
   return (
     <BrowserRouter>
-
         <Navigation/>
       <Suspense fallback={<LoadingDiv loading={true} />}>
         <Routes>
@@ -52,10 +51,3 @@ function App() {
 
 export default App;
 
-function Home() {
-
-    return <section>
-        <a href='/setup'>click me</a>
-        <p>this is a test.</p>
-    </section>
-}

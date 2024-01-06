@@ -1,10 +1,9 @@
 import "@pagestyles/Home.scss";
 
-import React from 'react';
 import {Logo} from "@components";
 import {Link} from "react-router-dom";
 
-function Home(props) {
+function Home() {
     return (
         <>
             <nav className="navigation">
@@ -35,7 +34,7 @@ function Home(props) {
                         </Link>
                     </div>
 
-                    <img className='accessibility-image' alt='Foto van een ' src="/src/assets/home-page.png"/>
+                    <img className='accessibility-image' alt='Foto van een een vrouw in een rolstoel en een man en een vrouw met een wandelstok.' src="/src/assets/home-page.png"/>
                 </section>
             </main>
         </>

@@ -1,6 +1,7 @@
 import {useEffect, useRef} from 'react';
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
 
 export default function Modal({ open, onClose, children, animation}) {
   const dialogRef = useRef(null);
@@ -38,7 +39,7 @@ export default function Modal({ open, onClose, children, animation}) {
   return (
     <dialog className='modal' ref={dialogRef}>
       <button className='close' onClick={handleClose} aria-label='Klik of druk op enter om de popup te sluiten.'>
-        <FontAwesomeIcon icon="fa-solid fa-xmark" />
+        <FontAwesomeIcon icon={faXmark} />
       </button>
       <section className='modal-content'>
           {children}

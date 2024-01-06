@@ -1,6 +1,6 @@
 {
     "rewrites":  [
       {"source": "/(.*)", "destination": "/"},
-      { "source": "/api/:path(.*)", "destination": "https://https://accessibility.davidout.com/:path" }
+      {"source": "/api/:path(.*)", "destination": "https://accessibility.davidout.com/:path" }
     ]
 }

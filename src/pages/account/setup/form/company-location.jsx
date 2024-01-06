@@ -19,8 +19,6 @@ function StartForm() {
     function handleChange({element, value, id}) {
         setValues({...values, [(id) ? id : element.id] : value});
     }
-    
-
 
     function handleSubmit(formData) {
         const {values} = formData;
@@ -31,16 +29,19 @@ function StartForm() {
             setMessage(message);
             return;
         }
-        
-        state.company = {...state.company, place, postcode, street, number}
-        nextStep();
+
+        setMove('moveOut')
+        setTimeout(() => {
+            state.company = {...state.company, place, postcode, street, number}
+            nextStep();
+        }, 500)
     }
 
     return (
         <div>
             <Form title="Bedrijf Informatie" buttonText='volgende' message={message} onSubmit={handleSubmit} className={move}>
                 <InputField id='place' value={values.place} onChange={handleChange} required>Plaats</InputField>
-                <InputField id='postcode' value={values.postcode} onChange={handleChange} required>Postcode</InputField>
+                <InputField id='postcode' value={values.postcode} onChange={handleChange} pattern={'^\\d{4}\\s?[a-zA-Z]{2}$'} required>Postcode</InputField>
                 <InputField id='street' value={values.street} onChange={handleChange} required>Straat</InputField>
                 <InputField id='number' value={values.number} onChange={handleChange} required>Huisnummer</InputField>
             </Form>

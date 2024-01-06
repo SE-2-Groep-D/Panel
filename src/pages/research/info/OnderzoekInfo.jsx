@@ -2,7 +2,7 @@ import '@pagestyles/OnderzoekInfo.scss';
 
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { fetchData } from "@services/api.js";
+import { fetchData } from "@api";
 
 // import components
 import OnderzoekInformatie from "./components/OnderzoekInformatie";

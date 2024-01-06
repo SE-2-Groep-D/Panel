@@ -1,7 +1,7 @@
 import '@pagestyles/research/question-list-results.scss';
 
 import { useState, useEffect } from 'react';
-import {fetchData} from '@services';
+import { fetchData } from "@api";
 
 import CountingAnimation from '../counting-animation';
 import { LoadingDiv, Modal} from '@components';

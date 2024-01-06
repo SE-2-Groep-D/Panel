@@ -6,7 +6,7 @@ import '@pagestyles/research/research-results.scss';
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import {lazy, Suspense} from 'react';
-import {fetchData} from '@services';
+import { fetchData } from "@api";
 
 // Import Components
 import {OptionSelector, LoadingDiv} from '@components';

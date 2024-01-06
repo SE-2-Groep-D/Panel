@@ -34,7 +34,7 @@ function Home() {
                         </Link>
                     </div>
 
-                    <img className='accessibility-image' alt='Foto van een een vrouw in een rolstoel en een man en een vrouw met een wandelstok.' src="/src/assets/home-page.png"/>
+                    <img className='accessibility-image' alt='Foto van een een vrouw in een rolstoel en een man en een vrouw met een wandelstok.' src="home-page.png"/>
                 </section>
             </main>
         </>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Form, InputField } from "@components";
+import Cookies from "universal-cookie";
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
@@ -10,8 +11,9 @@ function LoginForm() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("/api/Auth/Login", {
+      const response = await fetch("https://localhost:5000/Auth/Login", {
         method: "POST",
+        credentials: "include",
         body: JSON.stringify({
           email: newUser.email,
           password: newUser.password,
@@ -27,6 +29,8 @@ function LoginForm() {
         ? await response.text()
         : console.log("Login failed.");
       console.log(data || "No data");
+
+      saveCookie(data);
     } catch (error) {
       console.error(error.message);
     }
@@ -56,6 +60,16 @@ function LoginForm() {
       </InputField>
     </Form>
   );
+}
+
+function saveCookie(user) {
+  // const cookies = new Cookies();
+  // cookies.set("access_token", user.jwtToken, {
+  //   path: "/",
+  //   httpOnly: true,
+  //   secure: true,
+  // });
+  console.log("cookie set");
 }
 
 export default LoginForm;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import  { useState } from 'react';
 import {ToolTip, InputField} from '@components';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function MultiInputSelector({
   children,
@@ -70,7 +71,7 @@ export default function MultiInputSelector({
               return <li className='tag' key={index} tabIndex={0} onClick={removeOption} onKeyDown={removeOption}>
                         <label htmlFor={index}>{option}</label>
                         <button id={index} onClick={removeOption}>
-                          <FontAwesomeIcon icon="fa-solid fa-trash" />
+                          <FontAwesomeIcon icon={faTrash} />
                         </button>
                       </li>
           })}

@@ -2,18 +2,21 @@ import "@pagestyles/register.scss";
 import { Logo } from "@components";
 import RegisterForm from "./components/form";
 import GoogleButton from "./components/GoogleButton";
+import { FormProvider } from "../setup/data/formContext";
 
 function Register() {
   return (
-    <section id="register">
-      <Logo id="logo"></Logo>
-      <RegisterForm />
-      <div className='other'>
+    <FormProvider>
+      <section id="register">
+        <Logo id="logo"></Logo>
+        <RegisterForm />
+        <div className="other">
           <hr />
           <GoogleButton />
           <a href="./login">Toch inloggen?</a>
-      </div>
-    </section>
+        </div>
+      </section>
+    </FormProvider>
   );
 }
 

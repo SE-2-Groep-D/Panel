@@ -32,6 +32,7 @@ const PossibleForms = {
   researchInfo: lazy(() => import("./form/research-info.jsx")),
   companyForm: lazy(() => import("./form/company-info.jsx")),
   companyLocationForm: lazy(() => import("./form/company-location.jsx")),
+  confirmData: lazy(() => import("./form/confirm-data.jsx")),
 };
 
 function GetNextForm() {
@@ -75,6 +76,9 @@ function GetNextForm() {
         }
       }
       break;
+
+    case 4:
+      return PossibleForms.confirmData;
   }
 
   return null;

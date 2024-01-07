@@ -8,7 +8,8 @@ const hideNavigationRoutes  = [
     '/',
     '/setup',
     '/login',
-    '/register'
+    '/register',
+    '/privacy'
 ];
 
 function Navigation() {

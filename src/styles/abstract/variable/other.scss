@@ -1,4 +1,4 @@
-
+@import '../mixins.scss';
 
 
 // border
@@ -18,3 +18,14 @@ $animation-fast: .3s;
 $animation-medium: .5s;
 $animation-slow: .7s;
 $animation-slowest: 1s;
+
+$padding-page: 5rem 12rem;
+
+@include respond(mobile, min) {
+    $padding-page: 5rem 1rem;
+    
+}
+
+@include respond(tablet, min) {
+    $padding-page: 5rem 6rem;
+}

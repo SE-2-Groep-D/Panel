@@ -12,19 +12,7 @@
 .results {
     width: 100%;
     max-width: min(140rem, 100% - 2rem);
-  
-    @include respond(mobile, min) {
-        padding: 5rem 1rem;
-        
-    }
-
-    @include respond(tablet, min) {
-        padding: 5rem 6rem;
-    }
-
-    @include respond(laptop, min) {
-        padding: 5rem 12rem;
-    }
+    padding: $padding-page;
 
     .not-found {
         margin-top: 10rem;

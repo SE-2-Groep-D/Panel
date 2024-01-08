@@ -1,0 +1,13 @@
+@import '../../main.scss';
+
+#root {
+    background-color: $color-gray;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    padding: $padding-page;
+    width: 100%;
+    max-width: min(140rem, 100% - 2rem);
+}
+

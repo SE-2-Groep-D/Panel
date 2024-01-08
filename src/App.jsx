@@ -10,6 +10,7 @@ import { LoadingDiv } from "@components";
 // Import Pages
 import {
   Home,
+  UserHome,
   Navigation,
   Register, 
   Login, 
@@ -35,7 +36,7 @@ function App() {
       <Navigation />
       <Suspense fallback={<LoadingDiv loading={true} />}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<UserHome />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/setup" element={<SetupAccount />} />

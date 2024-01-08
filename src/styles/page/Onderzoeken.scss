@@ -4,24 +4,66 @@
   width: clamp(25rem, 90%, 120rem);
   margin: 0 auto;
   padding: 1rem 0;
-
+  background: var(--Gray, #F3F4F6);
 }
+
+.body-special-color {
+  background: var(--Gray, #F3F4F6);
+}
+
+.content-informatie{
+  color: #000;
+
+  /* paragraph */
+  font-family: Inter;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+}
+
 
 .onderzoek-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 3rem;
-  padding-top: 3rem;
-
+  padding-top: 2rem;
+  background: var(--Gray, #F3F4F6);
+}
+.content-titel{
+  color: #000;
+  text-align: center;
+  display: inline;
+  font-size: 2.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+button.btn.onderzoek-button {
+  padding: 1.5rem 6rem;
 }
 
+div.filters>.option-selector {
+  padding-right: 1rem;
+}
+.onderzoek-ttitel{
+  color: #000;
+
+  /* Heading 3 */
+  font-family: Inter;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
 .titel {
   flex-grow: 1;
 }
 
 .filters {
   flex-grow: 0;
+  display: flex;
 }
 
 .onderzoek-item {
@@ -35,7 +77,6 @@
   border-radius: 8px;
   border: 3px solid var(--border-2, #EBECF0);
   background: var(--White, #FFF);
-
   @include respond(laptop, max) {
     flex-direction: column;
     width: auto;
@@ -45,8 +86,52 @@
 }
 
 .onderzoek-omschrijving {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  color: #000;
+  font-family: Inter, serif;
+  font-style: normal;
+
+  font-weight: 400;
+  line-height: 150%;
 }
+.content-tags {
+  display: flex;
+  justify-content: center;
+
+}
+.content-informatie-een{
+  display: flex;
+  padding: 0px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 3px;
+  background: var(--Primary-85, #B9C5F9);
+  color: var(--Primary, #2B50EC);
+  font-family: Inter;
+  font-size: 1.3rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 19.5px */
+  margin-right: 3rem;
+}
+.content-tags>.content-informatie {
+
+  display: flex;
+  padding: 0px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 3px;
+  background: var(--Primary-85, #B9C5F9);
+  color: var(--Primary, #2B50EC);
+  font-family: Inter;
+  font-size: 1.3rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 19.5px */
+}
+
 
 
 .content-left {
@@ -73,5 +158,14 @@
     padding-bottom: 1rem;
     width: 100%;
   }
+}
+
+
+.content-informatie{
+  font-family: Inter;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
 }
 

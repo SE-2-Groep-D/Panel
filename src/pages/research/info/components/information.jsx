@@ -5,7 +5,7 @@ function Information({locatie,vergoeding,datum}) {
 
     return (
         <div className='information'>
-            <div className="information-loction"> {locatie}:</div>
+            <div className="information-location"> {locatie}</div>
             <div className="information-vergoeding"> €{vergoeding}</div>
             <div className="information-datum"> {formatDate(datum)}</div>
       </div>

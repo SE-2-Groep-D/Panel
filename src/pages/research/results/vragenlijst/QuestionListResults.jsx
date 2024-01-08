@@ -1,9 +1,14 @@
 import '@pagestyles/research/question-list-results.scss';
 
-import CountingAnimation from '../counting-animation';
 import { useState, useEffect } from 'react';
-import { LoadingDiv, Modal, Button } from '@components';
-import {fetchData} from '@services';
+import { fetchData } from "@api";
+
+import CountingAnimation from '../counting-animation';
+import { LoadingDiv, Modal} from '@components';
+
+import QuestionData from './QuestionData.jsx';
+import Questions from './Questions.jsx';
+
 
 
 export default function QuestionListResults({researhId}) {
@@ -69,101 +74,6 @@ function Statistics({data}) {
   );
 }
 
-function Questions({ data, setQuestion }) {
-  if(data === null || data === undefined || data.length == 0) {
-    return <div className='questions'>
-       <h2 className='heading-2'>Vragenlijst</h2>
-       <p className='text'>Nog geen vragen gevonden.</p>
-    </div>
-  }
-
-  function selectedQuestion(event) {
-    if(event.type !== 'click' && event.type !== 'keydown') return;
-    if(event.type === 'keydown') {
-      if(event.key !== 'Enter' && event.keyCode !== 32 && event.keyCode !== 13) return;
-    }
-
-      const { id } = event.currentTarget;
-      setQuestion(id);
-  }
-
-  return (
-    <section className='questions moveIn bottom'>
-    <table >
-      <thead>
-          <tr>
-            <th className='heading-3'>Vraag</th>
-            <th className='heading-3'>Aantal antwoorden</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((question, i) => {
-            i++;
-           return (
-              <tr
-              tabIndex={0} 
-              id={question.id} 
-              key={i} 
-              aria-label={`Klik met de muis of druk op enter om meer informatie te zien over vraag ${i}.`}
-              onClick={selectedQuestion}
-              onKeyDown={selectedQuestion}
-              >
-                  <td data-label="Vraag" className='text bold'>
-                    <span className='number bold'>{i}</span> 
-                    {question.onderwerp}
-                  </td>
-                  <td data-label="Aantal antwoorden" className='text bold'> {question.antwoorden.length} </td>
-              </tr>
-          
-            )
-          })}
-        </tbody>
-      </table>
-    </section>
-  );
-}
-
-function QuestionData({data, id, setQuestion}) {
-  if(id === undefined || id === null || id === '') return;
-  const questionNumber = data.findIndex((item) => item.id === id);
-  const question = data[questionNumber];
-  
-  const nextQuestion = () => setQuestion(data[questionNumber + 1]?.id);
-  const prevQuestion = () => setQuestion(data[questionNumber - 1]?.id);
-
-  const nextButton = <Button onClick={nextQuestion} color="secondary" varient="text">Volgende vraag</Button>;
-  const prevButton = <Button onClick={prevQuestion} color="secondary" varient="text">Vorige vraag</Button>;
-
-  const antwoorden = (question.antwoorden.length == 0)?  
-  <li className='awnser'> Geen antwoorden</li> : 
-  question.antwoorden.map((item, index) => {
-    return <li className="awnser" id={item.id} key={index}>
-      <span>{index + 1}.</span>
-      {item.tekst}
-    </li>
-  });
-
-  return <section className='question-info'>
-      <h2 className='heading-2'>Vraag {questionNumber + 1}</h2>
-      <h3 className='question heading-3'>{question.onderwerp}</h3>
-      
-      <div className='awnser-box'>
-        <h3 className='heading-3'>Antwoorden</h3>
-        <ul className='awnsers'>
-        {antwoorden}
-        </ul>
-      </div>
-      
-      <div className='button-box'>
-        {questionNumber !== 0 && prevButton}
-        {questionNumber !== data.length - 1 && nextButton}
-      </div>
-  </section>
-}
-
-
-
-
 async function fetchResearchData(id, setData) {
   if(id === undefined || id === null) return;
   try {
@@ -176,20 +86,12 @@ async function fetchResearchData(id, setData) {
 
 import PropTypes from 'prop-types';
 
-Questions.propTypes = {
-  data: PropTypes.array.isRequired,
-  setQuestion: PropTypes.func.isRequired
-};
+
 
 QuestionListResults.protoTypes = {
   researhId: PropTypes.string.isRequired
 }
 
-QuestionData.propTypes = {
-  data: PropTypes.array.isRequired,
-  id: PropTypes.string,
-  setQuestion: PropTypes.func
-};
 
 Statistics.propTypes = {
   data: PropTypes.object.isRequired,

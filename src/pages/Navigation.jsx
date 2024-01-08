@@ -5,9 +5,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
 
 const hideNavigationRoutes  = [
+    '/',
     '/setup',
     '/login',
-    '/register'
+    '/register',
+    '/privacy'
 ];
 
 function Navigation() {

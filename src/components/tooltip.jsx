@@ -23,9 +23,9 @@ export default function ToolTip({children, message, position, error}) {
   }
 
   return (
-    <div className={className}>
+    <div className={className} aria-label={msg}>
         {children}
-        <label className='tool-tip__message'>{msg}</label>
+        <label className='tool-tip__message' style={{ whiteSpace: 'pre-line' }}>{msg}</label>
     </div>
   )
 }

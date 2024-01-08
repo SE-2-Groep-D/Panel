@@ -6,4 +6,6 @@ const apiConfig = {
     production: data.VITE_API_PRODUCTION_URL,
 }
 
+
+
 export {apiConfig};

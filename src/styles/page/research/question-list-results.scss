@@ -13,8 +13,11 @@
         border-radius: $border-radius-big;
         border: $border-container;
 
-      tr {
-        padding: 0rem 5rem;
+
+        @include respond(tablet, min) {
+          tr {
+          padding: 0rem 5rem;
+        }
       }
       td {
         max-width: 45rem;
@@ -64,19 +67,23 @@
     overflow-y: auto;
 
     &::-webkit-scrollbar {
-      width: .8rem; /* Set the width of the scrollbar */
+      width: .8rem;
       overflow: overlay;
     }
-    
+
     &::-webkit-scrollbar-track {
-      background: $color-gray; 
+      background: $color-gray;
       border-radius: 2rem;
     }
-    
+
     /* Handle */
     &::-webkit-scrollbar-thumb {
-      background: $color-primary-60;
-      border-radius: 2rem; /* Set the color of the scrollbar handle */
+      background: $color-primary-85;
+      border-radius: 2rem;
+
+      &:active {
+        background-color: $color-primary-60;
+      }
     }
 
     .awnser {

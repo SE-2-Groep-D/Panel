@@ -19,13 +19,9 @@ $animation-medium: .5s;
 $animation-slow: .7s;
 $animation-slowest: 1s;
 
+
+$padding-page-phone: 5rem 1rem;
+$padding-page-tablet: 5rem 6rem;
 $padding-page: 5rem 12rem;
 
-@include respond(mobile, min) {
-    $padding-page: 5rem 1rem;
-    
-}
-
-@include respond(tablet, min) {
-    $padding-page: 5rem 6rem;
-}
+$dashboard-width: clamp(25rem, 100%, 140rem);

@@ -10,9 +10,7 @@
 }
 
 .results {
-    width: 100%;
-    max-width: min(140rem, 100% - 2rem);
-    padding: $padding-page;
+    width: $dashboard-width;
 
     .not-found {
         margin-top: 10rem;
@@ -24,7 +22,6 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: start;
-        margin-bottom: 6rem;
 
         @include respond(355px) {
             flex-direction: column;
@@ -108,51 +105,6 @@
     }
 
     table {
-        text-align: left;
-        width: 100%;
-        border-spacing: 1rem 2rem;
-        border-collapse: collapse;
-       
-
-        @include respond(tablet) {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-       
-        td {
-            margin-right: 1rem;
-            padding: 1rem 0rem;
-
-            span {
-                font-weight: bold;
-                margin-right: .5rem;
-            }
-        }
-
-        td, th {
-            &:last-child {
-                text-align: right;
-            }
-        }
-
-        th {
-            padding-bottom: 1rem !important;
-        }
-
-        tbody {
-            width: 100%;
-
-            tr{
-                border-top: 1px solid $color-gray;
-            }
-
-           
-        }
-
-    
-
-       
 
         @include respond(tablet) {
             th {
@@ -193,12 +145,6 @@
                 }
             }
         }
-
-        span.bold {
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-
     }
 }
 

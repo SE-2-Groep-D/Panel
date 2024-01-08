@@ -6,8 +6,21 @@
 }
 
 .dashboard {
-    padding: $padding-page;
-    width: 100%;
-    max-width: min(140rem, 100% - 2rem);
+    position: relative;
+    width: $dashboard-width;
+
+    .not-found {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .heading-2 {
+        margin-bottom: 2rem;
+    }
 }
+
+
 

@@ -1,21 +1,19 @@
 import "@pagestyles/home/user-home.scss";
 
-import React, { useState, lazy, Suspense } from 'react'
+import { useState, lazy } from 'react'
 
 
 import {LoadingDiv} from '@components';
-const DashboardData = lazy(() => import('./Default.jsx'));
+const DashboardData = lazy(() => import('./DashboardData.jsx'));
 
 export default function UserHome() {
     const [userName, setUsername] = useState('David');
     const [userType, setUserType] = useState('Ervaringsdeskundige');
 
-    
-
   return (
-    <section className='dashboard'>
+    <main className='dashboard'>
         <DashboardData userType={userType} message={getMessage() + " " + userName}/>
-    </section>
+    </main>
   )
 }
 

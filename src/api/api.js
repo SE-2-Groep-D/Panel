@@ -2,7 +2,6 @@ import {apiConfig} from './config.js';
 
 async function fetchData(endpoint) {
     const hostname = (apiConfig.inDevelopment) ? apiConfig.development : apiConfig.production;
-
     try {
         const response = await fetch(hostname + endpoint);
         if(!response.ok) {

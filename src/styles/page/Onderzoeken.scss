@@ -1,10 +1,7 @@
 @import '../main.scss';
 
 .onderzoeken-page {
-  width: clamp(25rem, 90%, 120rem);
-  margin: 0 auto;
-  padding: 1rem 0;
-
+  width: $dashboard-width;
 }
 
 .onderzoek-info {
@@ -27,12 +24,10 @@
 .onderzoek-item {
   display: flex;
   min-height: 20rem;
-  width: clamp(40rem, 100%, 120rem);
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 8px;
+  border-radius: $border-radius-big;
   height: 22rem;
-  border-radius: 8px;
   border: 3px solid var(--border-2, #EBECF0);
   background: var(--White, #FFF);
 

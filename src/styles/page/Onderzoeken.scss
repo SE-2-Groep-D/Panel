@@ -11,17 +11,6 @@
   background: var(--Gray, #F3F4F6);
 }
 
-.content-informatie{
-  color: #000;
-
-  /* paragraph */
-  font-family: Inter;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%; /* 24px */
-}
-
 
 .onderzoek-info {
   display: flex;
@@ -150,7 +139,7 @@ div.filters>.option-selector {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 100%;
   @include respond(tablet, max) {
     align-items: flex-start;
@@ -160,12 +149,18 @@ div.filters>.option-selector {
   }
 }
 
+.content-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 
-.content-informatie{
-  font-family: Inter;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%; /* 24px */
+  .content-informatie{
+    font-family: Inter;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+  }
 }
+
 

@@ -132,14 +132,13 @@ function Onderzoeken() {
                                         <p className="content-informatie-een">{onderzoek.status}</p>
                                         <p className="content-informatie">€{onderzoek.vergoeding}</p>
                                     </div>
-
-                                    <p className="content-informatie">{onderzoek.status}</p>
-                                    <p className="content-informatie">€{onderzoek.vergoeding}</p>
-                                    <p className="content-informatie">{onderzoek.aantalParticipanten}</p>
-                                    <p className="content-informatie">{onderzoek.locatie}</p>
-                                    <div className="content-informatie">{formatDate(onderzoek.startDatum)}</div>
+                                    <div className="content-info">
+                                        <p className="content-informatie">{onderzoek.aantalParticipanten}</p>
+                                        <p className="content-informatie">{onderzoek.locatie}</p>
+                                        <div className="content-informatie">{formatDate(onderzoek.startDatum)}</div>
+                                    </div>
                                     <div className="button-div">
-                                        <Button  className="onderzoek-button" onClick={() => goToOnderzoek(onderzoek.id)}> Onderzoek Info </Button>
+                                    <Button  className="onderzoek-button" onClick={() => goToOnderzoek(onderzoek.id)}> Onderzoek Info </Button>
                                     </div>
 
                                 </div>

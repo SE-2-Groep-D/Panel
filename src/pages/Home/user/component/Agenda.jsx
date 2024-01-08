@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import {formatDate} from "@services";
 
 export default function Agenda({data}) {
     data.sort((a, b) => new Date(a.date) - new Date(b.date))
@@ -19,7 +20,7 @@ export default function Agenda({data}) {
             <tr key={i}>
               <td data-label='Bedrijf' className='text'>{task.company}</td>
               <td data-label='Wat' className='text'>{task.title}</td>
-              <td data-label='Wanneer' className='text'>{task.date}</td>
+              <td data-label='Wanneer' className='text'>{formatDate(task.date)}</td>
             </tr>
           )})
         }

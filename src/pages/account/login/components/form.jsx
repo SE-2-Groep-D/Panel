@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Form, InputField, LoadingDiv } from "@components";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router";
+import useAuth from "@hooks/useAuth.js";
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
   const [isIngelogd, setIsIngelogd] = useState(false);
   const [gelukt, setGelukt] = useState(true);
   const navigate = useNavigate();
+  const { loginUser } = useAuth();
+
   function handleChange({ element, value, id }) {
     setNewUser({ ...newUser, [id ? id : element.id]: value });
     setGelukt(true);
@@ -28,11 +31,15 @@ function LoginForm() {
       });
 
       let data = response.ok
-        ? (await response.json(), setIsIngelogd(true), navigate("/"))
+        ? await response.json()
         : response.status === 400
-        ? (await response.text(), setGelukt(false))
+        ? await response.text()
         : console.log("Login failed.");
       console.log(data || "No data");
+
+      response.ok
+        ? (setIsIngelogd(true), navigate("/"), loginUser(data.userId, data))
+        : setGelukt(false);
     } catch (error) {
       console.error(error.message);
     }

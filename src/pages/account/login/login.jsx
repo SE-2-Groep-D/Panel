@@ -1,6 +1,6 @@
 import "@pagestyles/register.scss";
 
-import { Logo } from "@components";
+import { Logo, LoadingDiv } from "@components";
 import LoginForm from "./components/form";
 import GoogleButton from "./components/GoogleButton";
 
@@ -9,7 +9,7 @@ function Login() {
     <section id="register">
       <Logo id="logo"></Logo>
       <LoginForm />
-      <div className='other'>
+      <div className="other">
         <hr />
         <a href="">Wachtwoord vergeten?</a>
         <GoogleButton />

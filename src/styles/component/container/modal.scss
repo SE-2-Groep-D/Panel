@@ -12,6 +12,28 @@ dialog.modal  {
     flex-direction: column;
     gap: 10px;
 
+    max-height: 80vh;
+
+    &::-webkit-scrollbar {
+        width: .8rem; /* Set the width of the scrollbar */
+        overflow: auto;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $color-gray;
+        border-radius: 2rem;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: $color-primary-85;
+        border-radius: 2rem; /* Set the color of the scrollbar handle */
+
+        &:active {
+            background-color: $color-primary-60;
+        }
+    }
+
     button:focus-visible {
         outline: 3px solid $color-black !important;   
     }

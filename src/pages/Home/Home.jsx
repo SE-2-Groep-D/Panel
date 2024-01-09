@@ -1,4 +1,4 @@
-import "@pagestyles/Home.scss";
+import "@pagestyles/home/Home.scss";
 
 import {Logo} from "@components";
 import {Link} from "react-router-dom";

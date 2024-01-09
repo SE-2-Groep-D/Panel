@@ -5,7 +5,8 @@
   display: flex;
   justify-content: space-around;
   height: 60rem;
-  width: clamp(40rem, 100%, 140rem);
+  width: $dashboard-width;
+
   @include respond(tablet, max) {
     flex-direction: column;
     width:auto;
@@ -25,6 +26,7 @@
   width: 60rem;
   height: auto;
   padding-top: 5rem;
+
   @include respond(tablet, max) {
     padding-top: 0rem;
     width: clamp(40rem, 100%, 120rem);

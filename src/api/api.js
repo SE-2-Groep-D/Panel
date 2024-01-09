@@ -21,6 +21,8 @@ async function fetchApi(endpoint, data, method) {
             console.log('Failed to communicate with: ', response.url);
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
+        return response.json();
     } catch (error) {
         console.log('Error while fetching data: ', error);
         throw error;

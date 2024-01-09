@@ -29,12 +29,12 @@ function ConfirmData() {
   );
 
   function printUser() {
-    console.log({ ...state.user, ...state.company });
+    console.log({ state });
   }
 }
 
 function UserInfo(state) {
-  const user = state.user;
+  const user = state.user.user;
   const company = state.company;
   if (user.userType === "Ervaringsdeskundige") {
     return (
@@ -65,32 +65,32 @@ function UserInfo(state) {
         </p>
       </>
     );
-  } else if (user.user.userType === "Bedrijf") {
+  } else if (user.userType === "Bedrijf") {
     return (
       <>
         <p>
-          <b>Email</b>: {user.user.email}
+          <b>Email</b>: {user.email}
         </p>
         <p>
-          <b>Bedrijfsnaam</b>: {user.company.name}
+          <b>Bedrijfsnaam</b>: {company.name}
         </p>
         <p>
-          <b>Postcode</b>: {user.company.postcode}
+          <b>Postcode</b>: {company.postcode}
         </p>
         <p>
-          <b>Plaats</b>: {user.company.place}
+          <b>Plaats</b>: {company.place}
         </p>
         <p>
-          <b>Straat</b>: {user.company.street}
+          <b>Straat</b>: {company.street}
         </p>
         <p>
-          <b>Nummer</b>: {user.company.number}
+          <b>Nummer</b>: {company.number}
         </p>
         <p>
-          <b>Website</b>: {user.company.websiteUrl}
+          <b>Website</b>: {company.websiteUrl}
         </p>
         <p>
-          <b>Omschrijving</b>: {user.company.description}
+          <b>Omschrijving</b>: {company.description}
         </p>
       </>
     );

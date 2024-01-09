@@ -1,7 +1,10 @@
+import {apiConfig} from '@api';
+
 async function registerErvaringsdeskundige(user) {
+  const hostname = (apiConfig.inDevelopment) ? apiConfig.development : apiConfig.production;
     try {
       console.log("ik word uitgevoerd");
-      const response = await fetch("/api/Auth/RegisterErvaringsdeskundige", {
+      const response = await fetch(hostname + "Auth/RegisterErvaringsdeskundige", {
         method: "POST",
         body: JSON.stringify({
           voornaam: user.firstName,

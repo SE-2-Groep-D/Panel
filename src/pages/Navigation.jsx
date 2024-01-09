@@ -5,10 +5,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
 
 const hideNavigationRoutes  = [
-    '/',
+    // '/',
     '/setup',
     '/login',
-    '/register'
+    '/register',
+    '/privacy'
 ];
 
 function Navigation() {
@@ -27,7 +28,7 @@ function Navigation() {
             <li className="navigation-item">
                 <Link to='/'>
                     <FontAwesomeIcon icon={faHome} />
-                    Home
+                    Dashboard
                 </Link>
             </li>
             <li className="navigation-item active">

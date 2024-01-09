@@ -1,7 +1,8 @@
 import '@pagestyles/Onderzoeken.scss';
 
 // Import from libraries
-import {fetchData, formatDate} from "@services";
+import { fetchData } from "@api";
+import {formatDate} from "@services";
 import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from "react";
 

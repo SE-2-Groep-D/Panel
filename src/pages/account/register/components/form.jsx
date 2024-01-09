@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Form, InputField, Checkbox } from "@components";
-import { useNavigate } from "react-router-dom";
+import { Form, InputField, Checkbox, ToolTip } from "@components";
 import { useForm } from "../../setup/data/useForm";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
@@ -32,19 +32,30 @@ function RegisterForm() {
       >
         Email
       </InputField>
-      <InputField
-        id="password"
-        type="password"
-        visible
-        required
-        value={newUser.password}
-        onChange={handleChange}
-        pattern={"^(?=.*\\d)(?=.*[A-Z]).{5,}$"}
+      <ToolTip
+        position="bottom"
+        message={
+          "Het wachtwoord moet voldoen aan de volgende criteria:" +
+          "\n" +
+          "\n- Minimaal 1 hoofdletter." +
+          "\n- Minimaal 5 karakters lang." +
+          "\n- Minimaal 1 cijfer."
+        }
       >
-        Wachtwoord
-      </InputField>
+        <InputField
+          id="password"
+          type="password"
+          visible
+          required
+          value={newUser.password}
+          onChange={handleChange}
+          pattern={"^(?=.*\\d)(?=.*[A-Z]).{5,}$"}
+        >
+          Wachtwoord
+        </InputField>
+      </ToolTip>
       <Checkbox id="privacy" visible required>
-        Acepteer privacy verklaring
+        <Link to="/privacy">Acepteer privacy verklaring</Link>
       </Checkbox>
     </Form>
   );

@@ -4,14 +4,9 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5001',
-        changeOrigin: true,
-        secure: false, // set to true if you have a self signed certificate
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
+  build: {
+    define: {
+      'process.env': {},
     },
   },
   plugins: [react()],
@@ -25,7 +20,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@services': path.resolve(__dirname, 'src/services'),
-      
+      '@api': path.resolve(__dirname, 'src/api'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@pagestyles': path.resolve(__dirname, 'src/styles/page'),
 

@@ -8,17 +8,12 @@
   width: clamp(40rem, 100%, 180rem);
   @include respond(tablet, max) {
     flex-direction: column;
-    width:auto;
+    width: auto;
     height: auto;
     padding: 0 2rem;
     margin: 0 2rem;
   }
 }
-.onderzoek-omschrijving,.information-text{
-  font-size: 1.6rem;
-  font-family: Inter;
-}
-
 
 .content-left-container {
   display: flex;
@@ -75,40 +70,15 @@
     align-items: start;
   }
 }
-.heading-2 {
-  font-size: 2.8rem;
-  /* color: #000; */
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-.heading-3 {
-  font-size: 1.8rem;
-  color: #000;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
 
 
-
-.information-location, .information-vergoeding, .information-datum {
+.information-tag {
   margin-left: 1rem;
-  border-radius: 3px;
-  background: var(--Primary-85, #B9C5F9);
-  color: var(--Primary, #2B50EC);
-  font-family: Inter;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%; /* 19.5px */
-  display: flex;
-  padding: 0px 10px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  padding: 0px 1rem;
+  @include respond(tablet, max) {
+    margin-left: 0rem;
+    margin-right: 1rem;
+  }
 }
 
 .card {

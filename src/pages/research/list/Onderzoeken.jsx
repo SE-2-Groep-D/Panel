@@ -1,7 +1,7 @@
 import '@pagestyles/Onderzoeken.scss';
 
 // Import from libraries
-import { fetchData } from "@api";
+import {fetchData} from "@api";
 import {formatDate} from "@services";
 import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from "react";
@@ -112,12 +112,13 @@ function Onderzoeken() {
                                         <p className="content-informatie tag">€{onderzoek.vergoeding}</p>
                                     </div>
                                     <div className="content-info">
-                                    <p className="text">{onderzoek.aantalParticipanten}</p>
+                                        <p className="text">{onderzoek.aantalParticipanten}</p>
                                         <p className="text">{onderzoek.locatie}</p>
                                         <div className="text">{formatDate(onderzoek.startDatum)}</div>
                                     </div>
                                     <div className="button-div">
-                                    <Button  className="onderzoek-button" onClick={() => goToOnderzoek(onderzoek.id)}> Onderzoek Info </Button>
+                                        <Button className="onderzoek-button"
+                                                onClick={() => goToOnderzoek(onderzoek.id)}> Onderzoek Info </Button>
                                     </div>
 
                                 </div>

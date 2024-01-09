@@ -4,7 +4,7 @@ async function fetchData(endpoint) {
    return await fetchApi(endpoint, {}, "GET");
 }
 
-async function fetchApi(endpoint, data, method) {
+async function fetchApi(endpoint, method, data) {
     const hostname = getHostName();
 
     try {

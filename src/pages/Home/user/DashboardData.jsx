@@ -31,7 +31,7 @@ export default function DashboardData({message}) {
   return (
     <>
          <h2 className='heading-2'>{message}</h2>
-         <section className={(data.news && data.news.length > 0 && data.type !== 'Bedrijf') ? 'data' : 'data no-message'}>
+         <section className={(data.news && data.news.length > 0 && data.type !== 'test') ? 'data' : 'data no-message'}>
             <Statistics data={data.statistics}/>
             <UserAgenda data={data.agenda} type={data.type}/>
             <Message articles={data.news}/>
@@ -45,7 +45,6 @@ async function fetchUserData(setData) {
 
     try {
         const data = await fetchData(`/dashboard/${id}`);
-        console.log(data);
         setData(data);
     } catch (err) {
         setData(err);
@@ -87,7 +86,7 @@ function UserAgenda({data, type}) {
             <h2 className='heading-2'>Agenda</h2> 
             <Suspense fallback={<LoadingDiv loading/>}>
             {
-                (type === 'Bedrijf') ? <CompanyAgenda data={data} /> : <Agenda data={data}/>
+                (type === 'dfafda') ? <CompanyAgenda data={data} /> : <Agenda data={data}/>
             }
             </Suspense>
         </section>
@@ -103,31 +102,30 @@ function Message({articles}) {
     const isArticle = article !== undefined && article !== null && article !== '';
 
     if(!articles) return null;
-    articles.sort((a, b) =>   new Date(b.date) - new Date(a.date))
-
+    articles.sort((a, b) =>   new Date(b.datum) - new Date(a.datum))
 
 
     return (
-        <div className="news moveIn bottom">
+        <section className="news moveIn bottom">
             <h2 className="heading-2">Laatste Nieuws</h2>
             <Modal open={isArticle} onClose={() => setArticle(undefined)}>
-                <h2 className="heading-2">{(article) ? article.title : ''}</h2>
-                <p className='text'>{(article) ? article.text : ''}</p>
+                <h2 className="heading-2">{(article) ? article.titel : ''}</h2>
+                <p className='text'>{(article) ? article.inhoud : ''}</p>
             </Modal>
 
             {
                 articles.map((currentArticle, index) => {
-                    const message = getShortenedMessage(currentArticle.text);
-                    const link = (message.endsWith("...")) ? <button onClick={() => setArticle(currentArticle)}>Lees meer over {currentArticle.title}</button> : null;
+                    const message = getShortenedMessage(currentArticle.inhoud);
+                    const link = (message.endsWith("...")) ? <button onClick={() => setArticle(currentArticle)}>Lees meer over {currentArticle.titel}</button> : null;
 
                     return (<article key={index}>
-                        <h3 className="heading-3">{currentArticle.title}</h3>
+                        <h3 className="heading-3">{currentArticle.titel}</h3>
                         <p className='text'>{message}</p>
                         {link}
                     </article>);
                 })
             }
-        </div>
+        </section>
     );
 }
 

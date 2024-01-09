@@ -11,8 +11,6 @@ const defaultAuth = {
 export function AuthProvider({children}) {
     const [auth, setAuth] = useState(defaultAuth);
 
-    console.log('auth render');
-
     function loginUser(userId, userInfo) {
         setAuth({
             authenticated: true,

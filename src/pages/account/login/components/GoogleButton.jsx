@@ -1,5 +1,7 @@
 //import Cookies from "universal-cookie";
 
+import {fetchApi} from "@api";
+
 function GoogleButton() {
   //const cookies = new Cookies();
 

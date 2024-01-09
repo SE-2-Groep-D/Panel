@@ -5,16 +5,18 @@ import PropTypes from 'prop-types';
 import {fetchData} from "@api";
 
 import {LoadingDiv, CountingAnimation, Modal} from '@components';
+import {useAuth} from "@hooks";
 
 const Agenda = lazy(() => import('./component/Agenda.jsx'));
 const CompanyAgenda = lazy(() => import('./component/CompanyAgenda.jsx'));
 
 export default function DashboardData({message}) {
     const [data, setData] = useState();
+    const userData = useAuth();
 
     useEffect(() => {
-        fetchUserData(setData);
-    }, []);
+        fetchUserData(userData, setData);
+    }, [userData]);
     
     if(data === null) {
         return <h1 className='heading-2 not-found'>Oeps er is iets fout gegaan tijdens het ophalen van de gebruikers data.</h1>
@@ -40,11 +42,12 @@ export default function DashboardData({message}) {
   )
 }
 
-async function fetchUserData(setData) {
-    const id = '08dc09ee-a444-4aee-8b6f-6d769fedd493';
+async function fetchUserData(data, setData) {
+    const {id} = data.userInfo;
 
     try {
         const data = await fetchData(`/dashboard/${id}`);
+        console.log(data);
         setData(data);
     } catch (err) {
         setData(err);

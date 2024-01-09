@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { Form, InputField, LoadingDiv } from "@components";
-import Cookies from "universal-cookie";
 import { useNavigate } from "react-router";
 import {useAuth} from "@hooks";
-import { fetchApi } from "@api";
+import {ApiResponseError, fetchApi} from "@api";
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
   const [isIngelogd, setIsIngelogd] = useState(false);
-  const [gelukt, setGelukt] = useState(true);
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
   const { loginUser } = useAuth();
 
   function handleChange({ element, value, id }) {
     setNewUser({ ...newUser, [id ? id : element.id]: value });
-    setGelukt(true);
   }
 
   const handleSubmit = async () => {
@@ -23,46 +21,45 @@ function LoginForm() {
         email: newUser.email,
         password: newUser.password,
       });
-      setIsIngelogd(true), navigate("/"), loginUser(response.userId, response);
+
+      setIsIngelogd(true);
+      navigate("/");
+      loginUser(response.userId, response);
     } catch (error) {
-      console.error(error.message);
-      setGelukt(false);
+      if(!(error instanceof ApiResponseError)) {
+        console.error(error.message);
+        return;
+      }
+
+      const {status} = error.response;
+
+      switch (status) {
+        case 404:
+          setMessage('Gebruiker niet gevonden.');
+          break;
+
+        case 400:
+          setMessage('Het email of wachtwoord is onjuist.');
+          break;
+
+        default:
+          setMessage('Er is een fout ontstaan, probeer het later opnieuw.');
+          break;
+      }
+
+      if(status === 500) {
+        setMessage('Kon niet verbinden met de server, probeer het later opnieuw.');
+        console.log(error.response);
+        return;
+      }
+
     }
   };
-
-  // const handleSubmit = async () => {
-  //   try {
-  //     const response = await fetch("https://localhost:5000/Auth/Login", {
-  //       method: "POST",
-  //       credentials: "include",
-  //       body: JSON.stringify({
-  //         email: newUser.email,
-  //         password: newUser.password,
-  //       }),
-  //       headers: {
-  //         "Content-type": "application/json; charset=UTF-8",
-  //       },
-  //     });
-
-  //     let data = response.ok
-  //       ? await response.json()
-  //       : response.status === 400
-  //       ? await response.text()
-  //       : console.log("Login failed.");
-  //     console.log(data || "No data");
-
-  //     response.ok
-  //       ? (setIsIngelogd(true), navigate("/"), loginUser(data.userId, data))
-  //       : setGelukt(false);
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // };
 
   return (
     <>
       {!isIngelogd && (
-        <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit}>
+        <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit} message={message}>
           <InputField
             id="email"
             type="email"
@@ -86,7 +83,6 @@ function LoginForm() {
         </Form>
       )}
       {isIngelogd && <LoadingDiv loading={true} />}
-      {!gelukt && <p>Ongeldig email adres of wachtwoord</p>}
     </>
   );
 }

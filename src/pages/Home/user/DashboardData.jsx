@@ -12,7 +12,7 @@ const CompanyAgenda = lazy(() => import('./component/CompanyAgenda.jsx'));
 
 export default function DashboardData({message}) {
     const [data, setData] = useState();
-    const userData = useAuth();
+    const userData = useAuth().userInfo;
 
     useEffect(() => {
         fetchUserData(userData, setData);
@@ -43,10 +43,10 @@ export default function DashboardData({message}) {
 }
 
 async function fetchUserData(data, setData) {
-    const {id} = data.userInfo;
+    const {userId} = data;
 
     try {
-        const data = await fetchData(`/dashboard/${id}`);
+        const data = await fetchData(`/dashboard/${userId}`);
         console.log(data);
         setData(data);
     } catch (err) {
@@ -78,9 +78,9 @@ Statistics.propTypes = {
 };
 
 function UserAgenda({data, type}) {
-    if(data === undefined) return  <section className="agenda">
+    if(data === undefined || data.length === 0) return  <section className="agenda">
         <h2 className='heading-2'>Agenda</h2>
-        <p className='text'>Geen planning gevonden.</p>
+        <p className='text'>Er staat nog niks op de planning.</p>
     </section>;
 
 

@@ -7,7 +7,7 @@
 
 .dashboard {
     position: relative;
-    width: $dashboard-width;
+    width: clamp(25rem, 100%, 180rem);
 
     .not-found {
         position: absolute;

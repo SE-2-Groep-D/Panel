@@ -28,6 +28,13 @@ function LoginForm() {
     } catch (error) {
       if(!(error instanceof ApiResponseError)) {
         console.error(error.message);
+        setMessage('Kon niet verbinden met de server.')
+        return;
+      }
+
+
+      if (error.message.includes('Failed to fetch')) {
+        setMessage('Kon niet verbinden met de server, probeer het later opnieuw.');
         return;
       }
 
@@ -44,13 +51,8 @@ function LoginForm() {
 
         default:
           setMessage('Er is een fout ontstaan, probeer het later opnieuw.');
+          console.error(error.response)
           break;
-      }
-
-      if(status === 500) {
-        setMessage('Kon niet verbinden met de server, probeer het later opnieuw.');
-        console.log(error.response);
-        return;
       }
 
     }

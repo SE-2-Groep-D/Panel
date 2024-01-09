@@ -23,6 +23,9 @@ function Onderzoeken() {
     const goToOnderzoek = (id) => {
         navigate(`/onderzoek/${id}`);
     };
+    const goToOnderzoekAanmaken = () => {
+        navigate(`/onderzoek/aanmaken`);
+    };
 
     useEffect(() => {
         document.body.classList.add('body-special-color');
@@ -81,7 +84,7 @@ function Onderzoeken() {
     return (
 
 
-        <main className="onderzoeken-page">
+        <main >
             <div className="onderzoek-tabel">
                 <div className="onderzoek-info">
                     <div className="titel">
@@ -126,6 +129,11 @@ function Onderzoeken() {
                             </div>
                         ))}
                     </LoadingDiv>
+
+                    {/* <div className="button-div">
+                        <Button className="onderzoek-aanmaken-button"
+                                onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
+                    </div>*/}
                 </div>
             </div>
         </main>

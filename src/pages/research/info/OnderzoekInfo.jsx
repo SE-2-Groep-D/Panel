@@ -63,25 +63,28 @@ function OnderzoekInfo() {
     }
 
     return (
-        <LoadingDiv loading={loading}>
-            <div className="container">
-                {onderzoek && (
-                    <>
-                        <div className="content-left-container">
-                            <OnderzoekInformatie titel={onderzoek.titel}
-                                                 omschrijving={onderzoek.omschrijving}
-                                                 bedrijf={bedrijf}/>
-                        </div>
-                        <div className="content-right-container">
-                            <Information locatie={onderzoek.locatie}
-                                         vergoeding={onderzoek.vergoeding}
-                                         datum={onderzoek.startDatum}/>
-                            {bedrijfsCoordinaten && <Map coordinates={bedrijfsCoordinaten} bedrijf={bedrijf}/>}
-                        </div>
-                    </>
-                )}
-            </div>
-        </LoadingDiv>
+        <main>
+            <LoadingDiv loading={loading}>
+                <div className="container">
+                    {onderzoek && (
+                        <>
+                            <div className="content-left-container">
+                                <OnderzoekInformatie titel={onderzoek.titel}
+                                                     omschrijving={onderzoek.omschrijving}
+                                                     bedrijf={bedrijf}/>
+                            </div>
+                            <div className="content-right-container">
+                                <Information locatie={onderzoek.locatie}
+                                             vergoeding={onderzoek.vergoeding}
+                                             datum={onderzoek.startDatum}/>
+                                {bedrijfsCoordinaten && <Map coordinates={bedrijfsCoordinaten} bedrijf={bedrijf}/>}
+                            </div>
+                        </>
+                    )}
+                </div>
+            </LoadingDiv>
+        </main>
+
     );
 }
 

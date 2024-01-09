@@ -10,6 +10,7 @@ const hideNavigationRoutes  = [
     '/login',
     '/register',
     '/privacy',
+    '/onderzoek/aanmaken',
     '/onderzoek/:onderzoekId'
 ];
 

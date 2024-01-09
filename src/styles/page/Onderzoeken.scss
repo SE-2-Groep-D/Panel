@@ -2,10 +2,9 @@
 
 .onderzoeken-page {
   margin: 0 auto;
-  padding: 1rem 0;
   background: var(--Gray, #F3F4F6);
   width: $dashboard-width;
-  
+
 }
 
 .body-special-color {
@@ -18,7 +17,6 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 3rem;
-  padding-top: 2rem;
   background: var(--Gray, #F3F4F6);
   align-items: flex-end;
 
@@ -63,7 +61,7 @@ div.filters > .option-selector {
   padding: 2rem;
   margin-bottom: 2rem;
   height: 22rem;
- border-radius: $border-radius-big;
+  border-radius: $border-radius-big;
   border: 3px solid var(--border-2, #EBECF0);
   background: var(--White, #FFF);
   @include respond(laptop, max) {
@@ -134,4 +132,16 @@ div.filters > .option-selector {
 
 }
 
+button.btn.onderzoek-aanmaken-button {
+  width: clamp(25rem, 90%, 120rem);
+  border-radius: 8px;
+  border: 4px dashed #4C5166;
+  background-color: white;
+  color: #4D5166;
+  width: 100%; /* Zorg dat de breedte zich aanpast aan de container */
+  box-sizing: border-box; /* Zorgt ervoor dat de padding en border in de breedte worden meegenomen */
+  padding: 2rem;
+  @include respond(tablet, max) {
 
+  }
+}

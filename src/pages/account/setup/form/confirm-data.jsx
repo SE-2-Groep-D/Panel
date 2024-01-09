@@ -1,35 +1,59 @@
-import { Button, Form } from "@components";
+import { Button, Form, LoadingDiv } from "@components";
 import { useForm } from "../data/useForm.jsx";
 import "@pagestyles/confirmData.scss";
 import { registerErvaringsdeskundige } from "../postRequests/registerErvaringsdeskundige.js";
 import { registerBedrijf } from "../postRequests/registerBedrijf.js";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function ConfirmData() {
   const { state } = useForm();
+  const [isRegisterd, setIsRegisterd] = useState(0);
+  const navigate = useNavigate();
 
   async function handleSubmit() {
+    setIsRegisterd(1);
     if (state.user.userType === "Ervaringsdeskundige") {
-      await registerErvaringsdeskundige(state.user);
+      const result = await registerErvaringsdeskundige(state.user);
+      result ? setIsRegisterd(2) : setIsRegisterd(3);
     } else if (state.user.userType === "Bedrijf") {
-      await registerBedrijf({ ...state.user, ...state.company });
+      const result = await registerBedrijf({ ...state.user, ...state.company });
+      result ? setIsRegisterd(2) : setIsRegisterd(3);
     }
   }
   return (
     <>
-      <Form
-        title={"Klopt deze informatie"}
-        buttonText="Maak account"
-        onSubmit={handleSubmit}
-      >
-        <UserInfo user={state} />
-      </Form>
-
-      <Button onClick={printUser}>Bevestig</Button>
+      {isRegisterd === 0 && (
+        <Form
+          title={"Klopt deze informatie"}
+          buttonText="Maak account"
+          onSubmit={handleSubmit}
+        >
+          <UserInfo user={state} />
+        </Form>
+      )}
+      {isRegisterd === 1 && <LoadingDiv loading={true} />}
+      {isRegisterd === 2 && (
+        <>
+          <h1>U bent geregistreerd, U kunt nu inloggen</h1>
+          <Button onClick={naarLogin}>Naar inloggen</Button>
+        </>
+      )}
+      {isRegisterd === 3 && (
+        <>
+          <h1>Er is iets mis gegaan, probeer het later nog een keer</h1>
+          <Button onClick={naarRegister}>Naar registreren</Button>
+        </>
+      )}
     </>
   );
 
-  function printUser() {
-    console.log({ state });
+  function naarLogin() {
+    navigate("/login");
+  }
+
+  function naarRegister() {
+    navigate("/register");
   }
 }
 

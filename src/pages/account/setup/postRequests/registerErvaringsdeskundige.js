@@ -36,16 +36,19 @@ async function registerErvaringsdeskundige(user) {
       );
   
       if (response.ok) {
+        
         const data = await response.text();
         if (data) {
           console.log(data);
         } else {
           console.log("Message missing in the response.");
         }
+        return true;
       } else {
         console.log(response.status);
         console.log(response.statusText);
         console.log(response.body);
+        return false;
       }
     } catch (error) {
       console.error(error.message);

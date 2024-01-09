@@ -9,7 +9,9 @@ const hideNavigationRoutes  = [
     '/setup',
     '/login',
     '/register',
-    '/privacy'
+    '/privacy',
+    '/onderzoek/aanmaken',
+    '/onderzoek/:onderzoekId'
 ];
 
 function Navigation() {

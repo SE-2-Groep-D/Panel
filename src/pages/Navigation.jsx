@@ -2,7 +2,7 @@ import {Link, useLocation} from "react-router-dom";
 import {Logo, Button} from "@components";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHome, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faHome, faMagnifyingGlass, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "@hooks";
 
 const hideNavigationRoutes  = [
@@ -13,8 +13,9 @@ const hideNavigationRoutes  = [
 ];
 
 function Navigation() {
-    const {authenticated} = useAuth();
+    const {authenticated, logoutUser} = useAuth();
     const route = useLocation();
+
 
     if(hideNavigationRoutes.includes(route.pathname) || !authenticated) {
         return null;
@@ -39,6 +40,11 @@ function Navigation() {
                 </Link>
             </li>
         </ul>
+
+        <Button aria-label={'Log uit.'} className='logout' onClick={() => logoutUser()}>
+            <FontAwesomeIcon icon={faRightFromBracket} />
+            Logout
+        </Button>
 
         {/*<Button aria-label={'profile'} className='profile-button'>*/}
         {/*    <FontAwesomeIcon icon={faUser} />*/}

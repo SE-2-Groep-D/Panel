@@ -12,7 +12,7 @@ export default function UserHome() {
     const message = `${getMessage()} ${voornaam}!`;
 
   return (
-    <main className='dashboard'>
+    <main className='dashboard gray'>
         <DashboardData userType={type} message={message}/>
     </main>
   )

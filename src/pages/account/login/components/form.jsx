@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { Form, InputField } from "@components";
+import { Form, InputField, LoadingDiv } from "@components";
 import Cookies from "universal-cookie";
+import { useNavigate } from "react-router";
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
-
+  const [isIngelogd, setIsIngelogd] = useState(false);
+  const [gelukt, setGelukt] = useState(true);
+  const navigate = useNavigate();
   function handleChange({ element, value, id }) {
     setNewUser({ ...newUser, [id ? id : element.id]: value });
+    setGelukt(true);
   }
 
   const handleSubmit = async () => {
@@ -24,52 +28,46 @@ function LoginForm() {
       });
 
       let data = response.ok
-        ? await response.json()
+        ? (await response.json(), setIsIngelogd(true), navigate("/"))
         : response.status === 400
-        ? await response.text()
+        ? (await response.text(), setGelukt(false))
         : console.log("Login failed.");
       console.log(data || "No data");
-
-      saveCookie(data);
     } catch (error) {
       console.error(error.message);
     }
   };
 
   return (
-    <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit}>
-      <InputField
-        id="email"
-        type="email"
-        visible
-        required
-        value={newUser.email}
-        onChange={handleChange}
-      >
-        Email
-      </InputField>
-      <InputField
-        id="password"
-        type="password"
-        visible
-        required
-        value={newUser.password}
-        onChange={handleChange}
-      >
-        Wachtwoord
-      </InputField>
-    </Form>
+    <>
+      {!isIngelogd && (
+        <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit}>
+          <InputField
+            id="email"
+            type="email"
+            visible
+            required
+            value={newUser.email}
+            onChange={handleChange}
+          >
+            Email
+          </InputField>
+          <InputField
+            id="password"
+            type="password"
+            visible
+            required
+            value={newUser.password}
+            onChange={handleChange}
+          >
+            Wachtwoord
+          </InputField>
+        </Form>
+      )}
+      {isIngelogd && <LoadingDiv loading={true} />}
+      {!gelukt && <p>Ongeldig email adres of wachtwoord</p>}
+    </>
   );
-}
-
-function saveCookie(user) {
-  // const cookies = new Cookies();
-  // cookies.set("access_token", user.jwtToken, {
-  //   path: "/",
-  //   httpOnly: true,
-  //   secure: true,
-  // });
-  console.log("cookie set");
 }
 
 export default LoginForm;

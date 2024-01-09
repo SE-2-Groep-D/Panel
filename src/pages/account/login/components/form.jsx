@@ -6,9 +6,11 @@ import { useNavigate } from "react-router";
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
   const [isIngelogd, setIsIngelogd] = useState(false);
+  const [gelukt, setGelukt] = useState(true);
   const navigate = useNavigate();
   function handleChange({ element, value, id }) {
     setNewUser({ ...newUser, [id ? id : element.id]: value });
+    setGelukt(true);
   }
 
   const handleSubmit = async () => {
@@ -28,7 +30,7 @@ function LoginForm() {
       let data = response.ok
         ? (await response.json(), setIsIngelogd(true), navigate("/"))
         : response.status === 400
-        ? await response.text()
+        ? (await response.text(), setGelukt(false))
         : console.log("Login failed.");
       console.log(data || "No data");
     } catch (error) {
@@ -63,6 +65,7 @@ function LoginForm() {
         </Form>
       )}
       {isIngelogd && <LoadingDiv loading={true} />}
+      {!gelukt && <p>Ongeldig email adres of wachtwoord</p>}
     </>
   );
 }

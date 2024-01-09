@@ -40,10 +40,10 @@ function Navigation() {
             </li>
         </ul>
 
-        <Button aria-label={'profile'} className='profile-button'>
-            <FontAwesomeIcon icon={faUser} />
-            Profile
-        </Button>
+        {/*<Button aria-label={'profile'} className='profile-button'>*/}
+        {/*    <FontAwesomeIcon icon={faUser} />*/}
+        {/*    Profile*/}
+        {/*</Button>*/}
     </nav>
 }
 

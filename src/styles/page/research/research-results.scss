@@ -1,13 +1,19 @@
 @import '../../main.scss';
 
 #root {
-    background-color: $color-gray;
+   // background-color: $color-gray;
     overflow-x: hidden;
 }
 
 .heading-2 {
     margin-bottom: 1rem;
 }
+
+.body-special-color {
+    background: var(--Gray, #F3F4F6);
+
+}
+
 
 .results {
     width: $dashboard-width;

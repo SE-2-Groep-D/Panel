@@ -1,7 +1,6 @@
 import '@pagestyles/research/tracking-results.scss';
 
-import CountingAnimation from '../counting-animation';
-import {LoadingDiv} from '@components'
+import {LoadingDiv, CountingAnimation} from '@components'
 import { fetchData } from "@api";
 
 export default function TrackingResults({researhId}) {

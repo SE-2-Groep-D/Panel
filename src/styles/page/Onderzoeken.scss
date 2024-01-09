@@ -1,14 +1,16 @@
 @import '../main.scss';
 
 .onderzoeken-page {
-  width: clamp(25rem, 90%, 120rem);
   margin: 0 auto;
   padding: 1rem 0;
   background: var(--Gray, #F3F4F6);
+  width: $dashboard-width;
+  
 }
 
 .body-special-color {
   background: var(--Gray, #F3F4F6);
+
 }
 
 
@@ -58,12 +60,11 @@ div.filters > .option-selector {
 .onderzoek-item {
   display: flex;
   min-height: 20rem;
-  width: clamp(40rem, 100%, 120rem);
   padding: 2rem;
   margin-bottom: 2rem;
   height: 22rem;
-  border-radius: 0.8rem;
-  border: 0.3rem solid var(--border-2, #EBECF0);
+ border-radius: $border-radius-big;
+  border: 3px solid var(--border-2, #EBECF0);
   background: var(--White, #FFF);
   @include respond(laptop, max) {
     flex-direction: column;

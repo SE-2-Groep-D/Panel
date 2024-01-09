@@ -35,7 +35,7 @@ function ConfirmData() {
 
 function UserInfo(state) {
   const user = state.user.user;
-  const company = state.company;
+  const company = state.user.company;
   if (user.userType === "Ervaringsdeskundige") {
     return (
       <>

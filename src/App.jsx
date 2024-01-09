@@ -1,7 +1,7 @@
 import "@pagestyles/App.scss";
 
 import {AuthProvider} from "@context";
-import Routing from "./Routing.jsx";
+import Routing from "@pages/routes/Routing.jsx";
 
 function App() {
   return <AuthProvider>

@@ -3,9 +3,9 @@ import {Logo, Button} from "@components";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
+import {useAuth} from "@hooks";
 
 const hideNavigationRoutes  = [
-    // '/',
     '/setup',
     '/login',
     '/register',
@@ -13,9 +13,10 @@ const hideNavigationRoutes  = [
 ];
 
 function Navigation() {
+    const {authenticated} = useAuth();
     const route = useLocation();
 
-    if(hideNavigationRoutes.includes(route.pathname)) {
+    if(hideNavigationRoutes.includes(route.pathname) || !authenticated) {
         return null;
     }
 

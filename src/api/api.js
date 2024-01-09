@@ -22,7 +22,12 @@ async function fetchApi(endpoint, method, data) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        return response.json();
+        const contentType = response.headers.get('Content-Type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        }
+
+        return response.text();
     } catch (error) {
         console.log('Error while fetching data: ', error);
         throw error;

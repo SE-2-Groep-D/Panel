@@ -3,6 +3,7 @@ import { Form, InputField, LoadingDiv } from "@components";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router";
 import useAuth from "@hooks/useAuth.js";
+import { fetchApi } from "@api";
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
@@ -15,6 +16,19 @@ function LoginForm() {
     setNewUser({ ...newUser, [id ? id : element.id]: value });
     setGelukt(true);
   }
+
+  const handleSubmit2 = async () => {
+    try {
+      const response = await fetchApi("/Auth/Login", "POST", {
+        email: newUser.email,
+        password: newUser.password,
+      });
+      setIsIngelogd(true), navigate("/"), loginUser(response.userId, response);
+    } catch (error) {
+      console.error(error.message);
+      setGelukt(false);
+    }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -48,7 +62,7 @@ function LoginForm() {
   return (
     <>
       {!isIngelogd && (
-        <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit}>
+        <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit2}>
           <InputField
             id="email"
             type="email"

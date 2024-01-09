@@ -3,8 +3,7 @@ table {
     width: 100%;
     border-spacing: 1rem 2rem;
     border-collapse: collapse;
-
-
+    
     @include respond(tablet) {
         display: flex;
         flex-direction: column;

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Form, InputField, LoadingDiv } from "@components";
 import { useNavigate } from "react-router";
-import {useAuth} from "@hooks";
-import {ApiResponseError, fetchApi} from "@api";
+import { useAuth } from "@hooks";
+import { ApiResponseError, fetchApi } from "@api";
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
   const [isIngelogd, setIsIngelogd] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const { loginUser } = useAuth();
 
@@ -24,44 +24,50 @@ function LoginForm() {
 
       setIsIngelogd(true);
       navigate("/");
+      console.log(response);
       loginUser(response.userId, response);
     } catch (error) {
-      if(!(error instanceof ApiResponseError)) {
+      if (!(error instanceof ApiResponseError)) {
         console.error(error.message);
-        setMessage('Kon niet verbinden met de server.')
+        setMessage("Kon niet verbinden met de server.");
         return;
       }
 
-
-      if (error.message.includes('Failed to fetch')) {
-        setMessage('Kon niet verbinden met de server, probeer het later opnieuw.');
+      if (error.message.includes("Failed to fetch")) {
+        setMessage(
+          "Kon niet verbinden met de server, probeer het later opnieuw."
+        );
         return;
       }
 
-      const {status} = error.response;
+      const { status } = error.response;
 
       switch (status) {
         case 404:
-          setMessage('Gebruiker niet gevonden.');
+          setMessage("Gebruiker niet gevonden.");
           break;
 
         case 400:
-          setMessage('Het email of wachtwoord is onjuist.');
+          setMessage("Het email of wachtwoord is onjuist.");
           break;
 
         default:
-          setMessage('Er is een fout ontstaan, probeer het later opnieuw.');
-          console.error(error.response)
+          setMessage("Er is een fout ontstaan, probeer het later opnieuw.");
+          console.error(error.response);
           break;
       }
-
     }
   };
 
   return (
     <>
       {!isIngelogd && (
-        <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit} message={message}>
+        <Form
+          title="Inloggen"
+          buttonText="Inloggen"
+          onSubmit={handleSubmit}
+          message={message}
+        >
           <InputField
             id="email"
             type="email"

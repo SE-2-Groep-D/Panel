@@ -1,5 +1,9 @@
 // eslint-disable-next-line react/prop-types
 import PropTypes from "prop-types";
+import {ToolTip} from "@components";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {useState} from "react";
 
 export default function InputField({
   children,
@@ -13,6 +17,9 @@ export default function InputField({
   required,
   pattern
 }) {
+  const [showPassword, setShowPassword] = useState(false);
+  type = (type === 'password' && showPassword) ? 'text' : type || 'text';
+
   const isTextArea =
     size !== undefined && size !== null && size.toLowerCase() === "big";
 
@@ -22,7 +29,6 @@ export default function InputField({
   const Field = isTextArea ? (
     <textarea
       id={"input_" + id}
-      type={type || "text"}
       value={value}
       onChange={handleChange}
       placeholder={finalPlaceHolder}
@@ -31,7 +37,7 @@ export default function InputField({
     />
   ) : (
     <input
-      type={type || "text"}
+      type={type}
       id={"input_" + id}
       value={value}
       onChange={handleChange}
@@ -57,6 +63,7 @@ export default function InputField({
       <label htmlFor={"input_" + id}>{children}</label>
       <p className="message">{message}</p>
       {Field}
+      <PasswordButton type={type} showPassword={showPassword} setShowPassword={setShowPassword}/>
     </div>
   );
 }
@@ -74,3 +81,27 @@ InputField.propTypes = {
   required: PropTypes.bool,
   pattern: PropTypes.string
 };
+
+function PasswordButton({type, showPassword, setShowPassword}) {
+  if(type !== 'password' && showPassword === false) {
+    return null;
+  }
+
+  console.log(showPassword);
+
+  if(showPassword) {
+    return <button aria-label='Klik op de knop om je wachtwoord te verbergen.' onClick={(e) => {
+      e.preventDefault();
+      setShowPassword(false)
+    }}>
+      <FontAwesomeIcon icon={faEye} />
+    </button>
+  }
+
+  return <button aria-label='Klik deze knop om je wachtwoord te laten zien.' onClick={(e) => {
+    e.preventDefault();
+    setShowPassword(true)
+  }}>
+    <FontAwesomeIcon icon={faEyeSlash} />
+  </button>
+}

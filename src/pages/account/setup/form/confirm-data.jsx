@@ -82,7 +82,7 @@ function UserInfo(state) {
           <b>Leeftijdsgroep</b>: {user.ageGroup}
         </p>
         <p>
-          <b>Hulpmiddelen</b>: {user.disabillityTypes}
+          <b>Hulpmiddelen</b>: {user.tools}
         </p>
         <p>
           <b>Voorkeurbenaderingen</b>: {user.preferredApproach}

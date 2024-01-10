@@ -18,6 +18,17 @@
 
 
 
+    button {
+        position: absolute;
+        bottom: 1.8rem;
+        right: -3rem;
+
+        &:focus {
+            border: $border-component-focus;
+        }
+    }
+
+
 
     & input, textarea {
         padding: 1rem 2rem;

@@ -5,6 +5,8 @@ import { registerErvaringsdeskundige } from "../postRequests/registerErvaringsde
 import { registerBedrijf } from "../postRequests/registerBedrijf.js";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPersonCircleCheck} from "@fortawesome/free-solid-svg-icons";
 
 function ConfirmData() {
   const { state } = useForm();
@@ -35,6 +37,7 @@ function ConfirmData() {
       {isRegisterd === 1 && <LoadingDiv loading={true} />}
       {isRegisterd === 2 && (
         <>
+          <FontAwesomeIcon icon={faPersonCircleCheck} className='person-icon'/>
           <h1>U bent geregistreerd, U kunt nu inloggen</h1>
           <Button onClick={naarLogin}>Naar inloggen</Button>
         </>

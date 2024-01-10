@@ -1,3 +1,5 @@
++ @forward "./abstract/variables";
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -15,36 +17,19 @@ body {
     overflow-x: hidden;
 }
 
-
-#root > .loading-div {
-    width: 100vw;
-    height: 100vh;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-select,input,button,label {
-    outline: none;
-    border: none;
-}
-
-#root {
+#root, main {
+    width: 100%;
+    height: 100%;
+    min-height: 91vh;
     min-width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-.gray {
-    background-color: $color-gray !important;
 }
 
 main {
     padding: $padding-page-phone;
-    width: 100%;
+
+    &.gray {
+        background-color: $color-gray !important;
+    }
 
     @include respond(tablet, min) {
         padding: $padding-page-tablet;
@@ -54,6 +39,32 @@ main {
         padding: $padding-page;
     }
 }
+
+#root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    & > .loading-div {
+        width: 100vw;
+        height: 100vh;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+
+select,input,button,label {
+    outline: none;
+    border: none;
+}
+
+
 
 .not-found {
     display: flex;

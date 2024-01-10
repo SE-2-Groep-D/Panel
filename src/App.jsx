@@ -1,3 +1,4 @@
+import '@styles/main.scss'
 import "@pagestyles/App.scss";
 
 import {AuthProvider} from "@context";

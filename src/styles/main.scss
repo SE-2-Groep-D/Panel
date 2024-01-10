@@ -1,14 +1,8 @@
-@import 'abstract/variables', 'abstract/mixins', 'abstract/typography';
+@import "abstract/variables";
+@import "abstract/typography";
+@import "abstract/mixins";
+@import "abstract/animations";
 
-@import 'base';
+@import 'global';
 
 @import 'component/index';
-
-#root {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    height: 100%;
-}

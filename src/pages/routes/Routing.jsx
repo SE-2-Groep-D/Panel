@@ -20,6 +20,7 @@ import PrivateRoute from "@pages/routes/ProtectedRoute.jsx";
 import {useAuth} from "@hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPersonCircleCheck, faPersonCircleQuestion} from "@fortawesome/free-solid-svg-icons";
+import NewsList from "@pages/news/NewsList.jsx";
 
 function Routing() {
     return (
@@ -39,6 +40,8 @@ function Routing() {
                         <Route path="/onderzoek/:onderzoekId" element={<OnderzoekInfo />} />
                         <Route path="/onderzoek/:id/results" element={<OnderzoekResultaten />} />
                         <Route path="/onderzoek/aanmaken" element={<OnderzoekForm />} />
+
+                        <Route path='/nieuwsbrief' element={<NewsList/>}/>
                     </Route>
 
                     <Route path='*' element={<NotFound/>}/>

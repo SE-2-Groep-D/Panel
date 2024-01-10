@@ -2,11 +2,13 @@ import {useState} from 'react';
 
 import {Form, InputField, OptionSelector, Checkbox} from "@components";
 import {useForm} from '../data/useForm.jsx';
+import {useLocation} from "react-router-dom";
 
 function StartForm() {
-    const {state, nextStep, prevStep } = useForm();
+    const { state, nextStep, prevStep } = useForm();
     const [message, setMessage] = useState(null);
-    const [move, setMove] = useState('moveIn');
+    const [move, setMove] = useState("moveIn");
+    const location = useLocation();
 
     const [values, setValues] = useState({
         titel: '',
@@ -15,22 +17,24 @@ function StartForm() {
         status: '',
     });
 
-    function handleChange({element, value, id}) {
-        setValues({...values, [(id) ? id : element.id] : value});
+    function handleChange({ element, value, id }) {
+        setValues({ ...values, [id ? id : element.id]: value });
     }
 
     function handleSubmit(formData) {
-        const {values} = formData;
+        const { values } = formData;
 
+        setMove("moveOut");
 
-        state.onderzoek = values;
-
-        nextStep();
+        setTimeout(() => {
+            state.onderzoek = { ...state.onderzoek, ...values };
+            nextStep();
+        }, 500);
     }
 
     return (
         <div>
-            <Form title="Account Informatie" buttonText='volgende'  onSubmit={handleSubmit} move={move}>
+            <Form title="Onderzoek Aanmaken" buttonText='volgende'  onSubmit={handleSubmit} move={move}>
                 <InputField
                     id='onderzoekstitel'
                     type='text'
@@ -71,3 +75,8 @@ function StartForm() {
 
 export default StartForm;
 
+function validateForm() {
+
+
+
+}

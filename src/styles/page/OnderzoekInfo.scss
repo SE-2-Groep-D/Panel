@@ -1,32 +1,24 @@
 @import '../main.scss';
 
 .container {
-  margin: 2rem 0 0;
   display: flex;
   justify-content: space-around;
-  height: 60rem;
   width: $dashboard-width;
-
   @include respond(tablet, max) {
     flex-direction: column;
-    width:auto;
+    width: auto;
     height: auto;
     padding: 0 2rem;
     margin: 0 2rem;
   }
 }
-.onderzoek-omschrijving{
-  font-size: 2rem;
-}
-
 
 .content-left-container {
   display: flex;
   flex-direction: column;
   width: 60rem;
   height: auto;
-  padding-top: 5rem;
-
+  padding-top: 2rem;
   @include respond(tablet, max) {
     padding-top: 0rem;
     width: clamp(40rem, 100%, 120rem);
@@ -77,8 +69,14 @@
   }
 }
 
-.information-location, .information-vergoeding, .information-datum {
+
+.information-tag {
   margin-left: 1rem;
+  padding: 0px 1rem;
+  @include respond(tablet, max) {
+    margin-left: 0rem;
+    margin-right: 1rem;
+  }
 }
 
 .card {

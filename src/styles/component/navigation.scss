@@ -49,11 +49,16 @@ nav.navigation {
     }
   }
 
-  .profile-button {
+  button {
     background-color: transparent;
     font-size: 1.8rem;
     color: $color-black;
     font-weight: normal;
+  }
+
+  .logout:hover, .logout:focus {
+    background-color: $color-tertiary;
+    color: white;
   }
 
 }

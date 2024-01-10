@@ -15,12 +15,18 @@
     color: $color-tertiary;
     font-weight: bold;
     font-size: 1.4rem;
+    max-width: 24rem;
+    text-align: center;
   }
 
   &-header {
     display: flex;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+  }
+
+  .loading-div {
     width: 100%;
   }
 

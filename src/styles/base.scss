@@ -4,15 +4,27 @@
     box-sizing: border-box;
 }
 
+
 html {
     font-size: 62.5%; // this makes it so 1rem = 10px
     font-family: $font-family-1;
+
 }
 
 body {
     overflow-x: hidden;
 }
 
+
+#root > .loading-div {
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 
 select,input,button,label {
@@ -23,6 +35,10 @@ select,input,button,label {
 #root {
     min-width: 100vw;
     min-height: 100vh;
+}
+
+.gray {
+    background-color: $color-gray !important;
 }
 
 main {

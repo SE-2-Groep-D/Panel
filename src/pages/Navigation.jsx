@@ -2,20 +2,24 @@ import {Link, useLocation} from "react-router-dom";
 import {Logo, Button} from "@components";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHome, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faHome, faMagnifyingGlass, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {useAuth} from "@hooks";
 
 const hideNavigationRoutes  = [
-    // '/',
     '/setup',
     '/login',
     '/register',
-    '/privacy'
+    '/privacy',
+    '/onderzoek/aanmaken',
+    '/onderzoek/:onderzoekId'
 ];
 
 function Navigation() {
+    const {authenticated, logoutUser} = useAuth();
     const route = useLocation();
 
-    if(hideNavigationRoutes.includes(route.pathname)) {
+
+    if(hideNavigationRoutes.includes(route.pathname) || !authenticated) {
         return null;
     }
 
@@ -39,10 +43,15 @@ function Navigation() {
             </li>
         </ul>
 
-        <Button aria-label={'profile'} className='profile-button'>
-            <FontAwesomeIcon icon={faUser} />
-            Profile
+        <Button aria-label={'Log uit.'} className='logout' onClick={() => logoutUser()}>
+            <FontAwesomeIcon icon={faRightFromBracket} />
+            Logout
         </Button>
+
+        {/*<Button aria-label={'profile'} className='profile-button'>*/}
+        {/*    <FontAwesomeIcon icon={faUser} />*/}
+        {/*    Profile*/}
+        {/*</Button>*/}
     </nav>
 }
 

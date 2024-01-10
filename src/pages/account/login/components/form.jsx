@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { Form, InputField } from "@components";
+import { Form, InputField, LoadingDiv } from "@components";
+import { useNavigate } from "react-router";
+import { useAuth } from "@hooks";
+import { ApiResponseError, fetchApi } from "@api";
 
 function LoginForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
+  const [isIngelogd, setIsIngelogd] = useState(false);
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+  const { loginUser } = useAuth();
 
   function handleChange({ element, value, id }) {
     setNewUser({ ...newUser, [id ? id : element.id]: value });
@@ -10,51 +17,81 @@ function LoginForm() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("/api/Auth/Login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: newUser.email,
-          password: newUser.password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
+      const response = await fetchApi("/Auth/Login", "POST", {
+        email: newUser.email,
+        password: newUser.password,
       });
 
-      let data = response.ok
-        ? await response.json()
-        : response.status === 400
-        ? await response.text()
-        : console.log("Login failed.");
-      console.log(data || "No data");
+      setIsIngelogd(true);
+      navigate("/");
+      console.log(response);
+      loginUser(response.userId, response);
     } catch (error) {
-      console.error(error.message);
+      if (!(error instanceof ApiResponseError)) {
+        console.error(error.message);
+        setMessage("Kon niet verbinden met de server.");
+        return;
+      }
+
+      if (error.message.includes("Failed to fetch")) {
+        setMessage(
+          "Kon niet verbinden met de server, probeer het later opnieuw."
+        );
+        return;
+      }
+
+      const { status } = error.response;
+
+      switch (status) {
+        case 404:
+          setMessage("Gebruiker niet gevonden.");
+          break;
+
+        case 400:
+          setMessage("Het email of wachtwoord is onjuist.");
+          break;
+
+        default:
+          setMessage("Er is een fout ontstaan, probeer het later opnieuw.");
+          console.error(error.response);
+          break;
+      }
     }
   };
 
   return (
-    <Form title="Inloggen" buttonText="Inloggen" onSubmit={handleSubmit}>
-      <InputField
-        id="email"
-        type="email"
-        visible
-        required
-        value={newUser.email}
-        onChange={handleChange}
-      >
-        Email
-      </InputField>
-      <InputField
-        id="password"
-        type="password"
-        visible
-        required
-        value={newUser.password}
-        onChange={handleChange}
-      >
-        Wachtwoord
-      </InputField>
-    </Form>
+    <>
+      {!isIngelogd && (
+        <Form
+          title="Inloggen"
+          buttonText="Inloggen"
+          onSubmit={handleSubmit}
+          message={message}
+        >
+          <InputField
+            id="email"
+            type="email"
+            visible
+            required
+            value={newUser.email}
+            onChange={handleChange}
+          >
+            Email
+          </InputField>
+          <InputField
+            id="password"
+            type="password"
+            visible
+            required
+            value={newUser.password}
+            onChange={handleChange}
+          >
+            Wachtwoord
+          </InputField>
+        </Form>
+      )}
+      {isIngelogd && <LoadingDiv loading={true} />}
+    </>
   );
 }
 

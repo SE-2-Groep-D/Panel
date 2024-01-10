@@ -1,93 +1,96 @@
 table {
-  text-align: left;
-  width: 100%;
-  border-spacing: 1rem 2rem;
-  border-collapse: collapse;
-
-
-  @include respond(tablet) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  td {
-    margin-right: 1rem;
-    padding: 1rem 0rem;
-
-    span {
-      font-weight: bold;
-      margin-right: .5rem;
-    }
-  }
-
-  td, th {
-    &:last-child {
-      text-align: right;
-    }
-  }
-
-  th {
-    padding-bottom: 1rem !important;
-  }
-
-  tbody {
+    text-align: left;
     width: 100%;
-
-    tr{
-      border-top: 1px solid $color-gray;
+    border-spacing: 1rem 2rem;
+    border-collapse: collapse;
+    
+    @include respond(tablet) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
+    td {
+        margin-right: 1rem;
+        padding: 1rem 0rem;
 
-  }
+        span {
+            font-weight: bold;
+            margin-right: .5rem;
+        }
+    }
 
+    td, th {
+        &:last-child {
+            text-align: right;
+        }
+    }
 
-
-
-
-  @include respond(tablet) {
     th {
-      display: none;
+        padding-bottom: 1rem !important;
     }
 
     tbody {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
+        width: 100%;
+
+        tr {
+            border-top: 1px solid $color-gray;
+
+            &:first-child {
+                border-top: 3px solid $color-primary-85 !important;
+            }
+        }
+
+
     }
 
-    tr {
-      flex-direction: column;
+    @include respond(800px) {
+        th {
+            display: none;
+        }
+
+        tbody {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        tr {
+            flex-direction: column;
+        }
+
+        tr button {
+            width: 100%;
+        }
+
+        tr:not(:first-child) {
+            padding-top: 2rem;
+        }
+
+        td, td:last-child {
+            display: flex;
+            flex-direction: column;
+
+            text-align: left;
+            grid-template-columns: 1fr 1fr;
+            justify-content: space-between;
+
+            &::before {
+                content: attr(data-label);
+                font-weight: bold;
+            }
+
+            & span.number {
+                display: none;
+            }
+        }
     }
 
-    tr button {
-      width: 100%;
-    }
 
-    tr:not(:first-child) {
-      padding-top: 2rem;
-    }
 
-    td, td:last-child {
-      display: flex;
-      text-align: left;
-      grid-template-columns: 1fr 1fr;
-      justify-content: space-between;
-
-      &::before {
-        content: attr(data-label);
+    span.bold {
         font-weight: bold;
-      }
-
-      & span.number {
-        display: none;
-      }
+        margin-right: 1rem;
     }
-  }
-
-  span.bold {
-    font-weight: bold;
-    margin-right: 1rem;
-  }
 
 }

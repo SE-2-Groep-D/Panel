@@ -1,16 +1,48 @@
 @import '../main.scss';
 
 .onderzoeken-page {
+  margin: 0 auto;
+  background: var(--Gray, #F3F4F6);
   width: $dashboard-width;
+
 }
+
+.body-special-color {
+  background: var(--Gray, #F3F4F6);
+
+}
+
 
 .onderzoek-info {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   padding-bottom: 3rem;
-  padding-top: 3rem;
+  background: var(--Gray, #F3F4F6);
+  align-items: flex-end;
 
+  @include respond(tablet, max) {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.content-titel {
+  text-align: center;
+  display: inline;
+}
+
+button.btn.onderzoek-button {
+  padding: 1.5rem 6rem;
+
+  @include respond(tablet, max) {
+    padding: 0.5rem 3rem;
+  }
+}
+
+div.filters > .option-selector {
+  padding-right: 1rem;
 }
 
 .titel {
@@ -19,18 +51,19 @@
 
 .filters {
   flex-grow: 0;
+  display: flex;
+  margin-top: 2rem;
 }
 
 .onderzoek-item {
   display: flex;
   min-height: 20rem;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: $border-radius-big;
+  padding: 2rem;
+  margin-bottom: 2rem;
   height: 22rem;
+  border-radius: $border-radius-big;
   border: 3px solid var(--border-2, #EBECF0);
   background: var(--White, #FFF);
-
   @include respond(laptop, max) {
     flex-direction: column;
     width: auto;
@@ -39,8 +72,24 @@
   }
 }
 
-.onderzoek-omschrijving {
-  font-size: 1.5rem;
+
+.content-tags {
+  display: flex;
+  justify-content: center;
+  @include respond(tablet, max) {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+}
+
+.content-informatie-een {
+  padding: 0rem 1rem;
+  margin-right: 3rem;
+}
+
+.content-tags > .content-informatie {
+  padding: 0rem 1rem;
 }
 
 
@@ -50,7 +99,7 @@
   height: 100%;
 
   @include respond(tablet, max) {
-    padding-top: 0rem;
+    padding-top: 1rem;
     width: 100%;
   }
 }
@@ -60,7 +109,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 100%;
   @include respond(tablet, max) {
     align-items: flex-start;
@@ -70,3 +119,29 @@
   }
 }
 
+.content-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  @include respond(tablet, max) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+}
+
+button.btn.onderzoek-aanmaken-button {
+  width: clamp(25rem, 90%, 120rem);
+  border-radius: 8px;
+  border: 4px dashed #4C5166;
+  background-color: white;
+  color: #4D5166;
+  width: 100%; /* Zorg dat de breedte zich aanpast aan de container */
+  box-sizing: border-box; /* Zorgt ervoor dat de padding en border in de breedte worden meegenomen */
+  padding: 2rem;
+  @include respond(tablet, max) {
+
+  }
+}

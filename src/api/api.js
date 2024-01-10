@@ -1,19 +1,52 @@
-import {apiConfig} from './config.js';
+import {getHostName} from '@api';
 
 async function fetchData(endpoint) {
-    const hostname = (apiConfig.inDevelopment) ? apiConfig.development : apiConfig.production;
-    try {
-        const response = await fetch(hostname + endpoint);
-        if(!response.ok) {
-            console.log('Failed to fetch dat from: ', response.url);
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+   return await fetchApi(endpoint, "GET");
+}
 
-        return await response.json();
-    } catch (error) {
-        console.log('Error while fetching data: ', error);
-        throw error;
+class ApiResponseError extends Error {
+    constructor(message, response) {
+        super(message);
+        this.name = 'ApiResponseError';
+        this.response = response;
+        this.statusCode = response ? response.status : undefined;
     }
 }
 
-export {fetchData};
+async function fetchApi(endpoint, method, data) {
+    const hostname = getHostName();
+    endpoint = (endpoint.startsWith('/')) ? endpoint : "/" + endpoint;
+
+    try {
+        const response = await fetch(hostname + endpoint, {
+            method: method,
+            credentials: 'include',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
+
+        return await handleResponse(response);
+    } catch (error) {
+        console.error('Error while fetching data:', error);
+        throw new ApiResponseError(error.message, error.response);
+    }
+}
+
+async function handleResponse(response) {
+    if (!response.ok) {
+        console.error('Failed to communicate with:', response.url);
+        throw new ApiResponseError(`HTTP error! Status: ${response.status}`, response);
+    }
+
+    const contentType = response.headers.get('Content-Type');
+    if (contentType && contentType.includes('application/json')) {
+        return response.json();
+    }
+
+    return response.text();
+}
+
+
+export {fetchData, fetchApi, ApiResponseError};

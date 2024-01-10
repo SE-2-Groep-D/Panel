@@ -10,18 +10,17 @@ function StartForm() {
   const location = useLocation();
 
   const [values, setValues] = useState({
-    email: "",
+    email: state.user.email,
     phoneNumber: "+31",
     userType: "Ervaringsdeskundige",
     acceptTerms: false,
-    password: "",
   });
 
   useEffect(() => {
-    if(!location || !location.state) return;
-    const {email, password} = location.state;
-    if(email) values.email = location.state.email;
-    if(password) values.password = location.state.password;
+    if (!location || !location.state) return;
+    const { email, password } = location.state;
+    if (email) values.email = location.state.email;
+    if (password) values.password = location.state.password;
   });
 
   function handleChange({ element, value, id }) {
@@ -37,12 +36,12 @@ function StartForm() {
       return;
     }
 
-    setMove('moveOut')
+    setMove("moveOut");
 
     setTimeout(() => {
-      state.user = { ...values };
+      state.user = { ...state.user, ...values };
       nextStep();
-    }, 500)
+    }, 500);
   }
 
   return (
@@ -70,7 +69,9 @@ function StartForm() {
           value={values.phoneNumber}
           onChange={handleChange}
           required
-          pattern={"^(?:\\+31|0)(?:[1-9][0-9]?|6[1-6]|7[0-9]|8[1-5]|9[0-9])\\d{6,7}$"}
+          pattern={
+            "^(?:\\+31|0)(?:[1-9][0-9]?|6[1-6]|7[0-9]|8[1-5]|9[0-9])\\d{6,7}$"
+          }
         >
           Telefoonnummer
         </InputField>

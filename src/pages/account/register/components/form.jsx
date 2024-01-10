@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { Form, InputField, Checkbox, ToolTip } from "@components";
-import {Link, useNavigate } from "react-router-dom";
+import { useForm } from "../../setup/data/useForm";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
   const [newUser, setNewUser] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
+  const { state } = useForm();
 
   function handleChange({ element, value, id }) {
     setNewUser({ ...newUser, [id ? id : element.id]: value });
   }
 
-  const handleSubmit = () => {
+  function handleSubmit(formData) {
+    const { email, password } = newUser;
+
+    state.user = { ...state.user, email, password };
     navigate("/setup", { state: { ...newUser } });
-  };
+  }
 
   return (
     <Form title="Registreren" buttonText="Registreren" onSubmit={handleSubmit}>
@@ -27,14 +32,16 @@ function RegisterForm() {
       >
         Email
       </InputField>
-      <ToolTip  
+      <ToolTip
         position="bottom"
         message={
-          "Het wachtwoord moet voldoen aan de volgende criteria:" + "\n" + 
+          "Het wachtwoord moet voldoen aan de volgende criteria:" +
+          "\n" +
           "\n- Minimaal 1 hoofdletter." +
           "\n- Minimaal 5 karakters lang." +
-          "\n- Minimaal 1 cijfer." 
-        }>
+          "\n- Minimaal 1 cijfer."
+        }
+      >
         <InputField
           id="password"
           type="password"

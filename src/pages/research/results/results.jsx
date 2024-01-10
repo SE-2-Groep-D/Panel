@@ -26,7 +26,14 @@ export default function Results() {
         fetchOptions(id, setOptions);
     }, [id]);
 
-
+//Tijdellijk
+    useEffect(() => {
+        document.body.classList.add('body-special-color');
+        return () => {
+            document.body.classList.remove('body-special-color');
+        };
+    }, []);
+//
     const ResultsComponent = renderedResults(options, selectedOption);
     const inputOptions = getOptionsList(options);
 

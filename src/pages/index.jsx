@@ -8,6 +8,7 @@ const PrivacyStatement = lazy(() => import('./privacy-statement.jsx'));
 
 export * from './account';
 export * from './research';
+export * from './news';
 
 export { 
     Voorbeeld, 

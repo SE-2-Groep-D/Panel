@@ -34,19 +34,6 @@
             gap: 3rem;
         }
 
-        .back {
-            display: flex;
-            align-items: center;
-            font-size: 1.7rem;
-            font-weight: bold;
-            font-family: $font-family-1;
-            text-decoration: none;
-            color: $color-black;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
     }
 
     .statistics {        

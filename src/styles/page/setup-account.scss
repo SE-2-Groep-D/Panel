@@ -4,10 +4,28 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
     gap: 4rem;
     width: 100vw;
     height: 100vh;
+    position: relative;
+
+    .back {
+        position: absolute;
+        left: 20%;
+        top: 24rem;
+
+        @include respond(tablet) {
+            left: 5%;
+        }
+
+        @include respond(600px, max) {
+            top: 25%;
+        }
+    }
+
+    .logo {
+        width: clamp(20rem, 100%, 40rem);
+    }
 }
 
 .loading-div {

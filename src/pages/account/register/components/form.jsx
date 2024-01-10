@@ -54,7 +54,7 @@ function RegisterForm() {
         </InputField>
       </ToolTip>
       <Checkbox id="privacy" visible required>
-        Acepteer privacy verklaring
+        Ik accepteer de <Link to='/privacy'>privacy verklaring</Link>.
       </Checkbox>
     </Form>
   );

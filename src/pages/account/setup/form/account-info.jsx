@@ -85,16 +85,6 @@ function StartForm() {
         >
           Ik ben een
         </OptionSelector>
-
-        <Checkbox
-          id="acceptTerms"
-          value={values.canBeApproached}
-          onChange={handleChange}
-          required
-          checked
-        >
-          Ik ga akkoord met de algemene voorwaarden.
-        </Checkbox>
       </Form>
     </div>
   );

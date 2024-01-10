@@ -4,10 +4,16 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
     gap: 4rem;
     width: 100vw;
     height: 100vh;
+    position: relative;
+
+    .back {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+    }
 }
 
 .loading-div {

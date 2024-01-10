@@ -9,10 +9,10 @@ function StartForm() {
     const [move, setMove] = useState('moveIn');
     
     const [values, setValues] = useState({
-        postcode: '',
-        tools: [],
-        preferredApproach: 'Email',
-        canBeApproached: true,
+        postcode: (state.user && state.user.postcode) ? state.user.postcode : '',
+        tools: (state.user && state.user.tools) ? state.user.tools : [],
+        preferredApproach: (state.user && state.user.preferredApproach) ? state.user.preferredApproach : 'Email',
+        canBeApproached: (state.user && state.user.canBeApproached) ? state.user.canBeApproached : true,
     });
 
     function handleChange({element, value, id}) {

@@ -9,9 +9,9 @@ function StartForm() {
     const [move, setMove] = useState('moveIn');
     
     const [values, setValues] = useState({
-        name: '',
-        email: '',
-        phoneNumber: '+31',
+        name: (state.user && state.user.parent && state.user.parent.name) ? state.user.parent.name : '',
+        email: (state.user && state.user.parent && state.user.parent.email) ? state.user.parent.email : '',
+        phoneNumber: (state.user && state.user.parent && state.user.parent.email) ? state.user.parent.email : '+31',
     });
 
     function handleChange({element, value, id}) {

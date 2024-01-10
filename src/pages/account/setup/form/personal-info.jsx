@@ -9,9 +9,9 @@ function StartForm() {
     const [move, setMove] = useState('moveIn');
 
     const [values, setValues] = useState({
-        firstName: '',
-        lastName: '',
-        ageGroup: 'leeftijdsgroep',
+        firstName: (state.user && state.user.firstName) ? state.user.firstName : '',
+        lastName: (state.user && state.user.lastName) ? state.user.lastName : '',
+        ageGroup: (state.user && state.user.ageGroup) ? state.user.ageGroup : 'leeftijdsgroep',
     });
 
     function handleChange({element, value, id}) {

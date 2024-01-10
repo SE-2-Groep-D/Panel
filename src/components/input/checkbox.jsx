@@ -19,7 +19,7 @@ export default function Checkbox({children, id, value, onChange, required}) {
   return (<div className="checkbox" value={value} id={id}>
              {text}
             <label className="checkbox-label">
-            <input value={value} onChange={handleChange} type="checkbox" className='checkbox-cb' required={required}/>
+            <input value={value} checked={value} onChange={handleChange} type="checkbox" className='checkbox-cb' required={required}/>
             <span className="checkbox-mark"></span>
             </label>
         </div>

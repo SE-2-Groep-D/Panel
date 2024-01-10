@@ -87,8 +87,6 @@ function PasswordButton({type, showPassword, setShowPassword}) {
     return null;
   }
 
-  console.log(showPassword);
-
   if(showPassword) {
     return <button aria-label='Klik op de knop om je wachtwoord te verbergen.' onClick={(e) => {
       e.preventDefault();

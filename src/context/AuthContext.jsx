@@ -5,20 +5,16 @@ export const AuthContext = createContext();
 
 const defaultAuth = {
     authenticated: false,
-    userId: null,
-    username: null,
-    jwtoken: null,
+    userInfo: null,
 }
 
-export default function AuthProvider({children}) {
+export function AuthProvider({children}) {
     const [auth, setAuth] = useState(defaultAuth);
 
-    function loginUser(userId, username, jwtoken) {
+    function loginUser(userId, userInfo) {
         setAuth({
             authenticated: true,
-            userId,
-            username,
-            jwtoken,
+            userInfo,
           });
     }
     
@@ -26,9 +22,7 @@ export default function AuthProvider({children}) {
     function logoutUser() {
         setAuth({
           authenticated: false,
-          userId: null,
-          username: null,
-          jwtoken: null,
+          userInfo: null,
         });
       }
 

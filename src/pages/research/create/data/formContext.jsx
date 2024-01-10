@@ -10,10 +10,13 @@ const defaultState = {
 export const FormProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, defaultState);
 
+
     const nextStep = () => dispatch({type: 'nextStep'});
     const prevStep = () => dispatch({type: 'prevStep'});
+    const lastStep = () => dispatch({type: 'lastStep'});
 
-    const data = {state, nextStep, prevStep}
+
+    const data = {state, nextStep, prevStep,lastStep}
 
     return <FormContext.Provider value={data}>
         {children}
@@ -26,10 +29,11 @@ export const reducer = (state, action) => {
             return {...state, currentStep: state.currentStep + 1};
         case 'prevStep':
             return {...state, currentStep: state.currentStep - 1};
+        case 'lastStep':
+            return {...state, currentStep: 2};
         default:
             return state;
     }
 }
-
 
 

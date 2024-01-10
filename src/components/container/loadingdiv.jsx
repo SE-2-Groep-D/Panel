@@ -9,6 +9,10 @@ export default function LoadingDiv({children, loading, className}) {
       className += (loading) ? ' loading-div loading' : ' loading-div';
     }
 
+    if(children === null || children === undefined) {
+        className += ' empty';
+    }
+
   return (
     <div className={className}>
         {children}

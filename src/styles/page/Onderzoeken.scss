@@ -1,23 +1,16 @@
 @import '../main.scss';
 
+
+
 .onderzoeken-page {
   margin: 0 auto;
-  background: var(--Gray, #F3F4F6);
   width: $dashboard-width;
-
 }
-
-.body-special-color {
-  background: var(--Gray, #F3F4F6);
-
-}
-
 
 .onderzoek-info {
   display: flex;
   justify-content: space-between;
   padding-bottom: 3rem;
-  background: var(--Gray, #F3F4F6);
   align-items: flex-end;
 
   @include respond(tablet, max) {

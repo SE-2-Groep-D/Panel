@@ -35,6 +35,7 @@ select,input,button,label {
 #root {
     min-width: 100vw;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .gray {
@@ -54,3 +55,16 @@ main {
     }
 }
 
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+
+}
+
+.person-icon {
+    font-size: 15rem;
+}

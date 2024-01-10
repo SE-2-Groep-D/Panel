@@ -26,19 +26,12 @@ export default function Results() {
         fetchOptions(id, setOptions);
     }, [id]);
 
-//Tijdellijk
-    useEffect(() => {
-        document.body.classList.add('body-special-color');
-        return () => {
-            document.body.classList.remove('body-special-color');
-        };
-    }, []);
-//
+
     const ResultsComponent = renderedResults(options, selectedOption);
     const inputOptions = getOptionsList(options);
 
   return (
-    <main className='results'>
+    <main className='results gray'>
             <div className='navigation'>
                 <a href={`/onderzoek/` + id} className='back'>
                     <FontAwesomeIcon icon={faChevronLeft}/>

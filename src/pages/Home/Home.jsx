@@ -7,7 +7,7 @@ function Home() {
     return (
         <>
             <nav className="navigation">
-                <Link className='logo' to='/'>
+                <Link className='home-navigation' to='/'>
                     <Logo/>
                 </Link>
 

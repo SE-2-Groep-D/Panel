@@ -1,10 +1,5 @@
 @import '../../main.scss';
 
-#root {
-    background-color: $color-gray;
-    overflow-x: hidden;
-}
-
 .dashboard {
     position: relative;
     width: clamp(25rem, 100%, 180rem);

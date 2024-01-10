@@ -23,15 +23,61 @@ nav.navigation {
     width: 4rem;
   }
 
-  .navigation-items {
+  button {
+    background-color: transparent;
+    font-size: 1.8rem;
+    color: $color-black;
+    font-weight: normal;
+  }
+
+  .logout:hover, .logout:focus {
+    background-color: $color-tertiary;
+    color: white;
+  }
+}
+
+.navigation {
+
+  @include respond(tablet) {
+    display: flex;
+    justify-content: space-between !important;
+  }
+
+  &-items {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
     list-style: none;
+
+    @include respond(tablet) {
+      position: absolute;
+      top: 8.5rem;
+      right: 0;
+      padding: 5rem;
+
+      flex-direction: column;
+      background-color: $color-white;
+      border-bottom-left-radius: $border-radius-medium;
+      border-bottom: $border-container;
+      border-left: $border-container;
+      gap: 2rem;
+
+      opacity: 1;
+
+      transform: translateX(100%);
+      transition: transform $animation-medium;
+    }
   }
 
-  .navigation-item a {
+  .active {
+    border-bottom: 3px solid $color-primary-60;
+
+    @include respond(tablet) {
+      border-bottom: none;
+      background-color: rgba($color-primary-60, .1);
+    }
+  }
+  &-item a {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -49,16 +95,85 @@ nav.navigation {
     }
   }
 
-  button {
-    background-color: transparent;
-    font-size: 1.8rem;
-    color: $color-black;
-    font-weight: normal;
+
+  .menu {
+    user-select: none;
+
+    @include respond(tablet, min) {
+      display: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      border: $border-component-focus;
+    }
+
+    &-icon {
+      position: relative;
+
+      &, &::before, &::after {
+        display: block;
+        width: 3rem;
+        height: .3rem;
+        background-color: $color-black;
+        border-radius: $border-radius-small;
+
+        transition: transform $animation-fast;
+      }
+
+      &::before {
+        position: absolute;
+        top: -1rem;
+      }
+
+      &::after {
+        position: absolute;
+        top: 1rem;
+      }
+
+      &::before, &::after {
+        content: "";
+      }
+
+
+    }
+
+    @include respond(tablet) {
+      display: flex;
+    }
   }
 
-  .logout:hover, .logout:focus {
-    background-color: $color-tertiary;
-    color: white;
+}
+
+
+#navigation-checkbox {
+  display: none;
+
+  &:checked {
+
+    & ~ .navigation-items {
+      transform: translateX(0);
+    }
+
+    & ~ .menu .menu-icon {
+      background-color: transparent;
+
+      &::before {
+        top: 0;
+        transform: rotate(-45deg);
+      }
+
+      &::after {
+        top: 0;
+        transform: rotate(45deg);
+      }
+
+    }
+
+
   }
 
 }

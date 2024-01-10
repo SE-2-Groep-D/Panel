@@ -10,7 +10,7 @@ function StartForm() {
     
     const [values, setValues] = useState({
         postcode: (state.user && state.user.postcode) ? state.user.postcode : '',
-        tools: (state.user && state.user.tools) ? state.user.tools : [],
+        tools: (state.user && state.user.tools) ? state.user.tools.split(',') : [],
         preferredApproach: (state.user && state.user.preferredApproach) ? state.user.preferredApproach : 'Email',
         canBeApproached: (state.user && state.user.canBeApproached) ? state.user.canBeApproached : true,
     });

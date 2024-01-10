@@ -44,7 +44,7 @@ function StartForm() {
                 <InputField id='postcode' pattern={'^\\d{4}\\s?[a-zA-Z]{2}$'} value={values.postcode} onChange={handleChange} required>Postcode</InputField>
                 <MultiInputSelector id='tools' value={values.tools} onChange={handleChange}>Ik gebruik deze hulpmiddelen</MultiInputSelector>
                 <OptionSelector id='preferredApproach' value={values.preferredApproach} onChange={handleChange} options={['Email', 'Telefoon']}>Benader mij via</OptionSelector>
-                <Checkbox id='canBeApproached' value={values.canBeApproached} onChange={handleChange} required checked>Ik mag benaderd worden door bedrijven.</Checkbox>
+                <Checkbox id='canBeApproached' value={values.canBeApproached} onChange={handleChange} checked>Ik mag benaderd worden door bedrijven.</Checkbox>
             </Form>
         </div>
     );

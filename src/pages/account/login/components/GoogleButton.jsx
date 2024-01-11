@@ -1,37 +1,17 @@
-//import Cookies from "universal-cookie";
-
-import {fetchApi} from "@api";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 function GoogleButton() {
-  //const cookies = new Cookies();
-
-  async function handleClick() {
-    //console.log(`Bearer ${cookies.get("access_token")}`);
-    try {
-      const response = await fetch("https://localhost:5000/auth/", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-
-      let data = response.ok
-        ? await response.text()
-        : response.status === 400
-        ? await response.text()
-        : console.log("Login failed.");
-      console.log(data || "No data");
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-
   return (
-    <button id="googleSingInButton" onClick={handleClick}>
-      <img id="googleIcon" src="GooglegoogleIcon.png" />
-      <span>Sign in with Google</span>
-    </button>
+    <GoogleOAuthProvider clientId="169633306915-is0h5dvfs7e6cu1ic8ee17qjpf787qmn.apps.googleusercontent.com">
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
+    </GoogleOAuthProvider>
   );
 }
 

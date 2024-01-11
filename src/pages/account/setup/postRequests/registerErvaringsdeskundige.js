@@ -4,7 +4,7 @@ async function registerErvaringsdeskundige(user) {
   const data = {
     voornaam: user.firstName,
     achternaam: user.lastName,
-    googleAccount: false,
+    googleAccount: user.googleAccount != null ? user.googleAccount : false,
     email: user.email,
     password: user.password,
     postcode: user.postcode,

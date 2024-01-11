@@ -1,0 +1,78 @@
+@use "src/styles/abstract" as *;
+
+.checkbox {
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 1rem;
+
+    font-size: 1.6rem;
+    font-family: $font-family-1;
+
+    &-text {
+        display: block;
+        font-size: 1.3rem;
+        max-width: 20rem;
+    }
+    
+
+    &-label {
+        &:focus .checkbox-mark, &:focus-visible .checkbox-mark, &:focus-within .checkbox-mark  {
+            outline: $border-component-focus;
+        }
+    }
+
+    &-cb {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    &-cb:checked ~ .checkbox-mark {
+        background-color: $color-black;
+    } 
+
+    &-mark {
+        display: block;
+        border: $border-component;
+        height: 2.2rem;
+        width: 2.2rem;
+        padding: 2px;
+        user-select: none;
+        border-radius: $border-radius-small;
+
+        position: relative;
+
+        transition: all $animation-fast;
+        
+        &:hover {
+            cursor: pointer;
+        }
+
+        &::before, &::after {
+            position: absolute;
+            display: block;
+            content: "";
+            height: .3rem;
+            background-color: white;
+        }
+
+        &::before {
+            width: .8rem;
+            top: 1rem;
+            left: .2rem;
+            transform: rotate(45deg)
+        }
+
+        &::after {
+            width: 1.2rem;
+            top: .8rem;
+            right: .2rem;
+            transform: rotate(-45deg);
+        }
+    }
+   
+}
+

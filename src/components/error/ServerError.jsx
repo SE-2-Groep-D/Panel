@@ -1,4 +1,4 @@
-import '@pagestyles/error/ServerError.scss'
+import '@pagestyles/error/_server-error.scss'
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPersonCircleXmark} from "@fortawesome/free-solid-svg-icons";

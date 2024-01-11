@@ -1,4 +1,4 @@
-import '@pagestyles/news/list.scss';
+import '@pagestyles/news/_news-list.scss';
 
 import {useAuth} from "@hooks";
 import {useNavigate} from "react-router-dom";

@@ -88,7 +88,7 @@ function PasswordButton({type, showPassword, setShowPassword}) {
   }
 
   if(showPassword) {
-    return <button aria-label='Klik op de knop om je wachtwoord te verbergen.' onClick={(e) => {
+    return <button className='password' aria-label='Klik op de knop om je wachtwoord te verbergen.' onClick={(e) => {
       e.preventDefault();
       setShowPassword(false)
     }}>
@@ -96,7 +96,7 @@ function PasswordButton({type, showPassword, setShowPassword}) {
     </button>
   }
 
-  return <button aria-label='Klik deze knop om je wachtwoord te laten zien.' onClick={(e) => {
+  return <button className='password' aria-label='Klik deze knop om je wachtwoord te laten zien.' onClick={(e) => {
     e.preventDefault();
     setShowPassword(true)
   }}>

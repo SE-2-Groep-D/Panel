@@ -1,4 +1,4 @@
-import '@pagestyles/research/research-results.scss';
+import '@pagestyles/research/results/_research-results.scss';
 
 
 

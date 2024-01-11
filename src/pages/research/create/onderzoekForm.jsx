@@ -1,4 +1,4 @@
-import '@pagestyles/setup-account.scss';
+import '@pagestyles/account/_setup-account.scss';
 
 // Import libraries
 import { FormProvider } from './data/formContext.jsx';

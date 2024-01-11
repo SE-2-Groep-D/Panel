@@ -1,6 +1,6 @@
 import { Button, Form, LoadingDiv } from "@components";
 import { useForm } from "../data/useForm.jsx";
-import "@pagestyles/confirmData.scss";
+import "@pagestyles/account/_confirm-data.scss";
 import { registerErvaringsdeskundige } from "../postRequests/registerErvaringsdeskundige.js";
 import { registerBedrijf } from "../postRequests/registerBedrijf.js";
 import { useState } from "react";

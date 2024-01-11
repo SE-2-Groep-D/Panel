@@ -26,25 +26,25 @@ async function registerBedrijf(user) {
   }
 };
 
-// async function registerBedrijf(user) {
+// async function registerBedrijf(home) {
 //   const hostname = (apiConfig.inDevelopment) ? apiConfig.development : apiConfig.production;
 //     try {
 //       console.log("ik word uitgevoerd");
 //       const response = await fetch(hostname + "Auth/RegisterBedrijf", {
 //         method: "POST",
 //         body: JSON.stringify({
-//           voornaam: user.firstName,
-//           achternaam: user.lastName,
+//           voornaam: home.firstName,
+//           achternaam: home.lastName,
 //           googleAccount: false,
-//           email: user.email,
-//           password: user.password,
-//           bedrijfsnaam: user.name,
-//           postcode: user.postcode,
-//           plaats: user.place,
-//           straat: user.street,
-//           nummer: user.number,
-//           websiteUrl: user.websiteUrl,
-//           omschrijving: user.description,
+//           email: home.email,
+//           password: home.password,
+//           bedrijfsnaam: home.name,
+//           postcode: home.postcode,
+//           plaats: home.place,
+//           straat: home.street,
+//           nummer: home.number,
+//           websiteUrl: home.websiteUrl,
+//           omschrijving: home.description,
 //         }),
 //         headers: {
 //           "Content-type": "application/json; charset=UTF-8",
@@ -53,18 +53,18 @@ async function registerBedrijf(user) {
   
 //       console.log(
 //         JSON.stringify({
-//             voornaam: user.firstName,
-//             achternaam: user.lastName,
+//             voornaam: home.firstName,
+//             achternaam: home.lastName,
 //             googleAccount: false,
-//             email: user.email,
-//             password: user.password,
-//             bedrijfsnaam: user.name,
-//             postcode: user.postcode,
-//             plaats: user.place,
-//             straat: user.street,
-//             nummer: user.number,
-//             websiteUrl: user.websiteUrl,
-//             omschrijving: user.description,
+//             email: home.email,
+//             password: home.password,
+//             bedrijfsnaam: home.name,
+//             postcode: home.postcode,
+//             plaats: home.place,
+//             straat: home.street,
+//             nummer: home.number,
+//             websiteUrl: home.websiteUrl,
+//             omschrijving: home.description,
 //         })
 //       );
   

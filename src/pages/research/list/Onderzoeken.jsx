@@ -1,4 +1,4 @@
-import '@pagestyles/Onderzoeken.scss';
+import '@pagestyles/research/_research-list.scss';
 
 // Import from libraries
 import {fetchData} from "@api";

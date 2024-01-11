@@ -1,9 +1,10 @@
-// eslint-disable-next-line react/prop-types
 import PropTypes from "prop-types";
-import {ToolTip} from "@components";
+import DOMPurify from "dompurify";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
+
 
 export default function InputField({
   children,
@@ -48,13 +49,13 @@ export default function InputField({
   );
 
   function handleChange(e) {
-    const newValue = e.target.value;
+    const cleanedValue = DOMPurify.sanitize(e.target.value);
 
     if (onChange !== undefined && onChange !== null)
       onChange({
         element: e.target.parentNode,
         oldValue: value,
-        value: newValue,
+        value: cleanedValue,
       });
   }
 

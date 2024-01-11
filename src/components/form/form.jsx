@@ -1,6 +1,11 @@
-import {Button, LoadingDiv} from "@components";
+import DOMPurify from 'dompurify';
 import PropTypes from 'prop-types';
+
 import {useState} from "react";
+
+import {Button, LoadingDiv} from "@components";
+
+
 
 const Form = ({title, message, children, buttonText, onSubmit, className}) => {
     const [loading, setLoading] = useState(false);
@@ -19,7 +24,8 @@ const Form = ({title, message, children, buttonText, onSubmit, className}) => {
 
         content.childNodes.forEach((item, index) => {
             const id = (item.getAttribute('id') === null || item.getAttribute('id') === undefined) ? index : item.getAttribute('id');
-            data.values = {...data.values, [id] : item.getAttribute('value')}
+            const cleanedValue = DOMPurify.sanitize(item.getAttribute('value'));
+            data.values = {...data.values, [id] : cleanedValue}
         })
 
         setLoading(true);

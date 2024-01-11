@@ -2,7 +2,7 @@ import '@pagestyles/research/_research-list.scss';
 
 // Import from libraries
 import {fetchData} from "@api";
-import {formatDate} from "@services";
+import {formatDate} from "@utils";
 import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from "react";
 

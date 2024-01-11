@@ -1,5 +1,11 @@
 @use "src/styles/abstract" as *;
 
+.dashboard-wrapper {
+    display: flex;
+
+    justify-content: center;
+}
+
 .dashboard {
     position: relative;
     width: clamp(25rem, 100%, 180rem);

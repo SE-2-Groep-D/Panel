@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import {formatDate} from "@services";
+import {formatDate, sortObjectByDate} from "@utils";
 
 export default function Agenda({data}) {
-    data.sort((a, b) => new Date(a.date) - new Date(b.date))
+    data = sortObjectByDate(data);
 
   return (
     <table>

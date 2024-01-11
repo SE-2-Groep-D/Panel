@@ -20,7 +20,7 @@ import PrivateRoute from "@pages/routes/ProtectedRoute.jsx";
 import {useAuth} from "@hooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPersonCircleCheck, faPersonCircleQuestion} from "@fortawesome/free-solid-svg-icons";
-import NewsList from "@pages/news/NewsList.jsx";
+import NewsList from "@pages/news/News.jsx";
 
 function Routing() {
     return (

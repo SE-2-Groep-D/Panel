@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from "prop-types";
 
-export default function Button({className, children, onClick, color, varient, type}) {
+export default function Button({className, children, onClick, color, varient, type, label}) {
   const finalClassName = (className === null || className === undefined) ? getButtonClasses(color, varient) : getButtonClasses(color, varient) + ' ' + className;
 
   return (
-    <button type={type}
+    <button type={type} aria-label={label}
     className={finalClassName}
     onClick={onClick}
       >{children}</button>

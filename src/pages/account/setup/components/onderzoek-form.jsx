@@ -13,8 +13,6 @@ function OnderzoekForm() {
         formData.user = userData;
         setTimeout(() => {
             dispatch({type: 'NEXT_STAGE', user: userData});
-
-            console.log(formData)
         }, 300)
     };
 

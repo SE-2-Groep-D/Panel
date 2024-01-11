@@ -24,8 +24,6 @@
         border: $border-container;
         padding: 5rem;
 
-
-
         @include respond(laptop) {
             padding: 3rem;
         }
@@ -43,11 +41,39 @@
     grid-column: 2 / 3;
     max-height: 75rem;
     overflow-y: auto;
+    overflow-x: hidden;
+    width: clamp(30rem, 100%, 43rem);
 
     display: flex;
     flex-direction: column;
     gap: 2rem;
 
+    padding: 3rem;
+    align-items: center;
+
+    .heading-2 {
+      display: block;
+      width: 85% !important;
+
+    }
+
+    &-article {
+      padding: 0 0;
+      border: none;
+
+      .loading-div {
+        gap: 1rem;
+      }
+
+      .heading-2 {
+        margin-bottom: 0;
+
+      }
+
+      &__content {
+        flex-grow: unset;
+      }
+    }
 
     .text {
       font-size: 1.6rem;

@@ -36,6 +36,10 @@ dialog.modal  {
         }
     }
 
+    .save {
+        max-width: 30rem;
+    }
+
     button:focus-visible {
         outline: 3px solid $color-black !important;   
     }

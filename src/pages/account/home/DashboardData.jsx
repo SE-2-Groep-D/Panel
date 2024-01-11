@@ -4,8 +4,10 @@ import { Suspense, lazy, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { fetchData } from "@api";
 
-import { LoadingDiv, CountingAnimation, Modal } from "@components";
+import { LoadingDiv, CountingAnimation, Modal, Article, ArticleModal } from "@components";
 import { useAuth } from "@hooks";
+import {Status} from "@pages/news/data/newsContext.jsx";
+import {sortObjectByDate} from "@utils";
 
 const Agenda = lazy(() => import("./component/Agenda.jsx"));
 const CompanyAgenda = lazy(() => import("./component/CompanyAgenda.jsx"));
@@ -61,7 +63,6 @@ async function fetchUserData(data, setData) {
 
   try {
     const data = await fetchData(`/dashboard/${id}`);
-    console.log(data);
     setData(data);
   } catch (err) {
     setData(err);
@@ -103,7 +104,7 @@ function UserAgenda({ data, type }) {
     <section className="agenda moveIn bottom">
       <h2 className="heading-2">Agenda</h2>
       <Suspense fallback={<LoadingDiv loading />}>
-        {type === "dfafda" ? (
+        {type === "bedrijf" ? (
           <CompanyAgenda data={data} />
         ) : (
           <Agenda data={data} />
@@ -119,42 +120,25 @@ UserAgenda.propTypes = {
 
 function Message({ articles }) {
   const [article, setArticle] = useState();
-  const isArticle = article !== undefined && article !== null && article !== "";
 
   if (!articles) return null;
-  articles.sort((a, b) => new Date(b.datum) - new Date(a.datum));
+  articles = sortObjectByDate(articles)
 
   return (
     <section className="news moveIn bottom">
       <h2 className="heading-2">Laatste Nieuws</h2>
-      <Modal open={isArticle} onClose={() => setArticle(undefined)}>
-        <h2 className="heading-2">{article ? article.titel : ""}</h2>
-        <p className="text">{article ? article.inhoud : ""}</p>
-      </Modal>
-
-      {articles.map((currentArticle, index) => {
-        const message = getShortenedMessage(currentArticle.inhoud);
-        const link = message.endsWith("...") ? (
-          <button onClick={() => setArticle(currentArticle)}>
-            Lees meer over {currentArticle.titel}
-          </button>
-        ) : null;
-
-        return (
-          <article key={index}>
-            <h3 className="heading-3">{currentArticle.titel}</h3>
-            <p className="text">{message}</p>
-            {link}
-          </article>
-        );
-      })}
+      <Suspense fallback={null}>
+          <ArticleModal article={article} status={Status.READ} onClose={() => setArticle(undefined)}/>
+      </Suspense>
+      {
+          articles.map((currentArticle, index) => {
+              return <Suspense fallback={null} key={index}>
+                  <Article article={currentArticle} manage={false} setStatus={(s, article) => setArticle(article)} key={index}/>
+              </Suspense>
+          })
+      }
     </section>
   );
-}
-
-function getShortenedMessage(message) {
-  if (!message) return "";
-  return message.substring(0, 250) + "...";
 }
 
 Message.propTypes = {

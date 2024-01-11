@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import PropTypes from "prop-types";
 import Agenda from "@pages/account/home/component/Agenda.jsx";
-import {formatDate} from "@services";
+import {formatDate} from "@utils";
 
 export default function CompanyAgenda({data}) {
     data.sort((a, b) => new Date(a.date) - new Date(b.date))

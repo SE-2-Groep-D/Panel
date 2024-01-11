@@ -5,7 +5,7 @@ import { FormProvider } from './data/formContext.jsx';
 import { useForm } from './data/useForm.jsx';
 
 // Import components
-import {Logo, ProgressBar, LoadingDiv} from "@components";
+import {Logo, ProgressBar} from "@components";
 import Form from './form.jsx';
 
 

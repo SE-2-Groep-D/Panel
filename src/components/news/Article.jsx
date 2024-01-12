@@ -10,7 +10,7 @@ import {Status} from "@pages/news/data/newsContext.jsx";
 export default function Article({article, manage, loading, setStatus, deleteArticle}) {
     const message = formatString(article.inhoud, 195);
 
-    return <article className='news-article'>
+    return <article className='news-article moveIn bottom'>
         <LoadingDiv loading={loading}>
             <div className="news-article__header">
                 <p className='news-article__date'>

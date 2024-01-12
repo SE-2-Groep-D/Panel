@@ -18,11 +18,15 @@
   flex-direction: column;
   width: 60rem;
   height: auto;
-  padding-top: 2rem;
+  margin-top: 0.3rem;
   @include respond(tablet, max) {
     padding-top: 0rem;
     width: clamp(40rem, 100%, 120rem);
   }
+}
+
+.research-information{
+  margin-top: 3rem;
 }
 
 .information-text {

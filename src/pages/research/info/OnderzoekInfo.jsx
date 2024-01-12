@@ -2,30 +2,55 @@ import '@pagestyles/research/_research-info.scss';
 
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
-import {fetchData} from "@api";
+import {fetchApi, fetchData} from "@api";
 
 // import components
 import OnderzoekInformatie from "./components/OnderzoekInformatie";
 import Information from './components/information';
 import Map from "./components/map";
-import {Button, LoadingDiv} from "@components";
+import {Button, LoadingDiv, OptionSelector} from "@components";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAdd} from "@fortawesome/free-solid-svg-icons";
+import {faAdd, faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "@hooks";
 
+async function Inschrijven(onderzoekId, ervaringsdeskundigeId) {
+    var date = new Date().toISOString();
+    const data = {
+        onderzoekId: onderzoekId,
+        ervaringsdeskundigeId: ervaringsdeskundigeId,
+        datum: date
+
+    }
+    try {
+        console.log(data)
+        await fetchApi("/Onderzoek/registration", "POST", data);
+
+        return true;
+    } catch (error) {
+        console.error(error.message);
+        return false;
+    }
+}
 
 function OnderzoekInfo() {
     const {userInfo} = useAuth();
+    console.log(userInfo)
     const {onderzoekId} = useParams();
     const [onderzoek, setOnderzoek] = useState(null);
     const [loading, setLoading] = useState(true);
+
     const [bedrijf, setBedrijf] = useState(null);
     const [bedrijfsCoordinaten, setBedrijfsCoordinaten] = useState(null);
     const navigate = useNavigate();
+    const goToOnderzoek = (id) => {
+        navigate(`/onderzoek/${id}`);
+    };
+
     const goToOnderzoekResultaten = (id) => {
         navigate(`/onderzoek/${id}/results`);
     };
+
 
     const getCoordinatesForAddress = async (address) => {
         const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`);
@@ -76,7 +101,14 @@ function OnderzoekInfo() {
                 <div className="container">
                     {onderzoek && (
                         <>
+
                             <div className="content-left-container">
+                                <div className='navigation'>
+                                    <a href={`/onderzoek/`} className='back'>
+                                        <FontAwesomeIcon icon={faChevronLeft}/>
+                                        Terug
+                                    </a>
+                                </div>
                                 <OnderzoekInformatie titel={onderzoek.titel}
                                                      omschrijving={onderzoek.omschrijving}
                                                      bedrijf={bedrijf}/>
@@ -98,8 +130,10 @@ function OnderzoekInfo() {
                                         <div className="button-onderzoekinfo">
                                             <div>
                                                 <Button className="onderzoek-resultaten"
-                                                        onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Inschrijven</Button>
+                                                        onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Inschrijven
+                                                </Button>
                                             </div>
+
                                         </div>
                                 }
 

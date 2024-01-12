@@ -9,10 +9,10 @@ function StartForm() {
   const [move, setMove] = useState("moveIn");
 
   const [values, setValues] = useState({
-    place: "",
-    postcode: "",
-    street: "",
-    number: "",
+    place: (state.company && state.company.place) ? state.company.place : '',
+    postcode: (state.company && state.company.postcode) ? state.company.postcode: '',
+    street: (state.company && state.company.street) ? state.company.street : '',
+    number: (state.company && state.company.number) ? state.company.number : '',
   });
 
   function handleChange({ element, value, id }) {

@@ -1,2 +1,6 @@
-export {default as LoadingDiv} from './loadingdiv.jsx';
-export {default as Modal} from './modal.jsx';
+import {lazy} from "react";
+
+const LoadingDiv = lazy(() => import('./loadingdiv.jsx'));
+const Modal = lazy(() => import('./modal.jsx'));
+
+export {LoadingDiv, Modal}

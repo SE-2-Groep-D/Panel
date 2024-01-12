@@ -1,16 +1,23 @@
+
+export {default as GoogleButton} from './button/googleButton.jsx';
+
+import {lazy} from "react";
+
 export {default as Button} from './button/button.jsx';
+export {default as Form} from './form/form.jsx';
+
+const ProgressBar = lazy(() => import('./progress-bar.jsx'));
+const Logo = lazy(() => import('./logo/logo.jsx'));
+const CountingAnimation = lazy(() => import('./counting-animation.jsx'));
+
+const ToolTip = lazy(() => import('./tooltip.jsx'));
 
 
 // input
 export * from './input';
 export * from './container';
+export * from './error'
+export * from './news'
 
-export {default as ProgressBar} from './progress-bar.jsx';
-export {default as Logo} from './logo/logo.jsx';
-
-export {default as CountingAnimation} from './counting-animation.jsx'
-
-export {default as Form} from './form/form.jsx';
-
-export {default as ToolTip} from './tooltip.jsx';
+export {ProgressBar, Logo, CountingAnimation, ToolTip}
 

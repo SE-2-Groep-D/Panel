@@ -1,4 +1,4 @@
-import '@pagestyles/OnderzoekInfo.scss';
+import '@pagestyles/research/_research-info.scss';
 
 import {useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';

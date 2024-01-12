@@ -13,6 +13,7 @@ function OnderzoekInformatie({titel, omschrijving, bedrijf}) {
                 {/* Controleer of bedrijf een waarde heeft voordat je probeert de omschrijving te renderen */}
                 <p className="text">{bedrijf ? bedrijf.omschrijving : 'Laden...'}</p>
             </section>
+
         </div>
     );
 }

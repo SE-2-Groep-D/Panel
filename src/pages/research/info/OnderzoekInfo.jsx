@@ -1,23 +1,31 @@
 import '@pagestyles/research/_research-info.scss';
 
 import {useEffect, useState} from "react";
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {fetchData} from "@api";
 
 // import components
 import OnderzoekInformatie from "./components/OnderzoekInformatie";
 import Information from './components/information';
 import Map from "./components/map";
-import {LoadingDiv} from "@components";
+import {Button, LoadingDiv} from "@components";
+import {Status} from "@pages/news/data/newsContext.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAdd} from "@fortawesome/free-solid-svg-icons";
+import {useAuth} from "@hooks";
 
 
 function OnderzoekInfo() {
+    const {userInfo} = useAuth();
     const {onderzoekId} = useParams();
     const [onderzoek, setOnderzoek] = useState(null);
     const [loading, setLoading] = useState(true);
     const [bedrijf, setBedrijf] = useState(null);
     const [bedrijfsCoordinaten, setBedrijfsCoordinaten] = useState(null);
-
+    const navigate = useNavigate();
+    const goToOnderzoekResultaten = (id) => {
+        navigate(`/onderzoek/${id}/results`);
+    };
 
     const getCoordinatesForAddress = async (address) => {
         const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`);
@@ -72,6 +80,29 @@ function OnderzoekInfo() {
                                 <OnderzoekInformatie titel={onderzoek.titel}
                                                      omschrijving={onderzoek.omschrijving}
                                                      bedrijf={bedrijf}/>
+
+                                {
+                                    (userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') ?
+                                        <div className="button-onderzoekinfo">
+                                            <div className="button-onderzoekinfo-1">
+                                                <Button className="onderzoek-resultaten"
+                                                        onClick={() => goToOnderzoek(onderzoek.id)}>Bewerken</Button>
+                                            </div>
+                                            <div>
+                                                <Button className="onderzoek-resultaten"
+                                                        onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Bekijk
+                                                    resultaten</Button>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="button-onderzoekinfo">
+                                            <div>
+                                                <Button className="onderzoek-resultaten"
+                                                        onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Inschrijven</Button>
+                                            </div>
+                                        </div>
+                                }
+
                             </div>
                             <div className="content-right-container">
                                 <Information locatie={onderzoek.locatie}

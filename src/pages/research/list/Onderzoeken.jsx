@@ -8,9 +8,11 @@ import {useEffect, useState} from "react";
 
 // import components
 import {Button, LoadingDiv, OptionSelector} from "@components";
+import {useAuth} from "@hooks";
 
 
 function Onderzoeken() {
+    const {userInfo} = useAuth();
     const [alleOnderzoeken, setAlleOnderzoeken] = useState([]);
     const [getoondeOnderzoeken, setGetoondeOnderzoeken] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -56,21 +58,27 @@ function Onderzoeken() {
     }, []);
 
     useEffect(() => {
-        if (selectedBedrijf === "Alle") {
-            setGetoondeOnderzoeken(alleOnderzoeken);
-        } else {
-            const gefilterdeOnderzoeken = alleOnderzoeken.filter(o => bedrijfsGegevens[o.bedrijfId] === selectedBedrijf);
-            setGetoondeOnderzoeken(gefilterdeOnderzoeken);
-        }
-    }, [selectedBedrijf, alleOnderzoeken, bedrijfsGegevens]);
+        const filterOnderzoeken = () => {
+            if (userInfo.userType === 'Bedrijf') {
+                return alleOnderzoeken.filter(o => o.bedrijfId === userInfo.id);
+            } else if (selectedBedrijf === "Alle") {
+                return alleOnderzoeken;
+            } else {
+                return alleOnderzoeken.filter(o => bedrijfsGegevens[o.bedrijfId] === selectedBedrijf);
+            }
+        };
+
+        setGetoondeOnderzoeken(filterOnderzoeken());
+    }, [selectedBedrijf, alleOnderzoeken, bedrijfsGegevens, userInfo]);
+
 
     const fetchBedrijfGegevens = async (bedrijfId) => {
         try {
             const response = await fetchData(`/Gebruiker/${bedrijfId}`);
-            return response.bedrijfsnaam; // Of een andere eigenschap die je nodig hebt van het bedrijf
+            return response.bedrijfsnaam;
         } catch (error) {
             console.error('Fout bij het ophalen van bedrijfsgegevens:', error);
-            return null; // Of een passende foutafhandeling
+            return null;
         }
     };
 
@@ -80,21 +88,31 @@ function Onderzoeken() {
 
         <main className='gray'>
             <div className="onderzoek-tabel">
-                <div className="onderzoek-info">
-                    <div className="titel">
-                        <div className="content-titel heading-1">Onderzoeken</div>
-                    </div>
-                    <div className="filters">
-                        <OptionSelector
-                            onChange={(e) => setSelectedBedrijf(e.value)}
-                            options={bedrijfsOpties}
-                            value={selectedBedrijf}
-                        >
-                            Bedrijf
-                        </OptionSelector>
+                {
+                    (userInfo.userType === 'Ervaringsdeskundige') ?
+                        <div className="onderzoek-info">
+                            <div className="titel">
+                                <div className="content-titel heading-1">Onderzoeken</div>
+                            </div>
+                            <div className="filters">
+                                <OptionSelector
+                                    onChange={(e) => setSelectedBedrijf(e.value)}
+                                    options={bedrijfsOpties}
+                                    value={selectedBedrijf}
+                                >
+                                    Bedrijf
+                                </OptionSelector>
 
-                    </div>
-                </div>
+                            </div>
+                        </div>
+                        : <div className="onderzoek-info">
+                            <div className="titel">
+                                <div className="content-titel heading-1">Onze Onderzoeken</div>
+                            </div>
+                        </div>
+                }
+
+
                 <div className="onderzoek-items">
                     <LoadingDiv loading={isLoading}>
                         {getoondeOnderzoeken.map(onderzoek => (
@@ -117,17 +135,19 @@ function Onderzoeken() {
                                         <Button className="onderzoek-button"
                                                 onClick={() => goToOnderzoek(onderzoek.id)}> Onderzoek Info </Button>
                                     </div>
-
                                 </div>
 
                             </div>
                         ))}
                     </LoadingDiv>
-
-                     <div className="button-div">
-                        <Button className="onderzoek-aanmaken-button"
-                                onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
-                    </div>
+                    {
+                        (userInfo.userType === 'Bedrijf') ?
+                            <div className="button-div">
+                                <Button className="onderzoek-aanmaken-button"
+                                        onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
+                            </div>
+                            : null
+                    }
                 </div>
             </div>
         </main>

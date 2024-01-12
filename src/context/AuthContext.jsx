@@ -18,12 +18,12 @@ export function AuthProvider({ children }) {
     });
   }
 
-  function logoutUser() {
+  async function logoutUser() {
+    await fetchData("Auth/Logout");
     setAuth({
       authenticated: false,
       userInfo: null,
     });
-    fetchData("Auth/Logout");
   }
 
   return (

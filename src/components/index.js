@@ -1,3 +1,6 @@
+
+export {default as GoogleButton} from './button/googleButton.jsx';
+
 import {lazy} from "react";
 
 export {default as Button} from './button/button.jsx';
@@ -8,6 +11,7 @@ const Logo = lazy(() => import('./logo/logo.jsx'));
 const CountingAnimation = lazy(() => import('./counting-animation.jsx'));
 
 const ToolTip = lazy(() => import('./tooltip.jsx'));
+
 
 // input
 export * from './input';

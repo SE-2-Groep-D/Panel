@@ -1,7 +1,9 @@
+import { Logo, GoogleButton } from "@components";
+
 import "@pagestyles/account/_register.scss";
-import { Logo } from "@components";
+
 import RegisterForm from "./components/form";
-import GoogleButton from "./components/GoogleButton";
+//import GoogleButton from "./components/GoogleButton";
 import { FormProvider } from "../setup/data/formContext";
 
 function Register() {

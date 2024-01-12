@@ -1,7 +1,7 @@
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { ApiResponseError, fetchApi } from "@api";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "../../setup/data/useForm";
+import { useForm } from "../../pages/account/setup/data/useForm";
 import { useAuth } from "@hooks";
 function GoogleButton() {
   const navigate = useNavigate();

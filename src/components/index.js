@@ -1,5 +1,5 @@
 export {default as Button} from './button/button.jsx';
-
+export {default as GoogleButton} from './button/googleButton.jsx';
 
 // input
 export * from './input';

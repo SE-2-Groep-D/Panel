@@ -1,4 +1,4 @@
-import {formatDate} from '@services'
+import {formatDate} from '@utils'
 
 function Information({locatie, vergoeding, datum}) {
 

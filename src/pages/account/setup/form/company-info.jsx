@@ -9,9 +9,9 @@ function StartForm() {
   const [move, setMove] = useState("moveIn");
 
   const [values, setValues] = useState({
-    name: "",
-    description: "",
-    websiteUrl: "https://",
+    name: (state.company && state.company.name) ? state.company.name : '',
+    description: (state.company && state.company.description) ? state.company.description : '',
+    websiteUrl: (state.company && state.company.websiteUrl) ? state.company.websiteUrl : "https://",
   });
 
   function handleChange({ element, value, id }) {

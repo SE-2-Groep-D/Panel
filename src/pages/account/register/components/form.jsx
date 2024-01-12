@@ -15,7 +15,6 @@ function RegisterForm() {
 
   function handleSubmit(formData) {
     const { email, password } = newUser;
-
     state.user = { ...state.user, email, password };
     navigate("/setup", { state: { ...newUser } });
   }
@@ -55,7 +54,7 @@ function RegisterForm() {
         </InputField>
       </ToolTip>
       <Checkbox id="privacy" visible required>
-        <Link to="/privacy">Acepteer privacy verklaring</Link>
+        Ik accepteer de <Link to='/privacy'>privacy verklaring</Link>.
       </Checkbox>
     </Form>
   );

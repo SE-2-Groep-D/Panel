@@ -1,4 +1,4 @@
-import '@pagestyles/research/question-list-results.scss';
+import '@pagestyles/research/results/_question-list-results.scss';
 
 import { useState, useEffect } from 'react';
 import { fetchData } from "@api";

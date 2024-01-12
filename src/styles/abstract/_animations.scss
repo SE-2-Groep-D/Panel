@@ -1,0 +1,45 @@
+@use "variables" as *;
+
+.fast {
+    animation-duration: $animation-fast;
+}
+
+.medium {
+    animation-duration: $animation-medium;
+}
+
+.slow {
+    animation-duration: $animation-slow;
+}
+
+.slowest {
+    animation-duration: $animation-slowest;
+}
+
+
+.moveIn {
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        opacity: 1;
+        transform: translate(0,0); 
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        animation: moveIn $animation-medium forwards;
+    }
+
+    &.bottom {
+        transform: translateY(5rem);
+    }
+}
+
+@keyframes moveIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0,0); 
+    }
+}

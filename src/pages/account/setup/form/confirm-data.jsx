@@ -1,10 +1,12 @@
 import { Button, Form, LoadingDiv } from "@components";
 import { useForm } from "../data/useForm.jsx";
-import "@pagestyles/confirmData.scss";
+import "@pagestyles/account/_confirm-data.scss";
 import { registerErvaringsdeskundige } from "../postRequests/registerErvaringsdeskundige.js";
 import { registerBedrijf } from "../postRequests/registerBedrijf.js";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPersonCircleCheck} from "@fortawesome/free-solid-svg-icons";
 
 function ConfirmData() {
   const { state } = useForm();
@@ -35,6 +37,7 @@ function ConfirmData() {
       {isRegisterd === 1 && <LoadingDiv loading={true} />}
       {isRegisterd === 2 && (
         <>
+          <FontAwesomeIcon icon={faPersonCircleCheck} className='person-icon'/>
           <h1>U bent geregistreerd, U kunt nu inloggen</h1>
           <Button onClick={naarLogin}>Naar inloggen</Button>
         </>
@@ -82,7 +85,7 @@ function UserInfo(state) {
           <b>Leeftijdsgroep</b>: {user.ageGroup}
         </p>
         <p>
-          <b>Hulpmiddelen</b>: {user.disabillityTypes}
+          <b>Hulpmiddelen</b>: {user.tools}
         </p>
         <p>
           <b>Voorkeurbenaderingen</b>: {user.preferredApproach}

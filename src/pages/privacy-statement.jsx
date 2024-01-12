@@ -1,4 +1,4 @@
-import "@pagestyles/privacy.scss";
+import "@pagestyles/_privacy.scss";
 import React from 'react'
 
 function PrivacyStatement() {

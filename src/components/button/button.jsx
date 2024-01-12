@@ -1,10 +1,11 @@
-import React from 'react' 
+import React from 'react'
+import PropTypes from "prop-types";
 
-export default function Button({className, children, onClick, color, varient, type}) {
+export default function Button({className, children, onClick, color, varient, type, label}) {
   const finalClassName = (className === null || className === undefined) ? getButtonClasses(color, varient) : getButtonClasses(color, varient) + ' ' + className;
 
   return (
-    <button type={type}
+    <button type={type} aria-label={label}
     className={finalClassName}
     onClick={onClick}
       >{children}</button>
@@ -20,6 +21,17 @@ const varients = {
   OUTLINED: 'outlined',
   TEXT: 'text',
 }
+
+Button.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.any,
+  onClick: PropTypes.func,
+  color: PropTypes.oneOf(Object.values(colors)), // Pass array of color values
+  variant: PropTypes.oneOf(Object.values(varients)), // Pass array of variant values
+  type: PropTypes.string
+};
+
+
 
 function getButtonClasses(color, varient) {
   var className = "btn";

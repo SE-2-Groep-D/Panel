@@ -1,4 +1,4 @@
-import "@pagestyles/setup-account.scss";
+import "@pagestyles/account/_setup-account.scss";
 
 import { Logo, ProgressBar } from "@components";
 import Form from "./form.jsx";

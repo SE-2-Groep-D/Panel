@@ -15,9 +15,24 @@ export default function Modal({ open, onClose, children, animation}) {
   }, [open, animation]);
 
   function handleClose(e) {
-    dialogRef.current.close();
-    if(onClose !== undefined && onClose !== null) onClose(e);
+
+    if (onClose === undefined || onClose == null) return;
+
+    const children = [...dialogRef.current.querySelector('.modal-content').childNodes];
+    const values = children.map(element => ({
+      innerText: element.innerText,
+      value: element.value,
+    }));
+
+    const event = {
+      modal: dialogRef.current,
+      children: children,
+      values: values
+    }
+
+    onClose(event);
   }
+
 
   function addClickEvent(dialog) {
     dialog.addEventListener("click", e => {
@@ -31,14 +46,14 @@ export default function Modal({ open, onClose, children, animation}) {
         e.clientY > dialogDimensions.bottom
       ) {
 
-        handleClose(e);
+        dialogRef.current.close();
       }
     })
   }
 
   return (
-    <dialog className='modal' ref={dialogRef}>
-      <button className='close' onClick={handleClose} aria-label='Klik of druk op enter om de popup te sluiten.'>
+    <dialog className='modal' ref={dialogRef} onClose={handleClose}>
+      <button className='close' onClick={() => dialogRef.current.close()} aria-label='Klik of druk op enter om de popup te sluiten.'>
         <FontAwesomeIcon icon={faXmark} />
       </button>
       <section className='modal-content'>

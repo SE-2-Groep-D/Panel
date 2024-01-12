@@ -1,4 +1,4 @@
-import '@pagestyles/research/tracking-results.scss';
+import '@pagestyles/research/results/_tracking-results.scss';
 
 import {LoadingDiv, CountingAnimation} from '@components'
 import { fetchData } from "@api";

@@ -8,14 +8,14 @@ import {useAuth} from "@hooks";
 
 function OnderzoekStapTwee() {
     const { state, nextStep } = useForm();
+    const { userInfo } = useAuth();
     const [move, setMove] = useState("moveIn");
     const [values, setValues] = useState({
         aantalParticipanten: '',
         vergoeding: '',
         datum: '',
         websiteUrl: '',
-        plaats:''
-        // Voeg hier andere velden toe indien nodig
+        plaats:'',
     });
 
 
@@ -31,7 +31,7 @@ function OnderzoekStapTwee() {
 
         setTimeout(() => {
             state.onderzoek = { ...state.onderzoek, ...values };
-            OnderzoekAanmaken(state.onderzoek)
+             OnderzoekAanmaken(state.onderzoek,userInfo)
             nextStep();
         }, 500);
 

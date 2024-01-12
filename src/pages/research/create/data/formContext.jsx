@@ -30,7 +30,7 @@ export const reducer = (state, action) => {
         case 'prevStep':
             return {...state, currentStep: state.currentStep - 1};
         case 'lastStep':
-            return {...state, currentStep: 2};
+            return {...state, currentStep: state.maxStep};
         default:
             return state;
     }

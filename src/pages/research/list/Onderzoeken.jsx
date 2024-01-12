@@ -130,10 +130,10 @@ function Onderzoeken() {
                         ))}
                     </LoadingDiv>
 
-                    {/* <div className="button-div">
+                     <div className="button-div">
                         <Button className="onderzoek-aanmaken-button"
                                 onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
-                    </div>*/}
+                    </div>
                 </div>
             </div>
         </main>

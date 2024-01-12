@@ -29,7 +29,6 @@ function Routing() {
       const response = await fetchData("Auth/Refresh");
       return response;
     } catch {
-      console.log("er ging iets mis.");
       return null;
     }
   };
@@ -43,8 +42,6 @@ function Routing() {
       setTimeout(() => {
         setLoading(false);
       }, 800);
-      console.log("check");
-      console.log(response);
     };
     checkUserSession();
   }, []);

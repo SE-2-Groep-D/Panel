@@ -1,8 +1,8 @@
-import '@pagestyles/Onderzoeken.scss';
+import '@pagestyles/research/_research-list.scss';
 
 // Import from libraries
 import {fetchData} from "@api";
-import {formatDate} from "@services";
+import {formatDate} from "@utils";
 import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from "react";
 
@@ -27,12 +27,6 @@ function Onderzoeken() {
         navigate(`/onderzoek/aanmaken`);
     };
 
-    useEffect(() => {
-        document.body.classList.add('body-special-color');
-        return () => {
-            document.body.classList.remove('body-special-color');
-        };
-    }, []);
 
     useEffect(() => {
         async function fetchAllOnderzoeken() {
@@ -84,7 +78,7 @@ function Onderzoeken() {
     return (
 
 
-        <main >
+        <main className='gray'>
             <div className="onderzoek-tabel">
                 <div className="onderzoek-info">
                     <div className="titel">

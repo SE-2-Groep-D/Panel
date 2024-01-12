@@ -24,7 +24,6 @@ function LoginForm() {
 
       setIsIngelogd(true);
       navigate("/");
-      console.log(response);
       loginUser(response.userId, response);
     } catch (error) {
       if (!(error instanceof ApiResponseError)) {

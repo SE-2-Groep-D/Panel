@@ -1,7 +1,8 @@
 import {fetchApi} from '@api';
 
 async function OnderzoekAanmaken(onderzoek,user) {
-    console.log(onderzoek)
+
+
     const data = {
         titel: onderzoek.titel,
         aantalParticipanten: onderzoek.aantalParticipanten,
@@ -12,7 +13,6 @@ async function OnderzoekAanmaken(onderzoek,user) {
         locatie: onderzoek.plaats,
         status: onderzoek.status,
         bedrijfId: user.id
-
     }
 
     try {
@@ -26,4 +26,5 @@ async function OnderzoekAanmaken(onderzoek,user) {
     }
 }
 
-export {OnderzoekAanmaken};
+export  {OnderzoekAanmaken};
+

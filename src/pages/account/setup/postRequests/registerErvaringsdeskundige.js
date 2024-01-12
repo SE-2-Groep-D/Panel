@@ -4,7 +4,7 @@ async function registerErvaringsdeskundige(user) {
   const data = {
     voornaam: user.firstName,
     achternaam: user.lastName,
-    googleAccount: false,
+    googleAccount: user.googleAccount != null ? user.googleAccount : false,
     email: user.email,
     password: user.password,
     postcode: user.postcode,
@@ -22,22 +22,22 @@ async function registerErvaringsdeskundige(user) {
   }
 };
 
-// async function registerErvaringsdeskundige(user) {
+// async function registerErvaringsdeskundige(home) {
 //   const hostname = (apiConfig.inDevelopment) ? apiConfig.development : apiConfig.production;
 //     try {
 //       console.log("ik word uitgevoerd");
 //       const response = await fetch(hostname + "Auth/RegisterErvaringsdeskundige", {
 //         method: "POST",
 //         body: JSON.stringify({
-//           voornaam: user.firstName,
-//           achternaam: user.lastName,
+//           voornaam: home.firstName,
+//           achternaam: home.lastName,
 //           googleAccount: false,
-//           email: user.email,
-//           password: user.password,
-//           postcode: user.postcode,
-//           toestemmingBenadering: user.canBeApproached === "true",
-//           leeftijdscategorie: user.ageGroup,
-//           roles: user.roles,
+//           email: home.email,
+//           password: home.password,
+//           postcode: home.postcode,
+//           toestemmingBenadering: home.canBeApproached === "true",
+//           leeftijdscategorie: home.ageGroup,
+//           roles: home.roles,
 //         }),
 //         headers: {
 //           "Content-type": "application/json; charset=UTF-8",
@@ -46,14 +46,14 @@ async function registerErvaringsdeskundige(user) {
   
 //       console.log(
 //         JSON.stringify({
-//           voornaam: user.firstName,
-//           achternaam: user.lastName,
+//           voornaam: home.firstName,
+//           achternaam: home.lastName,
 //           googleAccount: false,
-//           email: user.email,
-//           password: user.password,
-//           postcode: user.postcode,
-//           toestemmingBenadering: user.canBeApproached,
-//           leeftijdscategorie: user.ageGroup,
+//           email: home.email,
+//           password: home.password,
+//           postcode: home.postcode,
+//           toestemmingBenadering: home.canBeApproached,
+//           leeftijdscategorie: home.ageGroup,
 //         })
 //       );
   

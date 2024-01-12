@@ -10,10 +10,10 @@ function StartForm() {
   const location = useLocation();
 
   const [values, setValues] = useState({
-    email: state.user.email,
-    phoneNumber: "+31",
-    userType: "Ervaringsdeskundige",
-    acceptTerms: false,
+    email: (state.user && state.user.email) ? state.user.email : '',
+    phoneNumber: (state.user && state.user.phoneNumber) ? state.user.phoneNumber : "+31",
+    userType: (state.user && state.user.userType) ? state.user.userType : "Ervaringsdeskundige",
+    acceptTerms: (state.user && state.user.acceptTerms) ? state.user.acceptTerms : false,
   });
 
   useEffect(() => {
@@ -85,16 +85,6 @@ function StartForm() {
         >
           Ik ben een
         </OptionSelector>
-
-        <Checkbox
-          id="acceptTerms"
-          value={values.canBeApproached}
-          onChange={handleChange}
-          required
-          checked
-        >
-          Ik ga akkoord met de algemene voorwaarden.
-        </Checkbox>
       </Form>
     </div>
   );

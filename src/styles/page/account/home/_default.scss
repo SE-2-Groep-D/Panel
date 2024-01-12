@@ -51,6 +51,14 @@
     padding: 3rem;
     align-items: center;
 
+    @include respond(tablet) {
+      width: 100%;
+
+      .news-article {
+        width: 100%;
+      }
+    }
+
     .heading-2 {
       display: block;
       width: 85% !important;
@@ -63,6 +71,7 @@
 
       .loading-div {
         gap: 1rem;
+        padding: 3rem;
       }
 
       .heading-2 {

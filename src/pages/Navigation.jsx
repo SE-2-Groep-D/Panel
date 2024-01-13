@@ -35,29 +35,33 @@ function Navigation() {
         </Link>
 
         <ul className="navigation-items">
-            <li className={`navigation-item ${isActive('/')}`}>
-                <Link to='/'>
-                    <FontAwesomeIcon icon={faHome} />
-                    Dashboard
-                </Link>
-            </li>
-            <li className={`navigation-item ${isActive('/onderzoek')}`}>
-                <Link to='/onderzoek'>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    Onderzoeken
-                </Link>
-            </li>
+            <div className="links">
+                <li className={`navigation-item ${isActive('/')}`}>
+                    <Link to='/'>
+                        <FontAwesomeIcon icon={faHome} />
+                        Dashboard
+                    </Link>
+                </li>
+                <li className={`navigation-item ${isActive('/onderzoek')}`}>
+                    <Link to='/onderzoek'>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        Onderzoeken
+                    </Link>
+                </li>
 
 
 
-            <li className={`navigation-item ${isActive('/nieuwsbrief')}`}>
-                <Link to='/nieuwsbrief'>
-                    <FontAwesomeIcon icon={faNewspaper} />
-                    Nieuws
-                </Link>
-            </li>
-
-
+                {
+                    (userInfo.userType !== 'Bedrijf') ?
+                        <li className={`navigation-item ${isActive('/nieuwsbrief')}`}>
+                            <Link to='/nieuwsbrief'>
+                                <FontAwesomeIcon icon={faNewspaper} />
+                                Nieuws
+                            </Link>
+                        </li>
+                        : null
+                }
+            </div>
 
             <Button aria-label={'Log uit.'} className='logout' onClick={() => logoutUser()}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
@@ -65,9 +69,13 @@ function Navigation() {
             </Button>
         </ul>
 
-        <label className='menu' htmlFor='navigation-checkbox'>
-            <span className="menu-icon"></span>
-        </label>
+
+
+        <div className="navigation-button">
+            <label className='menu' htmlFor='navigation-checkbox'>
+                <span className="menu-icon"></span>
+            </label>
+        </div>
 
     </nav>
 }

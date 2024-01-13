@@ -49,14 +49,14 @@
 
 
     .options-list {
+        position: absolute;
+        top: 100%;
+        transform: translateY(1rem);
+
         display: none;
 
         background-color: $color-white;
         z-index: 1;
-        
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
 
         list-style: none;
         width: 100%;

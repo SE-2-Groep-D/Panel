@@ -20,6 +20,8 @@ function Onderzoeken() {
     const [bedrijfsGegevens, setBedrijfsGegevens] = useState({});
     const [selectedBedrijf, setSelectedBedrijf] = useState('Alle');
     const [bedrijfsOpties, setBedrijfsOpties] = useState(["Alle"]);
+    const [selectedType, setSelectedType] = useState('Alle');
+    const [onderzoekTypes, setOnderzoekTypes] = useState(["Alle", "vragenlijst", "websiteBezoek"]);
     const navigate = useNavigate();
 
     const goToOnderzoek = (id) => {
@@ -59,17 +61,21 @@ function Onderzoeken() {
 
     useEffect(() => {
         const filterOnderzoeken = () => {
+            let gefilterdeOnderzoeken = alleOnderzoeken;
             if (userInfo.userType === 'Bedrijf') {
-                return alleOnderzoeken.filter(o => o.bedrijfId === userInfo.id);
-            } else if (selectedBedrijf === "Alle") {
-                return alleOnderzoeken;
-            } else {
-                return alleOnderzoeken.filter(o => bedrijfsGegevens[o.bedrijfId] === selectedBedrijf);
+                gefilterdeOnderzoeken = gefilterdeOnderzoeken.filter(o => o.bedrijfId === userInfo.id);
             }
+            if (selectedBedrijf !== "Alle") {
+                gefilterdeOnderzoeken = gefilterdeOnderzoeken.filter(o => bedrijfsGegevens[o.bedrijfId] === selectedBedrijf);
+            }
+            if (selectedType !== "Alle") {
+                gefilterdeOnderzoeken = gefilterdeOnderzoeken.filter(o => o.type === selectedType);
+            }
+            return gefilterdeOnderzoeken;
         };
 
         setGetoondeOnderzoeken(filterOnderzoeken());
-    }, [selectedBedrijf, alleOnderzoeken, bedrijfsGegevens, userInfo]);
+    }, [selectedBedrijf, selectedType, alleOnderzoeken, bedrijfsGegevens, userInfo]);
 
 
     const fetchBedrijfGegevens = async (bedrijfId) => {
@@ -102,6 +108,13 @@ function Onderzoeken() {
                                 >
                                     Bedrijf
                                 </OptionSelector>
+                                <OptionSelector
+                                    onChange={(e) => setSelectedType(e.value)}
+                                    options={onderzoekTypes}
+                                    value={selectedType}
+                                >
+                                    Type Onderzoek
+                                </OptionSelector>
 
                             </div>
                         </div>
@@ -124,7 +137,7 @@ function Onderzoeken() {
                                 <div className="content-right">
                                     <div className="content-tags">
                                         <p className="content-informatie-een tag">{bedrijfsGegevens[onderzoek.bedrijfId]}</p>
-                                        <p className="content-informatie tag">€{onderzoek.vergoeding}</p>
+                                        <p className="content-informatie tag">{onderzoek.type}</p>
                                     </div>
                                     <div className="content-info">
                                         <p className="text">{onderzoek.aantalParticipanten}</p>

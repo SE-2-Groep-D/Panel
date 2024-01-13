@@ -10,15 +10,13 @@ function StartForm() {
     const [values, setValues] = useState({
         titel: '',
         omschrijving: '',
-        typeOnderzoek: '',
+        type: '',
         status: '',
 
     });
-    const {userInfo} =   useAuth();
-    console.log(userInfo)
-
     function handleChange({element, value, id}) {
         setValues({...values, [id ? id : element.id]: value});
+        console.log(values)
     }
 
     function handleSubmit(formData) {
@@ -53,10 +51,10 @@ function StartForm() {
                     Omschrijving</InputField>
 
                 <OptionSelector
-                    id='typeOnderzoek'
-                    value={values.typeOnderzoek}
+                    id='type'
+                    value={values.type}
                     onChange={handleChange}
-                    options={['Vragenlijst', 'Website bezoek']}
+                    options={['vragenlijst', 'websiteBezoek']}
                     required>
                     Wat voor onderzoek</OptionSelector>
                 <OptionSelector

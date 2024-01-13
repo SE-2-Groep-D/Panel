@@ -18,12 +18,10 @@ function OnderzoekStapTwee() {
         plaats:'',
     });
 
-
     function handleChange({element, value, id}) {
         setValues({...values, [id ? id : element.id]: value});
+        console.log(values)
     }
-
-
 
     function handleSubmit(formData) {
         const { values } = formData;
@@ -31,6 +29,7 @@ function OnderzoekStapTwee() {
 
         setTimeout(() => {
             state.onderzoek = { ...state.onderzoek, ...values };
+            console.log(state.onderzoek)
              OnderzoekAanmaken(state.onderzoek,userInfo)
             nextStep();
         }, 500);

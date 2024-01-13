@@ -1,8 +1,6 @@
-import "@pagestyles/account/_login.scss";
-
+import "@pagestyles/account/_loginRegister.scss";
 import { Logo, LoadingDiv, GoogleButton } from "@components";
 import LoginForm from "./components/form";
-//import GoogleButton from "./components/GoogleButton";
 import { FormProvider } from "../setup/data/formContext";
 function Login() {
   return (

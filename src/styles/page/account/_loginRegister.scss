@@ -19,22 +19,15 @@
     }
 
     .inputField {
-        width: 12rem;
+        width: clamp(7rem, 100%, 25rem);
     }
     .btn {
-        width: 12rem;
+        width: clamp(7rem, 100%, 25rem);
     }
 }
 @include respond(185px) {
     .logo {
         width: 15rem;
-    }
-
-    .inputField {
-        width: 7rem;
-    }
-    .btn {
-        width: 7rem;
     }
     .heading-1 {
         font-size: 2rem;

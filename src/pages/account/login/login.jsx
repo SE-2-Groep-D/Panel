@@ -8,7 +8,7 @@ function Login() {
       <header>
         <Logo id="logo"></Logo>
       </header>
-      <main>
+      <main className="loginForm">
         <LoginForm />
       </main>
       <footer className="other">

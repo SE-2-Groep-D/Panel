@@ -26,10 +26,18 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
+
+    @include respond(tablet) {
+      width: max-content;
+    }
   }
 
   .loading-div {
     width: 100%;
+
+    @include respond(tablet) {
+      width: max-content;
+    }
   }
 
   &-content {

@@ -51,12 +51,16 @@ function Navigation() {
 
 
 
-                <li className={`navigation-item ${isActive('/nieuwsbrief')}`}>
-                    <Link to='/nieuwsbrief'>
-                        <FontAwesomeIcon icon={faNewspaper} />
-                        Nieuws
-                    </Link>
-                </li>
+                {
+                    (userInfo.userType !== 'Bedrijf') ?
+                        <li className={`navigation-item ${isActive('/nieuwsbrief')}`}>
+                            <Link to='/nieuwsbrief'>
+                                <FontAwesomeIcon icon={faNewspaper} />
+                                Nieuws
+                            </Link>
+                        </li>
+                        : null
+                }
             </div>
 
             <Button aria-label={'Log uit.'} className='logout' onClick={() => logoutUser()}>

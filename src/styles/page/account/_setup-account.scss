@@ -18,8 +18,8 @@
             left: 5%;
         }
 
-        @include respond(600px, max) {
-            top: 25%;
+        @include respond(600px) {
+            top: 24%;
         }
     }
 

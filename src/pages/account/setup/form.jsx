@@ -75,10 +75,13 @@ function GetNextForm() {
           return PossibleForms.researchInfo;
         }
       }
-      break;
+      return PossibleForms.confirmData;
+
+    case 4:
+      return PossibleForms.confirmData;
   }
 
-  return PossibleForms.confirmData;
+  return PossibleForms.accountInfo;
 }
 
 function validateUser(user) {

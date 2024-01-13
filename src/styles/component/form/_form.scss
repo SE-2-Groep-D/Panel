@@ -27,8 +27,13 @@
     flex-direction: column;
     width: 100%;
 
-    @include respond(tablet) {
+    @include respond(600px) {
       width: max-content;
+      text-align: center;
+    }
+
+    @include respond(350px) {
+      max-width: 25rem;
     }
   }
 

@@ -6,6 +6,8 @@ import { FormProvider } from "./data/formContext.jsx";
 import { useForm } from "./data/useForm.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from "react-router-dom";
+
 
 function SetupAccount() {
   return (
@@ -19,7 +21,13 @@ function SetupAccount() {
 }
 
 function SetupAccountForm() {
+    const navigate = useNavigate();
   const { state } = useForm();
+
+  if(!state.user || !state.user.password) {
+      navigate("/register");
+      return;
+  }
 
   return (
     <>

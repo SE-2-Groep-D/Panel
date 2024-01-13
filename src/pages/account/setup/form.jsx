@@ -76,12 +76,9 @@ function GetNextForm() {
         }
       }
       break;
-
-    case 4:
-      return PossibleForms.confirmData;
   }
 
-  return null;
+  return PossibleForms.confirmData;
 }
 
 function validateUser(user) {

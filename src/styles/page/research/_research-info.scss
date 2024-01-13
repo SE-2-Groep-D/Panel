@@ -58,14 +58,14 @@
 .information {
   display: flex;
   justify-content: flex-end;
-  align-items: end;
+  align-items: flex-end;
   width: 40rem;
 
   @include respond(tablet, max) {
     width: clamp(40rem, 100%, 120rem);
     display: flex;
     justify-content: flex-start;
-    align-items: start;
+    align-items: flex-start;
   }
 }
 

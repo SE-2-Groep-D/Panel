@@ -1,12 +1,17 @@
-import { Button, Form, LoadingDiv } from "@components";
-import { useForm } from "../data/useForm.jsx";
 import "@pagestyles/account/_confirm-data.scss";
+
+import { useNavigate } from "react-router-dom";
+import { useForm } from "../data/useForm.jsx";
+import { useState } from "react";
+
+import { Button, Form, LoadingDiv } from "@components";
 import { registerErvaringsdeskundige } from "../postRequests/registerErvaringsdeskundige.js";
 import { registerBedrijf } from "../postRequests/registerBedrijf.js";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 import {faPersonCircleCheck} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+
 
 function ConfirmData() {
   const { state } = useForm();
@@ -24,7 +29,7 @@ function ConfirmData() {
     }
   }
   return (
-    <>
+    <div className='confirm-data'>
       {isRegisterd === 0 && (
         <Form
           title={"Klopt deze informatie"}
@@ -48,7 +53,7 @@ function ConfirmData() {
           <Button onClick={naarRegister}>Naar registreren</Button>
         </>
       )}
-    </>
+    </div>
   );
 
   function naarLogin() {
@@ -65,61 +70,75 @@ function UserInfo(state) {
   const company = state.user.company;
   if (user.userType === "Ervaringsdeskundige") {
     return (
-      <>
-        <p>
-          <b>Voornaam:</b> {user.firstName}
-        </p>
-        <p>
-          <b>Achternaam</b>: {user.lastName}
-        </p>
-        <p>
-          <b>Telefoonnummer</b>: {user.phoneNumber}
-        </p>
-        <p>
-          <b>Email</b>: {user.email}
-        </p>
-        <p>
-          <b>Postcode</b>: {user.postcode}
-        </p>
-        <p>
-          <b>Leeftijdsgroep</b>: {user.ageGroup}
-        </p>
-        <p>
-          <b>Hulpmiddelen</b>: {user.tools}
-        </p>
-        <p>
-          <b>Voorkeurbenaderingen</b>: {user.preferredApproach}
-        </p>
-      </>
+      <ul className='user-info'>
+          <li>
+              <span>Voornaam:</span> {user.firstName}
+          </li>
+
+          <li>
+              <span>Achternaam:</span> {user.lastName}
+          </li>
+
+          <li>
+              <span>Telefoonnummer:</span> {user.phoneNumber}
+          </li>
+
+          <li>
+              <span>Email:</span> {user.email}
+          </li>
+
+          <li>
+              <span>Postcode:</span> {user.postcode}
+          </li>
+
+          <li>
+              <span>Leeftijdsgroep:</span> {user.ageGroup}
+          </li>
+
+          <li>
+              <span>Hulpmiddelen:</span> {user.tools}
+          </li>
+
+          <li>
+              <span>Voorkeurbenaderingen:</span> {user.preferredApproach}
+          </li>
+      </ul>
     );
   } else if (user.userType === "Bedrijf") {
     return (
-      <>
-        <p>
-          <b>Email</b>: {user.email}
-        </p>
-        <p>
-          <b>Bedrijfsnaam</b>: {company.name}
-        </p>
-        <p>
-          <b>Postcode</b>: {company.postcode}
-        </p>
-        <p>
-          <b>Plaats</b>: {company.place}
-        </p>
-        <p>
-          <b>Straat</b>: {company.street}
-        </p>
-        <p>
-          <b>Nummer</b>: {company.number}
-        </p>
-        <p>
-          <b>Website</b>: {company.websiteUrl}
-        </p>
-        <p>
-          <b>Omschrijving</b>: {company.description}
-        </p>
-      </>
+      <ul className='user-info'>
+          <li>
+              <span>Email:</span> {user.email}
+          </li>
+
+          <li>
+              <span>Bedrijfsnaam:</span> {company.name}
+          </li>
+
+          <li>
+              <span>Omschrijving:</span> {company.description}
+          </li>
+
+          <li>
+              <span>Postcode:</span> {company.postcode}
+          </li>
+
+          <li>
+              <span>Plaats:</span> {company.place}
+          </li>
+
+          <li>
+              <span>Straat:</span> {company.street}
+          </li>
+
+          <li>
+              <span>Nummer:</span> {company.number}
+          </li>
+
+          <li>
+              <span>Website:</span> {company.websiteUrl}
+          </li>
+      </ul>
     );
   } else {
     console.log(state);

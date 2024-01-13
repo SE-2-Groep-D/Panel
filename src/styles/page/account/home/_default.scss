@@ -49,7 +49,7 @@
     gap: 2rem;
 
     padding: 3rem;
-    align-items: center;
+    align-items: flex-start;
 
     @include respond(tablet) {
       width: 100%;
@@ -72,6 +72,10 @@
       .loading-div {
         gap: 1rem;
         padding: 3rem;
+
+        @include respond(tablet) {
+          padding: 0rem !important;
+        }
       }
 
       .heading-2 {

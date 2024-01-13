@@ -5,10 +5,12 @@ nav.navigation {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  overflow: hidden;
 
   background-color: $color-white;
   padding: 1rem 4rem;
   z-index: 10;
+  gap: 2rem;
 
   font: $font-family-1;
   font-size: 1.8rem;
@@ -51,6 +53,10 @@ nav.navigation {
     justify-content: center;
     list-style: none;
 
+    @include respond(tablet, min) {
+      flex-grow: 1;
+    }
+
     @include respond(tablet) {
       position: absolute;
       top: 8.5rem;
@@ -69,6 +75,18 @@ nav.navigation {
       transform: translateX(100%);
       transition: transform $animation-medium;
     }
+
+    .links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+
+      @include respond(tablet) {
+        flex-direction: column;
+      }
+    }
+
   }
 
   .active {
@@ -82,7 +100,7 @@ nav.navigation {
   &-item a {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     text-decoration: none;
     color: $color-black;
 
@@ -139,8 +157,6 @@ nav.navigation {
       &::before, &::after {
         content: "";
       }
-
-
     }
 
     @include respond(tablet) {
@@ -148,6 +164,17 @@ nav.navigation {
     }
   }
 
+  .navigation-button {
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include respond(tablet, min) {
+      display: none;
+    }
+  }
 }
 
 

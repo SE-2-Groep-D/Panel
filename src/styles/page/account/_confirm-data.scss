@@ -1,9 +1,28 @@
-p {
-    font-size: 2.3rem;
-    padding: .8rem;
-    letter-spacing: .15rem;
+
+
+.confirm-data {
+    display: flex;
+
+    p {
+        font-size: 2.3rem;
+        padding: .8rem;
+        letter-spacing: .15rem;
+    }
+
+    .user-info {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+
+        li {
+            display: flex;
+            flex-direction: column;
+
+            span {
+                font-weight: bold;
+            }
+        }
+    }
+
 }
 
-.form-content {
-    align-items: center;
-}

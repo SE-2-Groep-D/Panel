@@ -20,6 +20,12 @@
     justify-content: center !important;
   }
 
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+  }
+
   .home-navigation .logo {
     width: 30rem !important;
     height: 8rem !important;

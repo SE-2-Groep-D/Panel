@@ -18,7 +18,7 @@
   &-navigation {
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     width: $dashboard-width;
 
@@ -40,6 +40,11 @@
     gap: 3rem;
     list-style: none;
     width: $dashboard-width;
+
+    @include respond(laptop) {
+      justify-content: center;
+    }
+
 
     @include respond(tablet) {
       flex-direction: column;

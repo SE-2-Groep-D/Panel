@@ -76,10 +76,8 @@ function Onderzoeken() {
 
 
     return (
-
-
         <main className='gray'>
-            <div className="onderzoek-tabel">
+            <section className="onderzoeken">
                 <div className="onderzoek-info">
                     <div className="titel">
                         <div className="content-titel heading-1">Onderzoeken</div>
@@ -95,19 +93,22 @@ function Onderzoeken() {
 
                     </div>
                 </div>
-                <div className="onderzoek-items">
-                    <LoadingDiv loading={isLoading}>
-                        {getoondeOnderzoeken.map(onderzoek => (
-                            <div className="onderzoek-item" key={onderzoek.id}>
+                <LoadingDiv loading={isLoading} className='onderzoek-items'>
+                    {getoondeOnderzoeken.map(onderzoek => (
+                        <li className="onderzoek" key={onderzoek.id}>
+                            <div className="header">
+                                <h2 className="heading-2">{onderzoek.titel}</h2>
+                                <ul className="tags">
+                                    <li className="tag">{bedrijfsGegevens[onderzoek.bedrijfId]}</li>
+                                    <li className="tag">€{onderzoek.vergoeding}</li>
+                                </ul>
+                            </div>
+                            <div className="content">
                                 <div className="content-left">
-                                    <div className=" heading-3">{onderzoek.titel}</div>
-                                    <div className="text">{onderzoek.omschrijving}</div>
+                                    <p className="text">{onderzoek.omschrijving}</p>
                                 </div>
                                 <div className="content-right">
-                                    <div className="content-tags">
-                                        <p className="content-informatie-een tag">{bedrijfsGegevens[onderzoek.bedrijfId]}</p>
-                                        <p className="content-informatie tag">€{onderzoek.vergoeding}</p>
-                                    </div>
+
                                     <div className="content-info">
                                         <p className="text">{onderzoek.aantalParticipanten}</p>
                                         <p className="text">{onderzoek.locatie}</p>
@@ -119,17 +120,15 @@ function Onderzoeken() {
                                     </div>
 
                                 </div>
-
                             </div>
-                        ))}
-                    </LoadingDiv>
-
-                    {/* <div className="button-div">
+                        </li>
+                    ))}
+                </LoadingDiv>
+                {/* <div className="button-div">
                         <Button className="onderzoek-aanmaken-button"
                                 onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
                     </div>*/}
-                </div>
-            </div>
+            </section>
         </main>
 
     );

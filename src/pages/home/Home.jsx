@@ -11,7 +11,7 @@ function Home() {
                     <Logo/>
                 </Link>
 
-                <ul className="navigation-items">
+                <ul className="buttons">
                     <li className="navigation-item">
                         <Link to='/login' className='login'>
                             Login

@@ -8,38 +8,19 @@ import {fetchApi, fetchData} from "@api";
 import OnderzoekInformatie from "./components/OnderzoekInformatie";
 import Information from './components/information';
 import Map from "./components/map";
-import {Button, LoadingDiv, OptionSelector} from "@components";
-import {Status} from "@pages/news/data/newsContext.jsx";
+import {Button, LoadingDiv} from "@components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAdd, faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "@hooks";
 
-async function Inschrijven(onderzoekId, ervaringsdeskundigeId) {
-    var date = new Date().toISOString();
-    const data = {
-        onderzoekId: onderzoekId,
-        ervaringsdeskundigeId: ervaringsdeskundigeId,
-        datum: date
-
-    }
-    try {
-        console.log(data)
-        await fetchApi("/Onderzoek/registration", "POST", data);
-
-        return true;
-    } catch (error) {
-        console.error(error.message);
-        return false;
-    }
-}
 
 function OnderzoekInfo() {
     const {userInfo} = useAuth();
-    console.log(userInfo)
     const {onderzoekId} = useParams();
     const [onderzoek, setOnderzoek] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const [isAlIngeschreven, setIsAlIngeschreven] = useState(false);
+    const [melding, setMelding] = useState('');
     const [bedrijf, setBedrijf] = useState(null);
     const [bedrijfsCoordinaten, setBedrijfsCoordinaten] = useState(null);
     const navigate = useNavigate();
@@ -50,6 +31,48 @@ function OnderzoekInfo() {
     const goToOnderzoekResultaten = (id) => {
         navigate(`/onderzoek/${id}/results`);
     };
+
+    const Inschrijven = async (onderzoekId, ervaringsdeskundigeId) => {
+        var date = new Date().toISOString();
+        const data = {
+            onderzoekId: onderzoekId,
+            ervaringsdeskundigeId: ervaringsdeskundigeId,
+            datum: date
+        };
+        try {
+            const responseText = await fetchApi("/Onderzoek/registration", "POST", data)
+            if (responseText === "Registratie is aangemaakt.") {
+                setIsAlIngeschreven(true);
+                setMelding('Inschrijving succesvol!');
+                return true;
+            } else {
+                setMelding('Inschrijving mislukt. Probeer het opnieuw.');
+                return false;
+            }
+        } catch (error) {
+            setMelding(`Fout tijdens inschrijving: ${error.message}`);
+            return false;
+        }
+    };
+
+
+    useEffect(() => {
+        const controleerInschrijving = async () => {
+            if (!onderzoek || !userInfo) {
+                return;
+            }
+            try {
+                const response = await fetchData(`/Onderzoek/registration/list/${onderzoek.id}`);
+                const isIng = response.some(reg => reg.ervaringsdeskundigeId === userInfo.id);
+                setIsAlIngeschreven(isIng);
+            } catch (error) {
+                console.error('Fout bij ophalen registraties:', error);
+            }
+        };
+
+        controleerInschrijving();
+    }, [onderzoek, userInfo]);
+
 
 
     const getCoordinatesForAddress = async (address) => {
@@ -127,14 +150,25 @@ function OnderzoekInfo() {
                                             </div>
                                         </div>
                                         :
-                                        <div className="button-onderzoekinfo">
-                                            <div>
-                                                <Button className="onderzoek-resultaten"
-                                                        onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Inschrijven
-                                                </Button>
-                                            </div>
+                                        isAlIngeschreven ? (
+                                            <div className="button-onderzoekinfo-ervaringsdeskundige">
+                                                {melding && <div className="melding">{melding}</div>}
+                                                <div className="button-onderzoekinfo-2">
 
-                                        </div>
+                                                    <Button className="onderzoek-vragenlijst"
+                                                            onClick={() => goToOnderzoek(onderzoek.id)}>Start Vragenlijst</Button>
+                                                </div>
+                                                <div>
+                                                    <Button className="start-website-onderzoek"
+                                                            onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Start website onderzoek</Button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                    <Button className="onderzoek-Inschrijven"
+                                                            onClick={() => Inschrijven(onderzoek.id, userInfo.id)}>Inschrijven</Button>
+                                                </div>
+                                            )
                                 }
 
                             </div>

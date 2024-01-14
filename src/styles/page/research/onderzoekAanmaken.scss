@@ -1,0 +1,92 @@
+@use "src/styles/abstract" as *;
+
+#onderzoekAanmaken {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 4rem;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+
+  .back {
+    position: absolute;
+    left: 20%;
+    top: 24rem;
+
+    @include respond(tablet) {
+      left: 5%;
+    }
+
+    @include respond(600px, max) {
+      top: 25%;
+    }
+  }
+
+  .logo {
+    width: clamp(20rem, 100%, 40rem);
+  }
+}
+
+.loading-div {
+  width: 10rem;
+  height: 20rem;
+}
+
+.moveIn {
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+    transform: translate(0,0);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: moveInForm $animation-fast forwards;
+  }
+
+}
+
+.moveOut {
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: moveOutForm $animation-fast forwards;
+  }
+}
+
+@keyframes moveInForm {
+  0% {
+    transform: translateX(40rem);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveOutForm {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-40rem);
+    opacity: 0;
+  }
+}
+
+
+
+.logo {
+  width: 45rem;
+
+  @include respond(mobile) {
+    width: 35rem;
+  }
+}

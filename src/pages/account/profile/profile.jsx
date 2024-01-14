@@ -1,9 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import "@pagestyles/account/_profile.scss";
-import { useAuth } from "@hooks";
-import { useEffect, useState } from "react";
-import { LoadingDiv, Button } from "@components";
+import { useState } from "react";
 import EditForm from "./components/editForm";
 import UserInfo from "./components/userInfo";
 import { getUserData } from "./components/getUserData";
@@ -11,7 +9,6 @@ import { getUserData } from "./components/getUserData";
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const { userInfo } = useAuth();
   const [loading, setLoading] = useState(true);
 
   getUserData(setUser, setLoading);

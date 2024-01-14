@@ -12,14 +12,14 @@
     .back {
         position: absolute;
         left: 20%;
-        top: 24rem;
+        top: 23rem;
 
         @include respond(tablet) {
             left: 5%;
         }
 
-        @include respond(600px, max) {
-            top: 25%;
+        @include respond(600px) {
+            top: 24%;
         }
     }
 

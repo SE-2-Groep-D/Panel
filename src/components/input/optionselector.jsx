@@ -70,15 +70,14 @@ export default function OptionsSelector({
 
             </div>
             <ul className='options-list'>
-                {/* eslint-disable-next-line react/prop-types */}
                 {options.map((option, key) => {
-                    return <option 
+                    return <li
                                 className='option' 
                                 key={key} 
                                 onClick={(e) => {handleSelect(e.target, option);}}
                                 onKeyDown={handleKeyPress}
                                 tabIndex={0}
-                            >{option}</option>
+                            >{option}</li>
                 })}
             </ul>
         </div>

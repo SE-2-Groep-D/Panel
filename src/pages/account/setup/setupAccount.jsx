@@ -6,6 +6,9 @@ import { FormProvider } from "./data/formContext.jsx";
 import { useForm } from "./data/useForm.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+
 
 function SetupAccount() {
   return (
@@ -20,6 +23,13 @@ function SetupAccount() {
 
 function SetupAccountForm() {
   const { state } = useForm();
+  const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!state.user || !state.user.password) {
+            navigate('/');
+        }
+    }, [navigate, state.user]);
 
   return (
     <>

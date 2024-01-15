@@ -135,13 +135,15 @@ const IndividualChat = ({ userId, otherUserId }) => {
                 <ul aria-label="Lijst van je berichten" className="message-list" aria-live="polite">
                     {messages.map((msg, index) => (
                         <li key={index} className={`message ${msg.type}`}>
-                            <span className={msg.type}>{msg.tekst}</span> {/* Updated from msg.text to msg.tekst */}
+                            <span className={msg.type}><p>{msg.tekst}</p></span> {/* Updated from msg.text to msg.tekst */}
                         </li>
                     ))}
                 </ul>
             <div className="message-input-area">
                 <input
                     type="text"
+                    maxLength="250"
+                    minLength="1"
                     aria-label="Typ hier een bericht in"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}

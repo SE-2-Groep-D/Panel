@@ -1,3 +1,5 @@
+@use "src/styles/abstract" as *;
+
 body, html {
     margin: 0;
     padding: 0;
@@ -37,11 +39,26 @@ body, html {
     display: flex;
 }
 
-.message span {
+.message span{
     max-width: 80%;
     padding: 8px 12px;
     border-radius: 20px;
     display: inline-block;
+}
+.message p{
+    font-size: 1.4rem;
+}
+.chat-list-items{
+    padding: 1rem;
+}
+.chat-list ul {
+    list-style-type: none;
+    border-bottom: 2px solid lightgray;
+    font-size: 1.5rem;
+}
+.chat-list ul:hover{
+    background-color: lightgray;
+    cursor: pointer;
 }
 
 .message .sent {
@@ -136,6 +153,7 @@ body, html {
     padding: 10px;
     background-color: white;
     border-bottom: 1px solid #ddd;
+    font-size: 1.4rem;
 }
 
 .chat-header span {
@@ -146,4 +164,16 @@ body, html {
 .popup-chat-window {
     bottom: 90px;
     transition: all 0.3s ease;
+}
+.back-icon :hover{
+    cursor: pointer;
+}
+.back-icon{
+    padding: 1rem;
+}
+.x-icon{
+    padding: 1rem;
+}
+.x-icon :hover{
+    cursor: pointer;
 }

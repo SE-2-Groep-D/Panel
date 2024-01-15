@@ -20,9 +20,11 @@ const ChatList = ({ onSelectChat, userId }) => {
     return (
         <div className="chat-list">
             {chats.map((chat) => (
-                <div key={chat.otherUserId} onClick={() => onSelectChat(chat.otherUserId)}>
-                    {chat.otherUserId} {/* Displaying otherUserId as chat name */}
-                </div>
+                <ul className="chat-list-items" key={chat.otherUserId} onClick={() => onSelectChat(chat.otherUserId)}>
+                        <li>
+                            <span>{chat.naam}</span>
+                        </li>
+                </ul>
             ))}
         </div>
     );

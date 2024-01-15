@@ -41,6 +41,7 @@ export default function MultiInputSelector({
     }
 
     function removeOption(e) {
+      e.preventDefault();
     if(e.key !== 'Enter' && e.key !== undefined && e.key !== null) return;
     const target = e.currentTarget;
     const option = target.innerText;

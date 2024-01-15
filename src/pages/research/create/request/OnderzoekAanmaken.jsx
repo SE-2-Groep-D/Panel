@@ -10,7 +10,7 @@ async function OnderzoekAanmaken(onderzoek,user) {
         omschrijving: onderzoek.omschrijving,
         vergoeding: onderzoek.vergoeding,
         locatie: onderzoek.plaats,
-        status: onderzoek.status,
+        status: 'open',
         type:onderzoek.type,
         bedrijfId: user.id
     }

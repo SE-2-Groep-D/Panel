@@ -43,7 +43,7 @@ function OnderzoekStapTwee() {
             const aangemaaktOnderzoek = await OnderzoekAanmaken(updatedOnderzoek, userInfo);
 
             setTimeout(() => {
-                if (aangemaaktOnderzoek.type === "websiteBezoek") {
+                if (updatedOnderzoek.type === "websiteBezoek") {
                     NaarOnderzoeken();
                 } else {
                     state.onderzoek = {...state.onderzoek, ...aangemaaktOnderzoek};
@@ -61,11 +61,11 @@ function OnderzoekStapTwee() {
     return (
         <div>
             <Form title="Onderzoek aanmaken" buttonText='volgende' onSubmit={handleSubmit} className={move}>
-                <InputField id='aantalParticipanten' value={values.aantalParticipanten} onChange={handleChange}
+                <InputField id='aantalParticipanten' type="int" value={values.aantalParticipanten} onChange={handleChange}
                             required>Aantal Participanten</InputField>
-                <InputField id='vergoeding' value={values.vergoeding} onChange={handleChange}
+                <InputField id='vergoeding' type="int" value={values.vergoeding} onChange={handleChange}
                             required>Vergoeding</InputField>
-                <InputField id='datum' value={values.datum} onChange={handleChange} required>Datum</InputField>
+                <InputField id='datum' type='date' value={values.datum} onChange={handleChange} required>Datum</InputField>
                 <InputField id='websiteUrl' value={values.websiteUrl} onChange={handleChange}
                             required>WebsiteUrl</InputField>
                 <InputField id='plaats' value={values.plaats} onChange={handleChange} required>Plaats</InputField>

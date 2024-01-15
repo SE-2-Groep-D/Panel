@@ -10,9 +10,7 @@ function StartForm() {
     const [values, setValues] = useState({
         titel: '',
         omschrijving: '',
-        type: '',
-        status: '',
-
+        type: ''
     });
     function handleChange({element, value, id}) {
         setValues({...values, [id ? id : element.id]: value});
@@ -57,15 +55,6 @@ function StartForm() {
                     options={['vragenlijst', 'websiteBezoek']}
                     required>
                     Wat voor onderzoek</OptionSelector>
-                <OptionSelector
-                    id='status'
-                    value={values.status}
-                    onChange={handleChange}
-                    options={['open', 'active', 'ended']}
-                    required>
-                    Status</OptionSelector>
-
-
             </Form>
         </div>
     );

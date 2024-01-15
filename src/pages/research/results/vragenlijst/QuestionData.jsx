@@ -16,11 +16,11 @@ function QuestionData({data, id, setQuestion}) {
 
     return <section className='question-info'>
         <h2 className='heading-2'>Vraag {questionNumber + 1}</h2>
-        <h3 className='question heading-3'>{question.onderwerp}</h3>
+        <h3 className='question heading-3'>{question.description}</h3>
 
         <div className='awnser-box'>
             <h3 className='heading-3'>Antwoorden</h3>
-            <QuestionAnswers type={question.type} answers={question.antwoorden}/>
+            <QuestionAnswers type={question.type} answers={question.givenAnswers}/>
         </div>
 
         <div className='button-box'>
@@ -31,6 +31,9 @@ function QuestionData({data, id, setQuestion}) {
 }
 
 function QuestionAnswers({type, answers}) {
+
+    console.log(answers);
+
     if(type === 'multiple_choice' || type === 'one_choice') {
         return <ChoiceAwnsers data={answers}/>
     }
@@ -49,7 +52,7 @@ function ChoiceAwnsers({data}) {
 
         if (chartRef.current && data.length > 0) {
             const counts = data.reduce((acc, entry) => {
-                acc[entry.tekst] = (acc[entry.tekst] || 0) + 1;
+                acc[entry.value] = (acc[entry.value] || 0) + 1;
                 return acc;
             }, {});
 
@@ -108,11 +111,11 @@ function ChoiceAwnsers({data}) {
 function OpenQuestion({data}) {
     let finalAnswers =  <li className='awnser'> Geen antwoorden</li>
 
-    if(data !== undefined && data.length >= 0) {
+    if(data !== undefined && data.length > 0) {
         finalAnswers = data.map((item, index) => {
             return <li className="awnser" id={item.id} key={index}>
                 <span>{index + 1}.</span>
-                {item.tekst}
+                {item.value}
             </li>
         });
     }

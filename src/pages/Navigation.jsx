@@ -65,7 +65,7 @@ function Navigation() {
 
             <Button aria-label={'Log uit.'} className='logout' onClick={() => logoutUser()}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
-                Logout
+                Uitloggen
             </Button>
         </ul>
 

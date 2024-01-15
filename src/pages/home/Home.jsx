@@ -19,7 +19,7 @@ function Home() {
                     </li>
                     <li className="navigation-item">
                         <Link to='/register' className='register'>
-                            Register
+                            Registreer
                         </Link>
                     </li>
                 </ul>

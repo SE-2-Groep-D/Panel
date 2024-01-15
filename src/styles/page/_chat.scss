@@ -42,7 +42,7 @@ body, html {
 .message span{
     max-width: 80%;
     padding: 8px 12px;
-    border-radius: 20px;
+    border-radius: $border-radius-big;
     display: inline-block;
 }
 .message p{
@@ -62,15 +62,17 @@ body, html {
 }
 
 .message .sent {
-    background-color: #dcf8c6;
+    background-color: $color-primary-60;
     margin-left: auto;
     text-align: right;
+    color: $color-white;
 }
 
 .message .received {
-    background-color: #F1F1F1;
+    background-color: $color-primary-85;
     margin-right: auto;
     text-align: left;
+    color: $color-white;
 }
 
 .message-list li::after {

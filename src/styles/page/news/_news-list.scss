@@ -59,11 +59,11 @@
     padding: 3rem;
 
     width: 30rem;
-    height: 45rem;
 
     .loading-div {
       display: flex;
       flex-direction: column;
+      gap: 2rem;
     }
 
    &__header {

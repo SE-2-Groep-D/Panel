@@ -1,22 +1,22 @@
-import "@pagestyles/account/_register.scss";
-
+import "@pagestyles/account/_loginRegister.scss";
 import { Logo, LoadingDiv, GoogleButton } from "@components";
 import LoginForm from "./components/form";
-//import GoogleButton from "./components/GoogleButton";
 import { FormProvider } from "../setup/data/formContext";
 function Login() {
   return (
     <FormProvider>
-      <section id="register">
+      <header>
         <Logo id="logo"></Logo>
+      </header>
+      <main className="loginForm">
         <LoginForm />
-        <div className="other">
-          <hr />
-          <a href="">Wachtwoord vergeten?</a>
-          <GoogleButton />
-          <a href="./register">Nog geen account?</a>
-        </div>
-      </section>
+      </main>
+      <footer className="other">
+        <hr />
+        <a href="">Wachtwoord vergeten?</a>
+        <GoogleButton />
+        <a href="./register">Nog geen account?</a>
+      </footer>
     </FormProvider>
   );
 }

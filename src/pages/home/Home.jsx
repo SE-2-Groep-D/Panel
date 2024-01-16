@@ -25,7 +25,7 @@ function Home() {
                 </ul>
             </nav>
 
-            <main className='content'>
+            <main className='home-page'>
                 <section className='header'>
                     <div className='cta'>
                         <h1 className='heading-1'>Werk samen met ons aan een samenleving toegankelijk voor iedereen.</h1>

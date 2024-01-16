@@ -36,9 +36,9 @@ export default function TrackingResults({researhId}) {
 }
 
 function Statistics({data}) {
-
+    const [ref, inView] = useIntersectionObserver();
     return (
-        <section className='statistics moveIn bottom'>
+        <section ref={ref} className={(inView)? 'statistics moveIn bottom': 'statistics'}>
         <h1 className='heading-2'>Trackingscript resultaten</h1>
   
         <ul className='statistics__items'>
@@ -68,16 +68,18 @@ function Statistics({data}) {
   }
 
 function PageResults({data}) {
+    const [ref, inView] = useIntersectionObserver();
+    var className = (inView) ? 'tracking__results__page moveIn bottom' : 'tracking__results__page';
 
     if(data === null || data === undefined || data.length === 0) {
-        return  <section className='tracking__results__page moveIn bottom'>
+        return  <section ref={ref} className={className}>
                 <h2 className='heading-2'>Pagina resultaten</h2>
                 <p className='text'>Nog geen resultaten gevonden.</p>
         </section>
     }
 
     return (
-        <section className='tracking__results__page moveIn bottom'>
+        <section ref={ref} className={className}>
             <h2 className='heading-2'>Pagina resultaten</h2> 
 
             <table className='page-results'>
@@ -108,16 +110,17 @@ function PageResults({data}) {
 }
 
 function OtherResults({data}) {
-
+    const [ref, inView] = useIntersectionObserver();
+    var className = (inView)? 'tracking__results__other moveIn bottom' : 'tracking__results__other';
     if(data === null || data === undefined || data.length === 0) {
-        return      <section className='tracking__results__other moveIn bottom'>
+        return      <section ref={ref} className={className}>
                <h2 className='heading-2'>Andere resultaten</h2> 
                 <p className='text'>Nog geen resultaten gevonden.</p>
         </section>
     }
 
     return (
-        <section className='tracking__results__other moveIn bottom'>
+        <section ref={ref} className={className}>
               <h2 className='heading-2'>Andere resultaten</h2> 
               <ul className='result-list'>
             {
@@ -151,6 +154,7 @@ async function fetchResearchData(id, setData) {
 
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import {useIntersectionObserver} from "../../../../hooks/index.js";
 
 
 Statistics.propTypes = {

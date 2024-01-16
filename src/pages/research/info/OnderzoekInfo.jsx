@@ -3,6 +3,7 @@ import '@pagestyles/research/_research-info.scss';
 import {useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
 import {fetchData} from "@api";
+import {useIntersectionObserver} from "@hooks";
 
 // import components
 import OnderzoekInformatie from "./components/OnderzoekInformatie";
@@ -17,6 +18,7 @@ function OnderzoekInfo() {
     const [loading, setLoading] = useState(true);
     const [bedrijf, setBedrijf] = useState(null);
     const [bedrijfsCoordinaten, setBedrijfsCoordinaten] = useState(null);
+
 
 
     const getCoordinatesForAddress = async (address) => {

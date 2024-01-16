@@ -79,13 +79,10 @@ div.filters > .option-selector {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    text-align: right;
-
 
     @include respond(600px) {
       flex-direction: column;
       align-items: start;
-      text-align: left;
     }
   }
 
@@ -131,10 +128,12 @@ div.filters > .option-selector {
       align-items: flex-end;
       width: 30rem;
       gap: 2rem;
+      text-align: right;
 
       @include respond(600px) {
         align-items: flex-start;
         width: 20rem;
+        text-align: left;
       }
     }
 

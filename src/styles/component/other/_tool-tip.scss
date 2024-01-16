@@ -12,9 +12,26 @@
         font-size: 1.4rem;
         padding: .5rem 1rem;
         border-radius: $border-radius-small;
-        opacity: 0;
-        z-index: -10;
         transform: translate(-50%, -50%);
+
+        opacity: 0;
+        z-index: 10;
+        visibility: hidden;
+
+    }
+
+    &__message::after {
+        content: '';
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        background-color: $color-blue-black;
+        transform: rotate(45deg);
+        bottom: -.4rem;
+        left: 50%;
+        transform-origin: 50% 0;
+
+        z-index: 5;
     }
 
     &.error &__message {
@@ -25,8 +42,8 @@
     &:focus-within &__message {
         @media (prefers-reduced-motion: reduce) {
             animation: none;
+            visibility: visible;
             opacity: 1;
-            z-index: 10;
         }
 
         @media (prefers-reduced-motion: no-preference) {
@@ -46,11 +63,11 @@
 @keyframes moveMessage {
     from {
         opacity: 0;
-        z-index: -10;
+        visibility: hidden;
     }
 
     to {
         opacity: 1;
-        z-index: 10;
+        visibility: visible;
     }
 }

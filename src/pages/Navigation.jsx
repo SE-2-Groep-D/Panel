@@ -2,7 +2,14 @@ import {Link, useLocation} from "react-router-dom";
 import {Logo, Button} from "@components";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHome, faMagnifyingGlass, faNewspaper, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {
+    faBars,
+    faCross,
+    faHome,
+    faMagnifyingGlass,
+    faNewspaper,
+    faRightFromBracket, faXmark
+} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "@hooks";
 import {useState} from "react";
 
@@ -15,8 +22,18 @@ const hideNavigationRoutes  = [
     '/onderzoek/:onderzoekId'
 ];
 
+const NavigationItem = ({ to, icon, label, isActive, onClick}) => (
+    <li className={`navigation-item ${isActive(to)}`} onClick={onClick} onKeyDown={(e) => e.key === 'Enter' && onClick()}>
+        <Link to={to}>
+            <FontAwesomeIcon icon={icon} aria-hidden="true" />
+            {label}
+        </Link>
+    </li>
+);
+
 function Navigation() {
     const {authenticated, logoutUser, userInfo} = useAuth();
+    const [open, setOpen] = useState(false);
     const route = useLocation();
 
     if(hideNavigationRoutes.includes(route.pathname) || !authenticated) {
@@ -27,57 +44,37 @@ function Navigation() {
         return location.pathname === path ? 'active' : '';
     };
 
-    return <nav className='navigation'>
-        <input type={"checkbox"} id='navigation-checkbox' />
+    function onClick() {
+        setOpen(!open);
+    }
 
-        <Link className='home' to='/'>
-            <Logo small/>
-        </Link>
+    return (
+        <nav className="navigation" role="navigation">
+            <Link className="home" to="/">
+                <Logo small />
+            </Link>
 
-        <ul className="navigation-items">
-            <div className="links">
-                <li className={`navigation-item ${isActive('/')}`}>
-                    <Link to='/'>
-                        <FontAwesomeIcon icon={faHome} />
-                        Dashboard
-                    </Link>
-                </li>
-                <li className={`navigation-item ${isActive('/onderzoek')}`}>
-                    <Link to='/onderzoek'>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        Onderzoeken
-                    </Link>
-                </li>
+            <ul className={(open) ? "navigation-items open" : "navigation-items" }>
+                <div className="links">
+                    <NavigationItem to="/" icon={faHome} label="Dashboard" isActive={isActive} onClick={onClick}/>
+                    <NavigationItem to="/onderzoek" icon={faMagnifyingGlass} isActive={isActive} onClick={onClick} label="Onderzoeken" />
 
+                    {userInfo.userType !== 'Bedrijf' && (
+                        <NavigationItem to="/nieuwsbrief" icon={faNewspaper} isActive={isActive} onClick={onClick} label="Nieuws" />
+                    )}
+                </div>
 
+                <Button aria-label="Log uit" className="logout" onClick={() => logoutUser()}>
+                    <FontAwesomeIcon icon={faRightFromBracket} aria-hidden="true" />
+                   Uitloggen
+                </Button>
+            </ul>
 
-                {
-                    (userInfo.userType !== 'Bedrijf') ?
-                        <li className={`navigation-item ${isActive('/nieuwsbrief')}`}>
-                            <Link to='/nieuwsbrief'>
-                                <FontAwesomeIcon icon={faNewspaper} />
-                                Nieuws
-                            </Link>
-                        </li>
-                        : null
-                }
-            </div>
-
-            <Button aria-label={'Log uit.'} className='logout' onClick={() => logoutUser()}>
-                <FontAwesomeIcon icon={faRightFromBracket} />
-                Uitloggen
-            </Button>
-        </ul>
-
-
-
-        <div className="navigation-button">
-            <label className='menu' htmlFor='navigation-checkbox'>
-                <span className="menu-icon"></span>
-            </label>
-        </div>
-
-    </nav>
+            <button className="navigation-button" onClick={onClick}>
+                <FontAwesomeIcon icon={(!open) ? faBars : faXmark}/>
+            </button>
+        </nav>
+    );
 }
 
 export default Navigation;

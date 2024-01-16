@@ -95,7 +95,7 @@ function UserAgenda({ data, type }) {
   if (data === undefined || data.length === 0)
     return (
       <section className="agenda">
-        <h2 className="heading-2">Agenda</h2>
+        <h2 className="heading-2">Geplande onderzoeken</h2>
         <p className="text">Er staat nog niks op de planning.</p>
       </section>
     );

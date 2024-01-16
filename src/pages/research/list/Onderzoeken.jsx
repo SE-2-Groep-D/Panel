@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from "react";
 
 // import components
-import {Button, LoadingDiv, OptionSelector} from "@components";
+import {Button, LoadingDiv, OptionSelector, ToolTip} from "@components";
 
 
 function Onderzoeken() {
@@ -80,7 +80,7 @@ function Onderzoeken() {
             <section className="onderzoeken">
                 <div className="onderzoek-info">
                     <div className="titel">
-                        <div className="content-titel heading-1">Onderzoeken</div>
+                        <h1 className="content-titel heading-1">Onderzoeken</h1>
                     </div>
                     <div className="filters">
                         <OptionSelector
@@ -98,9 +98,13 @@ function Onderzoeken() {
                         <li className="onderzoek" key={onderzoek.id}>
                             <div className="header">
                                 <h2 className="heading-2">{onderzoek.titel}</h2>
-                                <ul className="tags">
-                                    <li className="tag">{bedrijfsGegevens[onderzoek.bedrijfId]}</li>
-                                    <li className="tag">€{onderzoek.vergoeding}</li>
+                                <ul className="tags" aria-label='Onderzoeks informatie'>
+                                    <ToolTip message='Bedrijfsnaam'>
+                                        <li className="tag">{bedrijfsGegevens[onderzoek.bedrijfId]}</li>
+                                    </ToolTip>
+                                    <ToolTip message='Onderzoek vergoeding'>
+                                        <li className="tag">€{onderzoek.vergoeding}</li>
+                                    </ToolTip>
                                 </ul>
                             </div>
                             <div className="content">
@@ -109,11 +113,17 @@ function Onderzoeken() {
                                 </div>
                                 <div className="content-right">
 
-                                    <div className="content-info">
-                                        <p className="text">{onderzoek.aantalParticipanten}</p>
-                                        <p className="text">{onderzoek.locatie}</p>
-                                        <div className="text">{formatDate(onderzoek.startDatum)}</div>
-                                    </div>
+                                    <ul className="content-info" aria-label='Extra onderzoek informatie'>
+                                        <ToolTip message='Aantal deelnemers'>
+                                            <li className="text">{onderzoek.aantalParticipanten}</li>
+                                        </ToolTip>
+                                        <ToolTip message='Locatie'>
+                                            <li className="text">{onderzoek.locatie}</li>
+                                        </ToolTip>
+                                        <ToolTip message='Startdatum'>
+                                            <li className="text">{formatDate(onderzoek.startDatum)}</li>
+                                        </ToolTip>
+                                    </ul>
                                     <div className="button-div">
                                         <Button className="onderzoek-button"
                                                 onClick={() => goToOnderzoek(onderzoek.id)}> Onderzoek Info </Button>

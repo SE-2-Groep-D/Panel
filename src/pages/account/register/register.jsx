@@ -9,7 +9,7 @@ function Register() {
       <header>
         <Logo id="logo"></Logo>
       </header>
-      <main clasName={"registerForm"}>
+      <main className={"registerForm"}>
         <RegisterForm />
       </main>
       <footer className="other">

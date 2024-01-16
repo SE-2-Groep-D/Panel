@@ -64,6 +64,9 @@ div.filters > .option-selector {
   flex-direction: column;
   gap: 1rem;
 
+  ul {
+    list-style: none;
+  }
 
   @include respond(laptop) {
     padding: 2rem 3rem;

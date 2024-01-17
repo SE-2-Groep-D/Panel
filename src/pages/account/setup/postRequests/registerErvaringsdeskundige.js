@@ -11,6 +11,8 @@ async function registerErvaringsdeskundige(user) {
     toestemmingBenadering: user.canBeApproached === "true",
     leeftijdscategorie: user.ageGroup,
     roles: user.roles,
+    nieuweHulpmiddelen: user.tools.split(","),
+    nieuweVoorkeursbenaderingen: [user.preferredApproach]
   }
 
   try {

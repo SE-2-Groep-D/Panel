@@ -7,6 +7,7 @@ function getUserData(setUser, setLoading) {
     useEffect(() => {
         const getDataUser = async () => {
           const response = await getUserInfo(userInfo.id);
+          console.log(response)
           if (userInfo.userType === "Bedrijf") {
             setUser(createBedrijfObject(response));
           } else {
@@ -30,16 +31,34 @@ async function getUserInfo(id) {
   }
 
   function createErvaringsdeskundigeObject(user) {
+    let hulpmiddelen = "";
+    if(user.hulpmiddelen === null){
+      hulpmiddelen = "nog geen hulpmiddel opgeslagen"
+    }
+
+    for(let hulpmiddel of user.hulpmiddelen) {
+      hulpmiddelen = hulpmiddelen + " " + hulpmiddel.naam
+    }
+    let benaderingen = "";
+    if(user.voorkeurbenaderingen === null){
+      benaderingen = "nog geen voorkeursbenadering opgeslagen"
+    }
+    for(let benadering of user.voorkeurbenaderingen) {
+      benaderingen = benaderingen + " " + benadering.type
+    }
+
     const userCreated = {
       Voornaam: user.voornaam,
       Achternaam: user.achternaam,
       Email: user.email,
-      Telefoonnummer: "komtnog",
       Postcode: user.postcode,
       Leeftijdscategorie: user.leeftijdscategorie,
-      Voorkeurbenadering: "kkomtnog",
-      Hulpmiddelen: "komtnog",
+      Voorkeurbenadering: benaderingen,
+      Hulpmiddelen: hulpmiddelen,
     };
+
+    
+    console.log(userCreated)
     return userCreated;
   }
   

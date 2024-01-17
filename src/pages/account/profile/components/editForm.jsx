@@ -68,15 +68,15 @@ function createBedrijfObjectApi(user) {
 }
 
 function createErvaringsdeskundigeObjectApi(user) {
+  console.log(user);
   const userCreated = {
     voornaam: user.Voornaam,
     achternaam: user.Achternaam,
     email: user.Email,
-    //phoneNumber: user.Telefoonnummer,
     postcode: user.Postcode,
     leeftijdscategorie: user.Leeftijdscategorie,
-    benaderingen: ["email"],
-    //hulpmiddelen: ["komtnog"],
+    //benaderingen: user.Voorkeurbenadering.split(" "),
+    //hulpmiddelen: user.Hulpmiddelen.split(" "),
   };
   return userCreated;
 }

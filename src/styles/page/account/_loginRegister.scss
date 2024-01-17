@@ -1,6 +1,6 @@
 @use "src/styles/abstract" as *;
 
-.logo {
+header .logo {
     width: 45rem;
 
     @include respond(500px) {
@@ -14,19 +14,22 @@
 }
 
 @include respond(305px) {
-    .logo {
+    header .logo {
         width: 20rem;
     }
 
     .inputField {
-        width: clamp(7rem, 100%, 25rem);
+        width: clamp(7rem, 75dvw, 25rem);
+    }
+    .checkbox {
+        width: clamp(7rem, 75dvw, 25rem);
     }
     .btn {
         width: clamp(7rem, 100%, 25rem);
     }
 }
 @include respond(185px) {
-    .logo {
+    header .logo {
         width: 15rem;
     }
     .heading-1 {

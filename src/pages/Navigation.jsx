@@ -88,6 +88,14 @@ function Navigation() {
           )}
         </div>
 
+        <NavigationItem
+          to="/profiel"
+          icon={faUser}
+          isActive={isActive}
+          onClick={onClick}
+          label="Profiel"
+        />
+
         <Button
           aria-label="Log uit"
           className="logout"

@@ -16,12 +16,9 @@ async function OnderzoekAanmaken(onderzoek,user) {
     }
 
     try {
-        console.log(data)
         const response = await fetchApi("/Onderzoek/create", "POST", data);
-        console.log(response)
         return response;
     } catch (error) {
-        console.error(error.message);
         return false;
     }
 }

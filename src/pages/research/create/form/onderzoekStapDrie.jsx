@@ -43,33 +43,40 @@ function OnderzoekStapDrie() {
         }
 
         setQuestionnaire({...questionnaire, questions: updatedQuestions});
-        setNewQuestion({ title: '', type: '', possibleAnswers: [] }); // Reset newQuestion for next entry
+        setNewQuestion({ title: '', type: '', possibleAnswers: [] });
+        console.log(questionnaire.questions)
         closeModal();
     };
 
 
-    function handleChange(event) {
-        const { id, value } = event.target;
-        setQuestionnaire(prev => ({ ...prev, [id]: value }));
+    function handleChangeQuestionnaire({element, value, id}) {
+        setQuestionnaire({...questionnaire, [id ? id : element.id]: value});
     }
 
     function handleChangeQuestion({element, value, id}) {
         setNewQuestion({...newQuestion, [id ? id : element.id]: value});
 
     }
-    const handleChangeAnswer = (event, answerIndex) => {
+    const handleChangeAnswer = (event, questionIndexOrAnswerIndex, answerIndex) => {
         const { value } = event.target;
-        const updatedAnswers = newQuestion.possibleAnswers.map((answer, index) =>
-            index === answerIndex ? { ...answer, answertext: value } : answer
-        );
-        setNewQuestion(prev => ({ ...prev, possibleAnswers: updatedAnswers }));
+
+        if (typeof answerIndex === 'undefined') {
+            // Updating an answer in newQuestion.possibleAnswers
+            const updatedAnswers = newQuestion.possibleAnswers.map((answer, index) =>
+                index === questionIndexOrAnswerIndex ? { ...answer, answertext: value } : answer
+            );
+            setNewQuestion(prev => ({ ...prev, possibleAnswers: updatedAnswers }));
+        } else {
+            // Updating an answer in questionnaire.questions[currentQuestionIndex].possibleAnswers
+            const updatedQuestionnaire = {...questionnaire};
+            updatedQuestionnaire.questions = [...questionnaire.questions];
+            updatedQuestionnaire.questions[questionIndexOrAnswerIndex].possibleAnswers =
+                updatedQuestionnaire.questions[questionIndexOrAnswerIndex].possibleAnswers.map((answer, index) =>
+                    index === answerIndex ? { ...answer, answertext: value } : answer
+                );
+            setQuestionnaire(updatedQuestionnaire);
+        }
     };
-
-
-
-
-
-
     const openModal = (index) => {
         if (index < questionnaire.questions.length) {
             console.log("low")
@@ -140,7 +147,7 @@ function OnderzoekStapDrie() {
                                             <OptionSelector
                                                 id="type"
                                                 value={question.type}
-                                                onChange={handleChange()}
+                                                onChange={handleChangeQuestion}
                                                 options={['openvraag', 'enkelekeus', 'meerkeuze']}
                                                 required
                                             />
@@ -164,40 +171,42 @@ function OnderzoekStapDrie() {
                     open={showModal}
                     onClose={closeModal}
                     animation="bottom"
-                    // ... other modal properties like style or contentLabel
                 >
                     <div className="modal-content">
                         {currentQuestionIndex !== null && currentQuestionIndex < questionnaire.questions.length ? (
-
                             <>
                                 <h3>Antwoord vraag {currentQuestionIndex + 1}</h3>
                                 <InputField
                                     label="Vraag"
                                     value={questionnaire.questions[currentQuestionIndex].title}
-                                    onChange={handleChange}
+                                    onChange={handleChangeQuestion}
                                 />
                                 {questionnaire.questions[currentQuestionIndex].possibleAnswers.map((answer, answerIndex) => (
-                                    <InputField
+                                    <input
                                         key={answerIndex}
-                                        id={answerIndex.toString()} // Setting the index as the id
-                                        label={`Antwoord ${answerIndex + 1}`}
                                         value={answer.answertext}
-                                        onChange={handleChangeAnswer}
+                                        onChange={(e) => handleChangeAnswer(e, currentQuestionIndex, answerIndex)}
+
                                     />
                                 ))}
-                                <Button onClick={() => handleAddPossibleAnswer(currentQuestionIndex)}>
-                                    Voeg antwoord toe
-                                </Button>
+
+                                {questionnaire.questions[currentQuestionIndex].type === 'enkelekeus' || questionnaire.questions[currentQuestionIndex].type === 'meerkeuze' ? (
+                                    <Button onClick={() => handleAddPossibleAnswer(currentQuestionIndex)}>
+                                        Voeg antwoord toe
+                                    </Button>
+                                ) : null}
+
+
                             </>
                         ) : (
                             <>
-                                <h3 className="heading-3">Nieuwe vraag toevoegen</h3>
+                            <h3 className="heading-3">Nieuwe vraag toevoegen</h3>
 
                                 <InputField
-                                    id="title" // Make sure this matches the state property name in questionnaire
+                                    id="title"
                                     label="Vraag Titel"
-                                    value={questionnaire.title} // Assuming questionnaire has a title property
-                                    onChange={handleChange}
+                                    value={newQuestion.title}
+                                    onChange={handleChangeQuestion}
                                     placeholder="Vraag"
                                 />
                                 <OptionSelector
@@ -216,12 +225,14 @@ function OnderzoekStapDrie() {
                                 />
                             ))}
 
-                                <Button onClick={() => setNewQuestion(prev => ({
-                                    ...prev,
-                                    possibleAnswers: [...prev.possibleAnswers, {answertext: ''}]
-                                }))}>
-                                    Voeg antwoord toe
-                                </Button>
+                                { (newQuestion.type === 'enkelekeus' || newQuestion.type === 'meerkeuze') && (
+                                    <Button onClick={() => setNewQuestion(prev => ({
+                                        ...prev,
+                                        possibleAnswers: [...prev.possibleAnswers, {answertext: ''}]
+                                    }))}>
+                                        Voeg antwoord toe
+                                    </Button>
+                                )}
                                 <div className="button-div">
                                     <Button onClick={closeModal}>Sluit</Button>
                                     <Button onClick={handleSaveNewQuestion}>Opslaan</Button>

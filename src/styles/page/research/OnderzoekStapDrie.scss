@@ -5,11 +5,10 @@
   width: $dashboard-width;
 }
 
-.onderzoek-info {
+.vragenlijst-info {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   padding-bottom: 3rem;
-  align-items: flex-end;
 
   @include respond(tablet, max) {
     display: flex;

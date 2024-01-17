@@ -4,7 +4,7 @@ export const FormContext = createContext();
 
 const defaultState = {
     currentStep: 0,
-    maxStep: 3,
+    maxStep: 2,
 };
 
 export const FormProvider = ({ children }) => {

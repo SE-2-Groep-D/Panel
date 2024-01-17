@@ -1,12 +1,12 @@
 import {useForm} from "@pages/research/create/data/useForm.jsx";
-import {useEffect, useState} from "react";
-import {Button, Form, InputField, OptionSelector, Modal} from "@components";
+import { useState} from "react";
+import {Button, InputField, OptionSelector, Modal} from "@components";
 import '@pagestyles/research/OnderzoekStapDrie.scss';
 
 
 function OnderzoekStapDrie() {
     const {state} = useForm();
-    const [move, setzMove] = useState("moveIn");
+    const [move, setMove] = useState("moveIn");
     const onderzoekId = state.onderzoek.id;
     const onderzoekNaam = state.onderzoek.titel;
     const [showModal, setShowModal] = useState(false);
@@ -16,13 +16,6 @@ function OnderzoekStapDrie() {
             title: '',
             type: '',
             possibleAnswers: []});
-
-    const [answer, setAnswer] = useState(
-        {
-        answerText:''
-
-        });
-
     const [questionnaire, setQuestionnaire] = useState({
         title: '',
         description: '',
@@ -48,6 +41,7 @@ function OnderzoekStapDrie() {
         closeModal();
     };
 
+    console.log(questionnaire)
 
     function handleChangeQuestionnaire({element, value, id}) {
         setQuestionnaire({...questionnaire, [id ? id : element.id]: value});
@@ -131,7 +125,23 @@ function OnderzoekStapDrie() {
                 <div className="onderzoek-tabel">
                     <div className="onderzoek-info">
                         <div className="titel">
-                            <div className="content-titel heading-1">{onderzoekNaam}</div>
+                            <h1 className="content-titel heading-1">{onderzoekNaam}</h1>
+                        </div>
+                        <div className="vragenlijst-info">
+                            <InputField
+                                id="title"
+                                label="Vraag Titel"
+                                value={questionnaire.title}
+                                onChange={handleChangeQuestionnaire}
+                                placeholder="Vragenlisjt Naam"
+                            />
+                            <InputField
+                                id="description"
+                                label="Vragenlisjt Beschrijving"
+                                value={questionnaire.description}
+                                onChange={handleChangeQuestionnaire}
+                                placeholder="Vragenlisjt Beschrijving"
+                            />
                         </div>
                     </div>
                     <div className="vraaglijst-items">

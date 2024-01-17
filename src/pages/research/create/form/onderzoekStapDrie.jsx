@@ -3,6 +3,7 @@ import { useState} from "react";
 import {Button, InputField, OptionSelector, Modal} from "@components";
 import '@pagestyles/research/OnderzoekStapDrie.scss';
 
+import {VragenlijstAanmaken} from "@pages/research/create/request/VragenlijstAanmaken.jsx";
 
 function OnderzoekStapDrie() {
     const {state} = useForm();
@@ -103,6 +104,12 @@ function OnderzoekStapDrie() {
         setCurrentQuestionIndex(questionnaire.questions.length);
         setShowModal(true);
     };
+
+
+    function vragenLijstOpslaan(){
+         VragenlijstAanmaken(questionnaire);
+    }
+
     return (
         <>
             <div className={`gray`}>
@@ -135,26 +142,30 @@ function OnderzoekStapDrie() {
                                     <div className="heading-3">{`Vraag ${index + 1}`}</div>
                                     <div className="text">{question.title}</div>
                                 </div>
-                                {question.type === 'enkelekeus' &&
-                                    (
-                                        <div className="content-right">
-                                            <OptionSelector
-                                                id="type"
-                                                value={question.type}
-                                                onChange={handleChangeQuestion}
-                                                options={['openvraag', 'enkelekeus', 'meerkeuze']}
-                                                required
-                                            />
-                                            <div className="button-div">
-                                                <Button onClick={() => openModal(index)}>Voeg antwoord toe</Button>
-                                            </div>
+                                {(question.type === 'enkelekeus' || question.type === 'meerkeuze') && (
+                                    <div className="content-right">
+                                        <OptionSelector
+                                            id="type"
+                                            value={question.type}
+                                            onChange={(e) => handleChangeQuestion(e, index)}
+                                            options={['openvraag', 'enkelekeus', 'meerkeuze']}
+                                            required
+                                        />
+                                        <div className="button-div">
+                                            <Button onClick={() => openModal(index)}>Voeg antwoord toe</Button>
                                         </div>
-                                    )}
+                                    </div>
+                                )}
                             </div>
                         ))}
                         <div className="button-div">
                             <Button className="vraag-maken" onClick={() => openModal(questionnaire.questions.length)}>
                                 Voeg een vraag toe
+                            </Button>
+                        </div>
+                        <div className="vragenlist-savebutton">
+                            <Button className="" onClick={() => vragenLijstOpslaan()}>
+                                Sla Vragenlijst Op
                             </Button>
                         </div>
                     </div>

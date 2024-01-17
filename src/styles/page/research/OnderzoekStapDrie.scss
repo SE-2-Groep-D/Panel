@@ -123,15 +123,21 @@ div.filters > .option-selector {
 }
 
 button.btn.vraag-maken{
-  width: clamp(25rem, 90%, 120rem);
   border-radius: 8px;
   border: 4px dashed #4C5166;
   background-color: white;
   color: #4D5166;
-  width: 100%; /* Zorg dat de breedte zich aanpast aan de container */
-  box-sizing: border-box; /* Zorgt ervoor dat de padding en border in de breedte worden meegenomen */
+  width: 100%;
+  box-sizing: border-box;
   padding: 2rem;
   @include respond(tablet, max) {
 
   }
 }
+
+.vragenlijst-button-div{
+  display: flex;
+  justify-content: center;
+}
+
+

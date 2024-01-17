@@ -25,23 +25,18 @@ function OnderzoekStapDrie() {
 
 
     const handleSaveNewQuestion = () => {
-        let updatedQuestions = questionnaire.questions.slice(); // Create a copy of the questions array
+        let updatedQuestions = questionnaire.questions.slice();
 
-        if (currentQuestionIndex !== null && currentQuestionIndex < updatedQuestions.length) {
-            // Update existing question
-            updatedQuestions[currentQuestionIndex] = {...newQuestion};
-        } else {
-            // Add new question
+        if (currentQuestionIndex === questionnaire.questions.length && newQuestion.title) {
             updatedQuestions.push({...newQuestion});
+        } else if (currentQuestionIndex < updatedQuestions.length) {
+            updatedQuestions[currentQuestionIndex] = {...newQuestion};
         }
-
         setQuestionnaire({...questionnaire, questions: updatedQuestions});
         setNewQuestion({ title: '', type: '', possibleAnswers: [] });
-        console.log(questionnaire.questions)
         closeModal();
     };
 
-    console.log(questionnaire)
 
     function handleChangeQuestionnaire({element, value, id}) {
         setQuestionnaire({...questionnaire, [id ? id : element.id]: value});
@@ -71,38 +66,7 @@ function OnderzoekStapDrie() {
             setQuestionnaire(updatedQuestionnaire);
         }
     };
-    const openModal = (index) => {
-        if (index < questionnaire.questions.length) {
-            console.log("low")
-            setCurrentQuestionIndex(index);
-            setShowModal(true);
-        } else {
-            console.log("test")
-            console.log(index)
-            handleAddNewQuestion();
-        }
-    };
 
-
-    const handleAddNewQuestion = () => {
-        setCurrentQuestionIndex(questionnaire.questions.length+1);
-        console.log(questionnaire.questions.length+" ozan");
-        console.log(currentQuestionIndex+"can");
-        setShowModal(true);
-        setQuestionnaire(prev => ({
-            ...prev,
-            questions: [...prev.questions, {title: '', type: '', possibleAnswers: []}]
-        }));
-    };
-
-
-    // Function to close the modal
-    const closeModal = () => {
-        setShowModal(false);
-    //    setCurrentQuestionIndex(null);
-    };
-
-    // Function to add a possible answer to a specific question
     const handleAddPossibleAnswer = (questionIndex) => {
         setQuestionnaire(prev => {
             const updatedQuestions = prev.questions.map((question, i) => {
@@ -119,6 +83,26 @@ function OnderzoekStapDrie() {
     };
 
 
+
+    const openModal = (index) => {
+        if (index < questionnaire.questions.length) {
+            setCurrentQuestionIndex(index);
+            setShowModal(true);
+        } else {
+            handleAddNewQuestion();
+        }
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
+
+
+    const handleAddNewQuestion = () => {
+        setCurrentQuestionIndex(questionnaire.questions.length);
+        setShowModal(true);
+    };
     return (
         <>
             <div className={`gray`}>
@@ -181,6 +165,7 @@ function OnderzoekStapDrie() {
                     open={showModal}
                     onClose={closeModal}
                     animation="bottom"
+                    className="large-modal" // Assign a unique class
                 >
                     <div className="modal-content">
                         {currentQuestionIndex !== null && currentQuestionIndex < questionnaire.questions.length ? (
@@ -243,8 +228,7 @@ function OnderzoekStapDrie() {
                                         Voeg antwoord toe
                                     </Button>
                                 )}
-                                <div className="button-div">
-                                    <Button onClick={closeModal}>Sluit</Button>
+                                <div className="vragenlijst-button-div">
                                     <Button onClick={handleSaveNewQuestion}>Opslaan</Button>
                                 </div>
                             </>

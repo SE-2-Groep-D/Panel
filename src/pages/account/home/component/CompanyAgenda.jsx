@@ -2,9 +2,15 @@ import React, {useEffect} from 'react'
 import PropTypes from "prop-types";
 import Agenda from "@pages/account/home/component/Agenda.jsx";
 import {formatDate} from "@utils";
+import {useNavigate} from "react-router-dom";
 
 export default function CompanyAgenda({data}) {
-    data.sort((a, b) => new Date(a.date) - new Date(b.date))
+    const navigate = useNavigate();
+    data = sortObjectByDate(data);
+
+    function goToInfoPage(id) {
+        navigate(`/onderzoek/${id}`);
+    }
 
   return (
       <table>
@@ -20,7 +26,13 @@ export default function CompanyAgenda({data}) {
           <tbody>
           {data.map((task, i) =>{
               return (
-                  <tr key={i}>
+                  <tr      key={i}
+                           id={task.id}
+                           className='clickable'
+                           onClick={() => goToInfoPage(task.id)}
+                           onKeyDown={(e) => e.key === 'Enter' && goToInfoPage(task.id)}
+                           tabIndex={0}
+                           role="button">
                       <td data-label='Wat' className='text'>{task.title}</td>
                       <td data-label='Status' className='text'>{task.status}</td>
                       <td data-label='Datum' className='text'>{formatDate(task.date)}</td>

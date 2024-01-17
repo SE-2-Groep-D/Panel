@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  width: 100%;
   gap: 3rem;
 
   .error {
@@ -59,11 +59,11 @@
     padding: 3rem;
 
     width: 30rem;
-    height: 45rem;
 
     .loading-div {
       display: flex;
       flex-direction: column;
+      gap: 2rem;
     }
 
    &__header {

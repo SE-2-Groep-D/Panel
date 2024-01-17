@@ -1,0 +1,63 @@
+@use "src/styles/abstract" as *;
+
+.logo {
+    width: 45rem;
+
+    @include respond(500px) {
+        width: 35rem;
+    }
+    @include respond(365px) {
+        width: 30rem;
+    }
+    
+
+}
+
+@include respond(305px) {
+    .logo {
+        width: 20rem;
+    }
+
+    .inputField {
+        width: clamp(7rem, 100%, 25rem);
+    }
+    .btn {
+        width: clamp(7rem, 100%, 25rem);
+    }
+}
+@include respond(185px) {
+    .logo {
+        width: 15rem;
+    }
+    .heading-1 {
+        font-size: 2rem;
+    }
+}
+
+
+
+.loginForm, .registerForm {
+    min-height: 0;
+}
+
+.other {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.2rem;
+
+    font-size: 1.3rem;
+}
+
+hr {
+    border: none;
+    border-top: 3px solid #e3e8fc;
+    overflow: visible;
+    text-align: center;
+    height: 3px;
+    width: 22.5rem;
+  }
+
+  a {
+    color: blue;
+  }

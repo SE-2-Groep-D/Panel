@@ -20,4 +20,8 @@ function sortObjectByDate(objects) {
     }) || [];
 }
 
-export {formatDate, formatString, sortObjectByDate}
+function generateCustomId(lenght) {
+    return Math.random().toString(36).substring(7);
+}
+
+export {formatDate, formatString, sortObjectByDate, generateCustomId}

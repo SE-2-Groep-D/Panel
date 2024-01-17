@@ -34,17 +34,19 @@ export default function QuestionListResults({researhId}) {
   return (
       <section className='question-list'>
           <Modal open={question !== undefined && question !== null && question !== ''} onClose={() => setQuestion(undefined)}>
-            <QuestionData data={data.vragen} id={question} setQuestion={setQuestion}/>
+            <QuestionData data={data.questions} id={question} setQuestion={setQuestion}/>
           </Modal>
           <Statistics data={data}/>
-          <Questions data={data.vragen} setQuestion={setQuestion}/>
+          <Questions data={data.questions} setQuestion={setQuestion}/>
       </section>
   )
 }
 
 function Statistics({data}) {
+    const [ref, inView] = useIntersectionObserver();
+
   return (
-      <section className='statistics moveIn bottom'>
+      <section ref={ref} className={(inView)? 'statistics moveIn bottom' : 'statistics'}>
       <h1 className='heading-2'>Vragenlijst resultaten</h1>
 
       <ul className='statistics__items'>
@@ -77,6 +79,7 @@ async function fetchResearchData(id, setData) {
   if(id === undefined || id === null) return;
   try {
       const data = await fetchData(`/vragenlijst/${id}`);
+      console.log(data);
       setData(data)
   } catch (err) {
       setData(err);
@@ -84,6 +87,7 @@ async function fetchResearchData(id, setData) {
 }
 
 import PropTypes from 'prop-types';
+import {useIntersectionObserver} from "../../../../hooks/index.js";
 
 
 

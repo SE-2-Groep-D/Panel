@@ -50,11 +50,13 @@ export default function Results() {
 async function fetchOptions(researchId, setOptions) {
     try {
         const data = await fetchData(`/resultaten/${researchId}`);
-        const {trackingOnderzoeken, vragenlijsten} = data;
+        const {trackingResearches, questionList} = data;
         const options = [];
 
-        addTracking(options, trackingOnderzoeken)
-        addVragenlijsten(options, vragenlijsten)
+
+        addTracking(options, trackingResearches)
+        addQuestionList(options, questionList)
+
         setOptions(options);
 
     } catch(err) {
@@ -75,11 +77,11 @@ async function fetchOptions(researchId, setOptions) {
         });
     }
 
-    function addVragenlijsten(options, vragenlijst) {
+    function addQuestionList(options, vragenlijst) {
         if(vragenlijst) vragenlijst.forEach((lijst) => {
             options.push({
                 id: lijst.id,
-                title: lijst.titel,
+                title: lijst.title,
                 type: 'list'
             })
         });

@@ -2,6 +2,8 @@ import {fetchApi} from '@api';
 
 async function VragenlijstAanmaken(questionnaire) {
 
+
+
     const formattedData = {
         title: questionnaire.title,
         description: questionnaire.description,
@@ -17,6 +19,7 @@ async function VragenlijstAanmaken(questionnaire) {
     console.log(formattedData)
     try {
         const response = await fetchApi("/Vragenlijst", "POST", formattedData );
+
         return response;
     } catch (error) {
         return false;

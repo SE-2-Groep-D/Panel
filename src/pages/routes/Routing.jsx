@@ -26,6 +26,7 @@ import {
 import NewsList from "@pages/news/News.jsx";
 import { useState } from "react";
 import { checkSession } from "./checkSession";
+import VragenLijst from "@pages/research/vragenlijst/VragenLijst.jsx";
 
 function Routing() {
   const [loading, setLoading] = useState(true);
@@ -55,6 +56,7 @@ function Routing() {
             <Route path="/onderzoek/aanmaken" element={<OnderzoekForm />} />
 
             <Route path="/nieuwsbrief" element={<NewsList />} />
+            <Route path="/vragenlijst/:onderzoekId" element={<VragenLijst />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

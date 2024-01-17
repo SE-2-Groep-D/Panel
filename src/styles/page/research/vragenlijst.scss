@@ -1,0 +1,43 @@
+@use "src/styles/abstract" as *;
+
+.container {
+  width: $dashboard-width;
+}
+
+.vragenlijst-content{
+  display: flex;
+  flex-direction: column;
+}
+.vragenlijst{
+  width: clamp(25rem, 70%, 120rem);
+}
+.vragenlijst-answer input[type="radio"] input[type="checkbox"] {
+  // Example style for radio buttons
+  accent-color: blue; // Customizes the color of the radio button
+  margin-right: 5px;
+}
+
+.vragenlijst-answer label {
+  // Style for labels
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.vragenlijst-titel{
+  display: flex;
+  justify-content: center;
+  margin: 1rem 1rem;
+}
+
+.vragenlijst-div {
+  display: flex;
+  justify-content: center;
+}
+.vragenlijst-description{
+  margin-top: 1rem;
+}
+
+.vragenlijst-answer {
+  display: flex;
+}

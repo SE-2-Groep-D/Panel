@@ -27,7 +27,9 @@ function OnderzoekInfo() {
     const goToOnderzoek = (id) => {
         navigate(`/onderzoek/${id}`);
     };
-
+    const goToVragenlijst = (id) => {
+        navigate(`/vragenlijst/${id}`);
+    };
     const goToOnderzoekResultaten = (id) => {
         navigate(`/onderzoek/${id}/results`);
     };
@@ -124,7 +126,6 @@ function OnderzoekInfo() {
                 <div className="container">
                     {onderzoek && (
                         <>
-
                             <div className="content-left-container">
                                 <div className='navigation'>
                                     <a href={`/onderzoek/`} className='back'>
@@ -156,7 +157,7 @@ function OnderzoekInfo() {
                                                 <div className="button-onderzoekinfo-2">
 
                                                     <Button className="onderzoek-vragenlijst"
-                                                            onClick={() => goToOnderzoek(onderzoek.id)}>Start Vragenlijst</Button>
+                                                            onClick={() => goToVragenlijst(onderzoek.id)}>Start Vragenlijst</Button>
                                                 </div>
                                                 <div>
                                                     <Button className="start-website-onderzoek"

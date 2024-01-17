@@ -4,10 +4,12 @@ import {Button, InputField, OptionSelector, Modal} from "@components";
 import '@pagestyles/research/OnderzoekStapDrie.scss';
 
 import {VragenlijstAanmaken} from "@pages/research/create/request/VragenlijstAanmaken.jsx";
+import {useNavigate} from "react-router-dom";
 
 function OnderzoekStapDrie() {
     const {state} = useForm();
     const [move, setMove] = useState("moveIn");
+    const navigate = useNavigate();
     const onderzoekId = state.onderzoek.id;
     const onderzoekNaam = state.onderzoek.titel;
     const [showModal, setShowModal] = useState(false);
@@ -24,6 +26,10 @@ function OnderzoekStapDrie() {
         onderzoekId: onderzoekId
     });
 
+
+    function naarHomePage() {
+        navigate("/");
+    }
 
     const handleSaveNewQuestion = () => {
         let updatedQuestions = questionnaire.questions.slice();
@@ -108,6 +114,7 @@ function OnderzoekStapDrie() {
 
     function vragenLijstOpslaan(){
          VragenlijstAanmaken(questionnaire);
+        naarHomePage();
     }
 
     return (

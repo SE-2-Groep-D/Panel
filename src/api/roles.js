@@ -10,13 +10,13 @@ const Role = {
 
 
 function isRole(role) {
-    if(role.toUpperCase().equals(Role.Gebruiker)) return true;
+    if(requiredRole.toUpperCase() === Role.Gebruiker) return true;
 
     const {userInfo} = useAuth();
 
     if(userInfo == null || userInfo.userType == null) return false;
     for (let roleKey in Role) {
-        if(!role.toUpperCase().equals(roleKey)) continue;
+        if(!role.toUpperCase() === roleKey) continue;
         return true;
     }
 
@@ -25,7 +25,7 @@ function isRole(role) {
 
 
 function hasPermission(requiredRole) {
-    if(requiredRole.toUpperCase().equals(Role.Gebruiker)) return true;
+    if(requiredRole.toUpperCase() === Role.Gebruiker) return true;
 
     const { userInfo } = useAuth();
     if (userInfo == null || userInfo.userType == null) return false;

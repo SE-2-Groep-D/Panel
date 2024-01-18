@@ -1,22 +1,29 @@
-import {formatDate} from '@utils'
-import {useEffect, useState} from "react";
-function Information({ locatie, vergoeding, datum, isEditable }) {
+import DOMPurify from 'dompurify';
+import { useState, useCallback } from 'react';
+import { formatDate } from '@utils';
+
+function Information({ locatie, vergoeding, datum, isEditable, onUpdate }) {
     const [editableLocatie, setEditableLocatie] = useState(locatie);
     const [editableVergoeding, setEditableVergoeding] = useState(vergoeding);
     const [editableDatum, setEditableDatum] = useState(datum);
 
+    const handleLocatieChange = useCallback((e) => {
+        const newLocatie = DOMPurify.sanitize(e.currentTarget.innerText);
+        setEditableLocatie(newLocatie);
+        onUpdate(newLocatie, editableVergoeding, editableDatum);
+    }, [editableVergoeding, editableDatum, onUpdate]);
 
-    const handleLocatieChange = (e) => {
-        setEditableLocatie(e.target.innerText);
-    };
+    const handleVergoedingChange = useCallback((e) => {
+        const newVergoeding = DOMPurify.sanitize(e.currentTarget.innerText);
+        setEditableVergoeding(newVergoeding);
+        onUpdate(editableLocatie, newVergoeding, editableDatum);
+    }, [editableLocatie, editableDatum, onUpdate]);
 
-    const handleVergoedingChange = (e) => {
-        setEditableVergoeding(e.target.innerText);
-    };
-
-    const handleDatumChange = (e) => {
-        setEditableDatum(e.target.innerText);
-    };
+    const handleDatumChange = useCallback((e) => {
+        const newDatum = DOMPurify.sanitize(e.currentTarget.innerText);
+        setEditableDatum(newDatum);
+        onUpdate(editableLocatie, editableVergoeding, newDatum);
+    }, [editableLocatie, editableVergoeding, onUpdate]);
 
     return (
         <div className='information'>
@@ -24,22 +31,22 @@ function Information({ locatie, vergoeding, datum, isEditable }) {
                 className="information-tag tag"
                 contentEditable={isEditable}
                 onBlur={handleLocatieChange}
+                dangerouslySetInnerHTML={{ __html: editableLocatie }}
                 suppressContentEditableWarning={true}>
-                {editableLocatie}
             </div>
             <div
                 className="information-tag tag"
                 contentEditable={isEditable}
                 onBlur={handleVergoedingChange}
+                dangerouslySetInnerHTML={{ __html: editableVergoeding }}
                 suppressContentEditableWarning={true}>
-                €{editableVergoeding}
             </div>
             <div
                 className="information-tag tag"
                 contentEditable={isEditable}
                 onBlur={handleDatumChange}
+                dangerouslySetInnerHTML={{ __html: formatDate(editableDatum) }}
                 suppressContentEditableWarning={true}>
-                {formatDate(editableDatum)}
             </div>
         </div>
     );

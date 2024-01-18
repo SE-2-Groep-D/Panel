@@ -25,7 +25,11 @@ function OnderzoekInfo() {
     const [bedrijfsCoordinaten, setBedrijfsCoordinaten] = useState(null);
     const navigate = useNavigate();
 
-
+    const [updatedTitel, setUpdatedTitel] = useState("");
+    const [updatedOmschrijving, setUpdatedOmschrijving] = useState("");
+    const [updatedLocatie, setUpdatedLocatie] = useState("");
+    const [updatedVergoeding, setUpdatedVergoeding] = useState("");
+    const [updatedDatum, setUpdatedDatum] = useState("")
 
 
     const [isEditMode, setIsEditMode] = useState(false);
@@ -121,17 +125,40 @@ function OnderzoekInfo() {
     }, [onderzoekId]);
 
 
+    const handleEditModeToggle = () => {
+        if (isEditMode) {
+            // If currently in edit mode, save changes
+            handleSave();
+        }
+        // Toggle edit mode state
+        setIsEditMode(!isEditMode);
+    };
+
+    const handleSave = async () => {
+
+        let updatedData = {};
+
+        if (updatedTitel) updatedData.titel = updatedTitel;
+        if (updatedOmschrijving) updatedData.omschrijving = updatedOmschrijving;
+        if (updatedLocatie) updatedData.locatie = updatedLocatie;
+        if (updatedVergoeding) updatedData.vergoeding = updatedVergoeding;
+        if (updatedDatum) updatedData.datum = updatedDatum;
+
+        console.log(updatedData);
+        setIsEditMode(!isEditMode);
+        try {
+            const updatedondezoek = await fetchApi(`/Onderzoek/update/${onderzoekId}`,"PUT", updatedData)
+            setOnderzoek(updatedondezoek);
+            console.log(updatedondezoek)
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+
     if (!onderzoek && !loading) {
         return <p>Onderzoek niet gevonden.</p>;
     }
-
-
-
-
-
-
-
-
     return (
         <main>
             <LoadingDiv loading={loading}>
@@ -149,13 +176,17 @@ function OnderzoekInfo() {
                                                       omschrijving={onderzoek.omschrijving}
                                                       bedrijf={bedrijf}
                                                       isEditable={isEditMode}
-                                                      userInfo={userInfo}/>
+                                                      userInfo={userInfo}
+                                                      onUpdate={(titel, omschrijving) => {
+                                                          setUpdatedTitel(titel);
+                                                          setUpdatedOmschrijving(omschrijving);
+                                                      }}/>
 
                                 {
                                     (userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') ?
                                         <div className="button-onderzoekinfo">
                                             <div className="button-onderzoekinfo-1">
-                                                <Button onClick={() => setIsEditMode(!isEditMode)}>
+                                                <Button onClick={handleEditModeToggle}>
                                                     {isEditMode ? 'Save' : 'Edit'}
                                                 </Button>
                                             </div>
@@ -194,7 +225,12 @@ function OnderzoekInfo() {
                                     vergoeding={onderzoek.vergoeding}
                                     datum={onderzoek.startDatum}
                                     isEditable={isEditMode}
-                                    userInfo={userInfo} />
+                                    userInfo={userInfo}
+                                    onUpdate={(locatie, vergoeding, datum) => {
+                                        setUpdatedLocatie(locatie);
+                                        setUpdatedVergoeding(vergoeding);
+                                        setUpdatedDatum(datum);
+                                    }}/>
                                 {bedrijfsCoordinaten && <Map coordinates={bedrijfsCoordinaten} bedrijf={bedrijf}/>}
                             </div>
                         </>

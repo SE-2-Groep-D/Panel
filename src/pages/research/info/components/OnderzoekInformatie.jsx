@@ -1,25 +1,35 @@
 import {useEffect, useState} from "react";
-function OnderzoekInformatie({ titel, omschrijving, bedrijf, isEditable }) {
+import DOMPurify from 'dompurify';
+function OnderzoekInformatie({ titel, omschrijving, bedrijf, isEditable,onUpdate }) {
     const [editableTitel, setEditableTitel] = useState(titel);
     const [editableOmschrijving, setEditableOmschrijving] = useState(omschrijving);
-    // Handlers for changes in content
 
     const handleTitelChange = (e) => {
-        setEditableTitel(e.target.innerText);
+        const newTitel = DOMPurify.sanitize(e.currentTarget.innerText);
+        setEditableTitel(newTitel);
+        onUpdate(newTitel, editableOmschrijving);
     };
 
     const handleOmschrijvingChange = (e) => {
-        setEditableOmschrijving(e.target.innerText);
+        const newOmschrijving = DOMPurify.sanitize(e.currentTarget.innerText);
+        setEditableOmschrijving(newOmschrijving);
+        onUpdate(editableTitel, newOmschrijving);
     };
 
     return (
         <div className="research-information">
             <header className="header">
-                <h1 className="heading-1"      contentEditable={isEditable} onBlur={handleTitelChange}> {editableTitel}</h1>
+                <h1 className="heading-1"
+                    contentEditable={isEditable}
+                    onBlur={handleTitelChange}
+                    dangerouslySetInnerHTML={{__html: editableTitel}}/>
             </header>
             <section className="section">
                 <h2 className="heading-3">Over onderzoek</h2>
-                <p className="text"     contentEditable={isEditable} onBlur={handleOmschrijvingChange}> {editableOmschrijving}</p>
+                <p className="text"
+                   contentEditable={isEditable}
+                   onBlur={handleOmschrijvingChange}
+                   dangerouslySetInnerHTML={{__html: editableOmschrijving}}/>
             </section>
             <section className="section">
                 <h2 className="heading-3">Over bedrijf</h2>

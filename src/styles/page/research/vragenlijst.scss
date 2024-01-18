@@ -33,7 +33,7 @@
   justify-content: center;
 }
 .vragenlijst-description{
-  margin-top: 1rem;
+  margin-top: 4rem;
 }
 
 .vragenlijst-answer {
@@ -42,6 +42,7 @@
 
 .vraag-nummer{
   padding-right: 1rem;
+  font-weight: bold;
 }
 .antwordenlijst{
   padding-top: 1rem;
@@ -52,4 +53,8 @@
   display: flex;
   justify-content: center;
   padding-top: 4rem;
+}
+.vragenlijst-vragen {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }

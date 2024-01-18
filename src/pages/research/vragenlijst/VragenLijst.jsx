@@ -11,7 +11,6 @@ import {Form, InputField, Checkbox} from "@components";
 import {fetchData} from "@api";
 
 function VragenLijst() {
-    const {userInfo} = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const {vragenlijstId} = useParams();

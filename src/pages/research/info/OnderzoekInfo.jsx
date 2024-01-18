@@ -44,6 +44,10 @@ function OnderzoekInfo() {
         navigate(`/onderzoek/${id}/results`);
     };
 
+    const goToCompanyWebsite=(url)=>{
+        window.location.href=url;
+    }
+
     //verzenden naar website
 
     useEffect(() => {
@@ -232,7 +236,7 @@ function OnderzoekInfo() {
                                                 </div>
                                                 <div>
                                                     <Button className="start-website-onderzoek"
-                                                            onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Start
+                                                            onClick={() => goToCompanyWebsite(bedrijf.websiteUrl)}>Start
                                                         website onderzoek</Button>
                                                 </div>
                                             </div>

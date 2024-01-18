@@ -8,6 +8,7 @@ import AricleList from "@pages/news/components/ArticleList.jsx";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {useAuth} from "@hooks";
 import {hasPermission, Role} from "@api";
+import LoadingData from "@components/container/loading-data.jsx";
 
 export default function NewsList() {
     const {fetchArticles} = useNewsInfo();
@@ -23,12 +24,8 @@ function NewsComponent() {
     const {articles, message, setStatus} = useNewsInfo();
     const {userInfo} = useAuth();
 
-    if(articles === undefined) {
-        return <LoadingDiv loading/>
-    }
-
-    if(articles instanceof Error) {
-        return <ServerError message='Er is een fout opgetreden bij het ophalen van van de nieuwsberichten. Probeer het later opnieuw.'/>
+    if(!articles) {
+        return <LoadingData data={articles}/>
     }
 
 

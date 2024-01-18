@@ -1,21 +1,20 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
+const LoadingDiv = ({ children, loading, className }) => {
+    const combinedClassName = `${className || ''} loading-div${loading ? ' loading' : ''}${!children ? ' empty' : ''}`;
 
-export default function LoadingDiv({children, loading, className}) {    
-    if(className === undefined) {
-      className = (loading) ? 'loading-div loading' : ' loading-div';
-    } else {
-      className += (loading) ? ' loading-div loading' : ' loading-div';
-    }
+    return (
+        <div className={combinedClassName} role="status" aria-busy={loading}>
+            {children}
+        </div>
+    );
+};
 
-    if(children === null || children === undefined) {
-        className += ' empty';
-    }
+LoadingDiv.propTypes = {
+    children: PropTypes.node,
+    loading: PropTypes.bool,
+    className: PropTypes.string,
+};
 
-  return (
-    <div className={className}>
-        {children}
-    </div>
-  )
-}
+export default LoadingDiv;

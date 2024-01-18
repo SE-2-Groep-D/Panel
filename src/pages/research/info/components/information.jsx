@@ -31,33 +31,34 @@ function Information({ locatie, vergoeding, datum, isEditable, onUpdate }) {
     return (
         <ul className='information' aria-label='Extra onderzoek informatie.'>
             <ToolTip message="Locatie">
-                <li
+                <div
                     className="information-tag tag"
                     contentEditable={isEditable}
                     onBlur={handleLocatieChange}
-                    dangerouslySetInnerHTML={{ __html: locatie }}
+                    dangerouslySetInnerHTML={{__html: editableLocatie}}
                     suppressContentEditableWarning={true}>
-                </li>
+                </div>
             </ToolTip>
             <ToolTip message="Vergoeding">
-                {/* eslint-disable-next-line react/no-danger-with-children */}
-                <li
-                    className="information-tag tag"
-                    contentEditable={isEditable}
-                    onBlur={handleVergoedingChange}
-                    dangerouslySetInnerHTML={{ __html: vergoeding }}
-                    suppressContentEditableWarning={true}>
-                    €{vergoeding}
-                </li>
+                <div className="information-tag tag">
+                    <span>€</span>
+                    <div
+                        contentEditable={isEditable}
+                        onBlur={handleVergoedingChange}
+                        dangerouslySetInnerHTML={{__html: editableVergoeding}}
+                        suppressContentEditableWarning={true}>
+                    </div>
+                </div>
             </ToolTip>
+
             <ToolTip message="Datum">
-                <li
+                <div
                     className="information-tag tag"
                     contentEditable={isEditable}
                     onBlur={handleDatumChange}
-                    dangerouslySetInnerHTML={{ __html: formatDate(datum) }}
+                    dangerouslySetInnerHTML={{__html: formatDate(editableDatum)}}
                     suppressContentEditableWarning={true}>
-                </li>
+                </div>
             </ToolTip>
         </ul>
 

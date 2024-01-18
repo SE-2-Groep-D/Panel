@@ -10,7 +10,7 @@ const Role = {
 
 
 function isRole(role) {
-    if(requiredRole.toUpperCase() === Role.Gebruiker) return true;
+    if(role.toUpperCase() === Role.Gebruiker) return true;
 
     const {userInfo} = useAuth();
 
@@ -25,16 +25,20 @@ function isRole(role) {
 
 
 function hasPermission(requiredRole) {
-    if(requiredRole.toUpperCase() === Role.Gebruiker) return true;
-
     const { userInfo } = useAuth();
+
     if (userInfo == null || userInfo.userType == null) return false;
-    const roleHierarchy = [Role.Beheerder, Role.Medewerker, Role.Ervaringsdeskundige, Role.Bedrijf];
 
-    const indexOfUser = roleHierarchy.indexOf(userInfo.userType);
-    const indexOfRequiredRole = roleHierarchy.indexOf(requiredRole.toUpperCase());
+    const roleHierarchy = {
+        Beheerder: [Role.Medewerker],
+        Medewerker: [Role.Bedrijf, Role.Ervaringsdeskundige],
+        Bedrijf: [Role.Gebruiker],
+        Ervaringsdeskundige: [Role.Gebruiker],
+        Gebruiker: [],
+    };
 
-    return indexOfUser !== -1 && indexOfRequiredRole !== -1 && indexOfUser >= indexOfRequiredRole;
+    const userRoles = roleHierarchy[userInfo.userType];
+    return userRoles.includes(requiredRole.toUpperCase()) || userInfo.userType.toUpperCase() === requiredRole.toUpperCase();
 }
 
 export {Role, isRole, hasPermission}

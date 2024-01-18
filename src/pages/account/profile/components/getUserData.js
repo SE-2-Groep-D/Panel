@@ -6,16 +6,18 @@ function getUserData(setUser, setLoading) {
     const { userInfo } = useAuth();
     const isBedrijf = isRole(Role.Bedrijf);
     const isErvaringsdeskundige = isRole(Role.Ervaringsdeskundige)
+    const isBeheerder = isRole(Role.Beheerder)
+    const isMedewerker = isRole(Role.Medewerker)
     useEffect(() => {
         const getDataUser = async () => {
           const response = await getUserInfo(userInfo.id);
-          console.log()
-          if (isBedrijf) {
-            setUser(createBedrijfObject(response));
-          } else if (isErvaringsdeskundige) {
-            setUser(createErvaringsdeskundigeObject(response));
-          } else {
+          
+          if (isBeheerder || isMedewerker) {
             setUser(createGebruikerObject(response));
+          } else if (isBedrijf) {
+            setUser(createBedrijfObject(response));
+          } else {
+            setUser(createErvaringsdeskundigeObject(response));
           }
           setLoading(false);
         };

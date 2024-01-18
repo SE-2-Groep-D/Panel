@@ -32,27 +32,29 @@ function NewsComponent() {
 
 
    return (
-       <main className='news gray'>
-           <div className='news-navigation'>
-               <div className="title-box">
-                   <h1 className='heading-1'>Nieuwsbrieven</h1>
-                   <p className='error'>{message}</p>
+       <main className='gray'>
+           <section className="news">
+               <div className='news-navigation'>
+                   <div className="title-box">
+                       <h1 className='heading-1'>Nieuwsbrieven</h1>
+                       <p className='error'>{message}</p>
+                   </div>
+
+                   <div className="filters">
+                       {
+                           (userInfo.userType === 'Medewerker' || userInfo.userType === 'Beheerder') ?
+                               <Button label='Klik op deze knop om een nieuw artikel toe te voegen.' color='secondary' onClick={() => setStatus(Status.CREATE, null)}>
+                                   <FontAwesomeIcon icon={faAdd}/>
+                                   Nieuw Artikel
+                               </Button>
+                               : null
+                       }
+                   </div>
                </div>
 
-               <div className="filters">
-                   {
-                       (userInfo.userType === 'Medewerker' || userInfo.userType === 'Beheerder') ?
-                           <Button label='Klik op deze knop om een nieuw artikel toe te voegen.' color='secondary' onClick={() => setStatus(Status.CREATE, null)}>
-                               <FontAwesomeIcon icon={faAdd}/>
-                               Nieuw Artikel
-                           </Button>
-                           : null
-                   }
-               </div>
-           </div>
-
-           <AricleModal />
-           <AricleList/>
+               <AricleModal />
+               <AricleList/>
+           </section>
        </main>
    );
 }

@@ -10,17 +10,14 @@
     font-size: 1.6rem;
     font-family: $font-family-1;
 
+    &:focus .checkbox-mark, &:focus-visible .checkbox-mark, &:focus-within .checkbox-mark  {
+        outline: $border-component-focus;
+    }
+
     &-text {
         display: block;
         font-size: 1.3rem;
         max-width: 20rem;
-    }
-    
-
-    &-label {
-        &:focus .checkbox-mark, &:focus-visible .checkbox-mark, &:focus-within .checkbox-mark  {
-            outline: $border-component-focus;
-        }
     }
 
     &-cb {

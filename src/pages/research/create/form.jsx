@@ -52,6 +52,16 @@ function GetNextForm() {
     }
 }
 
+function validateUser(user) {
+    return user !== null && user !== undefined && user.userType !== null && user.userType !== undefined;
+}
+
+function getUserAgeGroup(user) {
+    if(user.userType !== 'Ervaringsdeskundige') return null;
+    return user.ageGroup;
+
+}
+
 
 
 

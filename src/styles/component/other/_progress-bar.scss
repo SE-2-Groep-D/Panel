@@ -7,6 +7,8 @@ progress-bar {
     justify-content: center;
     gap: 1rem;
 
+
+
     .stage {
         display: block;
         width: 12.5rem;
@@ -14,7 +16,10 @@ progress-bar {
         background-color: #c2cdfa;
         user-select: none;
         transition: background-color $animation-slow;
-       
+
+        @include respond(600px) {
+            width: 10rem;
+        }
     
 
         &.active {

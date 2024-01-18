@@ -5,10 +5,12 @@ nav.navigation {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  overflow: hidden;
 
   background-color: $color-white;
   padding: 1rem 4rem;
   z-index: 10;
+  gap: 2rem;
 
   font: $font-family-1;
   font-size: 1.8rem;
@@ -32,6 +34,10 @@ nav.navigation {
     font-weight: normal;
   }
 
+  .logout {
+    max-width: 20rem;
+  }
+
   .logout:hover, .logout:focus {
     background-color: $color-tertiary;
     color: white;
@@ -51,13 +57,23 @@ nav.navigation {
     justify-content: center;
     list-style: none;
 
+    @include respond(tablet, min) {
+      flex-grow: 1;
+    }
+
     @include respond(tablet) {
-      position: absolute;
-      top: 8.5rem;
+      position: fixed;
+      top: 7rem;
       right: 0;
-      padding: 5rem;
+      width: 100%;
+      height: 100%;
+
+      font-size: 2rem;
 
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
       background-color: $color-white;
       border-bottom-left-radius: $border-radius-medium;
       border-bottom: $border-container;
@@ -68,7 +84,24 @@ nav.navigation {
 
       transform: translateX(100%);
       transition: transform $animation-medium;
+
+      &.open {
+        transform: translateX(0);
+      }
     }
+
+    .links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+
+      @include respond(tablet) {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+
   }
 
   .active {
@@ -82,7 +115,7 @@ nav.navigation {
   &-item a {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     text-decoration: none;
     color: $color-black;
 
@@ -97,85 +130,17 @@ nav.navigation {
     }
   }
 
-
-  .menu {
-    user-select: none;
-
-    @include respond(tablet, min) {
-      display: none;
-    }
+  .navigation-button {
+    font-size: 3rem;
 
     &:hover {
       cursor: pointer;
     }
 
-    &:focus {
-      border: $border-component-focus;
+
+    @include respond(tablet, min) {
+      display: none;
     }
-
-    &-icon {
-      position: relative;
-
-      &, &::before, &::after {
-        display: block;
-        width: 3rem;
-        height: .3rem;
-        background-color: $color-black;
-        border-radius: $border-radius-small;
-
-        transition: transform $animation-fast;
-      }
-
-      &::before {
-        position: absolute;
-        top: -1rem;
-      }
-
-      &::after {
-        position: absolute;
-        top: 1rem;
-      }
-
-      &::before, &::after {
-        content: "";
-      }
-
-
-    }
-
-    @include respond(tablet) {
-      display: flex;
-    }
-  }
-
-}
-
-
-#navigation-checkbox {
-  display: none;
-
-  &:checked {
-
-    & ~ .navigation-items {
-      transform: translateX(0);
-    }
-
-    & ~ .menu .menu-icon {
-      background-color: transparent;
-
-      &::before {
-        top: 0;
-        transform: rotate(-45deg);
-      }
-
-      &::after {
-        top: 0;
-        transform: rotate(45deg);
-      }
-
-    }
-
 
   }
-
 }

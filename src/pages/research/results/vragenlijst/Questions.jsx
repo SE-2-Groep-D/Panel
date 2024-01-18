@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
+import {useIntersectionObserver} from "@hooks";
 
-function Questions({ data, setQuestion }) {
+function Questions({data, setQuestion }) {
+    const [ref, inView] = useIntersectionObserver();
+
     if(data === null || data === undefined || data.length == 0) {
         return <div className='questions'>
             <h2 className='heading-2'>Vragenlijst</h2>
@@ -19,7 +22,7 @@ function Questions({ data, setQuestion }) {
     }
 
     return (
-        <section className='questions moveIn bottom'>
+        <section ref={ref} className={(inView) ? 'questions moveIn bottom' : 'questions'}>
             <table >
                 <thead>
                 <tr>
@@ -41,9 +44,9 @@ function Questions({ data, setQuestion }) {
                         >
                             <td data-label="Vraag" className='text bold'>
                                 <span className='number bold'>{i}</span>
-                                {question.onderwerp}
+                                {question.description}
                             </td>
-                            <td data-label="Aantal antwoorden" className='text bold'> {question.antwoorden.length} </td>
+                            <td data-label="Aantal antwoorden" className='text bold'> {question.totalAnswers} </td>
                         </tr>
 
                     )

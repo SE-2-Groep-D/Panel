@@ -1,9 +1,9 @@
 import '@pagestyles/research/_research-info.scss';
 
 import {useEffect, useState} from "react";
+
 import {useNavigate, useParams} from 'react-router-dom';
 import {fetchApi, fetchData} from "@api";
-
 // import components
 import OnderzoekInformatie from "./components/OnderzoekInformatie";
 import Information from './components/information';
@@ -33,9 +33,6 @@ function OnderzoekInfo() {
 
 
     const [isEditMode, setIsEditMode] = useState(false);
-    const goToOnderzoek = (id) => {
-        navigate(`/onderzoek/${id}`);
-    };
     const goToVragenlijst = (id) => {
         navigate(`/vragenlijst/${id}`);
     };
@@ -83,6 +80,7 @@ function OnderzoekInfo() {
 
         controleerInschrijving();
     }, [onderzoek, userInfo]);
+
 
 
 

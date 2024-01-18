@@ -1,6 +1,9 @@
-import DOMPurify from 'dompurify';
+
 import { useState, useCallback } from 'react';
 import { formatDate } from '@utils';
+import {ToolTip} from "@components";
+import DOMPurify from "dompurify";
+
 
 function Information({ locatie, vergoeding, datum, isEditable, onUpdate }) {
     const [editableLocatie, setEditableLocatie] = useState(locatie);
@@ -26,29 +29,38 @@ function Information({ locatie, vergoeding, datum, isEditable, onUpdate }) {
     }, [editableLocatie, editableVergoeding, onUpdate]);
 
     return (
-        <div className='information'>
-            <div
-                className="information-tag tag"
-                contentEditable={isEditable}
-                onBlur={handleLocatieChange}
-                dangerouslySetInnerHTML={{ __html: editableLocatie }}
-                suppressContentEditableWarning={true}>
-            </div>
-            <div
-                className="information-tag tag"
-                contentEditable={isEditable}
-                onBlur={handleVergoedingChange}
-                dangerouslySetInnerHTML={{ __html: editableVergoeding }}
-                suppressContentEditableWarning={true}>
-            </div>
-            <div
-                className="information-tag tag"
-                contentEditable={isEditable}
-                onBlur={handleDatumChange}
-                dangerouslySetInnerHTML={{ __html: formatDate(editableDatum) }}
-                suppressContentEditableWarning={true}>
-            </div>
-        </div>
+        <ul className='information' aria-label='Extra onderzoek informatie.'>
+            <ToolTip message="Locatie">
+                <li
+                    className="information-tag tag"
+                    contentEditable={isEditable}
+                    onBlur={handleLocatieChange}
+                    dangerouslySetInnerHTML={{ __html: locatie }}
+                    suppressContentEditableWarning={true}>
+                </li>
+            </ToolTip>
+            <ToolTip message="Vergoeding">
+                {/* eslint-disable-next-line react/no-danger-with-children */}
+                <li
+                    className="information-tag tag"
+                    contentEditable={isEditable}
+                    onBlur={handleVergoedingChange}
+                    dangerouslySetInnerHTML={{ __html: vergoeding }}
+                    suppressContentEditableWarning={true}>
+                    €{vergoeding}
+                </li>
+            </ToolTip>
+            <ToolTip message="Datum">
+                <li
+                    className="information-tag tag"
+                    contentEditable={isEditable}
+                    onBlur={handleDatumChange}
+                    dangerouslySetInnerHTML={{ __html: formatDate(datum) }}
+                    suppressContentEditableWarning={true}>
+                </li>
+            </ToolTip>
+        </ul>
+
     );
 }
 

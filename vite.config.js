@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path';
+import autoprefixer from 'autoprefixer'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   build: {
     define: {
@@ -10,6 +10,15 @@ export default defineConfig({
     },
   },
   plugins: [react()],
+  css: {
+    postcss: {
+      plugins: [
+        autoprefixer({
+          browsers: ['last 8 versions'],
+        }) 
+      ],
+    }
+  },
   resolve: {
     alias: {
       '@assets': path.resolve(__dirname, 'src/assets'),

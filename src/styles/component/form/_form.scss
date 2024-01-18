@@ -26,10 +26,23 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
+
+    @include respond(600px) {
+      width: max-content;
+      text-align: center;
+    }
+
+    @include respond(350px) {
+      max-width: 25rem;
+    }
   }
 
   .loading-div {
     width: 100%;
+
+    @include respond(tablet) {
+      width: max-content;
+    }
   }
 
   &-content {

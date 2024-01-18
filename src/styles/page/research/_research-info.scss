@@ -62,27 +62,19 @@
 .information {
   display: flex;
   justify-content: flex-end;
-  align-items: end;
+  align-items: flex-end;
   width: 40rem;
+  gap: 1rem;
 
   @include respond(tablet, max) {
     width: clamp(40rem, 100%, 120rem);
     display: flex;
     justify-content: flex-start;
-    align-items: start;
+    align-items: flex-start;
   }
 }
 
 
-.information-tag {
-  margin-left: 1rem;
-  
-
-  @include respond(tablet, max) {
-    margin-left: 0rem;
-    margin-right: 1rem;
-  }
-}
 
 .card {
   margin-top: 2rem;

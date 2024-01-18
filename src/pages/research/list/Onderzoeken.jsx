@@ -5,10 +5,12 @@ import {fetchData} from "@api";
 import {formatDate} from "@utils";
 import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from "react";
+import {useIntersectionObserver} from "@hooks";
 
-// import components
-import {Button, LoadingDiv, OptionSelector} from "@components";
+// import component
 import {useAuth} from "@hooks";
+import {Button, LoadingDiv, OptionSelector, ToolTip} from "@components";
+
 
 
 function Onderzoeken() {
@@ -90,82 +92,81 @@ function Onderzoeken() {
 
 
     return (
-
-
         <main className='gray'>
-            <div className="onderzoek-tabel">
-                {
-                    (userInfo.userType === 'Ervaringsdeskundige') ?
-                        <div className="onderzoek-info">
-                            <div className="titel">
-                                <div className="content-titel heading-1">Onderzoeken</div>
-                            </div>
-                            <div className="filters">
-                                <OptionSelector
-                                    onChange={(e) => setSelectedBedrijf(e.value)}
-                                    options={bedrijfsOpties}
-                                    value={selectedBedrijf}
-                                >
-                                    Bedrijf
-                                </OptionSelector>
-                                <OptionSelector
-                                    onChange={(e) => setSelectedType(e.value)}
-                                    options={onderzoekTypes}
-                                    value={selectedType}
-                                >
-                                    Type Onderzoek
-                                </OptionSelector>
+            <section className="onderzoeken">
+                <div className="onderzoek-info">
+                    <div className="titel">
+                        <h1 className="content-titel heading-1">Onderzoeken</h1>
+                    </div>
+                    <div className="filters">
+                        <OptionSelector
+                            onChange={(e) => setSelectedBedrijf(e.value)}
+                            options={bedrijfsOpties}
+                            value={selectedBedrijf}
+                        >
+                            Bedrijf
+                        </OptionSelector>
 
-                            </div>
-                        </div>
-                        : <div className="onderzoek-info">
-                            <div className="titel">
-                                <div className="content-titel heading-1">Onze Onderzoeken</div>
-                            </div>
-                        </div>
-                }
-
-
-                <div className="onderzoek-items">
-                    <LoadingDiv loading={isLoading}>
-                        {getoondeOnderzoeken.map(onderzoek => (
-                            <div className="onderzoek-item" key={onderzoek.id}>
-                                <div className="content-left">
-                                    <div className=" heading-3">{onderzoek.titel}</div>
-                                    <div className="text">{onderzoek.omschrijving}</div>
-                                </div>
-                                <div className="content-right">
-                                    <div className="content-tags">
-                                        <p className="content-informatie-een tag">{bedrijfsGegevens[onderzoek.bedrijfId]}</p>
-                                        <p className="content-informatie tag">{onderzoek.type}</p>
-                                    </div>
-                                    <div className="content-info">
-                                        <p className="text">{onderzoek.aantalParticipanten}</p>
-                                        <p className="text">{onderzoek.locatie}</p>
-                                        <div className="text">{formatDate(onderzoek.startDatum)}</div>
-                                    </div>
-                                    <div className="button-div">
-                                        <Button className="onderzoek-button"
-                                                onClick={() => goToOnderzoek(onderzoek.id)}> Onderzoek Info </Button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        ))}
-                    </LoadingDiv>
-                    {
-                        (userInfo.userType === 'Bedrijf') ?
-                            <div className="button-div">
-                                <Button className="onderzoek-aanmaken-button"
-                                        onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
-                            </div>
-                            : null
-                    }
+                    </div>
                 </div>
-            </div>
+                <LoadingDiv loading={isLoading} className='onderzoek-items'>
+                    {getoondeOnderzoeken.map((onderzoek, key) =>
+                        <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek} bedrijfsGegevens={bedrijfsGegevens}/>
+                    )}
+                </LoadingDiv>
+                {/* <div className="button-div">
+                        <Button className="onderzoek-aanmaken-button"
+                                onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
+                    </div>*/}
+            </section>
         </main>
 
     );
 }
+
+function Onderzoek({onderzoek, goToOnderzoek, bedrijfsGegevens}) {
+    const [ref, inView] = useIntersectionObserver();
+
+    return (
+        <li ref={ref} className={(inView) ? 'onderzoek moveIn bottom' : 'onderzoek'} key={onderzoek.id}>
+            <div className="header">
+                <h2 className="heading-2">{onderzoek.titel}</h2>
+                <ul className="tags" aria-label='Onderzoeks informatie'>
+                    <ToolTip message='Bedrijfsnaam'>
+                        <li className="tag">{bedrijfsGegevens[onderzoek.bedrijfId]}</li>
+                    </ToolTip>
+                    <ToolTip message='Onderzoek vergoeding'>
+                        <li className="tag">€{onderzoek.vergoeding}</li>
+                    </ToolTip>
+                </ul>
+            </div>
+            <div className="content">
+                <div className="content-left">
+                    <p className="text">{onderzoek.omschrijving}</p>
+                </div>
+                <div className="content-right">
+
+                    <ul className="content-info" aria-label='Extra onderzoek informatie'>
+                        <ToolTip message='Aantal deelnemers'>
+                            <li className="text">{onderzoek.aantalParticipanten}</li>
+                        </ToolTip>
+                        <ToolTip message='Locatie'>
+                            <li className="text">{onderzoek.locatie}</li>
+                        </ToolTip>
+                        <ToolTip message='Startdatum'>
+                            <li className="text">{formatDate(onderzoek.startDatum)}</li>
+                        </ToolTip>
+                    </ul>
+                    <div className="button-div">
+                        <Button className="onderzoek-button"
+                                onClick={() => goToOnderzoek(onderzoek.id)}> Onderzoek Info </Button>
+                    </div>
+
+                </div>
+            </div>
+        </li>
+    );
+}
+
 
 export default Onderzoeken;

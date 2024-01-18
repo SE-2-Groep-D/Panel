@@ -11,7 +11,7 @@ function Home() {
                     <Logo/>
                 </Link>
 
-                <ul className="navigation-items">
+                <ul className="buttons">
                     <li className="navigation-item">
                         <Link to='/login' className='login'>
                             Login
@@ -19,13 +19,13 @@ function Home() {
                     </li>
                     <li className="navigation-item">
                         <Link to='/register' className='register'>
-                            Register
+                            Registreer
                         </Link>
                     </li>
                 </ul>
             </nav>
 
-            <main className='content'>
+            <main className='home-page'>
                 <section className='header'>
                     <div className='cta'>
                         <h1 className='heading-1'>Werk samen met ons aan een samenleving toegankelijk voor iedereen.</h1>

@@ -4,17 +4,12 @@ import { useAuth } from "@hooks";
 
 function getUserData(setUser, setLoading) {
     const { userInfo } = useAuth();
-    const isBedrijf = isRole(Role.Bedrijf);
-    const isErvaringsdeskundige = isRole(Role.Ervaringsdeskundige)
-    const isBeheerder = isRole(Role.Beheerder)
-    const isMedewerker = isRole(Role.Medewerker)
     useEffect(() => {
         const getDataUser = async () => {
           const response = await getUserInfo(userInfo.id);
-          
-          if (isBeheerder || isMedewerker) {
+          if (userInfo.userType === "Beheerder" || userInfo.userType === "Medewerker") {
             setUser(createGebruikerObject(response));
-          } else if (isBedrijf) {
+          } else if (userInfo.userType === "Bedrijf") {
             setUser(createBedrijfObject(response));
           } else {
             setUser(createErvaringsdeskundigeObject(response));

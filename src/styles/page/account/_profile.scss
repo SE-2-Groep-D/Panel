@@ -1,0 +1,45 @@
+@use "src/styles/abstract" as *;
+
+.userIcon {
+    height: 16rem;
+    color: #d9d9d9
+}
+
+.userInfoMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 0;
+
+    .btn {
+        font-size: 1.4rem;
+        height: 4rem;
+        width: 100%;
+    }
+}
+
+.userInfo {
+    font-size: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+    margin-bottom: 2rem;
+    gap: 1rem;
+
+    li {
+        width: 24rem;
+        word-wrap: break-word;
+
+        @include respond(255px) {
+            width: 17rem;
+            font-size: 1.7rem;
+        }
+        span {
+            display: block;
+            font-weight: bold;
+        }
+    }
+}
+
+

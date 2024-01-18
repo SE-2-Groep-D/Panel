@@ -64,7 +64,9 @@ const IndividualChat = ({ userId, otherUserId }) => {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await axios.get(`${hostname}/Bericht/getberichten/${otherUserId}/${userId}`);
+                const response = await axios.get(`${hostname}/Bericht/getberichten/${otherUserId}/${userId}`, {
+                    withCredentials: true  // Include credentials
+                });
                 const formattedMessages = response.data.map(msg => ({
                     ...msg,
                     type: msg.verzenderId === userId ? 'sent' : 'received'
@@ -123,7 +125,9 @@ const IndividualChat = ({ userId, otherUserId }) => {
         };
     
         // Make the POST request
-        axios.post(`${hostname}/Bericht/stuurbericht`, payload)
+        axios.post(`${hostname}/Bericht/stuurbericht`, payload, {
+            withCredentials: true  // Include credentials
+        })
             .then(response => {
                 //console.log('Message sent:', response.data);
             })

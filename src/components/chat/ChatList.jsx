@@ -9,7 +9,9 @@ const ChatList = ({ onSelectChat, userId }) => {
     useEffect(() => {
         const fetchChats = async () => {
             try {
-                const response = await axios.get(`${hostname}/Bericht/chats/${userId}`);
+                const response = await axios.get(`${hostname}/Bericht/chats/${userId}`, {
+                    withCredentials: true
+                });
                 setChats(response.data);
             } catch (error) {
                 console.error('Error fetching chats:', error);

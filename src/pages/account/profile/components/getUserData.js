@@ -5,13 +5,17 @@ import { useAuth } from "@hooks";
 function getUserData(setUser, setLoading) {
     const { userInfo } = useAuth();
     const isBedrijf = isRole(Role.Bedrijf);
+    const isErvaringsdeskundige = isRole(Role.Ervaringsdeskundige)
     useEffect(() => {
         const getDataUser = async () => {
           const response = await getUserInfo(userInfo.id);
+          console.log()
           if (isBedrijf) {
             setUser(createBedrijfObject(response));
-          } else {
+          } else if (isErvaringsdeskundige) {
             setUser(createErvaringsdeskundigeObject(response));
+          } else {
+            setUser(createGebruikerObject(response));
           }
           setLoading(false);
         };
@@ -72,6 +76,15 @@ async function getUserInfo(id) {
       Nummer: user.nummer,
       Website: user.websiteUrl,
       Omschrijving: user.omschrijving,
+    };
+    return userCreated;
+  }
+
+  function createGebruikerObject (user) {
+    const userCreated = {
+      Voornaam: user.voornaam,
+      Achternaam: user.achternaam,
+      Email: user.email,
     };
     return userCreated;
   }

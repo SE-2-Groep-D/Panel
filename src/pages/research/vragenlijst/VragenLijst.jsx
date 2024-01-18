@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from "@hooks";
-import { Button, LoadingDiv } from "@components";
-import { GetVragenlijst } from "@pages/research/vragenlijst/request/GetVragenlijst.jsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import  {useEffect, useState} from "react";
+import {useNavigate, useParams} from 'react-router-dom';
+import {useAuth} from "@hooks";
+import {Button, LoadingDiv} from "@components";
+import {GetVragenlijst} from "@pages/research/vragenlijst/request/GetVragenlijst.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import '@pagestyles/research/vragenlijst.scss';
 import {SendVragenlijst} from "@pages/research/vragenlijst/response/SendVragenlijst.jsx";
 
+import {Form, InputField, Checkbox} from "@components";
+
 function VragenLijst() {
-    const { userInfo } = useAuth();
+    const {userInfo} = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const { onderzoekId } = useParams();
+    const {onderzoekId} = useParams();
     const [vragenlijst, setVragenlijst] = useState([]);
     const [answers, setAnswers] = useState([]);
 
@@ -38,24 +40,23 @@ function VragenLijst() {
 
     const handleInputChange = (questionId, value, isMultiple) => {
         setAnswers(prevAnswers => {
-            // Find the existing answer
+
             const existingAnswer = prevAnswers.find(answer => answer.questionId === questionId);
 
-            // If it's a multiple answer question and there's already an entry
             if (isMultiple && existingAnswer) {
-                // Check if the value is already in the array
+
                 const isValueSelected = existingAnswer.value.includes(value);
-                // Add or remove the value from the array
+
                 return prevAnswers.map(answer => {
                     if (answer.questionId === questionId) {
                         if (isValueSelected) {
-                            // Filter out the unselected value
+
                             return {
                                 ...answer,
                                 value: answer.value.filter(item => item !== value)
                             };
                         } else {
-                            // Add the selected value
+
                             return {
                                 ...answer,
                                 value: [...answer.value, value]
@@ -65,10 +66,10 @@ function VragenLijst() {
                     return answer;
                 });
             } else {
-                // For non-multiple answer questions or new entries
+
                 return [
                     ...prevAnswers.filter(answer => answer.questionId !== questionId),
-                    { questionId, value: isMultiple ? [value] : value }
+                    {questionId, value: isMultiple ? [value] : value}
                 ];
             }
         });
@@ -76,7 +77,7 @@ function VragenLijst() {
 
 
     const handleSaveAnswers = () => {
-       const vragenlijstId= vragenlijst.id
+        const vragenlijstId = vragenlijst.id
 
         const data = {
             answers: answers.map(answer => ({
@@ -87,8 +88,18 @@ function VragenLijst() {
         };
 
 
-        SendVragenlijst(vragenlijstId,data)
+        SendVragenlijst(vragenlijstId, data)
         goToHomePage();
+    };
+
+    // Deze functie zet een index om in een letter (A, B, C, ...)
+    const indexToLetter = (index) => {
+        return String.fromCharCode(65 + index);
+    };
+
+// Deze functie zet een index om in een nummer (1, 2, 3, ...)
+    const indexToNumber = (index) => {
+        return index + 1;
     };
 
     return (
@@ -100,7 +111,7 @@ function VragenLijst() {
                             <div className="vragenlijst-content">
                                 <div className='navigation'>
                                     <a href={`/onderzoek/`} className='back'>
-                                        <FontAwesomeIcon icon={faChevronLeft} />
+                                        <FontAwesomeIcon icon={faChevronLeft}/>
                                         Terug
                                     </a>
                                 </div>
@@ -113,46 +124,59 @@ function VragenLijst() {
                                             <h3 className="heading-3">{vragenlijst.description}</h3>
                                         </div>
                                         {vragenlijst.questions && vragenlijst.questions.map((question, qIndex) => (
-                                            <div key={question.id} className="vragenlijst-question">
-                                                <p className="text-big">{question.description}</p>
-                                                {question.type === "Open" && (
-                                                    <input
-                                                        type="text"
-                                                        placeholder="Jouw antwoord"
-                                                        onChange={(e) => handleInputChange(question.id, e.target.value)}
-                                                    />
-                                                )}
-                                                {question.possibleAnswers && question.possibleAnswers.map((answer, aIndex) => (
-                                                    <div key={answer.id} className="vragenlijst-answer">
-                                                        {question.type === "OneAnwer" ? (
-                                                            <input
-                                                                type="radio"
-                                                                id={`question_${question.id}_answer_${answer.id}`}
-                                                                name={`question_${question.id}`}
-                                                                value={answer.value}
-                                                                onChange={(e) => handleInputChange(question.id, answer.value, false)} // Pass `false` for single answer type
-                                                            />
-                                                        ) : question.type === "MultipleAnswer" ? (
-                                                            <input
-                                                                type="checkbox"
-                                                                id={`question_${question.id}_answer_${answer.id}`}
-                                                                name={`answer_${answer.id}`}
-                                                                value={answer.value}
-                                                                onChange={(e) => handleInputChange(question.id, answer.value, true)} // Pass `true` for multiple answer type
-                                                            />
-                                                        ) : null}
-                                                        <label htmlFor={`question_${question.id}_answer_${answer.id}`}
-                                                               className="text-small">
-                                                            {answer.value}
-                                                        </label>
-                                                    </div>
-                                                ))}
+                                            <div key={question.id} className="vragenlijst-vragen">
+                                                {/* Gebruik indexToNumber om de vraagnummer weer te geven */}
+                                                <p className="text-big"><span
+                                                    className="vraag-nummer"> {indexToNumber(qIndex)}. </span>{question.description}
+                                                </p>
+
+                                                <div className="antwordenlijst">
+                                                    {question.type === "Open" && (
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Type hier je antwoord in "
+                                                            onChange={(e) => handleInputChange(question.id, e.target.value)}
+                                                        />
+                                                    )}
+                                                    {question.possibleAnswers && question.possibleAnswers.map((answer, aIndex) => (
+                                                        <div key={answer.id} className="vragenlijst-answer">
+                                                            {/* Gebruik indexToLetter voor de antwoordletter */}
+                                                            <label
+                                                                htmlFor={`question_${question.id}_answer_${answer.id}`}
+                                                                className="text-small">
+                                                                {question.type === "OneAnwer" ? (
+                                                                    <>
+                                                                        <input
+                                                                            type="radio"
+                                                                            id={`question_${question.id}_answer_${answer.id}`}
+                                                                            name={`question_${question.id}`}
+                                                                            value={answer.value}
+                                                                            onChange={(e) => handleInputChange(question.id, answer.value, false)}
+                                                                        />
+                                                                        {indexToLetter(aIndex)}. {answer.value}
+                                                                    </>
+                                                                ) : question.type === "MultipleAnswer" ? (
+                                                                    <>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id={`question_${question.id}_answer_${answer.id}`}
+                                                                            name={`answer_${answer.id}`}
+                                                                            value={answer.value}
+                                                                            onChange={(e) => handleInputChange(question.id, answer.value, true)}
+                                                                        />
+                                                                        {indexToLetter(aIndex)}. {answer.value}
+
+                                                                    </>
+                                                                ) : null}
+                                                            </label>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         ))}
-
-                                        <div className="container">
+                                        <div className="opslaan-knop">
                                             {/* ... (Other JSX elements) */}
-                                            <Button onClick={handleSaveAnswers}>Save Answers</Button>
+                                            <Button onClick={handleSaveAnswers}>Opslaan</Button>
                                         </div>
                                     </div>
                                 </div>

@@ -12,7 +12,6 @@ import {useAuth} from "@hooks";
 import {Button, LoadingDiv, OptionSelector, ToolTip} from "@components";
 
 
-
 function Onderzoeken() {
     const {userInfo} = useAuth();
     const [alleOnderzoeken, setAlleOnderzoeken] = useState([]);
@@ -111,13 +110,18 @@ function Onderzoeken() {
                 </div>
                 <LoadingDiv loading={isLoading} className='onderzoek-items'>
                     {getoondeOnderzoeken.map((onderzoek, key) =>
-                        <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek} bedrijfsGegevens={bedrijfsGegevens}/>
+                        <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek}
+                                   bedrijfsGegevens={bedrijfsGegevens}/>
                     )}
                 </LoadingDiv>
-                {/* <div className="button-div">
-                        <Button className="onderzoek-aanmaken-button"
-                                onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
-                    </div>*/}
+                {(userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') &&
+                    <div className="button-div">
+                        <Button className="onderzoek-aanmaken-button" onClick={goToOnderzoekAanmaken}>
+                            Maak een onderzoek aan
+                        </Button>
+                    </div>
+                }
+
             </section>
         </main>
 

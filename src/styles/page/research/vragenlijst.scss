@@ -12,13 +12,11 @@
   width: clamp(25rem, 70%, 120rem);
 }
 .vragenlijst-answer input[type="radio"] input[type="checkbox"] {
-  // Example style for radio buttons
-  accent-color: blue; // Customizes the color of the radio button
+  accent-color: blue;
   margin-right: 5px;
 }
 
 .vragenlijst-answer label {
-  // Style for labels
   margin-right: 10px;
   cursor: pointer;
 }
@@ -40,4 +38,18 @@
 
 .vragenlijst-answer {
   display: flex;
+}
+
+.vraag-nummer{
+  padding-right: 1rem;
+}
+.antwordenlijst{
+  padding-top: 1rem;
+  padding-left: 3rem;
+}
+
+.opslaan-knop {
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
 }

@@ -82,8 +82,6 @@ function OnderzoekInfo() {
     }, [onderzoek, userInfo]);
 
 
-
-
     const getCoordinatesForAddress = async (address) => {
         const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`);
         const data = await response.json();
@@ -145,7 +143,7 @@ function OnderzoekInfo() {
         console.log(updatedData);
         setIsEditMode(!isEditMode);
         try {
-            const updatedondezoek = await fetchApi(`/Onderzoek/update/${onderzoekId}`,"PUT", updatedData)
+            const updatedondezoek = await fetchApi(`/Onderzoek/update/${onderzoekId}`, "PUT", updatedData)
             setOnderzoek(updatedondezoek);
             console.log(updatedondezoek)
         } catch (error) {
@@ -170,15 +168,15 @@ function OnderzoekInfo() {
                                         Terug
                                     </a>
                                 </div>
-                                <OnderzoekInformatie  titel={onderzoek.titel}
-                                                      omschrijving={onderzoek.omschrijving}
-                                                      bedrijf={bedrijf}
-                                                      isEditable={isEditMode}
-                                                      userInfo={userInfo}
-                                                      onUpdate={(titel, omschrijving) => {
-                                                          setUpdatedTitel(titel);
-                                                          setUpdatedOmschrijving(omschrijving);
-                                                      }}/>
+                                <OnderzoekInformatie titel={onderzoek.titel}
+                                                     omschrijving={onderzoek.omschrijving}
+                                                     bedrijf={bedrijf}
+                                                     isEditable={isEditMode}
+                                                     userInfo={userInfo}
+                                                     onUpdate={(titel, omschrijving) => {
+                                                         setUpdatedTitel(titel);
+                                                         setUpdatedOmschrijving(omschrijving);
+                                                     }}/>
 
                                 {
                                     (userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') ?
@@ -188,7 +186,7 @@ function OnderzoekInfo() {
                                                     {isEditMode ? 'Opslaan' : 'Bewerken'}
                                                 </Button>
                                             </div>
-                                            {isEditMode ? null :  <div>
+                                            {isEditMode ? null : <div>
                                                 <Button className="onderzoek-resultaten"
                                                         onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Bekijk
                                                     resultaten</Button>
@@ -201,19 +199,21 @@ function OnderzoekInfo() {
                                                 <div className="button-onderzoekinfo-2">
 
                                                     <Button className="onderzoek-vragenlijst"
-                                                            onClick={() => goToVragenlijst(onderzoek.id)}>Start Vragenlijst</Button>
+                                                            onClick={() => goToVragenlijst(onderzoek.id)}>Start
+                                                        Vragenlijst</Button>
                                                 </div>
                                                 <div>
                                                     <Button className="start-website-onderzoek"
-                                                            onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Start website onderzoek</Button>
+                                                            onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Start
+                                                        website onderzoek</Button>
                                                 </div>
                                             </div>
                                         ) : (
                                             <div>
-                                                    <Button className="onderzoek-Inschrijven"
-                                                            onClick={() => Inschrijven(onderzoek.id, userInfo.id)}>Inschrijven</Button>
-                                                </div>
-                                            )
+                                                <Button className="onderzoek-Inschrijven"
+                                                        onClick={() => Inschrijven(onderzoek.id, userInfo.id)}>Inschrijven</Button>
+                                            </div>
+                                        )
                                 }
 
                             </div>

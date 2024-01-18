@@ -4,6 +4,7 @@ import {ArticleModal} from "@components";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {useAuth} from "@hooks";
 import {sortObjectByDate} from "@utils";
+import {hasPermission, Role} from "@api";
 
 export default function AricleList() {
     const {article, status, articles, setStatus, deleteArticle, updateArticle, createArticle, loading} = useNewsInfo();
@@ -41,7 +42,7 @@ export default function AricleList() {
             <ul className="news-articles">
                 {
                     sortedArticles.map((a, key) => {
-                        return <Article loading={loading && article && article.id === a.id} manage={userInfo.userType === 'Medewerker' || userInfo.userType === 'Beheerder'} article={a} key={key} setStatus={setStatus} deleteArticle={deleteArticle}/>
+                        return <Article loading={loading && article && article.id === a.id} manage={hasPermission(Role.Medewerker)} article={a} key={key} setStatus={setStatus} deleteArticle={deleteArticle}/>
                     })
                 }
             </ul>

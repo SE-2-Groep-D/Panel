@@ -4,7 +4,7 @@ import { useForm } from "../../setup/data/useForm";
 import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
-  const [newUser, setNewUser] = useState({ email: "", password: "" });
+  const [newUser, setNewUser] = useState({ email: "", password: "", acceptTerms: false});
 
   const navigate = useNavigate();
   const { state } = useForm();
@@ -53,7 +53,7 @@ function RegisterForm() {
           Wachtwoord
         </InputField>
       </ToolTip>
-      <Checkbox id="privacy" visible required>
+      <Checkbox id="acceptTerms" visible required>
         Ik accepteer de <Link to='/privacy'>privacy verklaring</Link>.
       </Checkbox>
     </Form>

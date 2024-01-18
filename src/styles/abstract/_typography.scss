@@ -21,6 +21,7 @@
 
 .text {
   font-size: 1.6rem;
+  white-space: pre-line;
 
   &, &-big, &-small {
     font-family: $font-family-1;

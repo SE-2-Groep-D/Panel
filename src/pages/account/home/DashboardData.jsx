@@ -2,12 +2,13 @@ import "@pagestyles/account/home/_default.scss";
 
 import { Suspense, lazy, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { fetchData } from "@api";
+import {fetchData, isRole, Role} from "@api";
 
 import { LoadingDiv, CountingAnimation, Modal, Article, ArticleModal } from "@components";
 import { useAuth } from "@hooks";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {sortObjectByDate} from "@utils";
+import {useIntersectionObserver} from "@hooks";
 
 const Agenda = lazy(() => import("./component/Agenda.jsx"));
 const CompanyAgenda = lazy(() => import("./component/CompanyAgenda.jsx"));
@@ -70,9 +71,11 @@ async function fetchUserData(data, setData) {
 }
 
 function Statistics({ data }) {
+    const [ref, inView] = useIntersectionObserver();
+
   if (!data) return null;
   return (
-    <div className="statistics moveIn bottom">
+    <div ref={ref} className={(inView) ? "statistics moveIn bottom" : 'statistics'}>
       {data.map((item, index) => {
         return (
           <li className="statistics__item" key={index}>
@@ -92,19 +95,21 @@ Statistics.propTypes = {
 };
 
 function UserAgenda({ data, type }) {
+    const [ref, inView] = useIntersectionObserver();
+
   if (data === undefined || data.length === 0)
     return (
       <section className="agenda">
-        <h2 className="heading-2">Agenda</h2>
+        <h2 className="heading-2">Geplande onderzoeken</h2>
         <p className="text">Er staat nog niks op de planning.</p>
       </section>
     );
 
   return (
-    <section className="agenda moveIn bottom">
+    <section ref={ref} className={(inView) ? "agenda moveIn bottom" : 'agenda'}>
       <h2 className="heading-2">Agenda</h2>
       <Suspense fallback={<LoadingDiv loading />}>
-        {type === "bedrijf" ? (
+        {isRole(Role.Bedrijf) ? (
           <CompanyAgenda data={data} />
         ) : (
           <Agenda data={data} />
@@ -120,12 +125,13 @@ UserAgenda.propTypes = {
 
 function Message({ articles }) {
   const [article, setArticle] = useState();
+    const [ref, inView] = useIntersectionObserver();
 
   if (!articles) return null;
   articles = sortObjectByDate(articles)
 
   return (
-    <section className="news moveIn bottom">
+    <section ref={ref} className={(inView)? "news moveIn bottom" : 'news'}>
       <h2 className="heading-2">Laatste Nieuws</h2>
       <Suspense fallback={null}>
           <ArticleModal article={article} status={Status.READ} onClose={() => setArticle(undefined)}/>

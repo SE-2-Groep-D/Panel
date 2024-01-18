@@ -71,7 +71,6 @@ function GetNextForm() {
             break;
     }
 
-    console.log(state)
     return null;
 }
 

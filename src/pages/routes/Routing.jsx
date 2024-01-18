@@ -12,6 +12,7 @@ import {
   Register,
   SetupAccount,
   UserHome,
+  Profile,
 } from "@pages";
 
 import { Suspense } from "react";
@@ -55,6 +56,7 @@ function Routing() {
             <Route path="/onderzoek/aanmaken" element={<OnderzoekForm />} />
 
             <Route path="/nieuwsbrief" element={<NewsList />} />
+            <Route path="/profiel" element={<Profile />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

@@ -1,18 +1,14 @@
 import DOMPurify from 'dompurify';
 import PropTypes from 'prop-types';
+import { useState } from "react";
+import { Button, LoadingDiv } from "@components";
 
-import {useState} from "react";
-
-import {Button, LoadingDiv} from "@components";
-
-
-
-const Form = ({title, message, children, buttonText, onSubmit, className}) => {
+const Form = ({ title, message, children, buttonText, onSubmit, className }) => {
     const [loading, setLoading] = useState(false);
 
     async function submitForm(event) {
         event.preventDefault();
-        if(onSubmit === undefined || onSubmit === null) return;
+        if (onSubmit === undefined || onSubmit === null) return;
 
         const form = event.target;
         const content = form.childNodes[1].childNodes[0];
@@ -25,7 +21,7 @@ const Form = ({title, message, children, buttonText, onSubmit, className}) => {
         content.childNodes.forEach((item, index) => {
             const id = (item.getAttribute('id') === null || item.getAttribute('id') === undefined) ? index : item.getAttribute('id');
             const cleanedValue = DOMPurify.sanitize(item.getAttribute('value'));
-            data.values = {...data.values, [id] : cleanedValue}
+            data.values = { ...data.values, [id]: cleanedValue }
         })
 
         setLoading(true);
@@ -36,23 +32,24 @@ const Form = ({title, message, children, buttonText, onSubmit, className}) => {
     const finalClassName = (className) ? 'form ' + className : 'form';
 
     return (
-            <form id={title + "-form"} className={finalClassName} onSubmit={submitForm}>
-                <div className='form-header'>
-                    <h1 className='form-title heading-1'>{title}</h1>
-                    <p className='form-message'>{message}</p>
+        <form id={title + "-form"} className={finalClassName} onSubmit={submitForm}>
+            <div className='form-header'>
+                <h1 className='form-title heading-1'>{title}</h1>
+                <p className='form-message'>{message}</p>
+            </div>
+
+            <LoadingDiv loading={loading} aria-live="polite" aria-busy={loading}>
+                <div className='form-content'>
+                    {children}
                 </div>
 
-                <LoadingDiv loading={loading}>
-                    <div className='form-content'>
-                        {children}
-                    </div>
-
-                    <div className='form-footer'>
-                        <Button type='submit' className='form-button'>{buttonText}</Button>
-                    </div>
-                </LoadingDiv>
-            </form>
-
+                <div className='form-footer'>
+                    <Button type='submit' className='form-button' disabled={loading} aria-label={loading ? 'Submitting...' : 'Submit'}>
+                        {buttonText}
+                    </Button>
+                </div>
+            </LoadingDiv>
+        </form>
     );
 }
 
@@ -65,5 +62,4 @@ Form.propTypes = {
     buttonText: PropTypes.string,
     onSubmit: PropTypes.func,
     className: PropTypes.string,
-  };
-  
+};

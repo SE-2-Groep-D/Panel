@@ -7,6 +7,7 @@ import AricleModal from "@components/news/ArticleModal.jsx";
 import AricleList from "@pages/news/components/ArticleList.jsx";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {useAuth} from "@hooks";
+import {hasPermission, Role} from "@api";
 
 export default function NewsList() {
     const {fetchArticles} = useNewsInfo();
@@ -42,7 +43,7 @@ function NewsComponent() {
 
                    <div className="filters">
                        {
-                           (userInfo.userType === 'Medewerker' || userInfo.userType === 'Beheerder') ?
+                           (hasPermission(Role.Medewerker)) ?
                                <Button label='Klik op deze knop om een nieuw artikel toe te voegen.' color='secondary' onClick={() => setStatus(Status.CREATE, null)}>
                                    <FontAwesomeIcon icon={faAdd}/>
                                    Nieuw Artikel

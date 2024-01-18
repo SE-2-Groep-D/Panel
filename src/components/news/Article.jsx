@@ -6,11 +6,13 @@ import {Button, LoadingDiv, ToolTip} from "@components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendar, faPencil, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {Status} from "@pages/news/data/newsContext.jsx";
+import {useIntersectionObserver} from "@hooks";
 
 export default function Article({article, manage, loading, setStatus, deleteArticle}) {
+    const [ref, inView] = useIntersectionObserver();
     const message = formatString(article.inhoud, 195);
 
-    return <article className='news-article moveIn bottom'>
+    return <article ref={ref} className={(inView) ? 'news-article moveIn bottom' : 'news-article'}>
         <LoadingDiv loading={loading}>
             <div className="news-article__header">
                 <p className='news-article__date'>

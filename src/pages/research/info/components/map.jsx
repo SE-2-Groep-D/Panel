@@ -6,8 +6,7 @@ const Map = ({ coordinates,bedrijf }) => {
   const position = coordinates || [51.505, -0.09];
 
   return (
-      <div className='card'>
-        <MapContainer center={position} zoom={13} style={{ height: '80%', width: '100%' }}>
+        <MapContainer className='card' center={position} zoom={13} style={{ height: '80%', width: '100%' }}>
           <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -27,7 +26,6 @@ const Map = ({ coordinates,bedrijf }) => {
               </Popup>
           </Marker>
         </MapContainer>
-      </div>
   );
 };
 

@@ -68,7 +68,6 @@ function createBedrijfObjectApi(user) {
 }
 
 function createErvaringsdeskundigeObjectApi(user) {
-  console.log(user);
   const userCreated = {
     voornaam: user.Voornaam,
     achternaam: user.Achternaam,

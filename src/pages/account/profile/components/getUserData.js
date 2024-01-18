@@ -7,7 +7,6 @@ function getUserData(setUser, setLoading) {
     useEffect(() => {
         const getDataUser = async () => {
           const response = await getUserInfo(userInfo.id);
-          console.log(response)
           if (userInfo.userType === "Bedrijf") {
             setUser(createBedrijfObject(response));
           } else {
@@ -57,8 +56,6 @@ async function getUserInfo(id) {
       Hulpmiddelen: hulpmiddelen,
     };
 
-    
-    console.log(userCreated)
     return userCreated;
   }
   

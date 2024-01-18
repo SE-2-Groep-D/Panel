@@ -1,11 +1,11 @@
 import { Form, InputField } from "@components";
 import { useAuth } from "@hooks";
-import { fetchApi } from "@api";
+import {fetchApi, isRole, Role} from "@api";
 
 function EditForm({ isEditing, setIsEditing, user, setUser }) {
   const { userInfo } = useAuth();
   function handleSubmit() {
-    if (userInfo.userType === "Bedrijf") {
+    if (isRole(Role.Bedrijf)) {
       updateUserInfo(createBedrijfObjectApi(user), userInfo.id);
     } else {
       updateUserInfo(createErvaringsdeskundigeObjectApi(user), userInfo.id);

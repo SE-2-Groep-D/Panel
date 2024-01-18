@@ -1,4 +1,4 @@
-import { fetchData } from "@api";
+import {fetchData, isRole, Role} from "@api";
 import { useEffect } from "react";
 import { useAuth } from "@hooks";
 
@@ -7,7 +7,7 @@ function getUserData(setUser, setLoading) {
     useEffect(() => {
         const getDataUser = async () => {
           const response = await getUserInfo(userInfo.id);
-          if (userInfo.userType === "Bedrijf") {
+          if (isRole(Role.Bedrijf)) {
             setUser(createBedrijfObject(response));
           } else {
             setUser(createErvaringsdeskundigeObject(response));

@@ -3,6 +3,11 @@
 
 .loginForm, .registerForm {
     min-height: 0;
+
+    .tool-tip.bottom .tool-tip__message {
+        width: 100%;
+    }
+
 }
 
 .headerLogin,  .headerRegister {

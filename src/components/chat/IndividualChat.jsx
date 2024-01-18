@@ -1,17 +1,19 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import {getHostName} from '@api';
 
 const IndividualChat = ({ userId, otherUserId }) => {
     const [message, setMessage] = useState('');
     const [allMessages, setAllMessages] = useState({});
     const [connection, setConnection] = useState(null);
+    const hostname = getHostName();
 
     //console.log('UserID:', userId, 'OtherUserID:', otherUserId);
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
-            .withUrl(`https://localhost:5000/chatHub?username=${encodeURIComponent(userId)}`)
+            .withUrl(`${hostname}/chatHub?username=${encodeURIComponent(userId)}`)
             .withAutomaticReconnect()
             .build();
 
@@ -62,7 +64,7 @@ const IndividualChat = ({ userId, otherUserId }) => {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await axios.get(`https://localhost:5000/Bericht/getberichten/${otherUserId}/${userId}`);
+                const response = await axios.get(`${hostname}/Bericht/getberichten/${otherUserId}/${userId}`);
                 const formattedMessages = response.data.map(msg => ({
                     ...msg,
                     type: msg.verzenderId === userId ? 'sent' : 'received'
@@ -121,7 +123,7 @@ const IndividualChat = ({ userId, otherUserId }) => {
         };
     
         // Make the POST request
-        axios.post('https://localhost:5000/Bericht/stuurbericht', payload)
+        axios.post(`${hostname}/Bericht/stuurbericht`, payload)
             .then(response => {
                 //console.log('Message sent:', response.data);
             })

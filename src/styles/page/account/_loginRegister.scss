@@ -1,46 +1,62 @@
 @use "src/styles/abstract" as *;
 
-header .logo {
-    width: 45rem;
-
-    @include respond(500px) {
-        width: 35rem;
-    }
-    @include respond(365px) {
-        width: 30rem;
-    }
-    
-
-}
-
-@include respond(305px) {
-    header .logo {
-        width: 20rem;
-    }
-
-    .inputField {
-        width: clamp(7rem, 75dvw, 25rem);
-    }
-    .checkbox {
-        width: clamp(7rem, 75dvw, 25rem);
-    }
-    .btn {
-        width: clamp(7rem, 100%, 25rem);
-    }
-}
-@include respond(185px) {
-    header .logo {
-        width: 15rem;
-    }
-    .heading-1 {
-        font-size: 2rem;
-    }
-}
-
-
 
 .loginForm, .registerForm {
     min-height: 0;
+
+    header .logo {
+        width: 45rem;
+    
+        @include respond(500px) {
+            width: 35rem;
+        }
+        @include respond(365px) {
+            width: 30rem;
+        }
+        
+    
+    }
+    
+    @include respond(305px) {
+        header .logo {
+            width: 20rem;
+        }
+    
+        .inputField {
+            width: clamp(7rem, 75dvw, 25rem);
+        }
+        .checkbox {
+            width: clamp(7rem, 75dvw, 25rem);
+        }
+        .btn {
+            width: clamp(7rem, 100%, 25rem);
+        }
+    }
+    @include respond(185px) {
+        header .logo {
+            width: 15rem;
+        }
+        .heading-1 {
+            font-size: 2rem;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    hr {
+        border: none;
+        border-top: 3px solid #e3e8fc;
+        overflow: visible;
+        text-align: center;
+        height: 3px;
+        width: 22.5rem;
+      }
+    
+     
 }
 
 .other {
@@ -50,17 +66,8 @@ header .logo {
     gap: 2.2rem;
 
     font-size: 1.3rem;
+
+    a {
+        color: blue;
+      }
 }
-
-hr {
-    border: none;
-    border-top: 3px solid #e3e8fc;
-    overflow: visible;
-    text-align: center;
-    height: 3px;
-    width: 22.5rem;
-  }
-
-  a {
-    color: blue;
-  }

@@ -187,14 +187,14 @@ function OnderzoekInfo() {
                                         <div className="button-onderzoekinfo">
                                             <div className="button-onderzoekinfo-1">
                                                 <Button onClick={handleEditModeToggle}>
-                                                    {isEditMode ? 'Save' : 'Edit'}
+                                                    {isEditMode ? 'Opslaan' : 'Bewerken'}
                                                 </Button>
                                             </div>
-                                            <div>
+                                            {isEditMode ? null :  <div>
                                                 <Button className="onderzoek-resultaten"
                                                         onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Bekijk
                                                     resultaten</Button>
-                                            </div>
+                                            </div>}
                                         </div>
                                         :
                                         isAlIngeschreven ? (

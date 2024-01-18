@@ -2,19 +2,19 @@ import  {useEffect, useState} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
 import {useAuth} from "@hooks";
 import {Button, LoadingDiv} from "@components";
-import {GetVragenlijst} from "@pages/research/vragenlijst/request/GetVragenlijst.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import '@pagestyles/research/vragenlijst.scss';
 import {SendVragenlijst} from "@pages/research/vragenlijst/response/SendVragenlijst.jsx";
 
 import {Form, InputField, Checkbox} from "@components";
+import {fetchData} from "@api";
 
 function VragenLijst() {
     const {userInfo} = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const {onderzoekId} = useParams();
+    const {vragenlijstId} = useParams();
     const [vragenlijst, setVragenlijst] = useState([]);
     const [answers, setAnswers] = useState([]);
 
@@ -25,7 +25,7 @@ function VragenLijst() {
     useEffect(() => {
         async function fetchVragenlijst() {
             try {
-                const data = await GetVragenlijst(onderzoekId);
+                const data = await fetchData(`/Vragenlijst/${vragenlijstId}`);
                 setVragenlijst(data);
             } catch (error) {
                 console.error('Error fetching vragenlijst:', error);
@@ -33,10 +33,10 @@ function VragenLijst() {
             setLoading(false);
         }
 
-        if (onderzoekId) {
+        if (vragenlijstId) {
             fetchVragenlijst();
         }
-    }, [onderzoekId]);
+    }, [vragenlijstId]);
 
     const handleInputChange = (questionId, value, isMultiple) => {
         setAnswers(prevAnswers => {

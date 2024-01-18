@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 
 import {useNavigate, useParams} from 'react-router-dom';
 import {fetchApi, fetchData} from "@api";
+
 // import components
 import OnderzoekInformatie from "./components/OnderzoekInformatie";
 import Information from './components/information';
@@ -30,6 +31,9 @@ function OnderzoekInfo() {
     const [updatedLocatie, setUpdatedLocatie] = useState("");
     const [updatedVergoeding, setUpdatedVergoeding] = useState("");
     const [updatedDatum, setUpdatedDatum] = useState("")
+    const [geselecteerdeVragenlijstId, setGeselecteerdeVragenlijstId] = useState(null);
+
+    const [vragenlijsten, setVragenlijsten] = useState([]);
 
 
     const [isEditMode, setIsEditMode] = useState(false);
@@ -39,6 +43,14 @@ function OnderzoekInfo() {
     const goToOnderzoekResultaten = (id) => {
         navigate(`/onderzoek/${id}/results`);
     };
+
+    //verzenden naar website
+
+    useEffect(() => {
+        if (vragenlijsten.length === 1) {
+            setGeselecteerdeVragenlijstId(vragenlijsten[0].id);
+        }
+    }, [vragenlijsten]);
 
     const Inschrijven = async (onderzoekId, ervaringsdeskundigeId) => {
         var date = new Date().toISOString();
@@ -98,12 +110,19 @@ function OnderzoekInfo() {
             try {
                 const onderzoekData = await fetchData(`/Onderzoek/${onderzoekId}`);
                 setOnderzoek(onderzoekData);
+
+                const vragenlijstData = await fetchData(`Vragenlijst?onderzoekId=${onderzoekId}`);
+                if (vragenlijstData) {
+                    setVragenlijsten(vragenlijstData);
+                }
                 if (!onderzoekData?.bedrijfId) return;
+
 
                 const bedrijfData = await fetchData(`/Gebruiker/${onderzoekData.bedrijfId}`);
                 if (!bedrijfData) return;
 
                 setBedrijf(bedrijfData);
+
                 const {straat, nummer, postcode, plaats} = bedrijfData;
                 if (!postcode || !plaats || !nummer || !postcode) return;
 
@@ -149,7 +168,7 @@ function OnderzoekInfo() {
         } catch (error) {
             console.error('Error:', error);
         }
-    };
+    }
 
 
     if (!onderzoek && !loading) {
@@ -186,21 +205,31 @@ function OnderzoekInfo() {
                                                     {isEditMode ? 'Opslaan' : 'Bewerken'}
                                                 </Button>
                                             </div>
-                                            {isEditMode ? null : <div>
-                                                <Button className="onderzoek-resultaten"
-                                                        onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Bekijk
-                                                    resultaten</Button>
-                                            </div>}
+                                            {isEditMode ? null :
+                                                <div className="button-onderzoekinfo">
+                                                    <div>
+                                                        <Button className="onderzoek-vragenlijst"
+                                                                onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Vragenlijst Toevegoen
+                                                        </Button>
+                                                    </div>
+                                                    <div>
+                                                        <Button className="onderzoek-resultaten"
+                                                                onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Bekijk resultaten
+                                                        </Button>
+                                                    </div>
+
+                                                </div>
+                                            }
                                         </div>
                                         :
                                         isAlIngeschreven ? (
                                             <div className="button-onderzoekinfo-ervaringsdeskundige">
                                                 {melding && <div className="melding">{melding}</div>}
                                                 <div className="button-onderzoekinfo-2">
-
                                                     <Button className="onderzoek-vragenlijst"
-                                                            onClick={() => goToVragenlijst(onderzoek.id)}>Start
+                                                            onClick={() => goToVragenlijst(geselecteerdeVragenlijstId)}>Start
                                                         Vragenlijst</Button>
+
                                                 </div>
                                                 <div>
                                                     <Button className="start-website-onderzoek"
@@ -209,10 +238,32 @@ function OnderzoekInfo() {
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div>
-                                                <Button className="onderzoek-Inschrijven"
-                                                        onClick={() => Inschrijven(onderzoek.id, userInfo.id)}>Inschrijven</Button>
-                                            </div>
+                                            <>
+                                                {vragenlijsten.length === 0 &&
+                                                    <div className="text-small">
+                                                        Er is momenteel geen vragenlijst beschikbaar voor dit onderzoek.
+                                                    </div>
+                                                }
+
+                                                {vragenlijsten.length === 1 &&
+                                                    <div>
+                                                        <Button className="onderzoek-Inschrijven"
+                                                                onClick={() => Inschrijven(onderzoek.id, userInfo.id, vragenlijsten[0].id)}>Inschrijven
+                                                            voor vragenlijst</Button>
+                                                    </div>
+                                                }
+
+                                                {vragenlijsten.length > 1 &&
+                                                    <select
+                                                        onChange={(e) => Inschrijven(onderzoek.id, userInfo.id, e.target.value)}>
+                                                        {vragenlijsten.map((vragenlijst) => (
+                                                            <option key={vragenlijst.id} value={vragenlijst.id}>
+                                                                Inschrijven voor {vragenlijst.titel}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                }
+                                            </>
                                         )
                                 }
 

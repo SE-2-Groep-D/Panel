@@ -56,7 +56,7 @@ function Routing() {
             <Route path="/onderzoek/aanmaken" element={<OnderzoekForm />} />
 
             <Route path="/nieuwsbrief" element={<NewsList />} />
-            <Route path="/vragenlijst/:onderzoekId" element={<VragenLijst />} />
+            <Route path="/vragenlijst/:vragenlijstId" element={<VragenLijst />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

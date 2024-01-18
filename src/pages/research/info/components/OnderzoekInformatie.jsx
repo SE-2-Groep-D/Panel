@@ -1,12 +1,25 @@
-function OnderzoekInformatie({titel, omschrijving, bedrijf}) {
+import {useEffect, useState} from "react";
+function OnderzoekInformatie({ titel, omschrijving, bedrijf, isEditable }) {
+    const [editableTitel, setEditableTitel] = useState(titel);
+    const [editableOmschrijving, setEditableOmschrijving] = useState(omschrijving);
+    // Handlers for changes in content
+
+    const handleTitelChange = (e) => {
+        setEditableTitel(e.target.innerText);
+    };
+
+    const handleOmschrijvingChange = (e) => {
+        setEditableOmschrijving(e.target.innerText);
+    };
+
     return (
         <div className="research-information">
             <header className="header">
-                <h1 className="heading-1">{titel}</h1>
+                <h1 className="heading-1"      contentEditable={isEditable} onBlur={handleTitelChange}> {editableTitel}</h1>
             </header>
             <section className="section">
                 <h2 className="heading-3">Over onderzoek</h2>
-                <div className="text">{omschrijving}</div>
+                <p className="text"     contentEditable={isEditable} onBlur={handleOmschrijvingChange}> {editableOmschrijving}</p>
             </section>
             <section className="section">
                 <h2 className="heading-3">Over bedrijf</h2>

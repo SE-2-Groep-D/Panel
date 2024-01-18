@@ -24,6 +24,11 @@ function OnderzoekInfo() {
     const [bedrijf, setBedrijf] = useState(null);
     const [bedrijfsCoordinaten, setBedrijfsCoordinaten] = useState(null);
     const navigate = useNavigate();
+
+
+
+
+    const [isEditMode, setIsEditMode] = useState(false);
     const goToOnderzoek = (id) => {
         navigate(`/onderzoek/${id}`);
     };
@@ -120,6 +125,13 @@ function OnderzoekInfo() {
         return <p>Onderzoek niet gevonden.</p>;
     }
 
+
+
+
+
+
+
+
     return (
         <main>
             <LoadingDiv loading={loading}>
@@ -133,16 +145,19 @@ function OnderzoekInfo() {
                                         Terug
                                     </a>
                                 </div>
-                                <OnderzoekInformatie titel={onderzoek.titel}
-                                                     omschrijving={onderzoek.omschrijving}
-                                                     bedrijf={bedrijf}/>
+                                <OnderzoekInformatie  titel={onderzoek.titel}
+                                                      omschrijving={onderzoek.omschrijving}
+                                                      bedrijf={bedrijf}
+                                                      isEditable={isEditMode}
+                                                      userInfo={userInfo}/>
 
                                 {
                                     (userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') ?
                                         <div className="button-onderzoekinfo">
                                             <div className="button-onderzoekinfo-1">
-                                                <Button className="onderzoek-resultaten"
-                                                        onClick={() => goToOnderzoek(onderzoek.id)}>Bewerken</Button>
+                                                <Button onClick={() => setIsEditMode(!isEditMode)}>
+                                                    {isEditMode ? 'Save' : 'Edit'}
+                                                </Button>
                                             </div>
                                             <div>
                                                 <Button className="onderzoek-resultaten"
@@ -174,9 +189,12 @@ function OnderzoekInfo() {
 
                             </div>
                             <div className="content-right-container">
-                                <Information locatie={onderzoek.locatie}
-                                             vergoeding={onderzoek.vergoeding}
-                                             datum={onderzoek.startDatum}/>
+                                <Information
+                                    locatie={onderzoek.locatie}
+                                    vergoeding={onderzoek.vergoeding}
+                                    datum={onderzoek.startDatum}
+                                    isEditable={isEditMode}
+                                    userInfo={userInfo} />
                                 {bedrijfsCoordinaten && <Map coordinates={bedrijfsCoordinaten} bedrijf={bedrijf}/>}
                             </div>
                         </>

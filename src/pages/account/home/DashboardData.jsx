@@ -2,7 +2,7 @@ import "@pagestyles/account/home/_default.scss";
 
 import { Suspense, lazy, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { fetchData } from "@api";
+import {fetchData, isRole, Role} from "@api";
 
 import { LoadingDiv, CountingAnimation, Modal, Article, ArticleModal } from "@components";
 import { useAuth } from "@hooks";
@@ -109,7 +109,7 @@ function UserAgenda({ data, type }) {
     <section ref={ref} className={(inView) ? "agenda moveIn bottom" : 'agenda'}>
       <h2 className="heading-2">Agenda</h2>
       <Suspense fallback={<LoadingDiv loading />}>
-        {type === "bedrijf" ? (
+        {isRole(Role.Bedrijf) ? (
           <CompanyAgenda data={data} />
         ) : (
           <Agenda data={data} />

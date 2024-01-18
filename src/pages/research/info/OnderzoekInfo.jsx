@@ -66,8 +66,7 @@ function OnderzoekInfo() {
 
     return (
         <main>
-            <LoadingDiv loading={loading}>
-                <div className="container">
+            <LoadingDiv loading={loading} className='container'>
                     {onderzoek && (
                         <>
                             <div className="content-left-container">
@@ -83,7 +82,6 @@ function OnderzoekInfo() {
                             </div>
                         </>
                     )}
-                </div>
             </LoadingDiv>
         </main>
 

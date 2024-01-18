@@ -5,7 +5,7 @@ import { FormProvider } from "../setup/data/formContext";
 function Login() {
   return (
     <FormProvider>
-      <header>
+      <header className="headerLogin">
         <Logo id="logo"></Logo>
       </header>
       <main className="loginForm">

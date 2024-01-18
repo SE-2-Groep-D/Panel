@@ -16,7 +16,7 @@ import {
 } from "@pages";
 
 import { Suspense } from "react";
-import { LoadingDiv } from "@components";
+import { LoadingDiv, Chat } from "@components";
 import PrivateRoute from "@pages/routes/ProtectedRoute.jsx";
 import { useAuth } from "@hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -62,6 +62,7 @@ function Routing() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      <Chat />
     </BrowserRouter>
   );
 }

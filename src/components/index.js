@@ -4,6 +4,7 @@ export {default as GoogleButton} from './button/googleButton.jsx';
 import {lazy} from "react";
 
 export {default as Button} from './button/button.jsx';
+export {default as Chat} from './chat/chat.jsx';
 export {default as Form} from './form/form.jsx';
 
 const ProgressBar = lazy(() => import('./progress-bar.jsx'));

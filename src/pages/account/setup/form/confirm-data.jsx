@@ -66,7 +66,6 @@ function ConfirmData() {
 function UserInfo(state) {
   const user = state.user.user;
   const company = state.user.company;
-  console.log(state);
   if (user.userType === "Ervaringsdeskundige") {
     return (
       <ul className="user-info">

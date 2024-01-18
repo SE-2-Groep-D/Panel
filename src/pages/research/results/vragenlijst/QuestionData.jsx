@@ -34,7 +34,7 @@ function QuestionAnswers({type, answers}) {
 
     console.log(answers);
 
-    if(type === 'multiple_choice' || type === 'one_choice') {
+    if(type === 'OneAnwer' || type === 'MultipleAnswer') {
         return <ChoiceAwnsers data={answers}/>
     }
 

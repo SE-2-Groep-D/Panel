@@ -7,7 +7,9 @@ function getUserData(setUser, setLoading) {
     useEffect(() => {
         const getDataUser = async () => {
           const response = await getUserInfo(userInfo.id);
-          if (isRole(Role.Bedrijf)) {
+          if (userInfo.userType === "Beheerder" || userInfo.userType === "Medewerker") {
+            setUser(createGebruikerObject(response));
+          } else if (userInfo.userType === "Bedrijf") {
             setUser(createBedrijfObject(response));
           } else {
             setUser(createErvaringsdeskundigeObject(response));
@@ -71,6 +73,15 @@ async function getUserInfo(id) {
       Nummer: user.nummer,
       Website: user.websiteUrl,
       Omschrijving: user.omschrijving,
+    };
+    return userCreated;
+  }
+
+  function createGebruikerObject (user) {
+    const userCreated = {
+      Voornaam: user.voornaam,
+      Achternaam: user.achternaam,
+      Email: user.email,
     };
     return userCreated;
   }

@@ -74,5 +74,5 @@
 
 .card {
   margin-top: 2rem;
-  height: clamp(40rem, 100%, 120rem);
+  height: clamp(40rem, 100%, 120rem) !important;
 }

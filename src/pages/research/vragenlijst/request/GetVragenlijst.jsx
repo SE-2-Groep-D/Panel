@@ -8,7 +8,6 @@ async function GetVragenlijst(onderzoekId) {
 
         const firstVragenlijst = vragenlijstList[0];
         const vragenLijst = await fetchData(`/Vragenlijst/${firstVragenlijst.id}`);
-        console.log(vragenLijst)
         return vragenLijst;
     } catch (error) {
         return false;

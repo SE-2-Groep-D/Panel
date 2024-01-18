@@ -6,6 +6,7 @@ import { GetVragenlijst } from "@pages/research/vragenlijst/request/GetVragenlij
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import '@pagestyles/research/vragenlijst.scss';
+import {SendVragenlijst} from "@pages/research/vragenlijst/response/SendVragenlijst.jsx";
 
 function VragenLijst() {
     const { userInfo } = useAuth();
@@ -75,42 +76,25 @@ function VragenLijst() {
 
 
     const handleSaveAnswers = () => {
-        // Here you can now use the `answers` state to send to an API or store it
+       const vragenlijstId= vragenlijst.id
 
-        const payload = {
+        const data = {
             answers: answers.map(answer => ({
                 questionId: answer.questionId,
                 value: Array.isArray(answer.value) ? answer.value.join(', ') : answer.value
-                // Join array values with a separator if needed, or adjust according to your API requirements
+
             }))
         };
 
-        console.log('Answers to save:', payload);
 
-        // Example: POST to an API endpoint
-        // You would replace the URL with your actual endpoint and set up the request as needed
-        /*
-        fetch('YOUR_API_ENDPOINT', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ answers }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-        */
+        SendVragenlijst(vragenlijstId,data)
+        goToHomePage();
     };
 
     return (
         <main>
             <LoadingDiv loading={loading}>
-                <div className="container">
+                <div className="container-vragenlijst">
                     {vragenlijst && (
                         <>
                             <div className="vragenlijst-content">

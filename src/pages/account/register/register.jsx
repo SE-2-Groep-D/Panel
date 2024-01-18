@@ -6,7 +6,7 @@ import { FormProvider } from "../setup/data/formContext";
 function Register() {
   return (
     <FormProvider>
-      <header>
+      <header className="headerRegister">
         <Logo id="logo"></Logo>
       </header>
       <main className={"registerForm"}>

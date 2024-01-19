@@ -1,14 +1,18 @@
 import { Form, InputField } from "@components";
 import { useAuth } from "@hooks";
-import {fetchApi, isRole, Role} from "@api";
+import { fetchApi, isRole, Role } from "@api";
 
 function EditForm({ isEditing, setIsEditing, user, setUser }) {
   const { userInfo } = useAuth();
+  const isBedrijf = isRole(Role.Bedrijf);
+  const isErvaringsdeskundige = isRole(Role.Ervaringsdeskundige);
   function handleSubmit() {
-    if (isRole(Role.Bedrijf)) {
+    if (isBedrijf) {
       updateUserInfo(createBedrijfObjectApi(user), userInfo.id);
-    } else {
+    } else if (isErvaringsdeskundige) {
       updateUserInfo(createErvaringsdeskundigeObjectApi(user), userInfo.id);
+    } else {
+      updateUserInfo(createGebruikerObjectApi(user), userInfo.id);
     }
 
     setIsEditing(false);
@@ -76,6 +80,15 @@ function createErvaringsdeskundigeObjectApi(user) {
     leeftijdscategorie: user.Leeftijdscategorie,
     //benaderingen: user.Voorkeurbenadering.split(" "),
     //hulpmiddelen: user.Hulpmiddelen.split(" "),
+  };
+  return userCreated;
+}
+
+function createGebruikerObjectApi(user) {
+  const userCreated = {
+    voornaam: user.Voornaam,
+    achternaam: user.Achternaam,
+    email: user.Email,
   };
   return userCreated;
 }

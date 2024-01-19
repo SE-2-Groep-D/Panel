@@ -19,11 +19,14 @@ export function AuthProvider({ children }) {
   }
 
   async function logoutUser() {
-    setAuth({
-      authenticated: false,
-      userInfo: null,
-    });
-    await fetchData("Auth/Logout");
+    try {
+      await fetchData("Auth/Logout");
+    } finally {
+      setAuth({
+        authenticated: false,
+        userInfo: null,
+      });
+    }
   }
 
   return (

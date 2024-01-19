@@ -8,8 +8,9 @@ import {useEffect, useState} from "react";
 import {useIntersectionObserver} from "@hooks";
 
 // import components
-import {Button, LoadingDiv, OptionSelector, ToolTip} from "@components";
+import {Button, LoadingDiv, OptionSelector, ServerError, ToolTip} from "@components";
 import PropTypes from "prop-types";
+import LoadingData from "@components/container/loading-data.jsx";
 
 
 function Onderzoeken() {
@@ -77,6 +78,10 @@ function Onderzoeken() {
     };
 
 
+    if(!getoondeOnderzoeken) {
+        return <LoadingData data={getoondeOnderzoeken}/>
+    }
+
     return (
         <main className='gray'>
             <section className="onderzoeken">
@@ -96,9 +101,10 @@ function Onderzoeken() {
                     </div>
                 </div>
                 <LoadingDiv loading={isLoading} className='onderzoek-items'>
-                    {getoondeOnderzoeken.map((onderzoek, key) =>
-                        <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek} bedrijfsGegevens={bedrijfsGegevens}/>
-                    )}
+                    {
+                        getoondeOnderzoeken.map((onderzoek, key) =>
+                            <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek} bedrijfsGegevens={bedrijfsGegevens}/>)
+                    }
                 </LoadingDiv>
                 {/* <div className="button-div">
                         <Button className="onderzoek-aanmaken-button"

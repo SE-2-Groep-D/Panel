@@ -4,11 +4,12 @@ import { Suspense, lazy, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {fetchData, isRole, Role} from "@api";
 
-import { LoadingDiv, CountingAnimation, Modal, Article, ArticleModal } from "@components";
+import {LoadingDiv, CountingAnimation, Modal, Article, ArticleModal, ServerError} from "@components";
 import { useAuth } from "@hooks";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {sortObjectByDate} from "@utils";
 import {useIntersectionObserver} from "@hooks";
+import LoadingData from "@components/container/loading-data.jsx";
 
 const Agenda = lazy(() => import("./component/Agenda.jsx"));
 const CompanyAgenda = lazy(() => import("./component/CompanyAgenda.jsx"));
@@ -21,40 +22,24 @@ export default function DashboardData({ message }) {
     fetchUserData(userData, setData);
   }, [userData]);
 
-  if (data === null) {
-    return (
-      <h1 className="heading-2 not-found">
-        Oeps er is iets fout gegaan tijdens het ophalen van de gebruikers data.
-      </h1>
-    );
-  }
-
-  if (data instanceof Error) {
-    return (
-      <h1 className="heading-2 not-found">
-        Er is een fout opgetreden tijdens het ophalen van de resultaten.
-      </h1>
-    );
-  }
-
-  if (data === undefined) {
-    return <LoadingDiv loading />;
+  if(!data) {
+      return <LoadingData data={data}/>
   }
 
   return (
     <>
-      <h2 className="heading-2">{message}</h2>
-      <section
-        className={
-          data.news && data.news.length > 0 && data.type !== "test"
-            ? "data"
-            : "data no-message"
-        }
-      >
-        <Statistics data={data.statistics} />
-        <UserAgenda data={data.agenda} type={data.type} />
-        <Message articles={data.news} />
-      </section>
+            <h2 className="heading-2">{message}</h2>
+            <section
+                className={
+                    data.news && data.news.length > 0 && data.type !== "test"
+                        ? "data"
+                        : "data no-message"
+                }
+            >
+                <Statistics data={data.statistics} />
+                <UserAgenda data={data.agenda} type={data.type} />
+                <Message articles={data.news} />
+            </section>
     </>
   );
 }
@@ -99,7 +84,7 @@ function UserAgenda({ data, type }) {
 
   if (data === undefined || data.length === 0)
     return (
-      <section className="agenda">
+      <section className="agenda moveIn bottom">
         <h2 className="heading-2">Geplande onderzoeken</h2>
         <p className="text">Er staat nog niks op de planning.</p>
       </section>

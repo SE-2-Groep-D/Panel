@@ -10,13 +10,13 @@ async function VragenlijstAanmaken(questionnaire) {
         onderzoekId: questionnaire.onderzoekId,
         questions: questionnaire.questions.map(question => ({
             type: questionTypeToInt(question.type),
-            description: question.title,
+            description: question.description,
             possibleAnswers: question.possibleAnswers.map(answer => ({
-                value: answer.answertext
+                value: answer.value
             }))
         }))
     };
-    console.log(formattedData)
+    console.log(formattedData);
     try {
         const response = await fetchApi("/Vragenlijst", "POST", formattedData );
 
@@ -28,9 +28,9 @@ async function VragenlijstAanmaken(questionnaire) {
 
 function questionTypeToInt(type) {
     switch(type) {
-        case 'openvraag': return 0;
-        case 'enkelekeus': return 1;
-        case 'meerkeuze': return 2;
+        case 'Open': return 0;
+        case 'OneAnwer': return 1;
+        case 'MultipleAnswer': return 2;
         default: return -1;
     }
 }

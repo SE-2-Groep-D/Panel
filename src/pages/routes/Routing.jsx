@@ -28,6 +28,7 @@ import NewsList from "@pages/news/News.jsx";
 import { useState } from "react";
 import { checkSession } from "./checkSession";
 import VragenLijst from "@pages/research/vragenlijst/VragenLijst.jsx";
+import VragenlijstBewerken from "@pages/research/vragenlijst/VragenlijstBewerken.jsx";
 
 function Routing() {
   const [loading, setLoading] = useState(true);
@@ -58,6 +59,7 @@ function Routing() {
 
             <Route path="/nieuwsbrief" element={<NewsList />} />
             <Route path="/vragenlijst/:vragenlijstId" element={<VragenLijst />} />
+            <Route path="/vragenlijst/:vragenlijstId/bewerken" element={<VragenlijstBewerken />} />
             <Route path="/profiel" element={<Profile />} />
           </Route>
 

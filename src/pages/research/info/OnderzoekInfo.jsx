@@ -44,6 +44,12 @@ function OnderzoekInfo() {
         navigate(`/onderzoek/${id}/results`);
     };
 
+    const goToBewerkVragenlijst =(id)=>{
+        navigate(`/vragenlijst/${id}/bewerken`)
+    }
+
+
+
     const goToCompanyWebsite=(url)=>{
         window.location.href=url;
     }
@@ -146,10 +152,8 @@ function OnderzoekInfo() {
 
     const handleEditModeToggle = () => {
         if (isEditMode) {
-            // If currently in edit mode, save changes
             handleSave();
         }
-        // Toggle edit mode state
         setIsEditMode(!isEditMode);
     };
 
@@ -211,8 +215,11 @@ function OnderzoekInfo() {
                                             {isEditMode ? null :
                                                 <div className="button-onderzoekinfo">
                                                     <div>
+                                                        {/*<Button className="onderzoek-vragenlijst"
+                                                                 onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Vragenlijst Toevegoen
+                                                        </Button>*/}
                                                         <Button className="onderzoek-vragenlijst"
-                                                                onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Vragenlijst Toevegoen
+                                                                onClick={() => goToBewerkVragenlijst(geselecteerdeVragenlijstId)}>Vragenlijst Bewerken
                                                         </Button>
                                                     </div>
                                                     <div>

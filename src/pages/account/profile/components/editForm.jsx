@@ -1,22 +1,15 @@
-import {Button, Form, InputField} from "@components";
+import {Button, Checkbox, Form, InputField, MultiInputSelector} from "@components";
 import { useAuth } from "@hooks";
 import { fetchApi, isRole, Role } from "@api";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import news from "@pages/news/News.jsx";
 
 function EditForm({user, setUser }) {
-  const isBedrijf = isRole(Role.Bedrijf);
-  const isErvaringsdeskundige = isRole(Role.Ervaringsdeskundige);
   const auth = useAuth();
   const navigate = useNavigate()
 
   function handleSubmit() {
-    if (isBedrijf) {
-      updateUserInfo(createBedrijfObjectApi(user));
-    } else if (isErvaringsdeskundige) {
-      updateUserInfo(createErvaringsdeskundigeObjectApi(user));
-    } else {
-      updateUserInfo(createGebruikerObjectApi(user));
-    }
+    updateUserInfo(user, setUser)
   }
 
   function handleChange({ element, value, id }) {
@@ -24,22 +17,10 @@ function EditForm({user, setUser }) {
   }
 
   let listInputs = [];
-
+  const skipList = ['id', 'type', 'beschikbaarheden', 'voogdid', 'voogd', 'typebeperkingen']
     for (let key in user) {
-      const value = user[key];
-      if(key.toLowerCase() === "id") continue;
-
-      listInputs.push(
-          <InputField
-              key={key}
-              id={key}
-              onChange={handleChange}
-              value={user[key]}
-              size={(value.length >= 50) ? "big" : "small"}
-          >
-            {key}
-          </InputField>
-      );
+      if(skipList.includes(key.toLowerCase())) continue;
+      listInputs.push(getInputType(key, user, handleChange));
     }
 
   return (
@@ -53,11 +34,15 @@ function EditForm({user, setUser }) {
 }
 
 async function updateUserInfo(user, setUser) {
+  const finalUser = fixProperties(user);
   setUser(undefined);
 
+
+  console.log(finalUser)
+
   try {
-    await fetchApi(`/Gebruiker/${user.id}/update`, "PUT", user);
-    setUser(user);
+    await fetchApi(`/Gebruiker/${user.id}/update`, "PUT", finalUser);
+    setUser(finalUser);
   } catch (error) {
     console.log(error);
     setUser(error);
@@ -86,43 +71,61 @@ async function deleteUser(user, setUser, auth, navigate) {
   }
 }
 
-
-function createBedrijfObjectApi(user) {
-  const userCreated = {
-    voornaam: user.Voornaam,
-    achternaam: user.Achternaam,
-    email: user.Email,
-    postcode: user.Postcode,
-    bedrijfsnaam: user.Bedrijfsnaam,
-    plaats: user.Plaats,
-    straat: user.Straat,
-    nummer: user.Nummer,
-    websiteUrl: user.Website,
-    omschrijving: user.Omschrijving,
-  };
-  return userCreated;
+function fixProperties(user) {
+  console.log(user);
+  return user;
 }
 
-function createErvaringsdeskundigeObjectApi(user) {
-  const userCreated = {
-    voornaam: user.Voornaam,
-    achternaam: user.Achternaam,
-    email: user.Email,
-    postcode: user.Postcode,
-    leeftijdscategorie: user.Leeftijdscategorie,
-    //benaderingen: user.Voorkeurbenadering.split(" "),
-    //hulpmiddelen: user.Hulpmiddelen.split(" "),
-  };
-  return userCreated;
-}
+function getInputType(key, user, handleChange) {
+  const value = (!user[key])? '' : user[key];
 
-function createGebruikerObjectApi(user) {
-  const userCreated = {
-    voornaam: user.Voornaam,
-    achternaam: user.Achternaam,
-    email: user.Email,
-  };
-  return userCreated;
+  if(typeof value === 'boolean' || key === 'toestemmingBenadering') {
+    const text = (key === 'toestemmingBenadering') ? 'Ik mag benaderd worden door bedrijven.' : key;
+
+    return  <Checkbox
+        key={key}
+        id={key} visible
+        onChange={handleChange}
+        value={user[key]}
+    >
+
+      {text}
+    </Checkbox>
+  }
+
+  if (value instanceof Array) {
+    let finalValue = value;
+
+    if (value.length > 0 && value[0] instanceof Object) {
+      finalValue = value.map((item) => {
+        let propertyNames = Object.keys(item);
+        return item[propertyNames[1]];
+      });
+    }
+
+    return (
+        <MultiInputSelector
+            key={key}
+            id={key}
+            onChange={handleChange}
+            value={finalValue}
+        >
+          {key}
+        </MultiInputSelector>
+    );
+  }
+
+      return (
+          <InputField
+          key={key}
+          id={key}
+          onChange={handleChange}
+          value={user[key]}
+          size={(value.length >= 50) ? "big" : "small"}
+      >
+        {key}
+      </InputField>
+      );
 }
 
 export default EditForm;

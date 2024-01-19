@@ -6,16 +6,20 @@ import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import '@pagestyles/research/vragenlijst.scss';
 import {SendVragenlijst} from "@pages/research/vragenlijst/response/SendVragenlijst.jsx";
 import {fetchData} from "@api";
+import DynamicModal from "@pages/research/componenten/DynamicModal.jsx";
 
 function VragenLijst() {
+
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const {vragenlijstId} = useParams();
     const [vragenlijst, setVragenlijst] = useState([]);
     const [answers, setAnswers] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const goToHomePage = () => {
-        navigate(`/`);
+    const handleModalClose = () => {
+        navigate('/');
     };
 
     useEffect(() => {
@@ -73,6 +77,14 @@ function VragenLijst() {
 
 
     const handleSaveAnswers = () => {
+        const allAnswered = vragenlijst.questions.every(question =>
+            answers.some(answer => answer.questionId === question.id && answer.value)
+        );
+
+        if (!allAnswered) {
+            setErrorMessage("Vul alle vragen in voordat u opslaat.");
+            return;
+        }
         const vragenlijstId = vragenlijst.id
 
         const data = {
@@ -83,7 +95,7 @@ function VragenLijst() {
             }))
         };
         SendVragenlijst(vragenlijstId, data)
-        goToHomePage();
+        setShowModal(true);
     };
 
     // Deze functie zet een index om in een letter (A, B, C, ...)
@@ -168,6 +180,7 @@ function VragenLijst() {
                                                 </div>
                                             </div>
                                         ))}
+                                        <p className="text error-message">{errorMessage}</p>
                                         <div className="opslaan-knop">
                                             {/* ... (Other JSX elements) */}
                                             <Button onClick={handleSaveAnswers}>Opslaan</Button>
@@ -179,6 +192,13 @@ function VragenLijst() {
                     )}
                 </div>
             </LoadingDiv>
+            <DynamicModal
+                isOpen={showModal}
+                message="U heeft de vragenlijst succesvol beantwoord."
+                onClose={handleModalClose}
+                onRedirect={handleModalClose}
+                redirectLabel="Ga naar Home"
+            />
         </main>
     );
 }

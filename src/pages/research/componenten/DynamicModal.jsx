@@ -4,7 +4,7 @@ import {Button, Modal} from "@components";
 
 const DynamicModal = ({ isOpen, message, onClose, onRedirect, redirectLabel }) => {
     return (
-        <Modal open={isOpen} >
+        <Modal open={isOpen} onClose={onClose}>
             <div className="modal-content">
                 <p className="text">{message}</p>
                 {onRedirect &&

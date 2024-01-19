@@ -13,6 +13,7 @@ import {Button, LoadingDiv} from "@components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "@hooks";
+import DynamicModal from "@pages/research/componenten/DynamicModal.jsx";
 
 
 function OnderzoekInfo() {
@@ -37,6 +38,12 @@ function OnderzoekInfo() {
 
 
     const [isEditMode, setIsEditMode] = useState(false);
+
+
+    const [showInscriptionModal, setShowInscriptionModal] = useState(false);
+    const [inscriptionMessage, setInscriptionMessage] = useState('');
+
+
     const goToVragenlijst = (id) => {
         navigate(`/vragenlijst/${id}`);
     };
@@ -44,17 +51,15 @@ function OnderzoekInfo() {
         navigate(`/onderzoek/${id}/results`);
     };
 
-    const goToBewerkVragenlijst =(id)=>{
+    const goToBewerkVragenlijst = (id) => {
         navigate(`/vragenlijst/${id}/bewerken`)
     }
 
 
-
-    const goToCompanyWebsite=(url)=>{
-        window.location.href=url;
+    const goToCompanyWebsite = (url) => {
+        window.location.href = url;
     }
 
-    //verzenden naar website
 
     useEffect(() => {
         if (vragenlijsten.length === 1) {
@@ -70,17 +75,20 @@ function OnderzoekInfo() {
             datum: date
         };
         try {
-            const responseText = await fetchApi("/Onderzoek/registration", "POST", data)
+            const responseText = await fetchApi("/Onderzoek/registration", "POST", data);
             if (responseText === "Registratie is aangemaakt.") {
                 setIsAlIngeschreven(true);
-                setMelding('Inschrijving succesvol!');
+                setInscriptionMessage('U bent succesvol ingeschreven!');
+                setShowInscriptionModal(true);
                 return true;
             } else {
-                setMelding('Inschrijving mislukt. Probeer het opnieuw.');
+                setInscriptionMessage('Inschrijving mislukt. Probeer het opnieuw.');
+                setShowInscriptionModal(true);
                 return false;
             }
         } catch (error) {
-            setMelding(`Fout tijdens inschrijving: ${error.message}`);
+            setInscriptionMessage(`Fout tijdens inschrijving: ${error.message}`);
+            setShowInscriptionModal(true);
             return false;
         }
     };
@@ -185,116 +193,114 @@ function OnderzoekInfo() {
     return (
         <main>
             <LoadingDiv loading={loading} className='container'>
-                    {onderzoek && (
-                        <>
-                            <div className="content-left-container">
-                                <div className='navigation'>
-                                    <a href={`/onderzoek/`} className='back'>
-                                        <FontAwesomeIcon icon={faChevronLeft}/>
-                                        Terug
-                                    </a>
-                                </div>
-                                <OnderzoekInformatie titel={onderzoek.titel}
-                                                     omschrijving={onderzoek.omschrijving}
-                                                     bedrijf={bedrijf}
-                                                     isEditable={isEditMode}
-                                                     userInfo={userInfo}
-                                                     onUpdate={(titel, omschrijving) => {
-                                                         setUpdatedTitel(titel);
-                                                         setUpdatedOmschrijving(omschrijving);
-                                                     }}/>
+                {onderzoek && (
+                    <>
+                        <div className="content-left-container">
+                            <div className='navigation'>
+                                <a href={`/onderzoek/`} className='back'>
+                                    <FontAwesomeIcon icon={faChevronLeft}/>
+                                    Terug
+                                </a>
+                            </div>
+                            <OnderzoekInformatie titel={onderzoek.titel}
+                                                 omschrijving={onderzoek.omschrijving}
+                                                 bedrijf={bedrijf}
+                                                 isEditable={isEditMode}
+                                                 userInfo={userInfo}
+                                                 onUpdate={(titel, omschrijving) => {
+                                                     setUpdatedTitel(titel);
+                                                     setUpdatedOmschrijving(omschrijving);
+                                                 }}/>
 
-                                {
-                                    (userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') ?
-                                        <div className="button-onderzoekinfo">
-                                            <div className="button-onderzoekinfo-1">
-                                                <Button onClick={handleEditModeToggle}>
-                                                    {isEditMode ? 'Opslaan' : 'Bewerken'}
-                                                </Button>
-                                            </div>
-                                            {isEditMode ? null :
-                                                <div className="button-onderzoekinfo">
-                                                    <div>
-                                                        {/*<Button className="onderzoek-vragenlijst"
+                            {
+                                (userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') ?
+                                    <div className="button-onderzoekinfo">
+                                        <div className="button-onderzoekinfo-1">
+                                            <Button onClick={handleEditModeToggle}>
+                                                {isEditMode ? 'Opslaan' : 'Bewerken'}
+                                            </Button>
+                                        </div>
+                                        {isEditMode ? null :
+                                            <div className="button-onderzoekinfo">
+                                                <div>
+                                                    {/*<Button className="onderzoek-vragenlijst"
                                                                  onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Vragenlijst Toevegoen
                                                         </Button>*/}
-                                                        <Button className="onderzoek-vragenlijst"
-                                                                onClick={() => goToBewerkVragenlijst(geselecteerdeVragenlijstId)}>Vragenlijst Bewerken
-                                                        </Button>
-                                                    </div>
-                                                    <div>
-                                                        <Button className="onderzoek-resultaten"
-                                                                onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Bekijk resultaten
-                                                        </Button>
-                                                    </div>
-
-                                                </div>
-                                            }
-                                        </div>
-                                        :
-                                        isAlIngeschreven ? (
-                                            <div className="button-onderzoekinfo-ervaringsdeskundige">
-                                                {melding && <div className="melding">{melding}</div>}
-                                                <div className="button-onderzoekinfo-2">
                                                     <Button className="onderzoek-vragenlijst"
-                                                            onClick={() => goToVragenlijst(geselecteerdeVragenlijstId)}>Start
-                                                        Vragenlijst</Button>
-
+                                                            onClick={() => goToBewerkVragenlijst(geselecteerdeVragenlijstId)}>Vragenlijst
+                                                        Bewerken
+                                                    </Button>
                                                 </div>
                                                 <div>
-                                                    <Button className="start-website-onderzoek"
-                                                            onClick={() => goToCompanyWebsite(bedrijf.websiteUrl)}>Start
-                                                        website onderzoek</Button>
+                                                    <Button className="onderzoek-resultaten"
+                                                            onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Bekijk
+                                                        resultaten
+                                                    </Button>
                                                 </div>
+
                                             </div>
-                                        ) : (
-                                            <>
-                                                {vragenlijsten.length === 0 &&
-                                                    <div className="text-small">
-                                                        Er is momenteel geen vragenlijst beschikbaar voor dit onderzoek.
-                                                    </div>
-                                                }
+                                        }
+                                    </div>
+                                    :
+                                    isAlIngeschreven ? (
+                                        <div className="button-onderzoekinfo-ervaringsdeskundige">
+                                            {melding && <div className="melding">{melding}</div>}
+                                            <div className="button-onderzoekinfo-2">
+                                                <Button className="onderzoek-vragenlijst"
+                                                        onClick={() => goToVragenlijst(geselecteerdeVragenlijstId)}>Start
+                                                    Vragenlijst</Button>
 
-                                                {vragenlijsten.length === 1 &&
-                                                    <div>
-                                                        <Button className="onderzoek-Inschrijven"
-                                                                onClick={() => Inschrijven(onderzoek.id, userInfo.id, vragenlijsten[0].id)}>Inschrijven
-                                                            voor vragenlijst</Button>
-                                                    </div>
-                                                }
+                                            </div>
+                                            <div>
+                                                <Button className="start-website-onderzoek"
+                                                        onClick={() => goToCompanyWebsite(bedrijf.websiteUrl)}>Start
+                                                    website onderzoek</Button>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            {vragenlijsten.length === 0 &&
+                                                <div className="text-small button-onderzoekinfo">
+                                                    Er is momenteel geen vragenlijst beschikbaar voor dit onderzoek.
+                                                </div>
+                                            }
 
-                                                {vragenlijsten.length > 1 &&
-                                                    <select
-                                                        onChange={(e) => Inschrijven(onderzoek.id, userInfo.id, e.target.value)}>
-                                                        {vragenlijsten.map((vragenlijst) => (
-                                                            <option key={vragenlijst.id} value={vragenlijst.id}>
-                                                                Inschrijven voor {vragenlijst.titel}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                }
-                                            </>
-                                        )
-                                }
+                                            {vragenlijsten.length === 1 &&
+                                                <div className="button-onderzoekinfo">
+                                                    <Button className="onderzoek-Inschrijven"
+                                                            onClick={() => Inschrijven(onderzoek.id, userInfo.id, vragenlijsten[0].id)}>Inschrijven
+                                                        voor vragenlijst</Button>
+                                                </div>
+                                            }
 
-                            </div>
-                            <div className="content-right-container">
-                                <Information
-                                    locatie={onderzoek.locatie}
-                                    vergoeding={onderzoek.vergoeding}
-                                    datum={onderzoek.startDatum}
-                                    isEditable={isEditMode}
-                                    userInfo={userInfo}
-                                    onUpdate={(locatie, vergoeding, datum) => {
-                                        setUpdatedLocatie(locatie);
-                                        setUpdatedVergoeding(vergoeding);
-                                        setUpdatedDatum(datum);
-                                    }}/>
-                                {bedrijfsCoordinaten && <Map coordinates={bedrijfsCoordinaten} bedrijf={bedrijf}/>}
-                            </div>
-                        </>
-                    )}
+                                        </>
+                                    )
+                            }
+
+                        </div>
+                        <div className="content-right-container">
+                            <Information
+                                locatie={onderzoek.locatie}
+                                vergoeding={onderzoek.vergoeding}
+                                datum={onderzoek.startDatum}
+                                isEditable={isEditMode}
+                                userInfo={userInfo}
+                                onUpdate={(locatie, vergoeding, datum) => {
+                                    setUpdatedLocatie(locatie);
+                                    setUpdatedVergoeding(vergoeding);
+                                    setUpdatedDatum(datum);
+                                }}/>
+                            {bedrijfsCoordinaten && <Map coordinates={bedrijfsCoordinaten} bedrijf={bedrijf}/>}
+                        </div>
+                    </>
+                )}
             </LoadingDiv>
+            <DynamicModal
+                isOpen={showInscriptionModal}
+                message={inscriptionMessage}
+                onClose={() => setShowInscriptionModal(false)}
+            />
+
         </main>
 
     );

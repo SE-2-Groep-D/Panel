@@ -4,42 +4,42 @@ import { Suspense, lazy, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {fetchData, isRole, Role} from "@api";
 
-import {LoadingDiv, CountingAnimation, Modal, Article, ArticleModal, ServerError} from "@components";
+import { LoadingDiv, CountingAnimation, LoadingData, Article, ArticleModal } from "@components";
 import { useAuth } from "@hooks";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {sortObjectByDate} from "@utils";
 import {useIntersectionObserver} from "@hooks";
-import LoadingData from "@components/container/loading-data.jsx";
 
 const Agenda = lazy(() => import("./component/Agenda.jsx"));
 const CompanyAgenda = lazy(() => import("./component/CompanyAgenda.jsx"));
 
 export default function DashboardData({ message }) {
   const [data, setData] = useState();
-  const userData = useAuth().userInfo;
+  const {userInfo} = useAuth();
+  const isBedrijf = isRole(Role.Bedrijf);
 
   useEffect(() => {
-    fetchUserData(userData, setData);
-  }, [userData]);
+    fetchUserData(userInfo, setData);
+  }, [userInfo]);
 
-  if(!data) {
-      return <LoadingData data={data}/>
-  }
+    if(!data || data instanceof Error) {
+        return <LoadingData data={data}/>;
+    }
 
   return (
     <>
-            <h2 className="heading-2">{message}</h2>
-            <section
-                className={
-                    data.news && data.news.length > 0 && data.type !== "test"
-                        ? "data"
-                        : "data no-message"
-                }
-            >
-                <Statistics data={data.statistics} />
-                <UserAgenda data={data.agenda} type={data.type} />
-                <Message articles={data.news} />
-            </section>
+      <h2 className="heading-2">{message}</h2>
+      <section
+        className={
+          data.news && data.news.length > 0 && !isBedrijf
+            ? "data"
+            : "data no-message"
+        }
+      >
+        <Statistics data={data.statistics} />
+        <UserAgenda data={data.agenda} type={data.type} />
+        <Message articles={data.news} />
+      </section>
     </>
   );
 }
@@ -81,6 +81,7 @@ Statistics.propTypes = {
 
 function UserAgenda({ data, type }) {
     const [ref, inView] = useIntersectionObserver();
+    const isBedrijf = isRole(Role.Bedrijf)
 
   if (data === undefined || data.length === 0)
     return (
@@ -94,7 +95,7 @@ function UserAgenda({ data, type }) {
     <section ref={ref} className={(inView) ? "agenda moveIn bottom" : 'agenda'}>
       <h2 className="heading-2">Agenda</h2>
       <Suspense fallback={<LoadingDiv loading />}>
-        {isRole(Role.Bedrijf) ? (
+        {isBedrijf ? (
           <CompanyAgenda data={data} />
         ) : (
           <Agenda data={data} />

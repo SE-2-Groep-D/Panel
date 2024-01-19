@@ -1,33 +1,35 @@
-import {fetchData, isRole, Role} from "@api";
-import { useEffect } from "react";
-import { useAuth } from "@hooks";
+import {fetchData} from "@api";
+import {useEffect} from "react";
 
-function getUserData(setUser, setLoading) {
-    const { userInfo } = useAuth();
-    useEffect(() => {
-        const getDataUser = async () => {
-          const response = await getUserInfo(userInfo.id);
-          if (userInfo.userType === "Beheerder" || userInfo.userType === "Medewerker") {
-            setUser(createGebruikerObject(response));
-          } else if (userInfo.userType === "Bedrijf") {
-            setUser(createBedrijfObject(response));
-          } else {
-            setUser(createErvaringsdeskundigeObject(response));
-          }
-          setLoading(false);
-        };
-        getDataUser();
-      }, []);
+async function getUserData(id, setUser) {
+   const user = await  getUserInfo(id);
+
+   if(user.type === "Ervaringsdeskundige") {
+     setUser(
+         createErvaringsdeskundigeObject(user)
+     );
+     return;
+   }
+
+   if(user.type === "Bedrijf") {
+     setUser(
+         createBedrijfObject(user)
+     );
+   }
+
+
+   setUser(
+       createGebruikerObject(user)
+   );
 }
 
 export { getUserData };
 
 async function getUserInfo(id) {
     try {
-      const response = await fetchData("Gebruiker/" + id);
-      return response;
-    } catch {
-      console.log("niet gelukt om data te halen");
+      return await fetchData("Gebruiker/" + id);
+    } catch (err) {
+      return err;
     }
   }
 
@@ -49,6 +51,7 @@ async function getUserInfo(id) {
     }
 
     const userCreated = {
+      id: user.id,
       Voornaam: user.voornaam,
       Achternaam: user.achternaam,
       Email: user.email,
@@ -63,6 +66,7 @@ async function getUserInfo(id) {
   
   function createBedrijfObject(user) {
     const userCreated = {
+      id: user.id,
       Voornaam: user.voornaam,
       Achternaam: user.achternaam,
       Email: user.email,
@@ -79,6 +83,7 @@ async function getUserInfo(id) {
 
   function createGebruikerObject (user) {
     const userCreated = {
+      id: user.id,
       Voornaam: user.voornaam,
       Achternaam: user.achternaam,
       Email: user.email,

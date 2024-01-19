@@ -57,11 +57,11 @@ nav.navigation {
     justify-content: center;
     list-style: none;
 
-    @include respond(tablet, min) {
+    @include respond(1020px, min) {
       flex-grow: 1;
     }
 
-    @include respond(tablet) {
+    @include respond(1020px) {
       position: fixed;
       top: 7rem;
       right: 0;
@@ -96,7 +96,7 @@ nav.navigation {
       align-items: center;
       width: 100%;
 
-      @include respond(tablet) {
+      @include respond(1020px) {
         flex-direction: column;
         gap: 2rem;
       }
@@ -138,7 +138,7 @@ nav.navigation {
     }
 
 
-    @include respond(tablet, min) {
+    @include respond(1020px, min) {
       display: none;
     }
 

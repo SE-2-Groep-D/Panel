@@ -1,21 +1,22 @@
-import { Form, InputField } from "@components";
+import {Button, Form, InputField} from "@components";
 import { useAuth } from "@hooks";
 import { fetchApi, isRole, Role } from "@api";
+import {useNavigate} from "react-router-dom";
 
-function EditForm({ isEditing, setIsEditing, user, setUser }) {
-  const { userInfo } = useAuth();
+function EditForm({user, setUser }) {
   const isBedrijf = isRole(Role.Bedrijf);
   const isErvaringsdeskundige = isRole(Role.Ervaringsdeskundige);
+  const auth = useAuth();
+  const navigate = useNavigate()
+
   function handleSubmit() {
     if (isBedrijf) {
-      updateUserInfo(createBedrijfObjectApi(user), userInfo.id);
+      updateUserInfo(createBedrijfObjectApi(user));
     } else if (isErvaringsdeskundige) {
-      updateUserInfo(createErvaringsdeskundigeObjectApi(user), userInfo.id);
+      updateUserInfo(createErvaringsdeskundigeObjectApi(user));
     } else {
-      updateUserInfo(createGebruikerObjectApi(user), userInfo.id);
+      updateUserInfo(createGebruikerObjectApi(user));
     }
-
-    setIsEditing(false);
   }
 
   function handleChange({ element, value, id }) {
@@ -23,37 +24,68 @@ function EditForm({ isEditing, setIsEditing, user, setUser }) {
   }
 
   let listInputs = [];
-  if (isEditing) {
+
     for (let key in user) {
+      const value = user[key];
+      if(key.toLowerCase() === "id") continue;
+
       listInputs.push(
-        <InputField
-          key={key}
-          id={key}
-          onChange={handleChange}
-          value={user[key]}
-        >
-          {key}
-        </InputField>
+          <InputField
+              key={key}
+              id={key}
+              onChange={handleChange}
+              value={user[key]}
+              size={(value.length >= 50) ? "big" : "small"}
+          >
+            {key}
+          </InputField>
       );
     }
-  }
 
   return (
-    <Form buttonText="Opslaan" onSubmit={handleSubmit} title={"Bewerken"}>
-      {listInputs}
-    </Form>
+      <>
+        <Form buttonText="Opslaan" onSubmit={handleSubmit} title={"Profiel"}>
+          {listInputs}
+        </Form>
+        <Button label='Klik op de knop om het account te verwijderen.' color="tertiary" varient="text" onClick={() => deleteUser(user, setUser, auth, navigate)}>Verwijder Account</Button>
+      </>
   );
 }
 
-async function updateUserInfo(user, id) {
+async function updateUserInfo(user, setUser) {
+  setUser(undefined);
+
   try {
-    const endpoint = "Gebruiker/" + id + "/update";
-    await fetchApi(endpoint, "PUT", user);
+    await fetchApi(`/Gebruiker/${user.id}/update`, "PUT", user);
+    setUser(user);
   } catch (error) {
     console.log(error);
-    console.log("update ging mis");
+    setUser(error);
   }
 }
+
+async function deleteUser(user, setUser, auth, navigate) {
+  const finalUser = user;
+  const {logoutUser, userInfo} = auth;
+  setUser(undefined);
+
+  try {
+    await fetchApi(`/Gebruiker/${finalUser.id}/delete`, "DELETE");
+    setUser(user);
+
+    if(user.id === userInfo.id) {
+      logoutUser();
+      navigate('/');
+      return;
+    }
+
+    navigate("/admin/gebruiker/list");
+  } catch (error) {
+    console.log(error);
+    setUser(error);
+  }
+}
+
 
 function createBedrijfObjectApi(user) {
   const userCreated = {

@@ -5,6 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {fetchApi, fetchData} from "@api";
 import {faAdd, faEdit, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import DynamicModal from "@pages/research/componenten/DynamicModal.jsx";
 
 function VragenlijstBewerken() {
     const [error, setError] = useState('');
@@ -13,6 +14,9 @@ function VragenlijstBewerken() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(null);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
 
     const [newQuestion, setNewQuestion] = useState(
         {
@@ -26,9 +30,9 @@ function VragenlijstBewerken() {
         questions: []
     });
 
-    function naarHomePage() {
-        navigate("/");
-    }
+    const redirectToHome = () => {
+        navigate('/');
+    };
 
 
     useEffect(() => {
@@ -48,16 +52,12 @@ function VragenlijstBewerken() {
         }
     }, [vragenlijstId]);
 
-    useEffect(() => {
-        console.log(questionnaire);
-    }, [questionnaire]);
-
 
     const updateVragenlijst = async () => {
-        console.log(questionnaire)
         try {
             const response = await fetchApi(`/Vragenlijst/${vragenlijstId}`, 'PUT', questionnaire)
-            console.log(response)
+           console.log(response)
+            showSuccessModal('Vragenlijst is succesvol aangepast');
         } catch (error) {
             console.error('Error updating vragenlijst:', error);
             // Handle errors
@@ -81,7 +81,6 @@ function VragenlijstBewerken() {
             return;
         }
 
-        // Check for minimum answers for 'EnkeleKeus' and 'MultipleAnswer'
         if ((newQuestion.type === 'OneAnwer' || newQuestion.type === 'MultipleAnswer') && newQuestion.possibleAnswers.length < 3) {
             setError("EnkeleKeus en MultipleAnswer vragen vereisen minimaal 3 antwoorden.");
             return;
@@ -171,6 +170,13 @@ function VragenlijstBewerken() {
     const handleRemoveAnswerModal = (answerIndex) => {
         const updatedAnswers = newQuestion.possibleAnswers.filter((_, index) => index !== answerIndex);
         setNewQuestion({...newQuestion, possibleAnswers: updatedAnswers});
+    };
+
+
+
+    const showSuccessModal = (message) => {
+        setModalMessage(message);
+        setIsModalOpen(true);
     };
 
 
@@ -336,8 +342,17 @@ function VragenlijstBewerken() {
 
                         </div>
                     </Modal>
+
                 )}
             </div>
+            <DynamicModal
+                isOpen={isModalOpen}
+                message={modalMessage}
+                onClose={() => setIsModalOpen(false)}
+                onRedirect={redirectToHome}
+                redirectLabel="Ga naar Home"
+            />
+
         </>
     );
 }

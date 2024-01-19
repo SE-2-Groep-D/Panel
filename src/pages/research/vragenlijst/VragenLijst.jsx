@@ -1,13 +1,10 @@
 import  {useEffect, useState} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
-import {useAuth} from "@hooks";
 import {Button, LoadingDiv} from "@components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import '@pagestyles/research/vragenlijst.scss';
 import {SendVragenlijst} from "@pages/research/vragenlijst/response/SendVragenlijst.jsx";
-
-import {Form, InputField, Checkbox} from "@components";
 import {fetchData} from "@api";
 
 function VragenLijst() {
@@ -85,8 +82,6 @@ function VragenLijst() {
 
             }))
         };
-
-
         SendVragenlijst(vragenlijstId, data)
         goToHomePage();
     };

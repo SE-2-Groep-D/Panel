@@ -9,13 +9,14 @@ import {lazy, Suspense} from 'react';
 import { fetchData } from "@api";
 
 // Import Components
-import {OptionSelector, LoadingDiv} from '@components';
+import {OptionSelector, LoadingDiv, ServerError} from '@components';
 
 const TrackingResults = lazy(() => import('./tracking/TrackingResults.jsx'));
 const QuestionListResults = lazy(() => import('./vragenlijst/QuestionListResults.jsx'));
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import LoadingData from "@components/container/loading-data.jsx";
 
 export default function Results() {
     const [options, setOptions] = useState(undefined);
@@ -30,6 +31,11 @@ export default function Results() {
     const ResultsComponent = renderedResults(options, selectedOption);
     const inputOptions = getOptionsList(options);
 
+
+    if(!options) {
+        return <LoadingData data={options}/>
+    }
+
   return (
     <main className='results gray'>
             <div className='navigation'>
@@ -40,10 +46,7 @@ export default function Results() {
 
                 <OptionSelector onChange={(e) => setSelectedOption(e.value)} options={inputOptions} value={selectedOption}>Resultaten</OptionSelector>
             </div>
-
-            <LoadingDiv loading={options === undefined}>
-                    {ResultsComponent}
-            </LoadingDiv>
+                {ResultsComponent}
         </main>
     );
 }
@@ -91,17 +94,7 @@ async function fetchOptions(researchId, setOptions) {
 function renderedResults(options, selectedOption) {
     const data = getRenderedOption(options, selectedOption);
 
-    if(options === undefined || data === undefined) {
-        return <></>
-    }
 
-    if(options === null) {
-        return <h1 className='heading-2 not-found'>Er is een fout opgetreden tijdens het ophalen van de resultaten.</h1>
-    }
-
-    if(options.length == 0) {
-        return <h1 className='heading-2 not-found'>Geen resultaten gevonden.</h1>
-    }
 
     const {id, type} = data;
 

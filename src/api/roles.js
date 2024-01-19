@@ -10,17 +10,11 @@ const Role = {
 
 
 function isRole(role) {
-    if(role.toUpperCase() === Role.Gebruiker) return true;
-
     const {userInfo} = useAuth();
 
     if(userInfo == null || userInfo.userType == null) return false;
-    for (let roleKey in Role) {
-        if(!role.toUpperCase() === roleKey) continue;
-        return true;
-    }
 
-    return false;
+    return userInfo.userType.toUpperCase() === role.toUpperCase();
 }
 
 

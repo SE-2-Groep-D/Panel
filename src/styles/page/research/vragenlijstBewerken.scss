@@ -151,9 +151,10 @@ button.btn.vraag-maken{
 .antworden-div{
   display: flex;
   flex-direction: row;
+
 }
-.antworden-delete{
-  background: red !important;
+.antworden-buttons{
+  background-color: transparent !important;
 }
 
 .error-message{
@@ -163,4 +164,31 @@ button.btn.vraag-maken{
 .action-button-vragen {
   display: flex;
   gap: 2rem;
+}
+.vragelijst-modal>.modal{
+  width: clamp(30rem,80rem,80vh);
+}
+
+.antwoord-add{
+  border-radius: 8px;
+  border: 4px dashed #4C5166;
+  background-color: white !important;
+  color: #4D5166!important;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+.vragenlijst-informatie-bewerken{
+  display: flex;
+  justify-content:space-between ;
+
+  @include respond(tablet, max) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.antworden-delete{
+  background-color: transparent !important;
 }

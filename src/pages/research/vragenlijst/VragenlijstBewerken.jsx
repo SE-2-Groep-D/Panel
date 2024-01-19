@@ -7,7 +7,6 @@ import {faAdd, faEdit, faSave, faTrash} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function VragenlijstBewerken() {
-
     const [error, setError] = useState('');
     const {vragenlijstId} = useParams();
     const [loading, setLoading] = useState(true);
@@ -215,12 +214,11 @@ function VragenlijstBewerken() {
                                 <div className="content-right-bewerken">
                                     <p id="tpye" className="text-small">Vraag Type: {question.type}</p>
                                     <div className="action-button-vragen">
-                                        <Button label='Klik op deze knop om vraag te verwijderen.' className="antworden-delete"
-                                                onClick={() => verwijderdVraag(index)}><FontAwesomeIcon
-                                            icon={faTrash}/></Button>
-                                        <Button label='Klik op deze knop om vraag te wijzigen.' color='secondary'
+                                        <Button label='Klik op deze knop om vraag te verwijderen.' className="antworden-buttons"
+                                                onClick={() => verwijderdVraag(index)}><FontAwesomeIcon icon={faTrash} style={{ color: 'black' }}/></Button>
+                                        <Button label='Klik op deze knop om vraag te wijzigen.' className="antworden-buttons"
                                                 onClick={() => openModal(index)}> <FontAwesomeIcon
-                                            icon={faEdit}/></Button>
+                                            icon={faEdit} style={{ color: 'black' }}/></Button>
                                     </div>
                                 </div>
                             </div>
@@ -232,111 +230,114 @@ function VragenlijstBewerken() {
                         </div>
                         <div className="vragenlist-savebutton">
                             <Button className="" onClick={() => updateVragenlijst()}>
-                                Sla Bewerkte Vragenlijst Op
+                               Opslaan
                             </Button>
                         </div>
                     </div>
                 </div>
             </main>
-            {showModal && (
-                <Modal
-                    open={showModal}
-                    onClose={closeModal}
-                    animation="bottom"
-                    className="large-modal"
-                >
-                    <div className="modal-content">
-                        {currentQuestionIndex !== null && currentQuestionIndex < questionnaire.questions.length ? (
-                            <>
-                                <h3>Bewerkt Vraag {currentQuestionIndex + 1}</h3>
-                                <InputField
-                                    label="Question Description"
-                                    value={newQuestion.description}
-                                    onChange={(e) => setNewQuestion({...newQuestion, description: e.value})}
-                                >Vraag</InputField>
-                                <OptionSelector
-                                    onChange={(e) => setNewQuestion({...newQuestion, type: e.value})}
-                                    options={['Open', 'OneAnwer', 'MultipleAnswer']}
-                                    value={newQuestion.type}
-                                >
-                                    Question Type
-                                </OptionSelector>
-
-                                {newQuestion.possibleAnswers.map((answer, answerIndex) => (
-                                    <div key={answerIndex} className="antworden-div">
+            <div className="vragelijst-modal">
+                {showModal && (
+                    <Modal
+                        open={showModal}
+                        onClose={closeModal}
+                        animation="bottom"
+                        className="large-modal"
+                    >
+                        <div className="modal-content">
+                            {currentQuestionIndex !== null && currentQuestionIndex < questionnaire.questions.length ? (
+                                <>
+                                    <div className="vragenlijst-informatie-bewerken">
                                         <InputField
-                                            value={answer.value}
-                                            onChange={(e) => handleChangeAnswerModal(e, answerIndex)}
-                                        />
-                                        <Button className="antworden-delete"
-                                                onClick={() => handleRemoveAnswerModal(answerIndex)}> <FontAwesomeIcon
-                                            icon={faTrash}/></Button>
+                                            label="Question Description"
+                                            value={newQuestion.description}
+                                            onChange={(e) => setNewQuestion({...newQuestion, description: e.value})}
+                                        >{currentQuestionIndex + 1}. Vraag</InputField>
+                                        <OptionSelector
+                                            onChange={(e) => setNewQuestion({...newQuestion, type: e.value})}
+                                            options={['Open', 'OneAnwer', 'MultipleAnswer']}
+                                            value={newQuestion.type}
+                                        >
+                                            Vraag Type
+                                        </OptionSelector>
                                     </div>
-                                ))}
-                                {error && <div className="error-message">{error}</div>}
-                                <Button onClick={handleAddAnswerModal}
-                                        label='Klik op deze knop om een nieuw antworden toe te voegen.'
-                                        color='secondary'>Antwoord Toevoegen <FontAwesomeIcon icon={faAdd}/></Button>
-                                <Button onClick={handleSaveNewQuestion}
-                                        label='Klik op deze knop om een wijzingen opslaan.' color='tertiary'>Sla
-                                    wijzingen op <FontAwesomeIcon icon={faSave}/></Button>
-                            </>
-                        ) : (
-                            <>
-                                <h3 className="heading-3">Nieuwe vraag toevoegen</h3>
+                                    <h3>Antworden:</h3>
+                                    {newQuestion.possibleAnswers.map((answer, answerIndex) => (
+                                        <div key={answerIndex} className="antworden-div">
+                                            <InputField
+                                                value={answer.value}
+                                                onChange={(e) => handleChangeAnswerModal(e, answerIndex)}
+                                            >{answerIndex + 1}</InputField>
+                                            <Button className="antworden-delete"
+                                                    onClick={() => handleRemoveAnswerModal(answerIndex)}>
+                                                <FontAwesomeIcon style={{color: 'black'}}
+                                                                 icon={faTrash}/></Button>
+                                        </div>
+                                    ))}
+                                    {error && <div className="error-message">{error}</div>}
+                                    <Button onClick={handleAddAnswerModal} className="antwoord-add"
+                                            label='Klik op deze knop om een nieuw antworden toe te voegen.'
+                                    >Antwoord Toevoegen <FontAwesomeIcon icon={faAdd}/></Button>
+                                    <Button onClick={handleSaveNewQuestion} color='secondary'
+                                            label='Klik op deze knop om een wijzingen opslaan.'>Opslaan <FontAwesomeIcon icon={faSave}/></Button>
+                                </>
+                            ) : (
+                                <>
 
-                                <InputField
-                                    id="description"
-                                    label="Vraag Titel"
-                                    value={newQuestion.description}
-                                    onChange={handleChangeQuestion}
-                                    placeholder="Vraag"
-                                    required
-                                />
-                                <OptionSelector
-                                    id="type"
-                                    value={newQuestion.type}
-                                    onChange={handleChangeQuestion}
-                                    options={['Open', 'OneAnwer', 'MultipleAnswer']}
-                                    required
-                                />
-                                {newQuestion.possibleAnswers.map((answer, answerIndex) => (
-                                    <div key={answerIndex} className="antworden-div">
+                                    <div className="vragenlijst-informatie-bewerken">
                                         <InputField
-                                            key={answerIndex}
-                                            value={answer.value || ''}
-                                            onChange={(e) => handleChangeAnswer(e, answerIndex)}
-
-                                        />
-                                        <Button className="antworden-delete"
-                                                onClick={() => handleRemoveAnswerModal(answerIndex)}> <FontAwesomeIcon
-                                            icon={faTrash}/></Button>
+                                            id="description"
+                                            label="Vraag Titel"
+                                            value={newQuestion.description}
+                                            onChange={handleChangeQuestion}
+                                            placeholder="Vraag"
+                                            required
+                                        >Vraag</InputField>
+                                        <OptionSelector
+                                            id="type"
+                                            value={newQuestion.type}
+                                            onChange={handleChangeQuestion}
+                                            options={['Open', 'OneAnwer', 'MultipleAnswer']}
+                                            required
+                                        >Vraag Type</OptionSelector>
                                     </div>
-                                ))}
+                                    <h3>Antworden:</h3>
+                                    {newQuestion.possibleAnswers.map((answer, answerIndex) => (
+                                        <div key={answerIndex}className="antworden-div" >
+                                            <InputField
+                                                key={answerIndex}
+                                                value={answer.value || ''}
+                                                onChange={(e) => handleChangeAnswer(e, answerIndex)}
 
+                                            >{answerIndex+1}</InputField>
+                                            <Button className="antworden-delete"
+                                                    onClick={() => handleRemoveAnswerModal(answerIndex)}>
+                                                <FontAwesomeIcon style={{color: 'black'}}
+                                                    icon={faTrash}/></Button>
+                                        </div>
+                                    ))}
+                                    {error && <div className="error-message">{error}</div>}
+                                    <div className="vragenlijst-button-div">
 
-                                {error && <div className="error-message">{error}</div>}
-                                <div className="vragenlijst-button-div">
-                                    {(newQuestion.type === 'OneAnwer' || newQuestion.type === 'MultipleAnswer') && (
                                         <Button label='Klik op deze knop om een nieuw antworden toe te voegen.'
-                                                color='secondary' onClick={() => setNewQuestion(prev => ({
+                                                className="antwoord-add" onClick={() => setNewQuestion(prev => ({
                                             ...prev,
                                             possibleAnswers: [...prev.possibleAnswers, {value: ''}]
                                         }))}>
                                             Voeg antwoord toe <FontAwesomeIcon icon={faAdd}/>
                                         </Button>
-                                    )}
-                                    <Button label='Klik op deze knop om vraag aan te maken.' color='tertiary'
-                                            onClick={handleSaveNewQuestion}>Opslaan <FontAwesomeIcon
-                                        icon={faSave}/></Button>
-                                </div>
-                            </>
-                        )}
 
-                    </div>
-                </Modal>
-            )}
+                                        <Button label='Klik op deze knop om het op te slaan.' color='secondary'
+                                                onClick={handleSaveNewQuestion}>Opslaan <FontAwesomeIcon
+                                            icon={faSave}/></Button>
+                                    </div>
+                                </>
+                            )}
 
+                        </div>
+                    </Modal>
+                )}
+            </div>
         </>
     );
 }

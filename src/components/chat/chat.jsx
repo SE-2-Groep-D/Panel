@@ -26,6 +26,9 @@ function Chat() {
     if (!isChatOpen && bedrijfId != null) {
       await makeChat(bedrijfId, userInfo.id);
     }
+    if (isChatOpen) {
+      setBedrijfId(null);
+    }
     setChatOpen(!isChatOpen);
   };
 
@@ -62,7 +65,6 @@ async function makeChat(bedrijfId, userId) {
   if (berichten.length === 0) {
     try {
       await fetchApi(`bericht/stuurbericht`, "POST", defaultBericht);
-      console.log("een keer");
     } catch (error) {
       console.log(error);
     }

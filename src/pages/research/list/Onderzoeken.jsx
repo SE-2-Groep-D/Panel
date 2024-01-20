@@ -78,8 +78,8 @@ function Onderzoeken() {
     };
 
 
-    if(!getoondeOnderzoeken) {
-        return <LoadingData data={getoondeOnderzoeken}/>
+    if(!getoondeOnderzoeken || getoondeOnderzoeken instanceof Error) {
+        return <LoadingData data={getoondeOnderzoeken}/>;
     }
 
     return (

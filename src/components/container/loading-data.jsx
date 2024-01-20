@@ -1,14 +1,13 @@
 import { LoadingDiv, ServerError } from "@components";
+import {Suspense} from "react";
 
 function LoadingData({ data, children }) {
-
-    console.log(data);
 
     if (data === undefined) {
         return <LoadingDiv loading />;
     }
 
-    if (data === null || data.length === 0) {
+    if (data === null) {
         return <h2 className='heading-2 not-found'>Geen resultaten gevonden</h2>;
     }
 
@@ -16,7 +15,7 @@ function LoadingData({ data, children }) {
         return <ServerError message='Er is een fout opgetreden tijdens het ophalen van de resultaten.' />;
     }
 
-    return null;
+    return children;
 }
 
 export default LoadingData;

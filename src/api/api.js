@@ -16,7 +16,6 @@ class ApiResponseError extends Error {
 async function fetchApi(endpoint, method, data) {
     const hostname = getHostName();
     endpoint = (endpoint.startsWith('/')) ? endpoint : "/" + endpoint;
-
     try {
         const response = await fetch(hostname + endpoint, {
             method: method,

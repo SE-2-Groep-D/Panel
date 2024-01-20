@@ -11,8 +11,8 @@ export default function TrackingResults({researhId}) {
     },[researhId]);
 
 
-    if(!data) {
-        return <LoadingData data={data}/>
+    if(!data || data instanceof Error) {
+        return <LoadingData data={data}/>;
     }
 
   return (

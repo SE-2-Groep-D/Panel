@@ -1,0 +1,61 @@
+@use "src/styles/abstract" as *;
+
+.user-dashboard {
+  background-color: $color-white;;
+  border-radius: $border-radius-big;
+  border: $border-container;
+  padding: 5rem;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  margin-top: 5rem;
+
+  .btn {
+    max-width: 25rem;
+    padding: 1.5rem 1rem !important;
+    font-size: 1.6rem;
+  }
+
+
+
+  .filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    @include respond(tablet) {
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+
+  .user-list {
+    max-height: 60rem;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: .8rem;
+      overflow: overlay;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $color-gray;
+      border-radius: 2rem;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: $color-primary-85;
+      border-radius: 2rem;
+
+      &:active {
+        background-color: $color-primary-60;
+      }
+    }
+  }
+}

@@ -9,11 +9,9 @@ import {useIntersectionObserver} from "@hooks";
 
 // import component
 import {useAuth} from "@hooks";
-import {Button, LoadingDiv, OptionSelector, ToolTip} from "@components";
-
 // import components
 import {Button, LoadingDiv, OptionSelector, ServerError, ToolTip} from "@components";
-import PropTypes from "prop-types";
+
 import LoadingData from "@components/container/loading-data.jsx";
 
 function Onderzoeken() {

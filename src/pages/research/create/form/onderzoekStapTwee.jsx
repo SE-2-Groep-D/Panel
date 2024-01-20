@@ -17,7 +17,7 @@ function OnderzoekStapTwee() {
         aantalParticipanten: '',
         vergoeding: '',
         datum: '',
-        websiteUrl: '',
+        websiteUrl: 'https://',
         plaats: '',
     });
 

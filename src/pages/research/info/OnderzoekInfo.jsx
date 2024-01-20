@@ -13,7 +13,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "@hooks";
 import DynamicModal from "@pages/research/componenten/DynamicModal.jsx";
-import {data} from "autoprefixer";
 
 
 function OnderzoekInfo() {

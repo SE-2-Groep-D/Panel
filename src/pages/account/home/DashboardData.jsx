@@ -2,7 +2,7 @@ import "@pagestyles/account/home/_default.scss";
 
 import { Suspense, lazy, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {fetchData, isRole, Role} from "@api";
+import {fetchData, hasPermission, isRole, Role} from "@api";
 
 import { LoadingDiv, CountingAnimation, LoadingData, Article, ArticleModal } from "@components";
 import { useAuth } from "@hooks";
@@ -82,6 +82,7 @@ Statistics.propTypes = {
 function UserAgenda({ data, type }) {
     const [ref, inView] = useIntersectionObserver();
     const isBedrijf = isRole(Role.Bedrijf)
+    const isPerson = hasPermission(Role.Medewerker);
 
   if (data === undefined || data.length === 0)
     return (
@@ -93,7 +94,7 @@ function UserAgenda({ data, type }) {
 
   return (
     <section ref={ref} className={(inView) ? "agenda moveIn bottom" : 'agenda'}>
-      <h2 className="heading-2">Agenda</h2>
+      <h2 className="heading-2">{isPerson ? 'Geplande onderzoeken' : 'Uw geplande onderzoeken.'}</h2>
       <Suspense fallback={<LoadingDiv loading />}>
         {isBedrijf ? (
           <CompanyAgenda data={data} />

@@ -18,6 +18,8 @@ const hideNavigationRoutes  = [
 
 
 function Chat() {
+  const [isChatOpen, setChatOpen] = useState(false);
+  const {userInfo} = useAuth();
 
   const route = useLocation();
   const {authenticated} = useAuth();
@@ -26,8 +28,6 @@ function Chat() {
       return null;
   }
 
-  const {userInfo} = useAuth();
-  const [isChatOpen, setChatOpen] = useState(false);
   //const userId = '08dc185e-a40e-4f6a-85e2-05b1b7327e85'; // Replace with actual logged-in user's ID
   const userId = userInfo.id; // Replace with actual logged-in user's ID
 

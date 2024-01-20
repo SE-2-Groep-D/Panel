@@ -3,22 +3,24 @@
 .profile {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     gap: 1rem;
 
-    .input-list {
-        max-height: 50rem;
+    .form-content {
         overflow-y: auto;
-
         display: flex;
         list-style: none;
         flex-direction: column;
-        gap: 2rem;
+        justify-content: space-evenly;
 
+
+        text-area {
+            height: 5rem !important;
+        }
 
         &::-webkit-scrollbar {
             width: .8rem;
-            overflow: overlay;
+
         }
 
         &::-webkit-scrollbar-track {

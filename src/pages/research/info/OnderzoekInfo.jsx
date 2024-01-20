@@ -1,7 +1,6 @@
 import '@pagestyles/research/_research-info.scss';
 
 import {useEffect, useState} from "react";
-
 import {useNavigate, useParams} from 'react-router-dom';
 import {fetchApi, fetchData} from "@api";
 
@@ -11,9 +10,10 @@ import Information from './components/information';
 import Map from "./components/map";
 import {Button, LoadingDiv} from "@components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "@hooks";
 import DynamicModal from "@pages/research/componenten/DynamicModal.jsx";
+import {data} from "autoprefixer";
 
 
 function OnderzoekInfo() {
@@ -22,30 +22,30 @@ function OnderzoekInfo() {
     const [onderzoek, setOnderzoek] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isAlIngeschreven, setIsAlIngeschreven] = useState(false);
-    const [melding, setMelding] = useState('');
     const [bedrijf, setBedrijf] = useState(null);
     const [bedrijfsCoordinaten, setBedrijfsCoordinaten] = useState(null);
     const navigate = useNavigate();
 
+    //for cal back
     const [updatedTitel, setUpdatedTitel] = useState("");
     const [updatedOmschrijving, setUpdatedOmschrijving] = useState("");
     const [updatedLocatie, setUpdatedLocatie] = useState("");
     const [updatedVergoeding, setUpdatedVergoeding] = useState("");
     const [updatedDatum, setUpdatedDatum] = useState("")
     const [geselecteerdeVragenlijstId, setGeselecteerdeVragenlijstId] = useState(null);
-
     const [vragenlijsten, setVragenlijsten] = useState([]);
-
-
     const [isEditMode, setIsEditMode] = useState(false);
 
-
+    //for melding
     const [showInscriptionModal, setShowInscriptionModal] = useState(false);
     const [inscriptionMessage, setInscriptionMessage] = useState('');
 
 
     const goToVragenlijst = (id) => {
         navigate(`/vragenlijst/${id}`);
+    };
+    const goToHome= () => {
+        navigate(`/`);
     };
     const goToOnderzoekResultaten = (id) => {
         navigate(`/onderzoek/${id}/results`);
@@ -58,6 +58,39 @@ function OnderzoekInfo() {
 
     const goToCompanyWebsite = (url) => {
         window.location.href = url;
+    }
+
+    const OnderzoekVerwijderen = async (id) => {
+
+        try {
+            const response = await fetchApi(`/Onderzoek/delete/${id}`, 'DELETE');
+            if (response) {
+                setInscriptionMessage('Onderzoek succesvol verwijderd!');
+                setShowInscriptionModal(true);
+                goToHome();
+                return true;
+            }
+        } catch (error) {
+            setInscriptionMessage(`Er is een fout optreden tijdens Verwijderen.`);
+            setShowInscriptionModal(true);
+        }
+    }
+
+    const OnderzoekEindigen = async (id) => {
+        const data = {
+            status: 'ended',
+        };
+        try {
+            const response = await fetchApi(`/Onderzoek/update/${id}`, 'PUT',data);
+            if (response) {
+                setInscriptionMessage('Onderzoek succesvol beëindigd!');
+                setShowInscriptionModal(true);
+                return true;
+            }
+        } catch (error) {
+            setInscriptionMessage(`Er is een fout optreden tijdens beëindigen.`);
+            setShowInscriptionModal(true);
+        }
     }
 
 
@@ -186,10 +219,6 @@ function OnderzoekInfo() {
         }
     }
 
-
-    if (!onderzoek && !loading) {
-        return <p>Onderzoek niet gevonden.</p>;
-    }
     return (
         <main>
             <LoadingDiv loading={loading} className='container'>
@@ -244,7 +273,6 @@ function OnderzoekInfo() {
                                     :
                                     isAlIngeschreven ? (
                                         <div className="button-onderzoekinfo-ervaringsdeskundige">
-                                            {melding && <div className="melding">{melding}</div>}
                                             <div className="button-onderzoekinfo-2">
                                                 <Button className="onderzoek-vragenlijst"
                                                         onClick={() => goToVragenlijst(geselecteerdeVragenlijstId)}>Start
@@ -279,6 +307,20 @@ function OnderzoekInfo() {
 
                         </div>
                         <div className="content-right-container">
+                            {(userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') ?
+                                <div >
+                                    <Button label='Klik op deze knop om Onderzoek te verwijderen.'
+                                            className="antworden-buttons"
+                                            onClick={() => OnderzoekVerwijderen(onderzoekId)}><FontAwesomeIcon
+                                        icon={faTrash} style={{color: 'black'}}/></Button>
+                                    <Button label='Klik op deze knop om Onderzoek te eindigen.'
+                                            className="antworden-buttons"
+                                            onClick={() => OnderzoekEindigen(onderzoekId)}>Onderzoek Eindigen</Button>
+                                </div>
+
+                                :null
+                            }
+
                             <Information
                                 locatie={onderzoek.locatie}
                                 vergoeding={onderzoek.vergoeding}
@@ -300,9 +342,7 @@ function OnderzoekInfo() {
                 message={inscriptionMessage}
                 onClose={() => setShowInscriptionModal(false)}
             />
-
         </main>
-
     );
 }
 

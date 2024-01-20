@@ -11,6 +11,7 @@ function OnderzoekStapTwee() {
     const {state, nextStep} = useForm();
     const {userInfo} = useAuth();
     const navigate = useNavigate();
+    const [message, setMessage] = useState(null);
     const [move, setMove] = useState("moveIn");
     const [values, setValues] = useState({
         aantalParticipanten: '',
@@ -19,7 +20,6 @@ function OnderzoekStapTwee() {
         websiteUrl: '',
         plaats: '',
     });
-
 
     function NaarOnderzoeken() {
         navigate("/");
@@ -32,6 +32,13 @@ function OnderzoekStapTwee() {
 
     async function handleSubmit(formData) {
         const {values} = formData;
+        const { valid, message } = validateForm(values);
+        if (!valid) {
+            setMessage(message);
+            return;
+        }
+
+
         setMove("moveOut");
 
         try {
@@ -66,7 +73,7 @@ function OnderzoekStapTwee() {
                 <InputField id='vergoeding' type="int" value={values.vergoeding} onChange={handleChange}
                             required>Vergoeding</InputField>
                 <InputField id='datum' type='date' value={values.datum} onChange={handleChange} required>Datum</InputField>
-                <InputField id='websiteUrl' value={values.websiteUrl} onChange={handleChange}
+                <InputField id='websiteUrl'   pattern={"^(https?|ftp):\\/\\/[^\\s\\/$.?#].[^\\s]*$"} value={values.websiteUrl} onChange={handleChange}
                             required>WebsiteUrl</InputField>
                 <InputField id='plaats' value={values.plaats} onChange={handleChange} required>Plaats</InputField>
             </Form>
@@ -78,8 +85,8 @@ function OnderzoekStapTwee() {
 export default OnderzoekStapTwee;
 
 function validateForm(formData) {
-    const {websiteUrl} = formData;
+    const { websiteUrl } = formData;
     const regex =
         /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g;
-    return {valid: regex.test(websiteUrl), message: "Website url is ongeldig."};
+    return { valid: regex.test(websiteUrl), message: "Website url is ongeldig." };
 }

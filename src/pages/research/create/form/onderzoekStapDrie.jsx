@@ -170,8 +170,8 @@ function OnderzoekStapDrie() {
 
     return (
         <>
-                <div className="onderzoek-tabel">
-                    <div className="onderzoek-info">
+                <div className="vargenlijst-tabel">
+                    <div className="Vragenlisjt-info">
                         <div className="titel">
                             <h1 className="content-titel-bewerken heading-1">{onderzoekNaam}</h1>
                         </div>

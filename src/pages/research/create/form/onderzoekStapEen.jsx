@@ -63,7 +63,3 @@ function StartForm() {
 
 export default StartForm;
 
-function validateForm() {
-
-
-}

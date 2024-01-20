@@ -38,6 +38,10 @@ function Onderzoeken() {
             setIsLoading(true);
             try {
                 let onderzoekenData = await fetchData('/Onderzoek/list');
+                console.log(userInfo.userType)
+                if (userInfo.userType === 'Ervaringsdeskundige'){
+                    onderzoekenData = onderzoekenData.filter(o => o.status === 'open');
+                }
                 let uniekeBedrijfsIds = new Set(onderzoekenData.map(o => o.bedrijfId));
                 let bedrijven = {};
 
@@ -109,9 +113,13 @@ function Onderzoeken() {
                     </div>
                 </div>
                 <LoadingDiv loading={isLoading} className='onderzoek-items'>
-                    {getoondeOnderzoeken.map((onderzoek, key) =>
-                        <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek}
-                                   bedrijfsGegevens={bedrijfsGegevens}/>
+                    {getoondeOnderzoeken.length > 0 ? (
+                        getoondeOnderzoeken.map((onderzoek, key) =>
+                            <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek}
+                                       bedrijfsGegevens={bedrijfsGegevens}/>
+                        )
+                    ) : (
+                        <h3 className="heading-3">Er zijn momenteel geen onderzoeken open of actief.</h3>
                     )}
                 </LoadingDiv>
                 {(userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') &&

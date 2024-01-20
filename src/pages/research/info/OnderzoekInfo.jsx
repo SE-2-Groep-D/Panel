@@ -307,14 +307,14 @@ function OnderzoekInfo() {
                         </div>
                         <div className="content-right-container">
                             {(userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') ?
-                                <div >
+                                <div className="interactie-knop">
+                                    <Button label='Klik op deze knop om Onderzoek te eindigen.'
+                                            className="antworden-buttons"
+                                            onClick={() => OnderzoekEindigen(onderzoekId)}>Onderzoek Eindigen</Button>
                                     <Button label='Klik op deze knop om Onderzoek te verwijderen.'
                                             className="antworden-buttons"
                                             onClick={() => OnderzoekVerwijderen(onderzoekId)}><FontAwesomeIcon
                                         icon={faTrash} style={{color: 'black'}}/></Button>
-                                    <Button label='Klik op deze knop om Onderzoek te eindigen.'
-                                            className="antworden-buttons"
-                                            onClick={() => OnderzoekEindigen(onderzoekId)}>Onderzoek Eindigen</Button>
                                 </div>
 
                                 :null

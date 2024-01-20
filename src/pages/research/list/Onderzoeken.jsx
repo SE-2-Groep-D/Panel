@@ -95,7 +95,7 @@ function Onderzoeken() {
 
 
     return (
-        <main className='gray'>
+        <main className='gray onderzoek-main'>
             <section className="onderzoeken">
                 <div className="onderzoek-info">
                     <div className="titel">

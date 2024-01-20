@@ -1,9 +1,5 @@
 @use "src/styles/abstract" as *;
 
-.onderzoeken-page {
-  margin: 0 auto;
-  width: $dashboard-width;
-}
 
 .vragenlijst-info-bewerken {
   display: flex;
@@ -32,19 +28,12 @@ button.btn.onderzoek-button {
   }
 }
 
-div.filters > .option-selector {
-  padding-right: 1rem;
-}
 
 .titel {
   flex-grow: 1;
 }
 
-.filters {
-  flex-grow: 0;
-  display: flex;
-  margin-top: 2rem;
-}
+
 
 .vraaglijst-item{
   display: flex;
@@ -63,16 +52,6 @@ div.filters > .option-selector {
   }
 }
 
-
-.content-tags {
-  display: flex;
-  justify-content: center;
-  @include respond(tablet, max) {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-}
 
 .content-informatie-een {
   padding: 0rem 1rem;

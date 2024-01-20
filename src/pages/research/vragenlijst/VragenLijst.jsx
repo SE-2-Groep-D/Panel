@@ -109,7 +109,7 @@ function VragenLijst() {
     };
 
     return (
-        <main>
+        <main className="vragenlist-invullen">
             <LoadingDiv loading={loading}>
                 <div className="container-vragenlijst">
                     {vragenlijst && (

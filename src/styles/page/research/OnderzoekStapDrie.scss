@@ -1,10 +1,5 @@
 @use "src/styles/abstract" as *;
 
-.onderzoeken-page {
-  margin: 0 auto;
-  width: $dashboard-width;
-}
-
 .vragenlijst-info {
   display: flex;
   flex-direction: column;

@@ -185,10 +185,10 @@ function VragenlijstBewerken() {
     }
 
     return (
-        <>
-            <main className={`gray`}>
-                <div className="onderzoek-tabel">
-                    <div className="onderzoek-info">
+        <main className="gray  vraglijst-bewerken" >
+            <div >
+                <div className="vragenlijst-bewerken-div">
+                    <div className="vragenlijst-info-naam">
                         <div className="titel">
                             <h1 className="content-titel-bewerken heading-1">Vragenlijst Bewerken</h1>
                         </div>
@@ -241,7 +241,7 @@ function VragenlijstBewerken() {
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
             <div className="vragelijst-modal">
                 {showModal && (
                     <Modal
@@ -353,7 +353,7 @@ function VragenlijstBewerken() {
                 redirectLabel="Ga naar Home"
             />
 
-        </>
+        </main>
     );
 }
 

@@ -2,9 +2,9 @@ import "@pagestyles/account/home/_default.scss";
 
 import { Suspense, lazy, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { fetchData } from "@api";
+import {fetchData, isRole, Role} from "@api";
 
-import { LoadingDiv, CountingAnimation, Modal, Article, ArticleModal } from "@components";
+import { LoadingDiv, CountingAnimation, LoadingData, Article, ArticleModal } from "@components";
 import { useAuth } from "@hooks";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {sortObjectByDate} from "@utils";
@@ -15,38 +15,23 @@ const CompanyAgenda = lazy(() => import("./component/CompanyAgenda.jsx"));
 
 export default function DashboardData({ message }) {
   const [data, setData] = useState();
-  const userData = useAuth().userInfo;
+  const {userInfo} = useAuth();
+  const isBedrijf = isRole(Role.Bedrijf);
 
   useEffect(() => {
-    fetchUserData(userData, setData);
-  }, [userData]);
+    fetchUserData(userInfo, setData);
+  }, [userInfo]);
 
-  if (data === null) {
-    return (
-      <h1 className="heading-2 not-found">
-        Oeps er is iets fout gegaan tijdens het ophalen van de gebruikers data.
-      </h1>
-    );
-  }
-
-  if (data instanceof Error) {
-    return (
-      <h1 className="heading-2 not-found">
-        Er is een fout opgetreden tijdens het ophalen van de resultaten.
-      </h1>
-    );
-  }
-
-  if (data === undefined) {
-    return <LoadingDiv loading />;
-  }
+    if(!data || data instanceof Error) {
+        return <LoadingData data={data}/>;
+    }
 
   return (
     <>
       <h2 className="heading-2">{message}</h2>
       <section
         className={
-          data.news && data.news.length > 0 && data.type !== "test"
+          data.news && data.news.length > 0 && !isBedrijf
             ? "data"
             : "data no-message"
         }
@@ -96,10 +81,11 @@ Statistics.propTypes = {
 
 function UserAgenda({ data, type }) {
     const [ref, inView] = useIntersectionObserver();
+    const isBedrijf = isRole(Role.Bedrijf)
 
   if (data === undefined || data.length === 0)
     return (
-      <section className="agenda">
+      <section className="agenda moveIn bottom">
         <h2 className="heading-2">Geplande onderzoeken</h2>
         <p className="text">Er staat nog niks op de planning.</p>
       </section>
@@ -109,7 +95,7 @@ function UserAgenda({ data, type }) {
     <section ref={ref} className={(inView) ? "agenda moveIn bottom" : 'agenda'}>
       <h2 className="heading-2">Agenda</h2>
       <Suspense fallback={<LoadingDiv loading />}>
-        {type === "bedrijf" ? (
+        {isBedrijf ? (
           <CompanyAgenda data={data} />
         ) : (
           <Agenda data={data} />

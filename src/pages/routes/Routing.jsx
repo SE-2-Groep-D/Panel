@@ -13,15 +13,16 @@ import {
   SetupAccount,
   UserHome,
   Profile,
+  UserList,
+  CreateUser,
 } from "@pages";
 
 import { Suspense } from "react";
-import { LoadingDiv } from "@components";
+import { LoadingDiv, Chat } from "@components";
 import PrivateRoute from "@pages/routes/ProtectedRoute.jsx";
 import { useAuth } from "@hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faPersonCircleCheck,
   faPersonCircleQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import NewsList from "@pages/news/News.jsx";
@@ -49,6 +50,9 @@ function Routing() {
           <Route path="/privacy" element={<PrivacyStatement />} />
 
           <Route element={<PrivateRoute />}>
+            <Route path="/admin/gebruiker/list" element={<UserList/>} />
+            <Route path="/admin/gebruiker/create" element={<CreateUser/>}/>
+
             <Route path="/onderzoek" element={<Onderzoeken />} />
             <Route path="/onderzoek/:onderzoekId" element={<OnderzoekInfo />} />
             <Route
@@ -58,14 +62,18 @@ function Routing() {
             <Route path="/onderzoek/aanmaken" element={<OnderzoekForm />} />
 
             <Route path="/nieuwsbrief" element={<NewsList />} />
+
             <Route path="/vragenlijst/:vragenlijstId" element={<VragenLijst />} />
             <Route path="/vragenlijst/:vragenlijstId/bewerken" element={<VragenlijstBewerken />} />
             <Route path="/profiel" element={<Profile />} />
+            <Route path="/profiel/:id" element={<Profile />} />
+
           </Route>
 
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      <Chat />
     </BrowserRouter>
   );
 }

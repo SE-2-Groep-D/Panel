@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "@hooks";
 import { useState } from "react";
+import {hasPermission, isRole, Role} from "@api";
 
 const hideNavigationRoutes = [
   "/setup",
@@ -41,6 +42,8 @@ function Navigation() {
   const { authenticated, logoutUser, userInfo } = useAuth();
   const [open, setOpen] = useState(false);
   const route = useLocation();
+  const isBedrijf = isRole(Role.Bedrijf)
+  const canManageUsers = hasPermission(Role.Beheerder);
 
   if (hideNavigationRoutes.includes(route.pathname) || !authenticated) {
     return null;
@@ -77,7 +80,7 @@ function Navigation() {
             label="Onderzoeken"
           />
 
-          {userInfo.userType !== "Bedrijf" && (
+          {!isBedrijf && (
             <NavigationItem
               to="/nieuwsbrief"
               icon={faNewspaper}
@@ -86,6 +89,18 @@ function Navigation() {
               label="Nieuws"
             />
           )}
+
+          {
+            canManageUsers && (
+                  <NavigationItem
+                      to="/admin/gebruiker/list"
+                      icon={faUser}
+                      isActive={isActive}
+                      onClick={onClick}
+                      label="Gebruikers"
+                  />
+            )
+          }
         </div>
 
         <NavigationItem

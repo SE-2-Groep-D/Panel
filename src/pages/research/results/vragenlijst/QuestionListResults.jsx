@@ -19,17 +19,9 @@ export default function QuestionListResults({researhId}) {
   },[researhId]);
 
 
-  if(data === null) {
-      return <h1 className='heading-2 not-found'>Geen resultaten gevonden</h1>
-  }
-
-  if(data instanceof Error) {
-      return <h1 className='heading-2 not-found'>Er is een fout opgetreden tijdens het ophalen van de resultaten.</h1>
-  }
-
-  if(data === undefined) {
-      return <LoadingDiv loading />;
-  }
+    if(!data || data instanceof Error) {
+        return <LoadingData data={data}/>;
+    }
 
   return (
       <section className='question-list'>
@@ -88,6 +80,7 @@ async function fetchResearchData(id, setData) {
 
 import PropTypes from 'prop-types';
 import {useIntersectionObserver} from "../../../../hooks/index.js";
+import LoadingData from "@components/container/loading-data.jsx";
 
 
 

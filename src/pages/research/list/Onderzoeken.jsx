@@ -11,6 +11,10 @@ import {useIntersectionObserver} from "@hooks";
 import {useAuth} from "@hooks";
 import {Button, LoadingDiv, OptionSelector, ToolTip} from "@components";
 
+// import components
+import {Button, LoadingDiv, OptionSelector, ServerError, ToolTip} from "@components";
+import PropTypes from "prop-types";
+import LoadingData from "@components/container/loading-data.jsx";
 
 function Onderzoeken() {
     const {userInfo} = useAuth();
@@ -93,6 +97,10 @@ function Onderzoeken() {
         }
     };
 
+
+    if(!getoondeOnderzoeken || getoondeOnderzoeken instanceof Error) {
+        return <LoadingData data={getoondeOnderzoeken}/>;
+    }
 
     return (
         <main className='gray onderzoek-main'>

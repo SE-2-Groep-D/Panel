@@ -1,7 +1,5 @@
-import React, {useEffect} from 'react'
 import PropTypes from "prop-types";
-import Agenda from "@pages/account/home/component/Agenda.jsx";
-import {formatDate} from "@utils";
+import {formatDate, sortObjectByDate} from "@utils";
 import {useNavigate} from "react-router-dom";
 
 export default function CompanyAgenda({data}) {

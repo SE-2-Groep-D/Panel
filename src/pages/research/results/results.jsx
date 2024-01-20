@@ -6,18 +6,23 @@ import '@pagestyles/research/results/_research-results.scss';
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import {lazy, Suspense} from 'react';
-import { fetchData } from "@api";
+import {fetchData, hasPermission, isRole, Role} from "@api";
 
 // Import Components
-import {OptionSelector, LoadingDiv} from '@components';
+import {OptionSelector, LoadingDiv, NoPermission} from '@components';
 
 const TrackingResults = lazy(() => import('./tracking/TrackingResults.jsx'));
 const QuestionListResults = lazy(() => import('./vragenlijst/QuestionListResults.jsx'));
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import LoadingData from "@components/container/loading-data.jsx";
 
 export default function Results() {
+    if(!hasPermission(Role.Bedrijf)) {
+        return <NoPermission/>
+    }
+
     const [options, setOptions] = useState(undefined);
     const [selectedOption, setSelectedOption] = useState();
     const { id } = useParams();
@@ -30,6 +35,11 @@ export default function Results() {
     const ResultsComponent = renderedResults(options, selectedOption);
     const inputOptions = getOptionsList(options);
 
+
+    if(!options || options instanceof Error) {
+        return <LoadingData data={options}/>;
+    }
+
   return (
     <main className='results gray'>
             <div className='navigation'>
@@ -40,10 +50,7 @@ export default function Results() {
 
                 <OptionSelector onChange={(e) => setSelectedOption(e.value)} options={inputOptions} value={selectedOption}>Resultaten</OptionSelector>
             </div>
-
-            <LoadingDiv loading={options === undefined}>
-                    {ResultsComponent}
-            </LoadingDiv>
+                {ResultsComponent}
         </main>
     );
 }

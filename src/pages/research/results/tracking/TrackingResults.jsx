@@ -1,6 +1,6 @@
 import '@pagestyles/research/results/_tracking-results.scss';
 
-import {LoadingDiv, CountingAnimation} from '@components'
+import {LoadingDiv, CountingAnimation, ServerError} from '@components'
 import { fetchData } from "@api";
 
 export default function TrackingResults({researhId}) {
@@ -11,16 +11,8 @@ export default function TrackingResults({researhId}) {
     },[researhId]);
 
 
-    if(data === null) {
-        return <h1 className='heading-2 not-found'>Geen resultaten gevonden</h1>
-    }
-
-    if(data instanceof Error) {
-        return <h1 className='heading-2 not-found'>Er is een fout opgetreden tijdens het ophalen van de resultaten.</h1>
-    }
-
-    if(data === undefined) {
-        return <LoadingDiv loading />;
+    if(!data || data instanceof Error) {
+        return <LoadingData data={data}/>;
     }
 
   return (
@@ -155,6 +147,7 @@ async function fetchResearchData(id, setData) {
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import {useIntersectionObserver} from "../../../../hooks/index.js";
+import LoadingData from "@components/container/loading-data.jsx";
 
 
 Statistics.propTypes = {

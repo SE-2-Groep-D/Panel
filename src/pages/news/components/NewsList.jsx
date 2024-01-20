@@ -7,6 +7,8 @@ import AricleModal from "@components/news/ArticleModal.jsx";
 import AricleList from "@pages/news/components/ArticleList.jsx";
 import {Status} from "@pages/news/data/newsContext.jsx";
 import {useAuth} from "@hooks";
+import {hasPermission, Role} from "@api";
+import LoadingData from "@components/container/loading-data.jsx";
 
 export default function NewsList() {
     const {fetchArticles} = useNewsInfo();
@@ -21,13 +23,10 @@ export default function NewsList() {
 function NewsComponent() {
     const {articles, message, setStatus} = useNewsInfo();
     const {userInfo} = useAuth();
+    const canManage = hasPermission(Role.Medewerker);
 
-    if(articles === undefined) {
-        return <LoadingDiv loading/>
-    }
-
-    if(articles instanceof Error) {
-        return <ServerError message='Er is een fout opgetreden bij het ophalen van van de nieuwsberichten. Probeer het later opnieuw.'/>
+    if(!articles || articles instanceof Error) {
+        return <LoadingData data={articles}/>;
     }
 
 
@@ -42,7 +41,7 @@ function NewsComponent() {
 
                    <div className="filters">
                        {
-                           (userInfo.userType === 'Medewerker' || userInfo.userType === 'Beheerder') ?
+                           (canManage) ?
                                <Button label='Klik op deze knop om een nieuw artikel toe te voegen.' color='secondary' onClick={() => setStatus(Status.CREATE, null)}>
                                    <FontAwesomeIcon icon={faAdd}/>
                                    Nieuw Artikel

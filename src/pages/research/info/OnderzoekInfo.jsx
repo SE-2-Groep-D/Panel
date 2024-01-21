@@ -2,7 +2,7 @@ import "@pagestyles/research/_research-info.scss";
 
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchApi, fetchData } from "@api";
+import {fetchApi, fetchData, hasPermission, Role} from "@api";
 
 // import components
 import OnderzoekInformatie from "./components/OnderzoekInformatie";
@@ -39,6 +39,8 @@ function OnderzoekInfo() {
   //for melding
   const [showInscriptionModal, setShowInscriptionModal] = useState(false);
   const [inscriptionMessage, setInscriptionMessage] = useState("");
+
+  const updatePermission = hasPermission(Role.Bedrijf);
 
   const goToVragenlijst = (id) => {
     navigate(`/vragenlijst/${id}`);
@@ -231,6 +233,9 @@ function OnderzoekInfo() {
     }
   };
 
+
+
+
   return (
     <main>
       <LoadingDiv loading={loading} className="container">
@@ -255,8 +260,7 @@ function OnderzoekInfo() {
                 }}
               />
 
-              {userInfo.userType === "Medewerker" ||
-              userInfo.userType === "Bedrijf" ? (
+              {updatePermission ? (
                 <div className="button-onderzoekinfo">
                   <div className="button-onderzoekinfo-1">
                     {
@@ -343,8 +347,7 @@ function OnderzoekInfo() {
               )}
             </div>
             <div className="content-right-container">
-              {userInfo.userType === "Medewerker" ||
-              userInfo.userType === "Bedrijf" ? (
+              {updatePermission ? (
                 <div className="interactie-knop">
                   {
                     (isEditMode) ? null :

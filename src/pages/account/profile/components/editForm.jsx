@@ -70,6 +70,8 @@ async function deleteUser(user, setUser, auth, navigate) {
 }
 
 function fixProperties(user) {
+
+  console.log(user)
   return user;
 }
 

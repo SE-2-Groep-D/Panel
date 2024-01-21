@@ -1,5 +1,44 @@
 @use "src/styles/abstract" as *;
 
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+
+    .form-content {
+        overflow-y: auto;
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+
+        text-area {
+            height: 5rem !important;
+        }
+
+        &::-webkit-scrollbar {
+            width: .8rem;
+
+        }
+
+        &::-webkit-scrollbar-track {
+            background: $color-gray;
+            border-radius: 2rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $color-primary-85;
+            border-radius: 2rem;
+
+            &:active {
+                background-color: $color-primary-60;
+            }
+        }
+    }
+}
+
 .userIcon {
     height: 16rem;
     color: #d9d9d9
@@ -26,6 +65,8 @@
     list-style: none;
     margin-bottom: 2rem;
     gap: 1rem;
+
+
 
     li {
         width: 24rem;

@@ -1,0 +1,144 @@
+@use "src/styles/abstract" as *;
+
+.vragenlijst-info {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3rem;
+
+  @include respond(tablet, max) {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.content-titel {
+  text-align: center;
+  display: inline;
+}
+
+button.btn.onderzoek-button {
+  padding: 1.5rem 6rem;
+
+  @include respond(tablet, max) {
+    padding: 0.5rem 3rem;
+  }
+}
+
+div.filters > .option-selector {
+  padding-right: 1rem;
+}
+
+.titel {
+  flex-grow: 1;
+}
+
+.filters {
+  flex-grow: 0;
+  display: flex;
+  margin-top: 2rem;
+}
+
+.vraaglijst-item{
+  display: flex;
+  min-height: 15rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  height: 5rem;
+  border-radius: $border-radius-big;
+  border: 3px solid var(--border-2, #EBECF0);
+  background: var(--White, #FFF);
+  @include respond(laptop, max) {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    padding: 0 2rem;
+  }
+}
+
+
+.content-tags {
+  display: flex;
+  justify-content: center;
+  @include respond(tablet, max) {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+}
+
+.content-informatie-een {
+  padding: 0rem 1rem;
+  margin-right: 3rem;
+}
+
+.content-tags > .content-informatie {
+  padding: 0rem 1rem;
+}
+
+
+.content-left {
+  flex: 0 0 70%;
+  padding-right: 20px;
+  height: 100%;
+
+  @include respond(tablet, max) {
+    padding-top: 1rem;
+    width: 100%;
+  }
+}
+
+.content-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100%;
+  @include respond(tablet, max) {
+    align-items: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+  }
+}
+
+.content-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  @include respond(tablet, max) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+}
+
+button.btn.vraag-maken{
+  border-radius: 8px;
+  border: 4px dashed #4C5166;
+  background-color: white;
+  color: #4D5166;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
+  @include respond(tablet, max) {
+
+  }
+}
+
+.vragenlijst-button-div{
+  display: flex;
+  justify-content: center;
+}
+
+.vragenlist-savebutton{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+

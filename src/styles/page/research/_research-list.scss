@@ -1,6 +1,6 @@
 @use "src/styles/abstract" as *;
 
-main {
+.onderzoek-main {
   display: flex;
   justify-content: center;
 }
@@ -15,6 +15,17 @@ main {
     align-items: center;
   }
 }
+
+button.btn.onderzoek-aanmaken-button {
+  border-radius: $border-radius-big;
+  border: 4px dashed #4C5166;
+  background-color: white;
+  color: #4D5166;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4rem;
+  font-size: 1.8rem;
+ }
 
 .content-titel {
   text-align: center;
@@ -122,7 +133,10 @@ div.filters > .option-selector {
       flex-direction: column;
       gap: 1rem;
       flex-grow: 1;
-      max-width: 20rem;
+      max-width: 70rem;
+      @include respond(600px) {
+        max-width: 20rem;
+      }
     }
 
     &-right {
@@ -223,16 +237,4 @@ div.filters > .option-selector {
 //
 //}
 //
-//button.btn.onderzoek-aanmaken-button {
-//  width: clamp(25rem, 90%, 120rem);
-//  border-radius: 8px;
-//  border: 4px dashed #4C5166;
-//  background-color: white;
-//  color: #4D5166;
-//  width: 100%; /* Zorg dat de breedte zich aanpast aan de container */
-//  box-sizing: border-box; /* Zorgt ervoor dat de padding en border in de breedte worden meegenomen */
-//  padding: 2rem;
-//  @include respond(tablet, max) {
-//
-//  }
 //}

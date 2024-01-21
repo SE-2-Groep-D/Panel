@@ -10,6 +10,7 @@ export default function AricleList() {
     const {article, status, articles, setStatus, deleteArticle, updateArticle, createArticle, loading} = useNewsInfo();
     const sortedArticles = sortObjectByDate(articles);
     const {userInfo} = useAuth();
+    const canManage = hasPermission(Role.Medewerker);
 
     function closeModal(e) {
         if(status === Status.READ) {
@@ -42,7 +43,7 @@ export default function AricleList() {
             <ul className="news-articles">
                 {
                     sortedArticles.map((a, key) => {
-                        return <Article loading={loading && article && article.id === a.id} manage={hasPermission(Role.Medewerker)} article={a} key={key} setStatus={setStatus} deleteArticle={deleteArticle}/>
+                        return <Article loading={loading && article && article.id === a.id} manage={canManage} article={a} key={key} setStatus={setStatus} deleteArticle={deleteArticle}/>
                     })
                 }
             </ul>

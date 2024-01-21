@@ -24,7 +24,7 @@ function hasPermission(requiredRole) {
     if (userInfo == null || userInfo.userType == null) return false;
 
     const roleHierarchy = {
-        Beheerder: [Role.Medewerker],
+        Beheerder: [Role.Medewerker, Role.Bedrijf, Role.Ervaringsdeskundige],
         Medewerker: [Role.Bedrijf, Role.Ervaringsdeskundige],
         Bedrijf: [Role.Gebruiker],
         Ervaringsdeskundige: [Role.Gebruiker],

@@ -6,10 +6,10 @@ import '@pagestyles/research/results/_research-results.scss';
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import {lazy, Suspense} from 'react';
-import { fetchData } from "@api";
+import {fetchData, hasPermission, isRole, Role} from "@api";
 
 // Import Components
-import {OptionSelector, LoadingDiv, ServerError} from '@components';
+import {OptionSelector, LoadingDiv, NoPermission} from '@components';
 
 const TrackingResults = lazy(() => import('./tracking/TrackingResults.jsx'));
 const QuestionListResults = lazy(() => import('./vragenlijst/QuestionListResults.jsx'));
@@ -19,6 +19,10 @@ import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import LoadingData from "@components/container/loading-data.jsx";
 
 export default function Results() {
+    if(!hasPermission(Role.Bedrijf)) {
+        return <NoPermission/>
+    }
+
     const [options, setOptions] = useState(undefined);
     const [selectedOption, setSelectedOption] = useState();
     const { id } = useParams();
@@ -32,8 +36,8 @@ export default function Results() {
     const inputOptions = getOptionsList(options);
 
 
-    if(!options) {
-        return <LoadingData data={options}/>
+    if(!options || options instanceof Error) {
+        return <LoadingData data={options}/>;
     }
 
   return (
@@ -94,7 +98,17 @@ async function fetchOptions(researchId, setOptions) {
 function renderedResults(options, selectedOption) {
     const data = getRenderedOption(options, selectedOption);
 
+    if(options === undefined || data === undefined) {
+        return <></>
+    }
 
+    if(options === null) {
+        return <h1 className='heading-2 not-found'>Er is een fout opgetreden tijdens het ophalen van de resultaten.</h1>
+    }
+
+    if(options.length == 0) {
+        return <h1 className='heading-2 not-found'>Geen resultaten gevonden.</h1>
+    }
 
     const {id, type} = data;
 

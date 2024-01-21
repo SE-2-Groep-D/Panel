@@ -23,9 +23,10 @@ export default function NewsList() {
 function NewsComponent() {
     const {articles, message, setStatus} = useNewsInfo();
     const {userInfo} = useAuth();
+    const canManage = hasPermission(Role.Medewerker);
 
-    if(!articles) {
-        return <LoadingData data={articles}/>
+    if(!articles || articles instanceof Error) {
+        return <LoadingData data={articles}/>;
     }
 
 
@@ -40,7 +41,7 @@ function NewsComponent() {
 
                    <div className="filters">
                        {
-                           (hasPermission(Role.Medewerker)) ?
+                           (canManage) ?
                                <Button label='Klik op deze knop om een nieuw artikel toe te voegen.' color='secondary' onClick={() => setStatus(Status.CREATE, null)}>
                                    <FontAwesomeIcon icon={faAdd}/>
                                    Nieuw Artikel

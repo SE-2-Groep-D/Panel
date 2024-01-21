@@ -3,50 +3,78 @@ import {useState} from 'react';
 import {Form, InputField} from "@components";
 import {useForm} from '../data/useForm.jsx';
 import {OnderzoekAanmaken} from "@pages/research/create/request/OnderzoekAanmaken.jsx";
+import {useAuth} from "@hooks";
+import {useNavigate} from "react-router-dom";
+
 
 function OnderzoekStapTwee() {
-    const { state, nextStep } = useForm();
+    const {state, nextStep} = useForm();
+    const {userInfo} = useAuth();
+    const navigate = useNavigate();
     const [message, setMessage] = useState(null);
     const [move, setMove] = useState("moveIn");
-
-
     const [values, setValues] = useState({
-        aantalParticipanten: '',
-        vergoeding: '',
+        aantalParticipanten: 0,
+        vergoeding: 0,
         datum: '',
-        websiteUrl: '',
+        websiteUrl: 'https://',
+        plaats: '',
     });
 
-    function handleChange({ element, value, id }) {
-        setValues({ ...values, [id ? id : element.id]: value });
+    function NaarOnderzoeken() {
+        navigate("/");
     }
 
-    function handleSubmit(formData) {
-        const { values } = formData;
-        const { valid, message } = validateForm(values);
-        const { aantalParticipanten, vergoeding, datum ,websiteUrl} = values;
+    function handleChange({element, value, id}) {
+        setValues({...values, [id ? id : element.id]: value});
+    }
 
+    async function handleSubmit(formData) {
+        const {values} = formData;
+        const { valid, message } = validateForm(values);
         if (!valid) {
             setMessage(message);
             return;
         }
 
-        setMove("moveOut");
-        setTimeout(() => {
-            state.onderzoektwee = { aantalParticipanten, vergoeding, datum, websiteUrl };
-            OnderzoekAanmaken(state)
-        }, 500);
-    }
 
+        setMove("moveOut");
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            const updatedOnderzoek = {...state.onderzoek, ...values};
+
+
+            const aangemaaktOnderzoek = await OnderzoekAanmaken(updatedOnderzoek, userInfo);
+
+            setTimeout(() => {
+                if (updatedOnderzoek.type === "websiteBezoek") {
+                    NaarOnderzoeken();
+                } else {
+                    state.onderzoek = {...state.onderzoek, ...aangemaaktOnderzoek};
+                    nextStep();
+                }
+            }, 1000);
+
+        } catch (error) {
+            console.error("Error in handleSubmit:", error);
+
+        }
+    }
 
 
     return (
         <div>
-            <Form title="Onderzoek aanmaken" buttonText='volgende'  onSubmit={handleSubmit} move={move}>
-                <InputField id='aantalParticipanten' value={values.aantalParticipanten} onChange={handleChange} required>Aantal Participanten</InputField>
-                <InputField id='vergoeding' value={values.vergoeding} onChange={handleChange} required>Vergoeding</InputField>
-                <InputField id='datum' value={values.datum} onChange={handleChange} required>Datum</InputField>
-                <InputField id='websiteUrl' value={values.websiteUrl} onChange={handleChange} required>WebsiteUrl</InputField>
+            <Form title="Onderzoek aanmaken" buttonText='volgende' onSubmit={handleSubmit} className={move}>
+                <InputField id='aantalParticipanten' type="number" value={values.aantalParticipanten} onChange={handleChange}
+                            required>Aantal Participanten</InputField>
+                <InputField id='vergoeding' type="number" value={values.vergoeding} onChange={handleChange}
+                            required>Vergoeding</InputField>
+                <InputField id='datum' type='date' value={values.datum} onChange={handleChange} required>Datum</InputField>
+                <InputField id='websiteUrl'   pattern={"^(https?|ftp):\\/\\/[^\\s\\/$.?#].[^\\s]*$"} value={values.websiteUrl} onChange={handleChange}
+                            required>WebsiteUrl</InputField>
+                <InputField id='plaats' value={values.plaats} onChange={handleChange} required>Plaats</InputField>
             </Form>
         </div>
     );

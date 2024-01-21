@@ -1,0 +1,60 @@
+@use "src/styles/abstract" as *;
+
+.container-vragenlijst {
+  width: $dashboard-width;
+}
+
+.vragenlijst-content{
+  display: flex;
+  flex-direction: column;
+}
+.vragenlijst{
+  width: clamp(25rem, 70%, 120rem);
+}
+.vragenlijst-answer input[type="radio"] input[type="checkbox"] {
+  accent-color: blue;
+  margin-right: 5px;
+}
+
+.vragenlijst-answer label {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.vragenlijst-titel{
+  display: flex;
+  justify-content: center;
+  margin: 1rem 1rem;
+}
+
+.vragenlijst-div {
+  display: flex;
+  justify-content: center;
+}
+.vragenlijst-description{
+  margin-top: 4rem;
+}
+
+.vragenlijst-answer {
+  display: flex;
+}
+
+.vraag-nummer{
+  padding-right: 1rem;
+  font-weight: bold;
+}
+.antwordenlijst{
+  padding-top: 1rem;
+  padding-left: 3rem;
+}
+
+.opslaan-knop {
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+}
+.vragenlijst-vragen {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}

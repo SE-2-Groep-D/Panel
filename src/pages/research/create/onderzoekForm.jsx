@@ -1,32 +1,37 @@
-import '@pagestyles/account/_setup-account.scss';
-
-// Import libraries
+import '@pagestyles/research/onderzoekAanmaken.scss';
 import { FormProvider } from './data/formContext.jsx';
 import { useForm } from './data/useForm.jsx';
-
-// Import components
-import {Logo, ProgressBar} from "@components";
+import { Logo, ProgressBar } from "@components";
 import Form from './form.jsx';
 
-
-
 function Onderzoek() {
-    return <main id='setup-account'>
-        <Logo id="logo" />
+    return (
         <FormProvider>
-            <OnderzoekForm/>
+            <OnderzoekContent />
         </FormProvider>
-    </main>
+    );
+}
+
+function OnderzoekContent() {
+    const { state } = useForm();
+
+    let mainId = state.currentStep > 1 ? 'vragenlijst' : 'onderzoekAanmaken';
+    return (
+        <main id={mainId}>
+            <OnderzoekForm />
+        </main>
+    );
 }
 
 function OnderzoekForm() {
-    const {state} = useForm();
-    return <>
-        <ProgressBar step={state.currentStep} maxStep={state.maxStep}/>
-        <Form />
-    </>
+    const { state } = useForm();
+
+    return (
+        <>
+            {state.currentStep <= 1 && <ProgressBar step={state.currentStep} maxStep={state.maxStep} />}
+            <Form />
+        </>
+    );
 }
-
-
 
 export default Onderzoek;

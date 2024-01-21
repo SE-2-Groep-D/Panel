@@ -7,13 +7,15 @@ import {useNavigate} from 'react-router-dom';
 import {useEffect, useState} from "react";
 import {useIntersectionObserver} from "@hooks";
 
+// import component
+import {useAuth} from "@hooks";
 // import components
 import {Button, LoadingDiv, OptionSelector, ServerError, ToolTip} from "@components";
-import PropTypes from "prop-types";
+
 import LoadingData from "@components/container/loading-data.jsx";
 
-
 function Onderzoeken() {
+    const {userInfo} = useAuth();
     const [alleOnderzoeken, setAlleOnderzoeken] = useState([]);
     const [getoondeOnderzoeken, setGetoondeOnderzoeken] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +23,8 @@ function Onderzoeken() {
     const [bedrijfsGegevens, setBedrijfsGegevens] = useState({});
     const [selectedBedrijf, setSelectedBedrijf] = useState('Alle');
     const [bedrijfsOpties, setBedrijfsOpties] = useState(["Alle"]);
+    const [selectedType, setSelectedType] = useState('Alle');
+    const [onderzoekTypes, setOnderzoekTypes] = useState(["Alle", "vragenlijst", "websiteBezoek"]);
     const navigate = useNavigate();
 
     const goToOnderzoek = (id) => {
@@ -36,6 +40,10 @@ function Onderzoeken() {
             setIsLoading(true);
             try {
                 let onderzoekenData = await fetchData('/Onderzoek/list');
+                console.log(userInfo.userType)
+                if (userInfo.userType === 'Ervaringsdeskundige'){
+                    onderzoekenData = onderzoekenData.filter(o => o.status === 'open');
+                }
                 let uniekeBedrijfsIds = new Set(onderzoekenData.map(o => o.bedrijfId));
                 let bedrijven = {};
 
@@ -59,21 +67,31 @@ function Onderzoeken() {
     }, []);
 
     useEffect(() => {
-        if (selectedBedrijf === "Alle") {
-            setGetoondeOnderzoeken(alleOnderzoeken);
-        } else {
-            const gefilterdeOnderzoeken = alleOnderzoeken.filter(o => bedrijfsGegevens[o.bedrijfId] === selectedBedrijf);
-            setGetoondeOnderzoeken(gefilterdeOnderzoeken);
-        }
-    }, [selectedBedrijf, alleOnderzoeken, bedrijfsGegevens]);
+        const filterOnderzoeken = () => {
+            let gefilterdeOnderzoeken = alleOnderzoeken;
+            if (userInfo.userType === 'Bedrijf') {
+                gefilterdeOnderzoeken = gefilterdeOnderzoeken.filter(o => o.bedrijfId === userInfo.id);
+            }
+            if (selectedBedrijf !== "Alle") {
+                gefilterdeOnderzoeken = gefilterdeOnderzoeken.filter(o => bedrijfsGegevens[o.bedrijfId] === selectedBedrijf);
+            }
+            if (selectedType !== "Alle") {
+                gefilterdeOnderzoeken = gefilterdeOnderzoeken.filter(o => o.type === selectedType);
+            }
+            return gefilterdeOnderzoeken;
+        };
+
+        setGetoondeOnderzoeken(filterOnderzoeken());
+    }, [selectedBedrijf, selectedType, alleOnderzoeken, bedrijfsGegevens, userInfo]);
+
 
     const fetchBedrijfGegevens = async (bedrijfId) => {
         try {
             const response = await fetchData(`/Gebruiker/${bedrijfId}`);
-            return response.bedrijfsnaam; // Of een andere eigenschap die je nodig hebt van het bedrijf
+            return response.bedrijfsnaam;
         } catch (error) {
             console.error('Fout bij het ophalen van bedrijfsgegevens:', error);
-            return null; // Of een passende foutafhandeling
+            return null;
         }
     };
 
@@ -83,7 +101,7 @@ function Onderzoeken() {
     }
 
     return (
-        <main className='gray'>
+        <main className='gray onderzoek-main'>
             <section className="onderzoeken">
                 <div className="onderzoek-info">
                     <div className="titel">
@@ -101,15 +119,23 @@ function Onderzoeken() {
                     </div>
                 </div>
                 <LoadingDiv loading={isLoading} className='onderzoek-items'>
-                    {
+                    {getoondeOnderzoeken.length > 0 ? (
                         getoondeOnderzoeken.map((onderzoek, key) =>
-                            <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek} bedrijfsGegevens={bedrijfsGegevens}/>)
-                    }
+                            <Onderzoek key={key} onderzoek={onderzoek} goToOnderzoek={goToOnderzoek}
+                                       bedrijfsGegevens={bedrijfsGegevens}/>
+                        )
+                    ) : (
+                        <h3 className="heading-3">Er zijn momenteel geen onderzoeken open of actief.</h3>
+                    )}
                 </LoadingDiv>
-                {/* <div className="button-div">
-                        <Button className="onderzoek-aanmaken-button"
-                                onClick={() => goToOnderzoekAanmaken()}> Maak een onderzoek aan </Button>
-                    </div>*/}
+                {(userInfo.userType === 'Medewerker' || userInfo.userType === 'Bedrijf') &&
+                    <div className="button-div">
+                        <Button className="onderzoek-aanmaken-button" onClick={goToOnderzoekAanmaken}>
+                            Maak een onderzoek aan
+                        </Button>
+                    </div>
+                }
+
             </section>
         </main>
 

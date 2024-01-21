@@ -17,12 +17,19 @@
   display: flex;
   flex-direction: column;
   width: 60rem;
-  height: auto;
-  padding-top: 2rem;
+  margin-top: 0.3rem;
+  align-items: flex-start;
+  justify-content: space-between;
   @include respond(tablet, max) {
+    height: auto;
     padding-top: 0rem;
     width: clamp(40rem, 100%, 120rem);
+    padding-bottom: 2rem;
   }
+}
+
+.research-information{
+  margin-top: 3rem;
 }
 
 .information-text {
@@ -75,4 +82,63 @@
 .card {
   margin-top: 2rem;
   height: clamp(40rem, 100%, 120rem) !important;
+}
+
+.button-onderzoekinfo {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: auto;
+
+}
+.button-onderzoekinfo-1{
+
+  padding: 0rem 1rem;
+  @include respond(tablet, max) {
+    padding:0rem;
+  }
+}
+
+
+.button-onderzoekinfo-ervaringsdeskundige {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: auto;
+
+  @include respond(tablet, max) {
+    margin-top: 0;
+  }
+}
+
+.button-onderzoekinfo-2 {
+  padding: 0rem 1rem;
+  @include respond(tablet, max) {
+    padding:0rem;
+  }
+}
+
+.onderzoek-vragenlijst{
+  margin-right: 1rem;
+  border: 1px solid;
+  border-color:#2B50EC ;
+}
+
+.start-website-onderzoek,.onderzoek-resultaten{
+  border: 1px solid;
+  border-color: white;
+  background-color: rgba(43, 80, 236, 0.00)!important;
+  color: #2B50EC !important;
+}
+.start-website-onderzoek:hover,.onderzoek-resultaten:hover{
+  background-color: rgba(43, 80, 236, 0.00);
+  border-color:#2B50EC ;
+  color: #2B50EC;
+}
+
+.onderzoek-main-info{
+  position: relative;
+}
+
+.interactie-knop{
+  display: flex;
+  justify-content: flex-end;
 }

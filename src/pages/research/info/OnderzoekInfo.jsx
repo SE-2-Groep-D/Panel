@@ -213,7 +213,7 @@ function OnderzoekInfo() {
             if (!onderzoek) return;
             console.log(onderzoek);
             try {
-                const data = await fetchData(`/Resultaten/${onderzoek.bedrijfId}`);
+                const data = await fetchData(`/Resultaten/${onderzoek.id}`);
                 console.log(data);
                 setResultaten(data);
             } catch (error) {
@@ -316,7 +316,7 @@ function OnderzoekInfo() {
                                 </div>
                             ) : isAlIngeschreven ? (
                                 <div className="button-onderzoekinfo-ervaringsdeskundige">
-                                    {resultaten && resultaten.vragenlijsten && resultaten.vragenlijsten.length > 0 && (
+                                    {resultaten && resultaten.questionList && resultaten.questionList.length > 0 && (
 
                                         <div className="button-onderzoekinfo-2">
                                             <Button
@@ -341,7 +341,7 @@ function OnderzoekInfo() {
                                 </div>
                             ) : (
                                 <>
-                                    {(resultaten.vragenlijsten && resultaten.vragenlijsten.length > 0) ||
+                                    {(resultaten.questionList && resultaten.questionList.length > 0) ||
                                     (resultaten.trackingResearches && resultaten.trackingResearches.length > 0) ? (
                                         <div className="button-onderzoekinfo">
                                             <Button

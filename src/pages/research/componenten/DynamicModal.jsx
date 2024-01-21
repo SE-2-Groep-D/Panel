@@ -8,7 +8,7 @@ const DynamicModal = ({ isOpen, message, onClose, onRedirect, redirectLabel }) =
             <div className="modal-content">
                 <p className="text">{message}</p>
                 {onRedirect &&
-                    <Button color="" onClick={onRedirect}>{redirectLabel || 'Ga Verder'}</Button>
+                    <Button  onClick={onRedirect}>{redirectLabel || 'Ga Verder'}</Button>
                 }
             </div>
         </Modal>

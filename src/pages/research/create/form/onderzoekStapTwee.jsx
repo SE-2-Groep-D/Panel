@@ -14,8 +14,8 @@ function OnderzoekStapTwee() {
     const [message, setMessage] = useState(null);
     const [move, setMove] = useState("moveIn");
     const [values, setValues] = useState({
-        aantalParticipanten: '',
-        vergoeding: '',
+        aantalParticipanten: 0,
+        vergoeding: 0,
         datum: '',
         websiteUrl: 'https://',
         plaats: '',
@@ -68,9 +68,9 @@ function OnderzoekStapTwee() {
     return (
         <div>
             <Form title="Onderzoek aanmaken" buttonText='volgende' onSubmit={handleSubmit} className={move}>
-                <InputField id='aantalParticipanten' type="int" value={values.aantalParticipanten} onChange={handleChange}
+                <InputField id='aantalParticipanten' type="number" value={values.aantalParticipanten} onChange={handleChange}
                             required>Aantal Participanten</InputField>
-                <InputField id='vergoeding' type="int" value={values.vergoeding} onChange={handleChange}
+                <InputField id='vergoeding' type="number" value={values.vergoeding} onChange={handleChange}
                             required>Vergoeding</InputField>
                 <InputField id='datum' type='date' value={values.datum} onChange={handleChange} required>Datum</InputField>
                 <InputField id='websiteUrl'   pattern={"^(https?|ftp):\\/\\/[^\\s\\/$.?#].[^\\s]*$"} value={values.websiteUrl} onChange={handleChange}

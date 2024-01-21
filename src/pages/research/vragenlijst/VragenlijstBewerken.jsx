@@ -269,6 +269,7 @@ function VragenlijstBewerken() {
                                     </div>
                                     <h3>Antworden:</h3>
                                     {newQuestion.possibleAnswers.map((answer, answerIndex) => (
+                                        
                                         <div key={answerIndex} className="antworden-div">
                                             <InputField
                                                 value={answer.value}
@@ -309,7 +310,7 @@ function VragenlijstBewerken() {
                                     </div>
                                     <h3>Antworden:</h3>
                                     {newQuestion.possibleAnswers.map((answer, answerIndex) => (
-                                        <div key={answerIndex}className="antworden-div" >
+                                        <div key={answerIndex} className="antworden-div" >
                                             <InputField
                                                 key={answerIndex}
                                                 value={answer.value || ''}

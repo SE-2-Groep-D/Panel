@@ -12,7 +12,7 @@
 
 
 .results {
-    width: $dashboard-width;
+    width: $dashboard-width !important;
 
     .not-found {
         margin-top: 10rem;

@@ -273,19 +273,18 @@ function OnderzoekInfo() {
                   </div>
                   {isEditMode ? null : (
                     <div className="button-onderzoekinfo">
-                      <div>
-                        {/*<Button className="onderzoek-vragenlijst"
-                                                                 onClick={() => goToOnderzoekResultaten(onderzoek.id)}>Vragenlijst Toevegoen
-                                                        </Button>*/}
-                        <Button
-                          className="onderzoek-vragenlijst"
-                          onClick={() =>
-                            goToBewerkVragenlijst(geselecteerdeVragenlijstId)
-                          }
-                        >
-                          Vragenlijst Bewerken
-                        </Button>
-                      </div>
+                      {
+                        vragenlijsten && vragenlijsten.length > 0 ? (
+                            <div>
+                              <Button
+                                  className="onderzoek-vragenlijst"
+                                  onClick={() => goToBewerkVragenlijst(geselecteerdeVragenlijstId)}
+                              >
+                                Vragenlijst Bewerken
+                              </Button>
+                            </div>
+                        ) : null
+                      }
                       <div>
                         <Button
                           className="onderzoek-resultaten"

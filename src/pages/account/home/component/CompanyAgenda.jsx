@@ -17,7 +17,7 @@ export default function CompanyAgenda({data}) {
               <th className='heading-3'>Wat</th>
               <th className='heading-3'>Status</th>
               <th className='heading-3'>Datum</th>
-              <th className='heading-3'>Aantal particpanten</th>
+              <th className='heading-3'>Maximaal aantal particpanten</th>
           </tr>
           </thead>
 

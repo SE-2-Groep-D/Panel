@@ -54,7 +54,5 @@ function StartForm() {
 export default StartForm;
 
 function validateForm(formData) {
-    console.log(formData);
-
     return {valid: true, message: null};
 }

@@ -142,7 +142,6 @@ async function fetchResearchData(id, setData) {
 
     try {
         const data = await fetchData(`/tracking/${id}`);
-        console.log(data);
         setData(data)
     } catch (err) {
         setData(err);

@@ -90,14 +90,6 @@
   margin-top: auto;
 
 }
-.button-onderzoekinfo-1{
-
-  padding: 0rem 1rem;
-  @include respond(tablet, max) {
-    padding:0rem;
-  }
-}
-
 
 .button-onderzoekinfo-ervaringsdeskundige {
   display: flex;
@@ -141,4 +133,5 @@
 .interactie-knop{
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 2rem;
 }

@@ -17,14 +17,14 @@
 }
 
 button.btn.onderzoek-aanmaken-button {
-  width: clamp(25rem, 90%, 120rem);
-  border-radius: 8px;
+  border-radius: $border-radius-big;
   border: 4px dashed #4C5166;
   background-color: white;
   color: #4D5166;
-  width: 100%;
   box-sizing: border-box;
-  padding: 2rem;
+  width: 100%;
+  padding: 4rem;
+  font-size: 1.8rem;
  }
 
 .content-titel {

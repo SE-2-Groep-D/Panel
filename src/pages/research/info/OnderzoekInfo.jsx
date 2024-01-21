@@ -8,9 +8,9 @@ import { fetchApi, fetchData } from "@api";
 import OnderzoekInformatie from "./components/OnderzoekInformatie";
 import Information from "./components/information";
 import Map from "./components/map";
-import { Button, LoadingDiv } from "@components";
+import {Button, LoadingDiv, ToolTip} from "@components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faPencil, faStop, faTrash} from "@fortawesome/free-solid-svg-icons";
 import { useAuth, useChat } from "@hooks";
 import DynamicModal from "@pages/research/componenten/DynamicModal.jsx";
 
@@ -259,9 +259,13 @@ function OnderzoekInfo() {
               userInfo.userType === "Bedrijf" ? (
                 <div className="button-onderzoekinfo">
                   <div className="button-onderzoekinfo-1">
-                    <Button onClick={handleEditModeToggle}>
-                      {isEditMode ? "Opslaan" : "Bewerken"}
-                    </Button>
+                    {
+                      (isEditMode) ?
+                          <Button onClick={handleEditModeToggle}>
+                            Opslaan
+                          </Button>
+                          : null
+                    }
                   </div>
                   {isEditMode ? null : (
                     <div className="button-onderzoekinfo">
@@ -342,23 +346,48 @@ function OnderzoekInfo() {
               {userInfo.userType === "Medewerker" ||
               userInfo.userType === "Bedrijf" ? (
                 <div className="interactie-knop">
-                  <Button
-                    label="Klik op deze knop om Onderzoek te eindigen."
-                    className="antworden-buttons"
-                    onClick={() => OnderzoekEindigen(onderzoekId)}
-                  >
-                    Onderzoek Eindigen
-                  </Button>
-                  <Button
-                    label="Klik op deze knop om Onderzoek te verwijderen."
-                    className="antworden-buttons"
-                    onClick={() => OnderzoekVerwijderen(onderzoekId)}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      style={{ color: "black" }}
-                    />
-                  </Button>
+                  {
+                    (isEditMode) ? null :
+                        <ToolTip message="Bewerk onderzoek">
+                          <Button
+                              label="Klik op deze knop om Onderzoek te bewerken."
+                              varient="text"
+                              onClick={() => setIsEditMode(true)}
+                          >
+                            <FontAwesomeIcon
+                                icon={faPencil}
+                                style={{ color: "black" }}
+                            />
+                          </Button>
+                        </ToolTip>
+                  }
+
+                  <ToolTip message="Beëindig onderzoek">
+                    <Button
+                        label="Klik op deze knop om Onderzoek te eindigen."
+                        varient="text"
+                        onClick={() => OnderzoekEindigen(onderzoekId)}
+                    >
+                      <FontAwesomeIcon
+                          icon={faStop}
+                          style={{ color: "black" }}
+                      />
+                    </Button>
+                  </ToolTip>
+
+                  <ToolTip message='Verwijder onderzoek'>
+                    <Button
+                        label="Klik op deze knop om Onderzoek te verwijderen."
+                        onClick={() => OnderzoekVerwijderen(onderzoekId)}
+                        varient="text"
+                        color="tertiary"
+                    >
+                      <FontAwesomeIcon
+                          icon={faTrash}
+                          style={{ color: "black" }}
+                      />
+                    </Button>
+                  </ToolTip>
                 </div>
               ) : null}
 

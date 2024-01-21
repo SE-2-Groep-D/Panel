@@ -35,7 +35,7 @@ function Statistics({data}) {
   
         <ul className='statistics__items'>
             <li className='statistics__item'>
-                <h3 className='statistics__item-title heading-3'>Aantal participanten</h3>
+                <h3 className='statistics__item-title heading-3'>Maximaal aantal participanten</h3>
                 <p className='statistics__item-value'>
                     <CountingAnimation value={data.participants} />
                 </p>

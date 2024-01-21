@@ -128,13 +128,16 @@ function OnderzoekInfo() {
 
   useEffect(() => {
     const controleerInschrijving = async () => {
-      if (!onderzoek || !userInfo) {
+      console.log(userInfo.userType)
+      if (!onderzoek || !userInfo || userInfo.userType !== 'Ervaringsdeskundige') {
         return;
       }
+
       try {
         const response = await fetchData(
           `/Onderzoek/registration/list/${onderzoek.id}`
         );
+        console.log(response)
         const isIng = response.some(
           (reg) => reg.ervaringsdeskundigeId === userInfo.id
         );
@@ -169,7 +172,7 @@ function OnderzoekInfo() {
         setOnderzoek(onderzoekData);
 
         const vragenlijstData = await fetchData(
-          `Vragenlijst?onderzoekId=${onderzoekId}`
+          `/Vragenlijst?onderzoekId=${onderzoekId}`
         );
         if (vragenlijstData) {
           setVragenlijsten(vragenlijstData);
@@ -216,7 +219,6 @@ function OnderzoekInfo() {
     if (updatedVergoeding) updatedData.vergoeding = updatedVergoeding;
     if (updatedDatum) updatedData.datum = updatedDatum;
 
-    console.log(updatedData);
     setIsEditMode(!isEditMode);
     try {
       const updatedondezoek = await fetchApi(
@@ -225,7 +227,6 @@ function OnderzoekInfo() {
         updatedData
       );
       setOnderzoek(updatedondezoek);
-      console.log(updatedondezoek);
     } catch (error) {
       console.error("Error:", error);
     }

@@ -173,7 +173,7 @@ function OnderzoekStapDrie() {
                 <div className="vargenlijst-tabel">
                     <div className="Vragenlisjt-info">
                         <div className="titel">
-                            <h1 className="content-titel-bewerken heading-1">{onderzoekNaam}</h1>
+                            <h1 className="content-titel-bewerken heading-1">Vragenlijst Aanmaken</h1>
                         </div>
                         < div className="vragenlijst-info-bewerken">
                             <InputField
@@ -182,13 +182,15 @@ function OnderzoekStapDrie() {
                                 value={questionnaire.title}
                                 onChange={handleChangeQuestionnaire}
                                 placeholder="Vragenlisjt Naam"
+                                required
                             >Vragenlisjt Naam</InputField>
                             <InputField
                                 id="description"
                                 label="Vragenlisjt Beschrijving"
                                 value={questionnaire.description}
                                 onChange={handleChangeQuestionnaire}
-                                placeholder="Vragenlisjt Beschrijving">
+                                placeholder="Vragenlisjt Beschrijving"
+                                required>
                                 Beschrijving
                             </InputField>
                         </div>
@@ -218,7 +220,7 @@ function OnderzoekStapDrie() {
                             </Button>
                         </div>
                         <div className="vragenlist-savebutton">
-                            <Button className="" onClick={() => vragenLijstOpslaan()}>
+                            <Button  onClick={() => vragenLijstOpslaan()}>
                                 Opslaan
                             </Button>
                         </div>
@@ -252,7 +254,7 @@ function OnderzoekStapDrie() {
                                     </div>
                                     <h3>Antworden:</h3>
                                     {newQuestion.possibleAnswers.map((answer, answerIndex) => (
-                                        <div key={answerIndex} className="antworden-div">
+                                        <div key={answer.id} className="antworden-div">
                                             <InputField
                                                 value={answer.value}
                                                 onChange={(e) => handleChangeAnswerModal(e, answerIndex)}
@@ -267,7 +269,7 @@ function OnderzoekStapDrie() {
                                     <Button onClick={handleAddAnswerModal} className="antwoord-add"
                                             label='Klik op deze knop om een nieuw antworden toe te voegen.'
                                     >Antwoord Toevoegen <FontAwesomeIcon icon={faAdd}/></Button>
-                                    <Button onClick={handleSaveNewQuestion} color='secondary'
+                                    <Button onClick={handleSaveNewQuestion} color="secondary"
                                             label='Klik op deze knop om een wijzingen opslaan.'>Opslaan <FontAwesomeIcon icon={faSave}/></Button>
                                 </>
                             ) : (
@@ -292,7 +294,7 @@ function OnderzoekStapDrie() {
                                     </div>
                                     <h3>Antworden:</h3>
                                     {newQuestion.possibleAnswers.map((answer, answerIndex) => (
-                                        <div key={answerIndex}className="antworden-div" >
+                                        <div key={answerIndex} className="antworden-div" >
                                             <InputField
                                                 key={answerIndex}
                                                 value={answer.value || ''}
@@ -316,7 +318,7 @@ function OnderzoekStapDrie() {
                                             Voeg antwoord toe <FontAwesomeIcon icon={faAdd}/>
                                         </Button>
 
-                                        <Button label='Klik op deze knop om het op te slaan.' color='secondary'
+                                        <Button label='Klik op deze knop om het op te slaan.' color="secondary"
                                                 onClick={handleSaveNewQuestion}>Opslaan <FontAwesomeIcon
                                             icon={faSave}/></Button>
                                     </div>

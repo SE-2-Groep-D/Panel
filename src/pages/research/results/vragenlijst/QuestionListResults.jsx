@@ -71,7 +71,6 @@ async function fetchResearchData(id, setData) {
   if(id === undefined || id === null) return;
   try {
       const data = await fetchData(`/vragenlijst/${id}`);
-      console.log(data);
       setData(data)
   } catch (err) {
       setData(err);

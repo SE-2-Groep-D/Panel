@@ -15,7 +15,6 @@ async function OnderzoekAanmaken(onderzoek,user) {
     }
     try {
         const response = await fetchApi("/Onderzoek/create", "POST", data);
-        console.log(response)
 
         if (onderzoek.type==="websiteBezoek"){
 
@@ -25,7 +24,6 @@ async function OnderzoekAanmaken(onderzoek,user) {
             }
             try {
                 const response = await fetchApi("/Tracking/create", "POST", trackingscriptdata);
-                console.log(response)
             }
             catch (error){
                 return false

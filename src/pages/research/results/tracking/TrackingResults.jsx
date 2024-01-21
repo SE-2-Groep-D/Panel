@@ -72,31 +72,35 @@ function PageResults({data}) {
 
     return (
         <section ref={ref} className={className}>
-            <h2 className='heading-2'>Pagina resultaten</h2> 
+            <h2 className='heading-2'>Pagina resultaten</h2>
 
-            <table className='page-results'>
-                <thead>
+            <div className="scroll-div">
+                <table className='page-results'>
+                    <thead>
                     <tr>
                         <th className='heading-3'>Pagina</th>
                         <th className='heading-3'>Scroll percentage</th>
                         <th className='heading-3'>Tijd tot actie</th>
                     </tr>
-                </thead>
+                    </thead>
 
-                <tbody>
+                    <tbody>
+                    {data.map((results, i) =>{
+                        var page = results.page.split('/')[results.page.split('/').length - 1];
+                        page = (page === '') ? 'home' : page;
 
-                {data.map((results, i) =>{
-                     return (
-                      <tr key={i}>
-                            <td data-label="Pagina" className='text'>{results.page}</td>
-                            <td data-label="Scroll percentage" className='text'>{results.scrollPercentage}</td>
-                            <td data-label="Tijd tot actie" className='text'>{results.timeToAction}</td>
-                      </tr>
-                     )
-               })}
+                        return (
+                            <tr key={i}>
+                                <td data-label="Pagina" className='text'>{page.replace('.html', '')}</td>
+                                <td data-label="Scroll percentage" className='text'>{results.pagePercentage}</td>
+                                <td data-label="Tijd tot actie" className='text'>{results.timeTillAction}</td>
+                            </tr>
+                        )
+                    })}
 
-                </tbody>
-             </table>
+                    </tbody>
+                </table>
+            </div>
         </section>    
     );
 }

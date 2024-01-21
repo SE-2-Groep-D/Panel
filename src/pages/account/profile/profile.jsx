@@ -24,7 +24,6 @@ export default function Profile() {
     useEffect(() => {
         const asyncData = async () => {
             const data = await getUserInfo(finalId);
-            console.log(data);
             setUser(data);
         }
 

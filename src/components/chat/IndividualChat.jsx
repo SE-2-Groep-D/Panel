@@ -9,7 +9,6 @@ const IndividualChat = ({ userId, otherUserId }) => {
     const [connection, setConnection] = useState(null);
     const hostname = getHostName();
 
-    //console.log('UserID:', userId, 'OtherUserID:', otherUserId);
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()

@@ -38,8 +38,6 @@ async function updateUserInfo(user, setUser) {
   setUser(undefined);
 
 
-  console.log(finalUser)
-
   try {
     await fetchApi(`/Gebruiker/${user.id}/update`, "PUT", finalUser);
     setUser(finalUser);
@@ -72,7 +70,6 @@ async function deleteUser(user, setUser, auth, navigate) {
 }
 
 function fixProperties(user) {
-  console.log(user);
   return user;
 }
 

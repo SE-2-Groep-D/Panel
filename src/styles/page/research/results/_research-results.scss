@@ -10,8 +10,12 @@
 }
 
 
-
 .results {
+    display: flex;
+    justify-content: center;
+}
+
+.results-dashboard {
     width: $dashboard-width !important;
 
     .not-found {

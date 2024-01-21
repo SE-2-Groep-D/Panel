@@ -41,7 +41,8 @@ export default function Results() {
     }
 
   return (
-    <main className='results gray'>
+    <main className='gray results'>
+        <div className="results-dashboard">
             <div className='navigation'>
                 <a href={`/onderzoek/` + id} className='back'>
                     <FontAwesomeIcon icon={faChevronLeft}/>
@@ -50,8 +51,9 @@ export default function Results() {
 
                 <OptionSelector onChange={(e) => setSelectedOption(e.value)} options={inputOptions} value={selectedOption}>Resultaten</OptionSelector>
             </div>
-                {ResultsComponent}
-        </main>
+            {ResultsComponent}
+        </div>
+    </main>
     );
 }
 async function fetchOptions(researchId, setOptions) {

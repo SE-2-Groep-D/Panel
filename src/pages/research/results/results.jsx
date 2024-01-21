@@ -41,8 +41,8 @@ export default function Results() {
     }
 
   return (
-    <main className='gray'>
-        <div className="results">
+    <main className='gray results'>
+        <div className="results-dashboard">
             <div className='navigation'>
                 <a href={`/onderzoek/` + id} className='back'>
                     <FontAwesomeIcon icon={faChevronLeft}/>

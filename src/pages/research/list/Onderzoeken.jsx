@@ -40,7 +40,6 @@ function Onderzoeken() {
             setIsLoading(true);
             try {
                 let onderzoekenData = await fetchData('/Onderzoek/list');
-                console.log(userInfo.userType)
                 if (userInfo.userType === 'Ervaringsdeskundige'){
                     onderzoekenData = onderzoekenData.filter(o => o.status === 'open');
                 }

@@ -164,7 +164,7 @@ function Onderzoek({onderzoek, goToOnderzoek, bedrijfsGegevens}) {
                 <div className="content-right">
 
                     <ul className="content-info" aria-label='Extra onderzoek informatie'>
-                        <ToolTip message='Aantal deelnemers'>
+                        <ToolTip message='Maximaal aantal deelnemers'>
                             <li className="text">{onderzoek.aantalParticipanten}</li>
                         </ToolTip>
                         <ToolTip message='Locatie'>

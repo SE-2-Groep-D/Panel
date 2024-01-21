@@ -10,9 +10,34 @@
 
      &__results__page, &__results__other {
         background-color: $color-white;;
-        padding: 5rem;
+        padding: 3rem !important;
         border-radius: $border-radius-big;
         border: $border-container;
+    }
+
+    .scroll-div {
+        max-height: 20rem;
+        overflow-y: auto;
+        padding: 1rem;
+        &::-webkit-scrollbar {
+            width: .8rem;
+            overflow: overlay;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: $color-gray;
+            border-radius: 2rem;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: $color-primary-85;
+            border-radius: 2rem;
+
+            &:active {
+                background-color: $color-primary-60;
+            }
+        }
     }
 
 
@@ -26,7 +51,8 @@
         @include respond(tablet, max) {
             flex-direction: column;
         }
-        
+
+
 
         &__page {
             flex-grow: 1;

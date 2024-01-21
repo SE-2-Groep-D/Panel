@@ -19,10 +19,6 @@ import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import LoadingData from "@components/container/loading-data.jsx";
 
 export default function Results() {
-    if(!hasPermission(Role.Bedrijf)) {
-        return <NoPermission/>
-    }
-
     const [options, setOptions] = useState(undefined);
     const [selectedOption, setSelectedOption] = useState();
     const { id } = useParams();
@@ -30,6 +26,10 @@ export default function Results() {
     useEffect(() => {
         fetchOptions(id, setOptions);
     }, [id]);
+
+    if(!hasPermission(Role.Bedrijf)) {
+        return <NoPermission/>
+    }
 
 
     const ResultsComponent = renderedResults(options, selectedOption);

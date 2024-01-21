@@ -19,7 +19,6 @@ async function VragenlijstAanmaken(questionnaire) {
     console.log(formattedData);
     try {
         const response = await fetchApi("/Vragenlijst", "POST", formattedData );
-
         return response;
     } catch (error) {
         return false;

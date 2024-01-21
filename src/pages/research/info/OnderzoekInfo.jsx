@@ -128,7 +128,6 @@ function OnderzoekInfo() {
 
   useEffect(() => {
     const controleerInschrijving = async () => {
-      console.log(userInfo.userType)
       if (!onderzoek || !userInfo || userInfo.userType !== 'Ervaringsdeskundige') {
         return;
       }
@@ -137,12 +136,12 @@ function OnderzoekInfo() {
         const response = await fetchData(
           `/Onderzoek/registration/list/${onderzoek.id}`
         );
-        console.log(response)
         const isIng = response.some(
           (reg) => reg.ervaringsdeskundigeId === userInfo.id
         );
         setIsAlIngeschreven(isIng);
       } catch (error) {
+
         console.error("Fout bij ophalen registraties:", error);
       }
     };
@@ -312,31 +311,31 @@ function OnderzoekInfo() {
                   </div>
                 </div>
               ) : (
-                <>
-                  {vragenlijsten.length === 0 && (
-                    <div className="text-small button-onderzoekinfo">
-                      Er is momenteel geen vragenlijst beschikbaar voor dit
-                      onderzoek.
-                    </div>
-                  )}
+                  <>
+                    {vragenlijsten.length === 0 && (
+                        <div className="text-small button-onderzoekinfo">
+                          Er is momenteel geen vragenlijst beschikbaar voor dit
+                          onderzoek.
+                        </div>
+                    )}
 
-                  {vragenlijsten.length === 1 && (
-                    <div className="button-onderzoekinfo">
-                      <Button
-                        className="onderzoek-Inschrijven"
-                        onClick={() =>
-                          Inschrijven(
-                            onderzoek.id,
-                            userInfo.id,
-                            vragenlijsten[0].id
-                          )
-                        }
-                      >
-                        Inschrijven voor vragenlijst
-                      </Button>
-                    </div>
-                  )}
-                </>
+                    {vragenlijsten.length === 1 && (
+                        <div className="button-onderzoekinfo">
+                          <Button
+                              className="onderzoek-Inschrijven"
+                              onClick={() =>
+                                  Inschrijven(
+                                      onderzoek.id,
+                                      userInfo.id,
+                                      vragenlijsten[0].id
+                                  )
+                              }
+                          >
+                            Inschrijven voor vragenlijst
+                          </Button>
+                        </div>
+                    )}
+                  </>
               )}
             </div>
             <div className="content-right-container">

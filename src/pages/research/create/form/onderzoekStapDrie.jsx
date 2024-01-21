@@ -254,7 +254,7 @@ function OnderzoekStapDrie() {
                                     </div>
                                     <h3>Antworden:</h3>
                                     {newQuestion.possibleAnswers.map((answer, answerIndex) => (
-                                        <div key={answer.id} className="antworden-div">
+                                        <div key={answerIndex} className="antworden-div">
                                             <InputField
                                                 value={answer.value}
                                                 onChange={(e) => handleChangeAnswerModal(e, answerIndex)}
@@ -334,7 +334,7 @@ function OnderzoekStapDrie() {
                 isOpen={isModalOpen}
                 message={modalMessage}
                 onRedirect={redirectToHome}
-                onClose={() => setIsModalOpen(false)}
+                onClose={() =>redirectToHome() }
                 redirectLabel="Ga naar Home"
             />
 

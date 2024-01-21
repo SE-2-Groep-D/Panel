@@ -1,7 +1,6 @@
 import {fetchApi} from '@api';
 
 async function OnderzoekAanmaken(onderzoek,user) {
-    console.log(onderzoek)
     const data = {
         titel: onderzoek.titel,
         aantalParticipanten: onderzoek.aantalParticipanten,

@@ -39,8 +39,9 @@ function VragenlijstBewerken() {
         async function fetchVragenlijst() {
             try {
                 const data = await fetchData(`/Vragenlijst/${vragenlijstId}`);
-                setQuestionnaire(data); // Set the fetched data
+                setQuestionnaire(data);
                 setLoading(false);
+
             } catch (error) {
                 console.error('Error fetching vragenlijst:', error);
                 setLoading(false);
@@ -312,7 +313,6 @@ function VragenlijstBewerken() {
                                     {newQuestion.possibleAnswers.map((answer, answerIndex) => (
                                         <div key={answerIndex} className="antworden-div" >
                                             <InputField
-                                                key={answerIndex}
                                                 value={answer.value || ''}
                                                 onChange={(e) => handleChangeAnswer(e, answerIndex)}
 
@@ -349,7 +349,7 @@ function VragenlijstBewerken() {
             <DynamicModal
                 isOpen={isModalOpen}
                 message={modalMessage}
-                onClose={() => setIsModalOpen(false)}
+                onClose={() =>redirectToHome() }
                 onRedirect={redirectToHome}
                 redirectLabel="Ga naar Home"
             />

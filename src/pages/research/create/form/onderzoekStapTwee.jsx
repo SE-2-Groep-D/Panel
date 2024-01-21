@@ -27,7 +27,6 @@ function OnderzoekStapTwee() {
 
     function handleChange({element, value, id}) {
         setValues({...values, [id ? id : element.id]: value});
-        console.log(values)
     }
 
     async function handleSubmit(formData) {

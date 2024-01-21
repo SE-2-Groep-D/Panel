@@ -14,7 +14,6 @@ function StartForm() {
     });
     function handleChange({element, value, id}) {
         setValues({...values, [id ? id : element.id]: value});
-        console.log(values)
     }
 
     function handleSubmit(formData) {

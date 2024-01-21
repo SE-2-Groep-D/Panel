@@ -5,7 +5,7 @@ import "@pagestyles/_chat.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { useAuth, useChat } from "@hooks";
-import { fetchApi, fetchData } from "@api";
+import { fetchApi, fetchData, isRole, Role } from "@api";
 
 const hideNavigationRoutes = ["/setup", "/login", "/register", "/privacy"];
 
@@ -13,6 +13,7 @@ function Chat() {
   const route = useLocation();
   const { authenticated, userInfo } = useAuth();
   const { bedrijfId, setBedrijfId } = useChat();
+  const isErvaringsdeskundige = isRole(Role.Ervaringsdeskundige);
 
   if (hideNavigationRoutes.includes(route.pathname) || !authenticated) {
     return null;
@@ -23,7 +24,7 @@ function Chat() {
   const userId = userInfo.id; // Replace with actual logged-in user's ID
 
   const toggleChat = async () => {
-    if (!isChatOpen && bedrijfId != null) {
+    if (!isChatOpen && bedrijfId != null && isErvaringsdeskundige) {
       await makeChat(bedrijfId, userInfo.id);
     }
     if (isChatOpen) {
@@ -62,7 +63,7 @@ async function makeChat(bedrijfId, userId) {
     VerzenderId: bedrijfId,
     OntvangerId: userId,
   };
-  if (berichten.length === 0) {
+  if (berichten.length === 0 && bedrijfId != userId) {
     try {
       await fetchApi(`bericht/stuurbericht`, "POST", defaultBericht);
     } catch (error) {

@@ -71,7 +71,9 @@ async function deleteUser(user, setUser, auth, navigate) {
 
 function fixProperties(user) {
 
-  console.log(user)
+  if(user.hulpmiddelen && user.hulpmiddelen instanceof Array && typeof user.hulpmiddelen[0] !== "string") {
+    user.hulpmiddelen = user.hulpmiddelen.map((item, index) => item.naam);
+  }
   return user;
 }
 

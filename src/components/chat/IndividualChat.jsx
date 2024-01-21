@@ -147,6 +147,7 @@ const IndividualChat = ({ userId, otherUserId }) => {
                 </ul>
             <div className="message-input-area">
                 <input
+                    id="input-message"
                     type="text"
                     maxLength="250"
                     minLength="1"

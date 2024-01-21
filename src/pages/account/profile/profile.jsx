@@ -2,7 +2,7 @@ import "@pagestyles/account/_profile.scss";
 
 import {useEffect, useState} from "react";
 
-import { getUserData } from "./components/getUserData";
+import {getUserInfo} from "./components/getUserData";
 import {useParams} from "react-router-dom";
 
 import {hasPermission, Role} from "@api";
@@ -22,7 +22,13 @@ export default function Profile() {
 
 
     useEffect(() => {
-        getUserData(finalId, setUser);
+        const asyncData = async () => {
+            const data = await getUserInfo(finalId);
+            console.log(data);
+            setUser(data);
+        }
+
+       asyncData();
     }, [finalId]);
 
     if(id && !hasPermission(Role.Beheerder)) {

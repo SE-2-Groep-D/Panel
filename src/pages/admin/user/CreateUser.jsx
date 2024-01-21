@@ -79,12 +79,9 @@ export default function CreateUser() {
 async function createUser(event, setCreatedUser, navigate) {
     setCreatedUser();
 
-    const user = event.values;
-    const {type} = user;
+    const user = fixProperties(event.values);
+    var endpoint = getEndPoint(user.type);
 
-    user.password = user.wachtwoord;
-    user.roles = [user.type];
-    var endpoint = getEndPoint(type);
     try {
         const response = await fetchApi(endpoint, "POST", user);
         navigate(`/admin/gebruiker/list`);
@@ -92,6 +89,15 @@ async function createUser(event, setCreatedUser, navigate) {
     } catch (err) {
         setCreatedUser(err);
     }
+}
+
+function fixProperties(user) {
+    user.password = user.wachtwoord;
+    user.roles = [user.type];
+    user.hulpmiddelen = user.hulpmiddelen.split(',');
+    user.benaderingen = user.benaderingen.split(',');
+    user.typeBeperkingen = user.typeBeperkingen.split(',');
+    return user;
 }
 
 function getEndPoint(type) {
@@ -134,8 +140,8 @@ function ErvaringsDeskundige(user) {
     return {
         postcode: user && user.postcode || '',
         leeftijdscategorie: user && user.leeftijdscategorie || '',
-        //benaderingen: user.Voorkeurbenadering.split(" "),
-        //hulpmiddelen: user.Hulpmiddelen.split(" "),
+        benaderingen: user.Voorkeurbenadering.split(" ") || '',
+        hulpmiddelen: user.Hulpmiddelen.split(" ") || '',
     };
 }
 

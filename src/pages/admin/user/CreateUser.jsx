@@ -127,7 +127,7 @@ function updateUser(user, type) {
             userData = {...userData, ...bedrijfData}
             break;
         case 'Medewerker':
-            userData = {...userData, functie: user.functie || ''}
+            userData = {...userData, functie: user && user.functie || ''}
             break;
     }
 

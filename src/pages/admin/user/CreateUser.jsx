@@ -15,12 +15,11 @@ export default function CreateUser() {
     const [createdUser, setCreatedUser] = useState('creating');
     const navigate = useNavigate();
 
-
-    // useEffect(() => {
-    //     setUser(
-    //         updateUser(user, type)
-    //     );
-    // }, [type]);
+    useEffect(() => {
+        setUser(
+            updateUser(user, type)
+        );
+    }, [type]);
 
 
 

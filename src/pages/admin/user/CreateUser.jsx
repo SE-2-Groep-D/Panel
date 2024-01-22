@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
 
 
 export default function CreateUser() {
-    const [type, setType] = useState('Ervaringsdeskundige');
+    const [type, setType] = useState('Medewerker');
     const [user, setUser] = useState();
     const [createdUser, setCreatedUser] = useState('creating');
     const navigate = useNavigate();
@@ -64,7 +64,7 @@ export default function CreateUser() {
                     value={type}
                     onChange={(e) => setType(e.value)}
                     id='type'
-                    options={['Ervaringsdeskundige', 'Bedrijf', 'Medewerker', 'Beheerder']}
+                    options={['Medewerker', 'Bedrijf', 'Ervaringsdeskundige', 'Beheerder']}
                     visible
                     required
                 >
@@ -140,8 +140,8 @@ function ErvaringsDeskundige(user) {
     return {
         postcode: user && user.postcode || '',
         leeftijdscategorie: user && user.leeftijdscategorie || '',
-        benaderingen: user.Voorkeurbenadering.split(" ") || '',
-        hulpmiddelen: user.Hulpmiddelen.split(" ") || '',
+        benaderingen: user && user.voorkeurBenaderingen.split(" ") || '',
+        hulpmiddelen: user && user.hulpmiddelen.split(" ") || '',
     };
 }
 

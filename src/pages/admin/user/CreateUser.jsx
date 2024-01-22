@@ -16,11 +16,11 @@ export default function CreateUser() {
     const navigate = useNavigate();
 
 
-    useEffect(() => {
-        setUser(
-            updateUser(user, type)
-        );
-    }, [type]);
+    // useEffect(() => {
+    //     setUser(
+    //         updateUser(user, type)
+    //     );
+    // }, [type]);
 
 
 
@@ -140,7 +140,7 @@ function ErvaringsDeskundige(user) {
     return {
         postcode: user && user.postcode || '',
         leeftijdscategorie: user && user.leeftijdscategorie || '',
-        benaderingen: user && user.voorkeurBenaderingen.split(" ") || '',
+        benaderingen: user && user.benaderingen.split(" ") || '',
         hulpmiddelen: user && user.hulpmiddelen.split(" ") || '',
     };
 }

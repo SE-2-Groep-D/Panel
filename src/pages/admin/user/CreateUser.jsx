@@ -139,8 +139,8 @@ function ErvaringsDeskundige(user) {
     return {
         postcode: user && user.postcode || '',
         leeftijdscategorie: user && user.leeftijdscategorie || '',
-        benaderingen: user && user.benaderingen.split(" ") || '',
-        hulpmiddelen: user && user.hulpmiddelen.split(" ") || '',
+        benaderingen: user && user.benaderingen && user.benaderingen.split(" ") || '',
+        hulpmiddelen: user && user.hulpmiddelen && user.hulpmiddelen.split(" ") || '',
     };
 }
 
